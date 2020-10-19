@@ -1,0 +1,36 @@
+.danger {
+    background-color: rgb(217, 83, 79);
+}
+
+.warning {
+    background-color: rgb(240, 173, 78); 
+}
+
+.teamwork {
+    background-color: #428bca;
+}
+
+.success {
+    background-color: rgb(92, 184, 92); 
+}
+
+.create {
+    background-color: #B703FA;
+}
+
+.anulado {
+    background-color: rgb(100, 100, 100);
+}
+
+.primary {
+    background-color: #007bff;
+}
+
+.calculado {
+    background-color: rgb(93, 173, 226);
+}
+
+.header-background {
+    background: rgb(2,67,162);
+    background: linear-gradient(90deg, rgba(2,67,162,1) 0%, rgba(0,82,255,1) 25%, rgba(0,116,255,1) 95%);
+}

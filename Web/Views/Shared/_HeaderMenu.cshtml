@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+
+
+    @Styles.Render("~/bundles/bootstrapcss")
+    @Styles.Render("~/bundles/jqueryuicss")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrapjs")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/libraryjs")
+    @Styles.Render("~/bundles/appcss")
+<style>
+    .btn-link, ul > li > a{
+        color:#fff;
+    }
+</style>
+</head>
+
+<body>
+    <div style="width: 100%; top: 0px; z-index: 999;" class="header-background">
+        <div class="row" style="width: 99%; margin: auto auto auto 5px;">
+            <div class="col-6 col-sm-6 col-md-4 col-lg-2" style="margin-top: 10px;">
+                <div style="text-align: center;">
+                    <a href="#">
+                        <img src="~/Resources/LogoWeb.jpg" class="imgLogoHome" style="height: 50px; display: block; margin: auto; cursor:pointer;" />
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-3 col-sm-3 col-md-4 col-lg-5 float-left">
+                <nav id="navbar-example2" class="navbar">
+
+                    <ul class="nav nav-pills">
+                        <li class="nav-item">
+                            <a class="btn btn-link border-light" href="#">Publica tu oferta</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Registrarse</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-3 col-sm-3 col-md-4 col-lg-5 float-right">
+                <nav id="navbar-example2" class="navbar">
+
+                    <ul class="nav nav-pills">
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index","Empresa")">Empresas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Publicaciones</a>
+                        </li>
+                        @if (Session["Usuario"] != null && ((string)Session["Usuario"]) != "")
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Nombre Usuario</a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#one">Perfil</a>
+                                    <div role="separator" class="dropdown-divider"></div>
+                                    <a class="dropdown-item signOut" href="#three">Cerrar Sesión</a>
+                                </div>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item signIn">
+                                <a class="btn btn-link border-light" href="#">Iniciar Sesión</a>
+                            </li>
+                        }
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="modalSignIn" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                @Html.Partial("Auth/_ModalInicioSesion")
+            </div>
+        </div>
+    </div>
+    <div class="row" style=" width: 100%;">
+        @RenderBody()
+    </div>
+</body>
+</html>

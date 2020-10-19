@@ -1,0 +1,127 @@
+﻿
+<div class="row">
+    <br />
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+        <h4>Formulario de Registro</h4>
+    </div>
+
+    @using (Ajax.BeginForm("GuardarEmpresa", "Empresa", new AjaxOptions()
+    {
+        HttpMethod = "POST",
+        UpdateTargetId = "mensajeRegistro",
+        InsertionMode = InsertionMode.Replace,
+        LoadingElementId = "loader"
+    }, new { @style = "display: block;" }))
+    {
+
+        <div class="row form-row" style="margin-top: 15px;">
+            <div class="col-12 col-sm-12 col-md-12 col-xl-12 col-lg-12">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="background-color: #007bff; color: #fff; width: 130px;">Rut*</span>
+                        </div>
+                        <input type="text" name="rut" id="rut" class="form-control soloRut" placeholder="Ej. 12345678k" autocomplete="off" maxlength="12" style="font-family: 'Roboto', sans-serif;" />
+                        <span id="rutError" class="error-span"></span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="background-color: #007bff; color:#fff; width: 130px;">Rubro*</span>
+                        </div>
+                        <input type="text" name="rubro" id="rubro" class="form-control soloLetras" maxlength="40" autocomplete="off" style="font-family: 'Roboto', sans-serif;" />
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="background-color: #007bff; color:#fff; width: 130px;">Nombre*</span>
+                        </div>
+                        <input type="text" name="nombre" id="nombre" class="form-control soloLetras" maxlength="40" autocomplete="off" style="font-family: 'Roboto', sans-serif;" />
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="background-color: #007bff; color:#fff; width: 130px;">Razon Social*</span>
+                        </div>
+                        <input type="text" name="razonsocial" id="razonsocial" class="form-control soloLetras" maxlength="40" autocomplete="off" style="font-family: 'Roboto', sans-serif;" />
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="background-color: #007bff; color:#fff; width: 130px;">Correo*</span>
+                        </div>
+                        <input type="text" name="correo" id="correo" class="form-control" placeholder="Ej. correo@correo.com" autocomplete="off" maxlength="60" style="font-family: 'Roboto', sans-serif;" />
+                        <span id="mailError" class="error-span"></span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="background-color: #007bff; color:#fff; width: 130px;">Telefono*</span>
+                        </div>
+                        <input type="text" name="telefono" id="telefono" class="form-control" autocomplete="off" style="font-family: 'Roboto', sans-serif; background-color:#fff;" autocomplete="off" />
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="background-color: #007bff; color:#fff; width: 130px;">Comuna*</span>
+                        </div>
+                        @*<input type="text" name="telefono" id="telefono" class="form-control" autocomplete="off" style="font-family: 'Roboto', sans-serif; background-color:#fff;" autocomplete="off" />*@
+                        <select name="comuna" id="comuna" class="form-control">
+                            <option value="1">Maipu</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="background-color: #007bff; color:#fff; width: 130px;">Dirección*</span>
+                        </div>
+                        <input type="text" name="direccion" id="direccion" class="form-control" autocomplete="off" style="font-family: 'Roboto', sans-serif; background-color:#fff;" autocomplete="off" />
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="background-color: #007bff; color:#fff; width: 130px;">Contraseña*</span>
+                        </div>
+                        <input type="password" name="clave" id="clave" class="form-control" autocomplete="off" style="font-family: 'Roboto', sans-serif; background-color:#fff;" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="background-color: #007bff; color: #fff; width: 130px; ">Repetir*</span>
+                        </div>
+                        <input type="password" name="repetirclave" id="repetirclave" class="form-control" autocomplete="off" style="font-family: 'Roboto', sans-serif; background-color:#fff;" autocomplete="off" />
+                        <span id="repetirError" class="error-span"></span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin-top:-15px; margin-bottom:15px;">
+                    <span>(*) Campos obligatorios para el registro</span>
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin-bottom: 30px;">
+                    <button class="btn btn-primary guardarEmpresa">
+                        <i class="fas fa-save" style="color: #fff;"> Registrar</i>
+                    </button>
+                    <input type="hidden" name="error" id="error" />
+                </div>
+            </div>
+
+        </div>
+    }
+</div>

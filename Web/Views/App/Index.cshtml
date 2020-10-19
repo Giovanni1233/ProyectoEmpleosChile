@@ -1,0 +1,29 @@
+﻿@{
+    if (ViewBag.ApplicationActive != null)
+    {
+        if (ViewBag.ApplicationActive)
+        {
+            Layout = "~/Views/Shared/_HeaderMenu.cshtml";
+            ViewBag.Title = "Empleos Chile";
+        }
+        else
+        {
+
+        }
+    }
+    else
+    {
+
+    }
+
+
+
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin: 20px 0px 0px 20px;">
+        @Html.Partial("App/_Filtros")
+    </div>
+
+    <div id="ViewFiltros" class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin: 20px 0px 0px 20px;">
+        @Html.Partial("App/_Empleos")
+    </div>
+}
+
