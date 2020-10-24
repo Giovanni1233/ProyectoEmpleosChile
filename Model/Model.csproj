@@ -124,6 +124,8 @@
     <Compile Include="Models\PlanesEmpresa.cs" />
     <Compile Include="Models\PublicacionesEmpresa.cs" />
     <Compile Include="Models\TipoPublicacion.cs" />
+    <Compile Include="Models\Pais.cs" />
+    <Compile Include="Models\Region.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Models\UsuariosPostulados.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -16,7 +16,16 @@ namespace Web.Controllers
         public ActionResult Index()
         {
             ViewBag.ApplicationActive = true;
-           
+            ViewBag.ReferenciaHome = ModuleControlRetorno() + "/App/Inicio";
+
+            return View();
+        }
+
+        public ActionResult Inicio()
+        {
+            ViewBag.ApplicationActive = true;
+            ViewBag.ReferenciaRegistro = ModuleControlRetorno() + "/Auth/RegistroUsuario";
+
             return View();
         }
 

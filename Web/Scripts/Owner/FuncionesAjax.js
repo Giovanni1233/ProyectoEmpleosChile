@@ -86,3 +86,20 @@ function ajaxCierraSesionEmpresa(controller) {
         }
     });
 }
+
+
+
+
+function ajaxGetCiudad(controller, region) {
+    $.ajax({
+        type: 'POST',
+        url: controller + 'GetCiudad',
+        data: '{ region: "' + region + '"}',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: true,
+        success: function (response) {
+            
+        }
+    });
+}

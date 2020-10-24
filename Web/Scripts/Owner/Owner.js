@@ -159,6 +159,13 @@
         }
     });
 
+    $(document).on('change', "#region", function () {
+        var region = $("#region").val();
+        var controller = GetControllerAuth();
+
+        ajaxGetCiudad(controller, region);
+    });
+
 });
 
 function validaRut(rut) {
@@ -251,4 +258,38 @@ function validarErrorIngreso() {
     }
 
     $("#error").val(error);
+}
+
+
+
+function GetControllerAuth() {
+    var prefixDomain = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2];
+    var prefix = "";
+
+    if (window.location.href.split('/')[2].indexOf(atob("bG9jYWxob3N0OjQ0MzA0")) !== -1) {
+        if ((window.location.href.split('/').length - 1) === 5) {
+            prefix = prefix + "/" + window.location.href.split('/')[window.location.href.split('/').length - 1] + "/";
+        } else {
+            if (window.location.href.split('/')[3] != "") {
+                prefix = prefix + "/" + window.location.href.split('/')[3] + "/";
+            }
+            else {
+                prefix = prefix + "/Auth/";
+            }
+
+        }
+    }
+    else {
+        if ((window.location.href.split('/').length - 1) === 5) {
+            prefix = prefix + "/" + window.location.href.split('/')[3] + "/" + window.location.href.split('/')[window.location.href.split('/').length - 2] + "/";
+        } else {
+            prefix = prefix + "/" + window.location.href.split('/')[3] + "/";
+        }
+    }
+
+    if (prefix == "") {
+        prefix = "/Auth/";
+    }
+
+    return prefixDomain + prefix;
 }

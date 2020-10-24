@@ -17,6 +17,72 @@ namespace Web.Controllers
             return View();
         }
 
+        public ActionResult RegistroUsuario()
+        {
+            DataSet data = new DataSet();
+            List<Pais> lstPais = new List<Pais>();
+            List<Region> lstRegion = new List<Region>();
+
+            ViewBag.ApplicationActive = true;
+            ViewBag.ReferenciaRegistro = ModuleControlRetorno() + "/Auth/RegistroUsuario";
+
+            data = GetPais();
+            if (data.Tables.Count > 0)
+            {
+                foreach (DataRow row in data.Tables[0].Rows)
+                {
+                    lstPais.Add(new Pais
+                    {
+                        Id = row["Id"].ToString(),
+                        Nombre = row["Nombre"].ToString()
+                    });
+                }
+
+                ViewBag.ReferenciaPais = lstPais;
+            }
+
+            data = GetRegion();
+            if (data.Tables.Count > 0)
+            {
+                foreach (DataRow row in data.Tables[0].Rows)
+                {
+                    lstRegion.Add(new Region
+                    {
+                        Id = row["Id"].ToString(),
+                        Nombre = row["Nombre"].ToString()
+                    });
+                }
+
+                ViewBag.ReferenciaRegion = lstRegion;
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult RegistroUsuario(string rut, string nombres, string apaterno, string amaterno, 
+            string correo, string correoRepetir, string repetirPassword, string password, string passwordRepetir)
+        {
+            string[] parametros = new string[3];
+            string[] valores = new string[3];
+            DataSet data = new DataSet();
+            string view = string.Empty;
+
+            try
+            {
+                ViewBag.ApplicationActive = true;
+
+                
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorPlataforma = errorSistema;
+                view = "";
+            }
+
+            return PartialView(view);
+        }
+
 
         [HttpPost]
         public JsonResult InicioSesion(string usuario, string clave)
@@ -75,6 +141,38 @@ namespace Web.Controllers
           return Json(new { Code = code, Message = mensaje, Usuario = clUsuario });
         }
 
+        [HttpPost]
+        public JsonResult CerrarSesion()
+        {
+            var retorno = string.Empty;
+            Session.Clear();
+
+            retorno = "/App/Index"; // ModuleControlRetorno() + "/Index";
+
+            return Json(new { Retorno = retorno });
+        }
+
+
+        public DataSet GetPais()
+        {
+            DataSet data = new DataSet();
+
+            data = svcEmpleos.GetPais().Table;
+
+            return data;
+        }
+        public DataSet GetRegion()
+        {
+            DataSet data = new DataSet();
+
+            data = svcEmpleos.GetRegion().Table;
+
+            return data;
+        }
+
+
+
+
         private string ModuleControlRetorno()
         {
             string domainReal = string.Empty;
@@ -107,17 +205,6 @@ namespace Web.Controllers
 
             return domain + prefixDomain;
 
-        }
-
-        [HttpPost]
-        public JsonResult CerrarSesion()
-        {
-            var retorno = string.Empty;
-            Session.Clear();
-
-            retorno = "/App/Index"; // ModuleControlRetorno() + "/Index";
-
-            return Json(new { Retorno = retorno });
         }
     }
 }

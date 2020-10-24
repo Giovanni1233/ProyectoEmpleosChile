@@ -292,10 +292,12 @@
     <Content Include="Views\Shared\Empresa\_PlanesEmpresa.cshtml" />
     <Content Include="Views\Empresa\EditarPublicacion.cshtml" />
     <Content Include="Views\Shared\Empresa\_DetallePublicacion.cshtml" />
+    <Content Include="Views\App\Inicio.cshtml" />
+    <Content Include="Views\Shared\Auth\_RegistroUsuario.cshtml" />
+    <Content Include="Views\Auth\RegistroUsuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
-    <Folder Include="Views\Auth\" />
     <Folder Include="Views\Inicio\" />
   </ItemGroup>
   <ItemGroup>
@@ -336,7 +338,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>59904</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44304/</IISUrl>
+          <IISUrl>http://localhost:44304/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

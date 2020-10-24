@@ -1,0 +1,31 @@
+﻿@{
+    if (ViewBag.ApplicationActive != null)
+    {
+        if (ViewBag.ApplicationActive)
+        {
+            Layout = "~/Views/Shared/_HeaderMenu.cshtml";
+            ViewBag.Title = "EmpleosChie | Registro Usuario";
+        }
+        else
+        {
+
+        }
+    }
+    else
+    {
+
+    }
+
+
+
+    <div id="ViewIndex" class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin: 10px 0px 0px 0px;">
+        <div class="row">
+            <div id="ViewRegistroUsuario" class="col-12 col-sm-12 col-md-12 col-lg-10" style="margin: 20px 0px 0px 30px;">
+                @Html.Partial("Auth/_RegistroUsuario")
+            </div>
+        </div>
+    </div>
+
+
+}
+

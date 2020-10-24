@@ -9,11 +9,41 @@
       <xsd:import schemaLocation="http://localhost/ServicioEmpleosChile/wsServicioEmpleosChile.svc?xsd=xsd4" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="IServicioEmpleosChile_GetCiudad_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCiudad" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GetCiudad_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCiudadResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GetComuna_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetComuna" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GetComuna_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetComunaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GetPais_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPais" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GetPais_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPaisResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GetRegion_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRegion" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GetRegion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRegionResponse" />
+  </wsdl:message>
   <wsdl:message name="IServicioEmpleosChile_GetUsuario_InputMessage">
     <wsdl:part name="parameters" element="tns:GetUsuario" />
   </wsdl:message>
   <wsdl:message name="IServicioEmpleosChile_GetUsuario_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GuardarEmpresa_InputMessage">
+    <wsdl:part name="parameters" element="tns:GuardarEmpresa" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GuardarEmpresa_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GuardarEmpresaResponse" />
   </wsdl:message>
   <wsdl:message name="IServicioEmpleosChile_ValUsuario_InputMessage">
     <wsdl:part name="parameters" element="tns:ValUsuario" />
@@ -64,9 +94,29 @@
     <wsdl:part name="parameters" element="tns:GetDetallePublicacionResponse" />
   </wsdl:message>
   <wsdl:portType name="IServicioEmpleosChile">
+    <wsdl:operation name="GetCiudad">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetCiudad" message="tns:IServicioEmpleosChile_GetCiudad_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetCiudadResponse" message="tns:IServicioEmpleosChile_GetCiudad_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetComuna">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetComuna" message="tns:IServicioEmpleosChile_GetComuna_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetComunaResponse" message="tns:IServicioEmpleosChile_GetComuna_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPais">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetPais" message="tns:IServicioEmpleosChile_GetPais_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetPaisResponse" message="tns:IServicioEmpleosChile_GetPais_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRegion">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetRegion" message="tns:IServicioEmpleosChile_GetRegion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetRegionResponse" message="tns:IServicioEmpleosChile_GetRegion_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetUsuario" message="tns:IServicioEmpleosChile_GetUsuario_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetUsuarioResponse" message="tns:IServicioEmpleosChile_GetUsuario_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GuardarEmpresa">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GuardarEmpresa" message="tns:IServicioEmpleosChile_GuardarEmpresa_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GuardarEmpresaResponse" message="tns:IServicioEmpleosChile_GuardarEmpresa_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ValUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/ValUsuario" message="tns:IServicioEmpleosChile_ValUsuario_InputMessage" />
@@ -103,6 +153,42 @@
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServicioEmpleosChile" type="tns:IServicioEmpleosChile">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetCiudad">
+      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/GetCiudad" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetComuna">
+      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/GetComuna" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPais">
+      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/GetPais" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRegion">
+      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/GetRegion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetUsuario">
       <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/GetUsuario" style="document" />
       <wsdl:input>
@@ -112,8 +198,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ValUsuario">
-      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/ValUsuario" style="document" />
+    <wsdl:operation name="GuardarEmpresa">
+      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/GuardarEmpresa" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -121,8 +207,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ValEmpresa">
-      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/ValEmpresa" style="document" />
+    <wsdl:operation name="ValUsuario">
+      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/ValUsuario" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
