@@ -113,6 +113,14 @@
         return patron.test(te);
     });
 
+    // Modal Registro Publicaciones
+    $(document).on('click', ".NewPublicacion", function () {
+        $("#titulo").val('');
+        $("#descripcion").val('');
+        $("#monto").val('');
+        $("#modalRegistroPublicacion").modal("show");
+    });
+
     $(document).on('keypress', ".soloNumeros", function (e) {
         tecla = (document.all) ? e.keyCode : e.which;
         if (tecla == 8) {

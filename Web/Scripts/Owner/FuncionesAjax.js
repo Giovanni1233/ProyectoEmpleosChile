@@ -43,7 +43,12 @@ function ajaxCierraSesion(controller) {
 // Empresa
 
 function ajaxInicioSesionEmpresa(controller, usuario, password) {
-    
+    debugger;
+    if (!usuario.includes("@")) {
+        if (validaRut(usuario)) {
+            usuario = formateaRut(usuario);
+        }
+    }
     $.ajax({
         type: 'POST',
         url: controller + 'InicioSesion',
@@ -56,7 +61,7 @@ function ajaxInicioSesionEmpresa(controller, usuario, password) {
                 $("#userEmpresaHidden").val(response.Empresa.Rut);
                 $("#loginError").html('');
 
-                location.reload();
+                location.href = "/Empresa/Principal";
             }
             else {
                 $("#loginError").html(response.Message);

@@ -30,7 +30,7 @@
                     <a href="#">
                         <img src="~/Resources/LogoWeb.jpg" class="imgLogoHome" style="height: 50px; display: block; margin: auto; cursor:pointer;" />
                     </a>
-                    
+
                 </div>
             </div>
 
@@ -41,22 +41,40 @@
 
                     <ul class="nav nav-pills">
 
-                        @if (Session["Empresa"] != null && ((string)Session["Empresa"]) != "")
+                        @if (Session["NombreEmpresa"] != null && ((string)Session["NombreEmpresa"]) != "")
                         {
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Publicar</a>
+                                <a class="nav-link NewPublicacion" href="#">Publicar</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@Session["NombreEmpresa"]</a>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="#">Trabajadores</a>
                                     <a class="dropdown-item" href="#one">Candidatos</a>
-                                    <a class="dropdown-item" href="#one">Publicaciones</a>
+                                    @*<a class="dropdown-item" href="#one">Publicaciones</a>*@
                                     <a class="dropdown-item" href="#one">Perfil</a>
                                     <div role="separator" class="dropdown-divider"></div>
                                     <a class="dropdown-item signOutEmpresa" href="#three">Cerrar Sesión</a>
                                 </div>
                             </li>
+                        }
+                        else if (Session["UsuarioEmpresa"] != null && ((string)Session["UsuarioEmpresa"]) != "")
+                        {
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Publicar</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@Session["NombreEmpresa"]</a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#one">Candidatos</a>
+                                    @*<a class="dropdown-item" href="#one">Publicaciones</a>*@
+                                    <a class="dropdown-item" href="#one">Perfil</a>
+                                    <div role="separator" class="dropdown-divider"></div>
+                                    <a class="dropdown-item signOutEmpresa" href="#three">Cerrar Sesión</a>
+                                </div>
+                            </li>
+
                         }
                         else
                         {

@@ -15,8 +15,240 @@ namespace Web.Controllers
         // GET: Empresa
         public ActionResult Index()
         {
+            ViewBag.Planes = GetPlanes("");
             return View();
         }
+
+        public ActionResult Principal()
+        {
+            var empresa = Session["EmpresaID"].ToString();
+            //ViewBag.TiposPublicaciones = GetTiposPublicaciones();
+            ViewBag.PublicacionesEmpresa = GetPublicaciones(empresa);
+            ViewBag.PlanesEmpresa = GetPlanes(empresa);
+            return View();
+        }
+
+
+
+        #region ObtencionDatos
+
+        public List<PlanesEmpresa> GetPlanes(string parametro = "")
+        {
+            string code = string.Empty;
+            string mensaje = string.Empty;
+            string[] parametros = new string[1];
+            string[] valores = new string[1];
+            parametros[0] = "@IDL_EMPRESA";
+            valores[0] = parametro;
+            List<PlanesEmpresa> clPlanesEmpresa = new List<PlanesEmpresa>();
+            DataSet data = new DataSet();
+            try
+            {
+                data = svcEmpleos.GetPlanesEmpresa(parametros, valores).Table;
+                foreach (DataRow rows in data.Tables[0].Rows)
+                {
+                    switch (rows["Code"].ToString())
+                    {
+                        case "200":
+                            clPlanesEmpresa.Add(
+                                new PlanesEmpresa
+                                {
+                                    NombrePlan = rows["NombrePlan"].ToString(),
+                                    PrecioPlan = rows["Precio"].ToString()
+                                });
+
+                            mensaje = "";
+                            break;
+                        case "400":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        case "500":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        default:
+                            code = "600";
+                            mensaje = errorSistema;
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                code = "600";
+                mensaje = errorSistema;
+            }
+            return clPlanesEmpresa;
+        }
+
+        public List<PublicacionesEmpresa> GetPublicaciones(string parametro)
+        {
+            string code = string.Empty;
+            string mensaje = string.Empty;
+            string[] parametros = new string[1];
+            string[] valores = new string[1];
+            parametros[0] = "@IDL_EMPRESA";
+            valores[0] = parametro;
+            List<PublicacionesEmpresa> clPublicacionEmpresa = new List<PublicacionesEmpresa>();
+            DataSet data = new DataSet();
+            try
+            {
+                data = svcEmpleos.GetPublicacionesEmpresa(parametros, valores).Table;
+                foreach (DataRow rows in data.Tables[0].Rows)
+                {
+                    switch (rows["Code"].ToString())
+                    {
+                        case "200":
+                            clPublicacionEmpresa.Add(
+                                new PublicacionesEmpresa
+                                {
+
+                                    NombrePublicacion = rows["Titulo"].ToString(),
+                                    IdPublicacion = (int)rows["IdPublicacion"]
+                                });
+
+                            mensaje = "";
+                            break;
+                        case "400":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        case "500":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        default:
+                            code = "600";
+                            mensaje = errorSistema;
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                code = "600";
+                mensaje = errorSistema;
+            }
+            return clPublicacionEmpresa;
+        }
+
+        public List<DetallePublicacion> GetDetallePublicacion(string id)
+        {
+            string code = string.Empty;
+            string mensaje = string.Empty;
+            string[] parametros = new string[1];
+            string[] valores = new string[1];
+            parametros[0] = "@ID_PUBLICACION";
+            valores[0] = id;
+            List<DetallePublicacion> clPlanesEmpresa = new List<DetallePublicacion>();
+
+            DataSet data = new DataSet();
+
+            try
+            {
+                data = svcEmpleos.GetDetallePublicacion(parametros, valores).Table;
+                foreach (DataRow rows in data.Tables[0].Rows)
+                {
+                    switch (rows["Code"].ToString())
+                    {
+                        case "200":
+                            clPlanesEmpresa.Add(
+                                new DetallePublicacion
+                                {
+                                    AutorPublicacion = rows["Autor"].ToString(),
+                                    TituloPublicacion = rows["Titulo"].ToString(),
+                                    DescripcionPublicacion = rows["Descripcion"].ToString(),
+                                    FechaPublicacion = rows["Fecha"].ToString(),
+                                    MontoPublicacion = rows["Monto"].ToString(),
+                                    IdPublicacion = (int)rows["IdPublicacion"]
+                                });
+                            ViewBag.NombrePublicacion = rows["Titulo"].ToString();
+                            mensaje = "";
+                            break;
+                        case "400":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        case "500":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        default:
+                            code = "600";
+                            mensaje = errorSistema;
+                            break;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                code = "600";
+                mensaje = errorSistema;
+            }
+            return clPlanesEmpresa;
+        }
+
+        public List<CandidatoEmpleos> GetCandidatosPublicacion(string id)
+        {
+            string code = string.Empty;
+            string mensaje = string.Empty;
+            string[] parametros = new string[1];
+            string[] valores = new string[1];
+            parametros[0] = "@ID_PUBLICACION";
+            valores[0] = id;
+            DataSet datas = new DataSet();
+            List<CandidatoEmpleos> clCandidatos = new List<CandidatoEmpleos>();
+            try
+            {
+                datas = svcEmpleos.GetCandidatosEmpresa(parametros, valores).Table;
+
+                foreach (DataRow rows in datas.Tables[0].Rows)
+                {
+                    switch (rows["Code"].ToString())
+                    {
+                        case "200":
+                            clCandidatos.Add(
+                                new CandidatoEmpleos
+                                {
+                                    NombreCandidato = rows["Nombre"].ToString(),
+                                    FechaPostulacion = rows["FechaPostulacion"].ToString()
+                                });
+
+                            mensaje = "";
+                            break;
+                        case "400":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        case "500":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        default:
+                            code = "600";
+                            mensaje = errorSistema;
+                            break;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                code = "600";
+                mensaje = errorSistema;
+            }
+            return clCandidatos;
+        }
+        #endregion
 
         #region InicioSesion
         [HttpPost]
@@ -53,7 +285,7 @@ namespace Web.Controllers
                             clEmpresa.CorreoEmpresa = rows["Correo"].ToString();
                             code = rows["Code"].ToString();
                             mensaje = "";
-                            Session["Empresa"] = rows["Rut"].ToString();
+                            Session["EmpresaID"] = rows["IdEmpresa"].ToString();
                             Session["NombreEmpresa"] = rows["Nombre"].ToString();
                             break;
 
@@ -118,6 +350,7 @@ namespace Web.Controllers
             return Json(new { Code = code, Message = mensaje, Empresa = clEmpresa });
         }
         #endregion
+
         #region Registro
 
         public ActionResult Registro()
@@ -195,7 +428,7 @@ namespace Web.Controllers
                 valores[11] = comuna;
                 valores[12] = observacion;
 
-                data = svcEmpleos.GuardarEmpresa(parametros, valores).Table;
+                data = svcEmpleos.SetEmpresa(parametros, valores).Table;
 
                 foreach (DataRow rows in data.Tables[0].Rows)
                 {
@@ -203,7 +436,7 @@ namespace Web.Controllers
                     {
                         case "200":
                             ViewBag.ReferenciaMensaje = rows["Message"].ToString();
-                            view = ModuleControlRetorno() + "Empresa/Registro";
+                            view = ModuleControlRetorno() + "/Empresa/Registro";
                             //ViewBag.ReferenciaCatalogo = ModuleRetornoCatalogo();
                             break;
 
@@ -213,11 +446,11 @@ namespace Web.Controllers
                             break;
                         case "500":
                             ViewBag.ReferenciaMensaje = errorSistema;
-                            view = ModuleControlRetorno() + "Empresa/Registro";
+                            view = ModuleControlRetorno() + "/Empresa/Registro";
                             break;
                         default:
                             ViewBag.ReferenciaMensaje = errorSistema;
-                            view = ModuleControlRetorno() + "Empresa/Registro";
+                            view = ModuleControlRetorno() + "/Empresa/Registro";
                             break;
                     }
                 }
@@ -225,7 +458,7 @@ namespace Web.Controllers
             catch (Exception ex)
             {
                 ViewBag.ReferenciaMensaje = errorSistema;
-                view = "Empresa/Registro";
+                view = ModuleControlRetorno() + "/Empresa/Registro";
             }
 
             return PartialView(view);
@@ -244,6 +477,104 @@ namespace Web.Controllers
 
             return Json(new { Retorno = retorno });
         }
+        #endregion
+
+        #region RegistroPublicacion
+        [HttpPost]
+        public ActionResult GuardarPublicacion(string titulo, string id_empresa, string tipo, string descripcion, string monto, string discapacidad,
+        string area, string subarea, string error = "")
+        {
+            string view = string.Empty;
+
+            try
+            {
+                string[] parametros = new string[7];
+                string[] valores = new string[7];
+
+                DataSet data = new DataSet();
+
+                if (string.IsNullOrEmpty(id_empresa) || string.IsNullOrWhiteSpace(id_empresa) ||
+                    string.IsNullOrEmpty(titulo) || string.IsNullOrWhiteSpace(titulo) ||
+                    string.IsNullOrEmpty(descripcion) || string.IsNullOrWhiteSpace(descripcion) ||
+                    string.IsNullOrEmpty(tipo) || string.IsNullOrWhiteSpace(tipo) ||
+                    string.IsNullOrEmpty(monto) || string.IsNullOrWhiteSpace(monto) ||
+                    string.IsNullOrEmpty(subarea) || string.IsNullOrWhiteSpace(subarea)
+                    )
+                {
+
+                    //ViewBag.ReferenciaMensaje = "Debe completar todos los campos oblicatorios(*)";
+                    view = "../Empresa/Inicio";//"App/_ModalMensajeError";
+                    return PartialView(view);
+                }
+
+                if (error == "true")
+                {
+                    //ViewBag.ReferenciaMensaje = "Algunos datos ingresados tienen un formato no valido.";
+                    view = "../Empresa/Registro";//"App/_ModalMensajeError";
+                    return PartialView(view);
+                }
+
+                parametros[0] = "@ID_LOGINEMPRESA";
+                parametros[1] = "@TITULO";
+                parametros[2] = "@DESCRIPCION";
+                parametros[3] = "@TIPO";
+                parametros[4] = "@MONTO";
+                parametros[5] = "@DISCAPACIDAD";
+                parametros[6] = "@SUBAREA";
+
+                valores[0] = id_empresa;
+                valores[1] = titulo;
+                valores[2] = descripcion;
+                valores[3] = tipo;
+                valores[4] = monto;
+                valores[5] = discapacidad;
+                valores[6] = subarea;
+
+                data = svcEmpleos.SetPublicacionesEmpresa(parametros, valores).Table;
+
+                foreach (DataRow rows in data.Tables[0].Rows)
+                {
+                    switch (rows["Code"].ToString())
+                    {
+                        case "200":
+                            ViewBag.ReferenciaMensaje = rows["Message"].ToString();
+                            view = "/Empresa/Principal";
+                            //ViewBag.ReferenciaCatalogo = ModuleRetornoCatalogo();
+                            break;
+
+                        case "400":
+                            ViewBag.ReferenciaMensaje = rows["Message"].ToString();
+                            view = "/Empresa/Principal";
+                            break;
+                        case "500":
+                            ViewBag.ReferenciaMensaje = errorSistema;
+                            view = "/Empresa/Inicio";
+                            break;
+                        default:
+                            ViewBag.ReferenciaMensaje = errorSistema;
+                            view = "/Empresa/Principal";
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ReferenciaMensaje = errorSistema;
+                view = "/Empresa/Principal";
+            }
+
+            return PartialView(view);
+        }
+
+        [HttpGet]
+        public ActionResult EditarPublicacion(string id)
+        {
+            ViewBag.DetallePublicacion = GetDetallePublicacion(id);
+            ViewBag.Candidatos = GetCandidatosPublicacion(id);
+            return View();
+        }
+
+
         #endregion
 
         #region ControlRetorno
@@ -281,5 +612,7 @@ namespace Web.Controllers
 
         }
         #endregion
+
+
     }
 }

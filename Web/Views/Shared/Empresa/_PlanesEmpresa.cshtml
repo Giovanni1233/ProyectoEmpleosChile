@@ -1,6 +1,6 @@
-﻿@if (ViewBag.Planes != null)
+﻿@if (ViewBag.PlanesEmpresa.Count > 0)
 {
-    foreach (var item in ViewBag.Planes as ICollection<Model.Models.PlanesEmpresa>)
+    foreach (var item in ViewBag.PlanesEmpresa as ICollection<Model.Models.PlanesEmpresa>)
     {
         <div class="col-md-4">
             <div class="card-deck">
@@ -18,4 +18,3 @@
 
     }
 }
-

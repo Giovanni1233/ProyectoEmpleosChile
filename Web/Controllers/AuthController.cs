@@ -13,6 +13,7 @@ namespace Web.Controllers
         // GET: Auth
         public ActionResult Index()
         {
+           
             return View();
         }
 

@@ -117,9 +117,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\CandidatoEmpleos.cs" />
+    <Compile Include="Models\DetallePublicacion.cs" />
     <Compile Include="Models\Empresa.cs" />
     <Compile Include="Models\EmpresaRegistro.cs" />
+    <Compile Include="Models\PlanesEmpresa.cs" />
+    <Compile Include="Models\PublicacionesEmpresa.cs" />
+    <Compile Include="Models\TipoPublicacion.cs" />
     <Compile Include="Models\Usuario.cs" />
+    <Compile Include="Models\UsuariosPostulados.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

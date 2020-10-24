@@ -286,6 +286,12 @@
     <Content Include="Views\Shared\Empresa\_ModalInicioSesionEmpresa.cshtml" />
     <Content Include="Views\Empresa\Registro.cshtml" />
     <Content Include="Views\Shared\Empresa\_Registro.cshtml" />
+    <Content Include="Views\Empresa\Principal.cshtml" />
+    <Content Include="Views\Shared\Empresa\_Publicaciones.cshtml" />
+    <Content Include="Views\Shared\Empresa\_ModalRegistroPublicacion.cshtml" />
+    <Content Include="Views\Shared\Empresa\_PlanesEmpresa.cshtml" />
+    <Content Include="Views\Empresa\EditarPublicacion.cshtml" />
+    <Content Include="Views\Shared\Empresa\_DetallePublicacion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
