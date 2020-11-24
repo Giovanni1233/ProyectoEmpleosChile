@@ -24,7 +24,9 @@ namespace Web.Controllers
         public ActionResult Inicio()
         {
             ViewBag.ApplicationActive = true;
+            ViewBag.ReferenciaInicio = ModuleControlRetorno() + "/App/Inicio";
             ViewBag.ReferenciaRegistro = ModuleControlRetorno() + "/Auth/RegistroUsuario";
+
 
             return View();
         }
@@ -65,6 +67,6 @@ namespace Web.Controllers
 
         }
 
-        
+
     }
 }

@@ -119,6 +119,28 @@ function ajaxGetCiudad(controller, region) {
     });
 }
 
+function ajaxGetComuna(controller, ciudad) {
+    $.ajax({
+        type: 'POST',
+        url: controller + 'GetComuna',
+        data: '{ ciudad: "' + ciudad + '"}',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: true,
+        success: function (response) {
+            if (response.Code !== "600") {
+                if (response.Code === "200") {
+                    var comuna = '<option value="0">Seleccione...</option>';
+                    for (i = 0; i < response.Comuna.length; i++) {
+                        comuna = comuna + '<option value="' + response.Comuna[i].Id + '">' + response.Comuna[i].Nombre + '</option>';
+                    }
+                    $("#comuna").html(comuna);
+                }
+            }
+        }
+    });
+}
+
 function ajaxActualizarPublicacion(controller, id, descripcion) {
     $.ajax({
         type: 'POST',
@@ -129,6 +151,23 @@ function ajaxActualizarPublicacion(controller, id, descripcion) {
         async: true,
         success: function (response) {
             window.location.reload();
+        }
+    });
+}
+
+function ajaxRegistroUsuario(controller, rut, nombre1, nombre2, apellidoP, apellidoM, correo, correoRepetir, password, passwordRepetir, fechaNacimiento) {
+    $.ajax({
+        type: 'POST',
+        url: controller + 'RegistroUsuario',
+        data: '{ rut: "' + rut + '",  nombre1: "' + nombre1 + '",  nombre2: "' + nombre2 + '",  apellidoP: "' + apellidoP + '",  apellidoM: "' + apellidoM + '",  password: "' + password + '",  passwordRepetir: "' + passwordRepetir + '",  fechaNacimiento: "' + fechaNacimiento + '"}',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: true,
+        success: function (response) {
+
+        },
+        error: function (xhr) {
+
         }
     });
 }
@@ -184,6 +223,21 @@ function ajaxGuardarPreguntaPostulacion(controller, valor) {
             if (response.data == 1) {
                 window.location.reload();
             }
+        }
+    });
+}
+
+//PartialView
+function ajaxViewPartialErrorSignIn(controller, message) {
+    $.ajax({
+        type: 'POST',
+        url: controller + 'ViewPartialErrorSignIn',
+        data: '{ message: "' + message + '" }',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: true,
+        error: function (xhr) {
+            $("#errorSignIn").html(xhr.responseText);
         }
     });
 }

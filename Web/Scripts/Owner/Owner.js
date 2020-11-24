@@ -8,19 +8,17 @@
     // Validar datos
     $(document).on('change', "#rut", function () {
         var rut = $("#rut").val();
+        var error = '';
         if (rut != "" && rut != null && rut != undefined) {
             if (validaRut(rut)) {
                 $("#rut").val(formateaRut(rut));
-                $("#rutError").html('');
             }
             else {
-                $("#rutError").html('Rut ingresado no es valido');
+                error = '<li>Rut ingresado no es valido</li>';
             }
         }
-        else {
-            $("#rutError").html('');
-        }
-        validarErrorIngreso();
+        $("#errorRegistro").html(error);
+        //validarErrorIngreso();
     });
 
     $(document).on('change', "#correo", function () {
@@ -36,7 +34,7 @@
         else {
             $("#mailError").html('');
         }
-        validarErrorIngreso();
+        //validarErrorIngreso();
     });
 
     $(document).on('blur', "#repetirclave", function () {
@@ -206,6 +204,18 @@
         var controller = GetControllerAuth();
 
         ajaxGetCiudad(controller, region);
+    });
+
+    $(document).on('change', "#ciudad", function () {
+        var ciudad = $("#ciudad").val();
+        var controller = GetControllerAuth();
+
+        if (parseInt(ciudad) > 0) {
+            ajaxGetComuna(controller, ciudad);
+        }
+        else {
+            $("#comuna").html('<option value="0">Seleccione...</option>');
+        }
     });
 
 
@@ -383,7 +393,51 @@
 
     });
 
+
+
+
+    $(document).on('click', "#registraUsuario", function () {
+        var rut = $("#rut").val();
+        var nombre1 = $("#nombre1").val();
+        var nombre2 = $("#nombre2").val();
+        var apellidoP = $("#apellidoP").val();
+        var apellidoM = $("#apellidoM").val();
+        var correo = $("#correo").val();
+        var correoRepetir = $("#correoRepetir").val();
+        var password = $("#passWord").val();
+        var passwordRepetir = $("#passWordRepetir").val();
+        var fechaNacimiento = $("#fechaNacimiento").val();
+        var controller = GetControllerAuth();
+        var error = validarErrorIngreso();
+
+        document.getElementById('errorRegistro').innerHTML = error;
+
+        //if (error == "" || error == null || error == undefined) {
+
+        //ajaxRegistroUsuario(controller, rut, nombre1, nombre2, apellidoP, apellidoM,
+        //    correo, correoRepetir, password, passwordRepetir, fechaNacimiento);
+        $("#modalRegistroUsuario").modal("show");
+        //}
+    });
+
+    //se ejecuta al cerrar un modal
+    $("#modalRegistroUsuario").on('hide.bs.modal', function () {
+        $("#username").val('');
+        $("#password").val('');
+        $("#loginError").html('');
+
+        $("#modalSignIn").modal("show");
+    });
+
+    $("#modalSignIn").on('hide.bs.modal', function () {
+
+    });
+
 });
+
+function ModalShowMensajeRegistro() {
+    $("#modalMensajeRegistro").modal("show");
+}
 
 function validaRut(rut) {
     var valor = rut.replace(/\./g, '');
@@ -458,23 +512,75 @@ function ValidateEmail(inputText) {
 }
 
 function validarErrorIngreso() {
-    var rutError = $("#rutError").text();
-    var mailError = $("#rutError").text();
-    var repetirPassError = $("#repetirError").text();
-    var error = false;
+    var rut = $("#rut").val().replace(/\./g, '');;
+    var nombre = $("#nombre1").val();
+    var apellidoP = $("#apellidoP").val();
+    var correo = $("#correo").val();
+    var correoRepetir = $("#correoRepetir").val();
+    var password = $("#passWord").val();
+    var passwordRepetir = $("#passWordRepetir").val();
+    var fechaNacimiento = $("#fechaNacimiento").val();
+
+    var error = '';
+    if (rut != "" && rut != null && rut != undefined) {
+        if (validaRut(rut)) {
+            $("#rut").val(formateaRut(rut));
+        }
+        else {
+            error += '<li>Rut ingresado no es valido</li>';
+        }
+    }
+    else {
+        error += '<li>Debe ingresar un Rut</li>';
+    }
+
+    if (nombre == "" || nombre == null || nombre == undefined) {
+        error += '<li>Debe ingresar nombre</li>'
+    }
+
+    if (apellidoP == "" || apellidoP == null || apellidoP == undefined) {
+        error += '<li>Debe ingresar apellido</li>'
+    }
+
+    if (correo == "" || correo == null || correo == undefined) {
+        error += '<li>Debe ingresar un correo</li>'
+    }
+    else {
+        if (!ValidateEmail(correo)) {
+            error += '<li>Correo ingresado no es valido';
+        }
+        else {
+            if (correoRepetir == "" || correoRepetir == null || correoRepetir == undefined) {
+                error += '<li>Debe repetir correo</li>'
+            }
+            else {
+                if (correo != correoRepetir) {
+                    error += '<li>Repetición de correo no coindice</li>'
+                }
+            }
+        }
+    }
+
+    if (password == "" || password == null || password == undefined) {
+        error += '<li>Debe ingresar una contraseña</li>'
+    }
+    else {
+        if (passwordRepetir == "" || passwordRepetir == null || passwordRepetir == undefined) {
+            error += '<li>Debe repetir la contraseña</li>'
+        }
+        else {
+            if (password != passwordRepetir) {
+                error += '<li>Repetición de contraseñaW no coindice</li>'
+            }
+        }
+    }
+
+    if (fechaNacimiento == "" || fechaNacimiento == null || fechaNacimiento == undefined) {
+        error += '<li>Debe ingresar una fecha de nacimiento</li>'
+    }
 
 
-    if (rutError != '' && rutError != null && rutError != undefined) {
-        error = true;
-    }
-    if (mailError != '' && mailError != null && mailError != undefined) {
-        error = true;
-    }
-    if (repetirPassError != '' && repetirPassError != null && repetirPassError != undefined) {
-        error = true;
-    }
-
-    $("#error").val(error);
+    return error;
 }
 
 

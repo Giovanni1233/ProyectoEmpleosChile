@@ -14,6 +14,10 @@
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/libraryjs")
     @Styles.Render("~/bundles/appcss")
+    @Styles.Render("~/bundles/MaterialDesign")
+    @Styles.Render("https://use.fontawesome.com/releases/v5.8.2/css/all.css")
+
+
     <style>
         .btn-link, ul > li > a {
             color: #fff;
@@ -26,7 +30,7 @@
         <div class="row" style="width: 99%; margin: auto auto auto 5px;">
             <div class="col-6 col-sm-6 col-md-4 col-lg-2" style="margin-top: 10px;">
                 <div style="text-align: center;">
-                    <a href="#">
+                    <a href="@ViewBag.ReferenciaInicio">
                         <img src="~/Resources/LogoWeb.jpg" class="imgLogoHome" style="height: 50px; display: block; margin: auto; cursor:pointer;" />
                     </a>
                 </div>
@@ -49,23 +53,18 @@
                 <nav id="navbar-example2" class="navbar">
 
                     <ul class="nav nav-pills">
-
-
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index","Empresa")">Empresas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Publicaciones</a>
+                        </li>
                         @if (Session["Usuario"] != null && ((string)Session["Usuario"]) != "")
                         {
-                            if ((string)Session["TipoUsuario"] == "E")
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("Index","UsuarioEmpresa")">Publicaciones</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link NewPublicacion" href="javascript:void(0);">Publicar</a>
-                                </li>
-                            }
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@Session["Usuario"]</a>
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Nombre Usuario</a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="@Url.Action("Perfil","UsuarioEmpresa", new { idUsuario = Session["IdUsuario"] })">Perfil</a>
+                                    <a class="dropdown-item" href="#one">Perfil</a>
                                     <div role="separator" class="dropdown-divider"></div>
                                     <a class="dropdown-item signOut" href="#three">Cerrar Sesión</a>
                                 </div>
@@ -73,9 +72,6 @@
                         }
                         else
                         {
-                            <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("Index","Empresa")">Empresas</a>
-                            </li>
                             <li class="nav-item signIn">
                                 <a class="btn btn-link border-light" href="#">Iniciar Sesión</a>
                             </li>
@@ -95,16 +91,10 @@
             </div>
         </div>
     </div>
-
-    <div class="modal fade" id="modalRegistroPublicacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                @Html.Partial("Empresa/_ModalRegistroPublicacion")
-            </div>
-        </div>
-    </div>
     <div class="row" style=" width: 100%;">
         @RenderBody()
+
+        @Scripts.Render("~/bundles/appjs")
     </div>
 </body>
 </html>

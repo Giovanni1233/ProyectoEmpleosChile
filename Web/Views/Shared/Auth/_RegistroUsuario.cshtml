@@ -1,155 +1,103 @@
 ﻿<div class="row">
-    <div class="col-11 col-sm-11 col-md-11 col-lg-11">
+    <div class="col-11 col-sm-11 col-md-11 col-lg-10" style="">
         <h5>FORMULARIO DE REGISTRO</h5>
     </div>
 
-    <div class="col-12 col-sm-12 col-md-12 col-lg-6">
-        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="input-group form-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" style="width: 150px;">Rut</span>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-10">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6" style="margin: auto;">
+                <div class="md-form form-sm no-margin" style="margin: auto;">
+                    <input type="text" id="rut" class="form-control" style="font-family: 'Roboto', sans-serif;" tabindex="1" autocomplete="off" />
+                    <label for="rut">Rut</label>
                 </div>
-                <input type="text" name="rut" id="rut" class="form-control soloRut" placeholder="Ej. 12345678-k" maxlength="12" style="font-family: 'Roboto', sans-serif;" />
-                <span id="rutError" class="error-span"></span>
             </div>
 
-            <div class="input-group form-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" style="width: 150px;">Nombres</span>
-                </div>
-                <input type="text" name="nombres" id="nombres" class="form-control" maxlength="12" style="font-family: 'Roboto', sans-serif;" />
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6" style="margin: auto;"></div>
 
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6" style="margin: auto;">
+                <div class="md-form form-sm" style="margin: auto;">
+                    <input type="text" id="nombre1" class="form-control" style="font-family: 'Roboto', sans-serif;" tabindex="2" autocomplete="off" />
+                    <label for="nombre1">Nombre</label>
+                </div>
             </div>
 
-            <div class="input-group form-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" style="width: 150px;">Apellido Paterno</span>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6" style="margin: auto;">
+                <div class="md-form form-sm" style="margin: auto;">
+                    <input type="text" id="nombre2" class="form-control" style="font-family: 'Roboto', sans-serif;" tabindex="3" autocomplete="off" />
+                    <label for="nombre2">Nombre</label>
                 </div>
-                <input type="text" name="apaterno" id="apaterno" class="form-control" maxlength="12" style="font-family: 'Roboto', sans-serif;" />
             </div>
 
-            <div class="input-group form-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" style="width: 150px;">Apellido Materno</span>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6" style="margin: auto;">
+                <div class="md-form form-sm" style="margin: auto;">
+                    <input type="text" id="apellidoP" class="form-control" style="font-family: 'Roboto', sans-serif;" tabindex="4" autocomplete="off" />
+                    <label for="apellidoP">Apellido Paterno</label>
                 </div>
-                <input type="text" name="amaterno" id="amaterno" class="form-control" maxlength="12" style="font-family: 'Roboto', sans-serif;" />
             </div>
 
-            <div class="input-group form-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" style="width: 150px;">Correo</span>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6" style="margin: auto;">
+                <div class="md-form form-sm" style="margin: auto;">
+                    <input type="text" id="apellidoM" class="form-control" style="font-family: 'Roboto', sans-serif;" tabindex="5" autocomplete="off" />
+                    <label for="apellidoM">Apellido Materno</label>
                 </div>
-                <input type="text" name="correo" id="correo" class="form-control" maxlength="12" style="font-family: 'Roboto', sans-serif;" />
             </div>
 
-            <div class="input-group form-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" style="width: 150px;">Repetir Correo</span>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                <div class="md-form form-sm" style="margin: auto;">
+                    <input type="text" id="correo" class="form-control" style="font-family: 'Roboto', sans-serif;" tabindex="6" autocomplete="off" />
+                    <label for="correo">Correo</label>
                 </div>
-                <input type="text" name="correoRepetir" id="correoRepetir" class="form-control" maxlength="12" style="font-family: 'Roboto', sans-serif;" />
             </div>
 
-            <div class="input-group form-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" style="width: 150px;">Contraseña</span>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                <div class="md-form form-sm" style="margin: auto;">
+                    <input type="text" id="correoRepetir" class="form-control" style="font-family: 'Roboto', sans-serif;" tabindex="7" autocomplete="off" />
+                    <label for="correoRepetir">Repetir Correo</label>
                 </div>
-                <input type="text" name="password" id="password" class="form-control" maxlength="12" style="font-family: 'Roboto', sans-serif;" />
             </div>
 
-            <div class="input-group form-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" style="width: 150px;">Repetir Contraseña</span>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                <div class="md-form form-sm" style="margin: auto;">
+                    <input type="password" id="passWord" class="form-control" style="font-family: 'Roboto', sans-serif;" tabindex="8" autocomplete="off" />
+                    <label for="passWord">Contraseña</label>
                 </div>
-                <input type="text" name="passwordRepetir" id="passwordRepetir" class="form-control" maxlength="12" style="font-family: 'Roboto', sans-serif;" />
             </div>
 
-            <div class="input-group form-group">
-                <input type="checkbox" class="form-check-input" />
-                <span>Acepto <a href="#">Terminos y condiciones</a></span>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-12 col-sm-12 col-md-12 col-lg-6">
-        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="input-group form-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" style="width: 150px;">Fecha Nacimiento</span>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                <div class="md-form form-sm" style="margin: auto;">
+                    <input type="password" id="passWordRepetir" class="form-control" style="font-family: 'Roboto', sans-serif;" tabindex="9" autocomplete="off" />
+                    <label for="passWordRepetir">Repetir Contraseña</label>
                 </div>
-                <input type="text" name="fechaNacimiento" id="fechaNacimiento" class="form-control" style="font-family: 'Roboto', sans-serif;" />
             </div>
 
-            <div class="input-group form-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" style="width: 150px;">Nacionalidad</span>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                <div class="md-form form-sm" style="margin: auto;">
+                    <input type="date" name="fechaNacimiento" id="fechaNacimiento" class="form-control" style="font-family: 'Roboto', sans-serif;" tabindex="10" autocomplete="off" />
                 </div>
-                <select class="form-control">
-                    <option value="0">Seleccione...</option>
-                    @if (ViewBag.ReferenciaPais != null && ViewBag.ReferenciaPais.Count > 0)
-                    {
-                        foreach (Model.Models.Pais item in (List<Model.Models.Pais>)ViewBag.ReferenciaPais)
-                        {
-                            <option value="@item.Id">@item.Nombre</option>
-                        }
-                    }
-                </select>
             </div>
 
-            <div class="input-group form-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" style="width: 150px;">Telefono</span>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6"></div>
+
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                <div class="input-group form-group">
+                    <input type="checkbox" id="terminos" class="form-check-input" />
+                    <span>Acepto <a href="#">Terminos y condiciones</a></span>
                 </div>
-                <input type="text" name="telefono" id="telefono" class="form-control" style="font-family: 'Roboto', sans-serif;" />
+
+                <button id="registraUsuario" class="btn btn-primary" disabled>Registrar</button>
             </div>
 
-            <div class="input-group form-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" style="width: 150px;">Descripción</span>
-                </div>
-                <input type="text" name="descripcion" id="descripcion" class="form-control" style="font-family: 'Roboto', sans-serif;" />
-            </div>
-
-            <div class="input-group form-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" style="width: 150px;">Dirección</span>
-                </div>
-                <input type="text" name="direccion" id="direccion" class="form-control" style="font-family: 'Roboto', sans-serif;" />
-            </div>
-
-            <div class="input-group form-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" style="width: 150px;">Region</span>
-                </div>
-                <select id="region" class="form-control">
-                    <option value="0">Seleccione...</option>
-                    @if (ViewBag.ReferenciaRegion != null && ViewBag.ReferenciaRegion.Count > 0)
-                    {
-                        foreach (Model.Models.Region item in (List<Model.Models.Region>)ViewBag.ReferenciaRegion)
-                        {
-                            <option value="@item.Id">@item.Nombre</option>
-                        }
-                    }
-                </select>
-            </div>
-
-            <div class="input-group form-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" style="width: 150px;">Ciudad</span>
-                </div>
-                <select id="ciudad" class="form-control">
-                    <option value="0">Seleccione...</option>
-                </select>
-            </div>
-
-            <div class="input-group form-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" style="width: 150px;">Comuna</span>
-                </div>
-                <select class="form-control">
-                    <option value="0">Seleccione...</option>
-                </select>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                <ul id="errorRegistro" style="background-color: #FFDADA; width: 100%; margin-bottom: 10px; list-style-type:none"></ul>
             </div>
         </div>
     </div>
 </div>
 
+<div class="modal fade rounded" id="modalRegistroUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            @Html.Partial("Auth/_ModalRegistroUsuario")
+        </div>
+    </div>
+</div>

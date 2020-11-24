@@ -118,7 +118,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\CandidatoEmpleos.cs" />
+    <Compile Include="Models\Ciudad.cs" />
     <Compile Include="Models\ComentariosPubEmpresa.cs" />
+    <Compile Include="Models\Comuna.cs" />
     <Compile Include="Models\DatosEmpresa.cs" />
     <Compile Include="Models\DetallePlan.cs" />
     <Compile Include="Models\DetallePublicacion.cs" />
