@@ -1,0 +1,39 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <h4>Votación</h4>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-4">
+            <input type="hidden" name="urlVotacion" id="urlVotacion" value="@Url.Action("GuardarVotacionPublicacion","Empresa")" />
+            <input type="hidden" name="idPublicacion" value="@ViewBag.IdPublicacion" id="idPublicacionV" />
+            @if (Session["EmpresaID"] != null && ((string)Session["EmpresaID"]) != "")
+            {
+                <input type="hidden" name="idUsuario" value="@Session["EmpresaID"]" id="idUsuario" />
+            }
+            else if (Session["IdUsuario"] != null && ((string)Session["IdUsuario"]) != "")
+            {
+                <input type="hidden" name="idUsuario" value="@Session["IdUsuario"]" id="idUsuario" />
+            }
+            <div class="display-field">
+                <input type="radio" name="radioVotacion" value="1" /> 1<span>&nbsp;</span>
+                <input type="radio" name="radioVotacion" value="2" /> 2<span>&nbsp;</span>
+                <input type="radio" name="radioVotacion" value="3" /> 3<span>&nbsp;</span>
+                <input type="radio" name="radioVotacion" value="4" /> 4<span>&nbsp;</span>
+                <input type="radio" name="radioVotacion" value="5" /> 5<span>&nbsp;</span>
+                
+            </div>
+
+
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <h6>Resultados</h6>
+            <p>Total votaciones: 100</p>
+            <p>Promedio votaciones: 4</p>
+        </div>
+    </div>
+</div>

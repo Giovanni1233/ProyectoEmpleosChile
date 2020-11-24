@@ -1,0 +1,106 @@
+﻿<div class="row">
+    <button type="button" class="btn btn-outline-info btnModalNuevaPregunta">Nueva Pregunta</button>
+</div>
+@if (ViewBag.referenciaPreguntas.Count > 0 && ViewBag.referenciaPreguntas != null)
+{
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+            <h4>Preguntas de la empresa</h4>
+            <form>
+                <div class="form-row align-items-center">
+                    <div class="col-auto my-1">
+                        <select class="custom-select mr-sm-2" id="PreguntaSeleccion">
+                            <option selected value="0">Seleccione...</option>
+                            @foreach (var item in ViewBag.referenciaPreguntas as ICollection<Model.Models.PreguntasPublicacion>)
+                            {
+                                <option value="@item.idPregunta">@item.NombrePregunta</option>
+                            }
+                        </select>
+                        <input type="hidden" name="url" id="url" value="@Url.Action("ActivarDesactivarPregunta","Empresa")" />
+                    </div>
+
+                    <div class="col-auto my-1">
+                        <button type="button" class="btn btn-outline-success btnAgregarPregunta">Agregar</button>
+                        
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-3">
+        </div>
+
+    </div>
+    <hr />
+    if (ViewBag.PreguntasSeleccionadasEmpresa.Count > 0 && ViewBag.PreguntasSeleccionadasEmpresa != null)
+    {
+        <h3>Preguntas seleccionadas</h3>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-condensed table-hvoer">
+                    <thead>
+                        <tr>
+                            <th>Nombre pregunta</th>
+                            <th>Activar/Desactivar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ViewBag.PreguntasSeleccionadasEmpresa as ICollection<Model.Models.PreguntasSeleccionadas>)
+                        {
+                            <tr>
+                                <td>@item.NombrePreguntaSeleccionada</td>
+                                <td>
+                                    @if (item.EstadoPreguntaSeleccionada == 1)
+                                    {
+                                        <button type="button" id="@item.idPreguntaSeleccionada" class="btn btn-outline-danger DesactivarPregunta">Desactivar</button>
+                                    }
+                                    else if (item.EstadoPreguntaSeleccionada == 0)
+                                    {
+                                        <button type="button" id="@item.idPreguntaSeleccionada" class="btn btn-outline-info ActivarPregunta">Activar</button>
+                                    }
+                                </td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-6">
+                <div class="error-template">
+                    <div class="error-details">
+                        <h4>  No se encontraron preguntas seleccionadas</h4>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-3">
+            </div>
+        </div>
+    }
+
+}
+else
+{
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+            <div class="error-template">
+                <div class="error-details">
+                    <h4>  No se encontraron preguntas para añadir a la publicación.</h4>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+}

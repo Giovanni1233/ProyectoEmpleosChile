@@ -1,68 +1,35 @@
 ﻿@if (ViewBag.DetallePublicacion.Count > 0)
 {
-    <h3>Detalle Publicacion @ViewBag.NombrePublicacion </h3>
+    <h3>Detalle Publicacion</h3>
+    <a href="@Url.Action("Principal", "Empresa")" class="btn border">Volver</a>
     <hr />
-    <div class="card-deck col-md-12">
-        @foreach (var item in ViewBag.DetallePublicacion as ICollection<Model.Models.DetallePublicacion>)
-        {
-            <div class="card col-md-6">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="font-weight-bold text-primary text-uppercase mb-1">
-                                @item.TituloPublicacion
-                            </div>
-                            <div class="col mr-4">
-                                @item.DescripcionPublicacion
-                            </div>
-                            <div class="col mr-4">
-                                @item.AutorPublicacion
-                            </div>
-                            <div class="col mr-4">
-                                @item.FechaPublicacion
-                            </div>
-                        </div>
-                        @*<div class="col-auto">
-                                <a href="#" onclick="CargoModal(2, '@item.IdPublicacion');" data-toggle="modal" data-target="#modalRegisterForm" data-backdrop="static" data-keyboard="false" title="Editar">Editar</a>
-                                <span>&nbsp;&nbsp;</span>
-
-                            </div>*@
-                    </div>
-                </div>
-            </div>
-
-
-        }
-
-    </div>
-
-    <hr />
-    @*<h5>Candidatos</h5>
-    foreach (var item in ViewBag.CandidatosEmpresa as ICollection<Model.Models.CandidatoEmpleos>)
+    foreach (var item in ViewBag.DetallePublicacion as ICollection<Model.Models.DetallePublicacion>)
     {
-        <div class="card col-md-6">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="font-weight-bold text-primary text-uppercase mb-1">
-                            @item.NombreCandidato
-                        </div>
-                        <div class="col mr-4">
-                            @item.FechaPostulacion
-                        </div>
-                    </div>
-                   
-                </div>
-            </div>
+        <div class="jumbotron">
+            <h1 class="display-4">@item.TituloPublicacion</h1>
+            <p>@item.DescripcionPublicacion</p>
+            <hr class="my-4" />
+            <p>@item.AutorPublicacion - @item.FechaPublicacion</p>
+            <input type="hidden" name="url" id="url" value="@Url.Action("ActivarDesactivarPub","Empresa")" />
+            <button type="button" id="EditarPublicacion" class="btn btn-primary">Editar</button>
+            @if (item.EstadoPublicacion == 1)
+            {
+                <button type="button" id="@item.IdPublicacion" class="btn btn-outline-danger DesactivarPublicacion">Desactivar</button>
+            }
+            else if(item.EstadoPublicacion == 0)
+            {
+                <button type="button" id="@item.IdPublicacion" class="btn btn-outline-info ActivarPublicacion">Activar</button>
+            }
         </div>
-    }*@
+    }
+
 
 }
 else
 {
     <div class="row">
         <div class="col-md-12">
-            <h2 style="color:#808080">No se puede mostrar el detalle</h2>
+            <h2 style="color:#808080"> No se puede mostrar el detalle</h2>
 
         </div>
     </div>

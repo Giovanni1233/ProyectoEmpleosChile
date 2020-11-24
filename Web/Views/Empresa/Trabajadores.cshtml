@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Trabajadores";
+    Layout = "~/Views/Shared/_HeaderMenuEmpresa.cshtml";
+}
+<div id="BtnNuevo" class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin: 20px 0px 0px 20px;">
+
+    <a class="btn btn-outline-success BtnNuevoU" href="javascript:void(0);">Nuevo Trabajador</a>
+</div>
+<div id="ViewTrabajadores" class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin: 20px 0px 0px 20px;">
+    @Html.Partial("Empresa/_Trabajadores")
+</div>
+
+
+<div class="modal fade" id="modalRegistroUsuarioEmpresa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            @Html.Partial("UsuarioEmpresa/_ModalRegistroUsuarioEmpresa")
+        </div>
+    </div>
+</div>
+

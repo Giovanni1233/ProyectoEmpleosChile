@@ -1,20 +1,44 @@
-﻿@if (ViewBag.PlanesEmpresa.Count > 0)
+﻿
+@if (ViewBag.PlanesEmpresa.Count > 0)
 {
-    foreach (var item in ViewBag.PlanesEmpresa as ICollection<Model.Models.PlanesEmpresa>)
-    {
-        <div class="col-md-4">
-            <div class="card-deck">
-                <div class="card">
-                    <img class="card-img-top" src="~/Imagenes/algoogo.png" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">@item.NombrePlan</h5>
-                        <p class="card-text"><h6>@item.PrecioPlan</h6></p>
-                        <p class="card-text"><small class="text-muted">Ver Plan</small></p>
+    
+    <hr />
+    <div class="row">
+        @foreach (var item in ViewBag.PlanesEmpresa as ICollection<Model.Models.PlanesEmpresa>
+            )
+        {
+            <div class="col-md-4">
+                <div class="card-deck">
+                    <div class="card">
+                        <img class="card-img-top" src="~/Imagenes/algoogo.png" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.NombrePlan</h5>
+                            <p class="card-text"><h6>@item.PrecioPlan</h6></p>
+                        </div>
                     </div>
+
+                </div>
+            </div>
+
+        }
+    </div>
+
+}
+else
+{
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+            <div class="error-template">
+                <div class="error-details">
+                    <h4>  No se encontraron resultados de planes.</h4>
                 </div>
 
             </div>
         </div>
-
-    }
+        <div class="col-md-3">
+        </div>
+    </div>
 }
+

@@ -14,11 +14,11 @@
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/libraryjs")
     @Styles.Render("~/bundles/appcss")
-<style>
-    .btn-link, ul > li > a{
-        color:#fff;
-    }
-</style>
+    <style>
+        .btn-link, ul > li > a {
+            color: #fff;
+        }
+    </style>
 </head>
 
 <body>
@@ -49,18 +49,23 @@
                 <nav id="navbar-example2" class="navbar">
 
                     <ul class="nav nav-pills">
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("Index","Empresa")">Empresas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Publicaciones</a>
-                        </li>
+
+
                         @if (Session["Usuario"] != null && ((string)Session["Usuario"]) != "")
                         {
+                            if ((string)Session["TipoUsuario"] == "E")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Index","UsuarioEmpresa")">Publicaciones</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link NewPublicacion" href="javascript:void(0);">Publicar</a>
+                                </li>
+                            }
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Nombre Usuario</a>
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@Session["Usuario"]</a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#one">Perfil</a>
+                                    <a class="dropdown-item" href="@Url.Action("Perfil","UsuarioEmpresa", new { idUsuario = Session["IdUsuario"] })">Perfil</a>
                                     <div role="separator" class="dropdown-divider"></div>
                                     <a class="dropdown-item signOut" href="#three">Cerrar Sesión</a>
                                 </div>
@@ -68,6 +73,9 @@
                         }
                         else
                         {
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index","Empresa")">Empresas</a>
+                            </li>
                             <li class="nav-item signIn">
                                 <a class="btn btn-link border-light" href="#">Iniciar Sesión</a>
                             </li>
@@ -84,6 +92,14 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 @Html.Partial("Auth/_ModalInicioSesion")
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalRegistroPublicacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                @Html.Partial("Empresa/_ModalRegistroPublicacion")
             </div>
         </div>
     </div>

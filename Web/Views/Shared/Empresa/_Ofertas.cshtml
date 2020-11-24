@@ -1,21 +1,152 @@
 ﻿@if (ViewBag.Planes != null)
 {
-    foreach (var item in ViewBag.Planes as ICollection<Model.Models.PlanesEmpresa>)
-    {
-        <div class="col-md-4">
-            <div class="card-deck">
-                <div class="card">
-                    <img class="card-img-top" src="~/Imagenes/algoogo.png" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">@item.NombrePlan</h5>
-                        <p class="card-text"><h6>@item.PrecioPlan</h6></p>
-                        <p class="card-text"><small class="text-muted">Ver Plan</small></p>
-                    </div>
+    <div class="pricing pricing--sonam">
+        @foreach (var item in ViewBag.Planes as ICollection<Model.Models.PlanesEmpresa>
+            )
+        {
+
+            <div class="col-lg-4 mb-5 mb-lg-0">
+                <div class="bg-white p-5 rounded-lg shadow">
+                    @if (item.NombrePlan == "BASICO")
+                    {
+                        <h1 class="h6 text-uppercase font-weight-bold mb-4">@item.NombrePlan</h1>
+                    }
+                    else if (item.NombrePlan == "ENTERPRISE")
+                    {
+                        <h1 class="h6 text-uppercase font-weight-bold mb-4 text-">@item.NombrePlan</h1>
+                    }
+                    else
+                    {
+                        <h1 class="h6 text-uppercase font-weight-bold mb-4">@item.NombrePlan</h1>
+                    }
+
+
+                    <h2 class="h1 font-weight-bold">$ @item.PrecioPlan<span class="text-small font-weight-normal ml-2">/ mensual</span></h2>
+
+                    <div class="custom-separator my-4 mx-auto bg-primary"></div>
+
+                    <ul class="list-unstyled my-5 text-small text-left">
+                        @foreach (var item2 in item.detallePlan)
+                        {
+                            <li class="mb-3">
+                                <i class="fa fa-check mr-2 text-success CheckLi"></i> @item2.NombreDetalle
+                            </li>
+
+
+                        }
+                    </ul>
+                    @if (Session["NombreEmpresa"] != null && ((string)Session["NombreEmpresa"]) != "")
+                    {
+                        <a href="@Url.Action("Index","Pagos", new { idPlan = item.idPlan })" class="btn btn-primary btn-block p-2 shadow rounded-pill">Seleccionar Plan</a>
+
+                    }
+                    else
+                    {
+                        <a href="#" class="btn btn-primary btn-block p-2 shadow rounded-pill">Seleccionar Plan</a>
+                    }
+
                 </div>
-
             </div>
-        </div>
+            @*<div class="pricing__item">
+                    @if (item.NombrePlan == "BASICO")
+                    {
+                        <h3 class="pricing__title text-primary">@item.NombrePlan</h3>
+                    }
+                    else if (item.NombrePlan == "ENTERPRISE")
+                    {
+                        <h3 class="pricing__title text-success">@item.NombrePlan</h3>
+                    }
+                    else
+                    {
+                        <h3 class="pricing__title text-danger">@item.NombrePlan</h3>
+                    }
 
-    }
+                    <div class="pricing__price"><span class="pricing__currency">$</span>@item.PrecioPlan</div>
+                    <hr />
+                    <div class="pricing__sentence">
+                        <ul>
+                            @foreach (var item2 in item.detallePlan)
+                            {
+
+                                <li><span class="fa fa-check CheckLi">&nbsp;</span>@item2.NombreDetalle</li>
+
+                            }
+                        </ul>
+                    </div>
+                    @if (Session["NombreEmpresa"] != null && ((string)Session["NombreEmpresa"]) != "")
+                    {
+                        <a class="pricing__action contratoPlan btn" href="@Url.Action("Index","Pagos", new { idPlan = item.idPlan })">Escojer plan</a>
+                    }
+                    else
+                    {
+                        <a class="pricing__action contratoPlan btn" href="javascript:void(0);">Escojer plan</a>
+                    }
+                </div>*@
+
+            @*<input type="hidden" id="empresaLogin" value="@Session["EmpresaID"]" />
+                <input type="hidden" id="url" value="@Url.Action("GuardarPlanEmpresa", "Planes")" />*@
+
+        }
+    </div>
 }
+
+
+
+
+@*<div class="pricing-table">
+        <h3 class="pricing-title">Basico</h3>
+        <div class="price">$60<sup>/ mes</sup></div>
+         Lista de Caracteristicas / Propiedades
+        <ul class="table-list">
+            <li>10 GB <span>De almacenamiento</span></li>
+            <li>1 Dominio <span>incluido</span></li>
+            <li>25 GB <span>De transferencia mensual</span></li>
+            <li>Base de datos <span class="unlimited">ilimitadas</span></li>
+            <li>Cuentas de correo <span class="unlimited">ilimitadas</span></li>
+            <li>CPanel <span>incluido</span></li>
+        </ul>
+         Contratar / Comprar
+        <div class="table-buy">
+            <p>$60<sup>/ mes</sup></p>
+            <a href="#" class="pricing-action">Comprar</a>
+        </div>
+    </div>
+
+    <div class="pricing-table recommended">
+        <h3 class="pricing-title">Premium</h3>
+        <div class="price">$100<sup>/ mes</sup></div>
+         Lista de Caracteristicas / Propiedades
+        <ul class="table-list">
+            <li>35 GB <span>De almacenamiento</span></li>
+            <li>5 Dominios <span>incluidos</span></li>
+            <li>100 GB <span>De transferencia mensual</span></li>
+            <li>Base de datos <span class="unlimited">ilimitadas</span></li>
+            <li>Cuentas de correo <span class="unlimited">ilimitadas</span></li>
+            <li>CPanel <span>incluido</span></li>
+        </ul>
+         Contratar / Comprar
+        <div class="table-buy">
+            <p>$100<sup>/ mes</sup></p>
+            <a href="#" class="pricing-action">Comprar</a>
+        </div>
+    </div>
+
+    <div class="pricing-table">
+        <h3 class="pricing-title">Ultimate</h3>
+        <div class="price">$200<sup>/ mes</sup></div>
+         Lista de Caracteristicas / Propiedades
+        <ul class="table-list">
+            <li>100 GB <span>De almacenamiento</span></li>
+            <li>8 Dominios <span>incluidos</span></li>
+            <li>200 GB <span>De transferencia mensual</span></li>
+            <li>Base de datos <span class="unlimited">ilimitadas</span></li>
+            <li>Cuentas de correo <span class="unlimited">ilimitadas</span></li>
+            <li>CPanel <span>incluido</span></li>
+        </ul>
+         Contratar / Comprar
+        <div class="table-buy">
+            <p>$200<sup>/ mes</sup></p>
+            <a href="#" class="pricing-action">Comprar</a>
+        </div>
+    </div>*@
 

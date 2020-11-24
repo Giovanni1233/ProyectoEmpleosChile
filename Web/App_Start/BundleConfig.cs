@@ -21,7 +21,8 @@ namespace Web
                 "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrapjs").Include(
-                "~/Scripts/bootstrap.js"));
+                "~/Scripts/bootstrap.js",
+                "~/Scripts/popper.js"));
 
             bundles.Add(new StyleBundle("~/bundles/bootstrapcss").Include(
                 "~/Content/bootstrap.css"));
@@ -38,12 +39,16 @@ namespace Web
                 "~/Content/jqueryui.css"));
 
             bundles.Add(new StyleBundle("~/bundles/logincss").Include(
-                "~/Content/Owner/EstiloInicio.css",
-                "~/Content/Owner/LoginStyle.css"));
+                "~/Content/App/estiloPublicaciones.css"));
 
             bundles.Add(new StyleBundle("~/bundles/appcss").Include(
                 "~/Content/App/background-color.css",
-                "~/Content/App/btn.css"));
+                "~/Content/App/btn.css",
+                "~/Content/App/estilosPlanes.css",
+                "~/Content/App/estilosPlanes2.css",
+                "~/Content/App/estilosError.css"));
+
+          
         }
     }
 }

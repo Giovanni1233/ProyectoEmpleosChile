@@ -1,0 +1,67 @@
+﻿<h4>Comentarios</h4>
+<br />
+@if (ViewBag.ReferenciaComentarioPubEmpresa.Count > 0)
+{
+
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Fecha</th>
+                        <th>Comentario</th>
+                    </tr>
+                </thead>
+
+                @foreach (var item in ViewBag.ReferenciaComentarioPubEmpresa as ICollection<Model.Models.ComentariosPubEmpresa>
+                    )
+                {
+                    <tbody>
+                        <tr>
+                            <td>@item.NombreAutor</td>
+                            <td>@item.FechaComentario</td>
+                            <td>@item.DescripcionComentario</td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+        </div>
+
+    </div>
+
+}
+else
+{
+    <div class="row">
+        <div class="col-md-12">
+            <h4 style="color:#808080">NO EXISTEN COMENTARIOS</h4>
+        </div>
+    </div>
+}
+
+@using (Ajax.BeginForm("GuardarComentario", "Empresa", new AjaxOptions()
+{
+    HttpMethod = "POST",
+    UpdateTargetId = "mensajeRegistro",
+    InsertionMode = InsertionMode.Replace,
+    LoadingElementId = "loader"
+}, new { @style = "display: block;" }))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-8">
+
+                <label for="comment">Nuevo Comentario:</label>
+                <textarea class="form-control" rows="5" style="resize:none; width:100%; max-width:100%;" name="Comentario" id="Comentario"></textarea>
+                <br />
+                <input type="hidden" name="IdUsuario" value="@Session["EmpresaID"]" /> <!-- SE DEBE MODIFICAR AL ID DE USUARIO -->
+                <input type="hidden" name="Id_Publicacion" value="@ViewBag.IdPublicacion" />
+                <input type="submit" id="ComentarioGu" class="btn btn-success" style="float:right;" name="ComentarioGu" value="Guardar" />
+                <br />
+
+            </div>
+        </div>
+    </div>
+}
+

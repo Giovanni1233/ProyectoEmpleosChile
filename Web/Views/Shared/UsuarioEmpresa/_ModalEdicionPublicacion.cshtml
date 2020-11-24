@@ -1,0 +1,27 @@
+﻿<div class="modal-header">
+    <div class="d-block"><h3>Editar Publicacion</h3></div>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+</div>
+<div class="modal-body">
+    @if (ViewBag.DetallePublicacion.Count > 0)
+    {
+        foreach (var item in ViewBag.DetallePublicacion as ICollection<Model.Models.DetallePublicacion>)
+        {
+            <div class="form-group">
+                <input type="hidden" id="IdPublicacion" name="IdPublicacion" value="@item.IdPublicacion" />
+                <input type="hidden" name="valor" id="valor" value="2" />
+                <input type="text" class="form-control" id="TituloPublicacion" name="TituloPublicacion" value="@item.TituloPublicacion" readonly />
+            </div>
+
+            <br />
+            <div class="form-group">
+                <textarea class="form-control descripcion" name="descripcion" placeholder="Ingrese una descripción" rows="5" id="descripcion" style="min-height:250px; max-height:250px;" >@item.DescripcionPublicacion</textarea>
+            </div>
+            <br />
+            <div class="form-group">
+                <button type="button" class="btn btn-success btnModificarPublicacion">Guardar</button>
+            </div>
+        }
+    }
+</div>

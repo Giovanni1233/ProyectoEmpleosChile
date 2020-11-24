@@ -1,0 +1,50 @@
+﻿
+@if (ViewBag.PublicacionesEmpresa != null && ViewBag.PublicacionesEmpresa.Count > 0)
+{
+    <h3>Publicaciones</h3>
+    <hr />
+    <div class="card-deck col-md-12">
+        @foreach (var item in ViewBag.PublicacionesEmpresa as ICollection<Model.Models.DetallePublicacion>)
+        {
+            <div class="card col-md-6">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="font-weight-bold text-primary text-uppercase mb-1">
+                                <a href="@Url.Action("DetallePublicaciones", "UsuarioEmpresa", new { id = @item.IdPublicacion })" title="Ver publicacion" style="width: 100%; color:#808080;">
+                                    @item.TituloPublicacion
+                                </a>
+                            </div>
+
+                        </div>
+                        <div class="col-auto">
+                            <p> @item.AutorPublicacion</p>
+                        </div>
+                        <div class="col-auto">
+                            <p> @item.DescripcionPublicacion</p>
+                        </div>
+                        <div class="col-auto">
+                            <p> @item.FechaPublicacion</p>
+                        </div>
+                        <div class="col-auto">
+                            <p> @item.MontoPublicacion</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        }
+    </div>
+
+}
+else
+{
+    <div class="row">
+        <div class="col-md-12">
+            <h2 style="color:#808080">NO EXISTEN PUBLICACIONES</h2>
+
+        </div>
+    </div>
+
+}

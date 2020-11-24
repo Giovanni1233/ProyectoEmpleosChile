@@ -1,0 +1,71 @@
+﻿
+
+<div class='col-md-12'>
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h4>Filtros de búsqueda</h4>
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <h6 class="col-md-10 control-label" for="rut_0">Publicación:</h6>
+                <div class='input-group'>
+                    <input type="text" class="form-control" name="name" id="NombrePublicacion" autocomplete="off" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h6 class="col-md-10 control-label" for="rut_0">Fecha:</h6>
+                <div id="divCmbFlujo">
+                    <input type="text" class="form-control" name="fecha" id="FechaPublicacion" autocomplete="off" />
+                </div>
+            </div>
+            <hr />
+            <h3>Ordenamiento</h3>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="radioOrdenamiento" id="exampleRadios1" value="nombreAsc" checked>
+                <label class="form-check-label" for="exampleRadios1">
+                    Nombre (ascendente)
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="radioOrdenamiento" id="exampleRadios2" value="nombreDesc">
+                <label class="form-check-label" for="exampleRadios2">
+                    Nombre (descendente)
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="radioOrdenamiento" id="exampleRadios3" value="fechaAsc">
+                <label class="form-check-label" for="exampleRadios3">
+                    Fecha (ascendente)
+                </label>
+            </div>
+            
+        </div>
+        <div class="card-footer">
+            <div class="form-group">
+                <div>
+                    <button type="button" id="FiltroGatillo" class="btn btn-outline-primary form-control"><i class="fa fa-eye"></i> FILTRAR</button>
+                    <div class="clearfix">&nbsp;</div>
+                    <button type="button" id="btnLimpiar" class="btn btn-outline-success form-control" onclick="return Limpiar()"><i class="fa fa-trash"></i> LIMPIAR</button>
+                </div>
+                <div>
+                    @using (Ajax.BeginForm("Principal", "Empresa", new AjaxOptions()
+                    {
+                        HttpMethod = "POST",
+                        UpdateTargetId = "ViewPublicacionesP",
+                        InsertionMode = InsertionMode.Replace,
+                        LoadingElementId = "loader"
+                    }, new { @style = "display: none;" }))
+                    {
+                        <input type="hidden" name="NombrePublicacion" id="hiddenNombre" />
+                        <input type="hidden" name="FechaPublicacion" id="hiddenFecha" />
+                        <input type="hidden" name="Ordenamiento" id="hiddenOrdenamiento" />
+                        <button type="submit" id="buscarFiltros" class="btn btn-outline-primary form-control"><i class="fa fa-eye"></i> FILTRAR</button>
+                        
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

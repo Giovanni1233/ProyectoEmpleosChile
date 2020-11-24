@@ -1,0 +1,39 @@
+﻿@if (ViewBag.ReferenciaCandidatosEmpresa != null && ViewBag.ReferenciaCandidatosEmpresa.Count > 0)
+{
+    <div class="row">
+        @foreach (var item in ViewBag.ReferenciaCandidatosEmpresa as ICollection<Model.Models.CandidatoEmpleos>)
+        {
+
+            <div class="col-md-3">
+                <div class="card" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.RutCandidato - @item.NombreCandidato - @item.ApellidosCandidatos</h5>
+                        <p class="card-text">@item.TituloPostulacion - @item.FechaSolicitud</p>
+                        <a href="#" class="btn btn-primary">Ver perfil</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+            <div class="error-template">
+
+                <div class="error-details">
+                    <h4>   No hay candidatos en las publicaciones.</h4>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+}
+

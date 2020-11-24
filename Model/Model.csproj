@@ -118,16 +118,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\CandidatoEmpleos.cs" />
+    <Compile Include="Models\ComentariosPubEmpresa.cs" />
+    <Compile Include="Models\DatosEmpresa.cs" />
+    <Compile Include="Models\DetallePlan.cs" />
     <Compile Include="Models\DetallePublicacion.cs" />
+    <Compile Include="Models\DetalleTrabajadores.cs" />
     <Compile Include="Models\Empresa.cs" />
     <Compile Include="Models\EmpresaRegistro.cs" />
+    <Compile Include="Models\MensajesEmpresa.cs" />
+    <Compile Include="Models\NotificacionEmpresa.cs" />
     <Compile Include="Models\PlanesEmpresa.cs" />
+    <Compile Include="Models\PreguntasPublicacion.cs" />
+    <Compile Include="Models\PreguntasSeleccionadas.cs" />
     <Compile Include="Models\PublicacionesEmpresa.cs" />
+    <Compile Include="Models\SolicitudesEmpresaPublicacion.cs" />
     <Compile Include="Models\TipoPublicacion.cs" />
     <Compile Include="Models\Pais.cs" />
     <Compile Include="Models\Region.cs" />
     <Compile Include="Models\Usuario.cs" />
-    <Compile Include="Models\UsuariosPostulados.cs" />
+    <Compile Include="Models\UsuarioEmpresa.cs" />
+    <Compile Include="Models\PerfilCandidatoPostulacion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

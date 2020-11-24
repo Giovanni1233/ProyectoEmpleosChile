@@ -1,4 +1,10 @@
 ﻿function ajaxInicioSesion(controller, usuario, password) {
+    if (!usuario.includes("@")) {
+        if (validaRut(usuario)) {
+            usuario = formateaRut(usuario);
+        }
+    }
+ 
     $.ajax({
         type: 'POST',
         url: controller + 'InicioSesion',
@@ -8,13 +14,25 @@
         async: true,
         success: function (response) {
             if (response.Code == "200") {
-                $("#userUsuarioHidden").val(response.Usuario.Rut);
-                $("#perfilUsuarioHidden").val(response.Usuario.Perfil);
+                if (response.tipo == "E") {
+                    $("#userUsuarioHidden").val(response.Usuario.Rut);
+                    $("#perfilUsuarioHidden").val(response.Usuario.Perfil);
 
-                $("#loginError").html('');
-                $(".signInLoaderContent").hide();
+                    $("#loginError").html('');
+                    $(".signInLoaderContent").hide();
 
-                location.reload();
+                    location.href = "/UsuarioEmpresa/Index";
+                }
+                else {
+                    $("#userUsuarioHidden").val(response.Usuario.Rut);
+                    $("#perfilUsuarioHidden").val(response.Usuario.Perfil);
+
+                    $("#loginError").html('');
+                    $(".signInLoaderContent").hide();
+
+                    location.reload();
+                }
+                
             }
             else {
                 $("#loginError").html(response.Message);
@@ -43,7 +61,7 @@ function ajaxCierraSesion(controller) {
 // Empresa
 
 function ajaxInicioSesionEmpresa(controller, usuario, password) {
-    debugger;
+    
     if (!usuario.includes("@")) {
         if (validaRut(usuario)) {
             usuario = formateaRut(usuario);
@@ -87,9 +105,6 @@ function ajaxCierraSesionEmpresa(controller) {
     });
 }
 
-
-
-
 function ajaxGetCiudad(controller, region) {
     $.ajax({
         type: 'POST',
@@ -100,6 +115,75 @@ function ajaxGetCiudad(controller, region) {
         async: true,
         success: function (response) {
             
+        }
+    });
+}
+
+function ajaxActualizarPublicacion(controller, id, descripcion) {
+    $.ajax({
+        type: 'POST',
+        url: controller + 'ActualizarPublicacion',
+        data: '{ id: "' + id + '", descripcion: "' + descripcion + '"}',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: true,
+        success: function (response) {
+            window.location.reload();
+        }
+    });
+}
+
+
+// Configuracion Seleccion de preguntas
+
+function ajaxRegistroPreguntasEmpresa(controller, id) {
+    $.ajax({
+        type: 'POST',
+        url: controller + 'GuardarAsignacionPreguntas',
+        data: '{ idPregunta: "' + id + '"}',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: true,
+        success: function (response) {
+            if (response.data == 1) {
+                window.location.reload();
+            }
+            
+        }
+    });
+}
+
+
+// Filtros de busqueda
+
+//function ajaxGetPublicacionFiltros(controller, nombrePub, fechaPub) {
+//    $.ajax({
+//        type: 'POST',
+//        url: controller + 'Principal',
+//        data: '{ nombrePub: "' + nombrePub + '", fechaPub: "' + fechaPub + '"}',
+//        dataType: 'json',
+//        contentType: 'application/json',
+//        async: true,
+//        success: function (response) {
+//        }
+//    });
+//}
+
+// Nueva Pregunta Postulacion
+
+function ajaxGuardarPreguntaPostulacion(controller, valor) {
+
+    $.ajax({
+        type: 'POST',
+        url: controller + 'GuardarPreguntaPostulacion',
+        data: '{ nombrePregunta: "' + valor + '"}',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: true,
+        success: function (response) {
+            if (response.data == 1) {
+                window.location.reload();
+            }
         }
     });
 }

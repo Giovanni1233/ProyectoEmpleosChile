@@ -5,7 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@ViewBag.Title</title>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Optional: include a polyfill for ES6 Promises for IE11 -->
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
     @Styles.Render("~/bundles/bootstrapcss")
     @Styles.Render("~/bundles/jqueryuicss")
@@ -14,6 +17,7 @@
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/libraryjs")
     @Styles.Render("~/bundles/appcss")
+    @Styles.Render("~/bundles/logincss")
     <style>
         .btn-link, ul > li > a {
             color: #fff;
@@ -44,45 +48,42 @@
                         @if (Session["NombreEmpresa"] != null && ((string)Session["NombreEmpresa"]) != "")
                         {
                             <li class="nav-item">
-                                <a class="nav-link NewPublicacion" href="#">Publicar</a>
+                                <a class="nav-link" href="@Url.Action("Principal","Empresa")">Inicio</a>
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@Session["NombreEmpresa"]</a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Trabajadores</a>
-                                    <a class="dropdown-item" href="#one">Candidatos</a>
-                                    @*<a class="dropdown-item" href="#one">Publicaciones</a>*@
-                                    <a class="dropdown-item" href="#one">Perfil</a>
-                                    <div role="separator" class="dropdown-divider"></div>
-                                    <a class="dropdown-item signOutEmpresa" href="#three">Cerrar Sesión</a>
-                                </div>
-                            </li>
-                        }
-                        else if (Session["UsuarioEmpresa"] != null && ((string)Session["UsuarioEmpresa"]) != "")
-                        {
-
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Publicar</a>
+                                <a class="nav-link NewPublicacion" href="javascript:void(0);">Publicar</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@Session["NombreEmpresa"]</a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#one">Candidatos</a>
+                                    <a class="dropdown-item" href="@Url.Action("Trabajadores","Empresa")">Trabajadores</a>
+                                    <a class="dropdown-item" href="@Url.Action("CandidatosEmpresa","Empresa")">Candidatos</a>
+                                    <a class="dropdown-item" href="@Url.Action("Solicitudes","Empresa")">Solicitudes &nbsp;&nbsp;<span class="badge badge-success">@Session["ContadorSolicitudes"]</span></a>
                                     @*<a class="dropdown-item" href="#one">Publicaciones</a>*@
-                                    <a class="dropdown-item" href="#one">Perfil</a>
+                                    <a class="dropdown-item" href="@Url.Action("PerfilEmpresa","Empresa")">Perfil</a>
+                                    <a class="dropdown-item" href="@Url.Action("Configuracion","Empresa")">Configuracion</a>
+                                    <a class="dropdown-item" href="@Url.Action("NotificacionesM","Empresa")">
+                                        Not. <span class="badge badge-danger"><span class="fa fa-bell"></span>&nbsp;@Session["ContadorNotificaciones"]</span>
+                                        / Men. <span class="badge badge-info"><span class="fa fa-envelope"></span>&nbsp;@Session["ContadorMensajes"]</span>
+                                    </a>
                                     <div role="separator" class="dropdown-divider"></div>
-                                    <a class="dropdown-item signOutEmpresa" href="#three">Cerrar Sesión</a>
+                                    <a class="dropdown-item signOutEmpresa" href="javascript:void(0);">Cerrar Sesión</a>
                                 </div>
                             </li>
+                            <!-- SE DEBE QUITAR -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("PlanesEmpresa","Empresa")">Planes</a>
+                            </li>
+                            <!-- SE DEBE QUITAR -->
 
                         }
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Publicar</a>
+                                <a class="nav-link" href="@Url.Action("Inicio", "App")">Inicio</a>
                             </li>
                             <li class="nav-item signInEmpresa">
-                                <a class="btn btn-link border-light" href="#">Iniciar Sesión</a>
+                                <a class="btn btn-link border-light" href="javascript:void(0);">Iniciar Sesión</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("Registro","Empresa")">Registrarse</a>
@@ -103,6 +104,23 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="modalRegistroPublicacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                @Html.Partial("Empresa/_ModalRegistroPublicacion")
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalNotificacionesEmpresa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                @Html.Partial("Empresa/_ModalNotificaciones")
+            </div>
+        </div>
+    </div>
+
     <div class="row" style=" width: 100%;">
         @RenderBody()
     </div>

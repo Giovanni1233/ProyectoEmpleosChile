@@ -123,7 +123,8 @@
     <Compile Include="Controllers\AppController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
-    <Compile Include="Controllers\InicioController.cs" />
+    <Compile Include="Controllers\PagosController.cs" />
+    <Compile Include="Controllers\UsuarioEmpresaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -131,6 +132,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\App\background-color.css" />
+    <Content Include="Content\App\estiloPublicaciones.css" />
+    <Content Include="Content\App\estilosError.css" />
+    <Content Include="Content\App\estilosPlanes.css" />
+    <Content Include="Content\App\estilosPlanes2.css" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -290,15 +295,56 @@
     <Content Include="Views\Shared\Empresa\_Publicaciones.cshtml" />
     <Content Include="Views\Shared\Empresa\_ModalRegistroPublicacion.cshtml" />
     <Content Include="Views\Shared\Empresa\_PlanesEmpresa.cshtml" />
-    <Content Include="Views\Empresa\EditarPublicacion.cshtml" />
+    <Content Include="Views\Empresa\DetallePublicaciones.cshtml" />
     <Content Include="Views\Shared\Empresa\_DetallePublicacion.cshtml" />
     <Content Include="Views\App\Inicio.cshtml" />
     <Content Include="Views\Shared\Auth\_RegistroUsuario.cshtml" />
     <Content Include="Views\Auth\RegistroUsuario.cshtml" />
+    <Content Include="Views\Shared\Empresa\_CandidatosUltimosEmpresa.cshtml" />
+    <Content Include="Views\Shared\Empresa\_ModalEdicionPublicacion.cshtml" />
+    <Content Include="Views\Shared\Empresa\_PerfilCandidatoEmpresa.cshtml" />
+    <Content Include="Views\Empresa\PerfilCandidato.cshtml" />
+    <Content Include="Views\Empresa\CandidatosEmpresa.cshtml" />
+    <Content Include="Views\Shared\Empresa\_CandidatosEmpresa.cshtml" />
+    <Content Include="Views\Shared\Empresa\_Trabajadores.cshtml" />
+    <Content Include="Views\Shared\UsuarioEmpresa\_PublicacionPorTrabajador.cshtml" />
+    <Content Include="Views\Empresa\Trabajadores.cshtml" />
+    <Content Include="Views\UsuarioEmpresa\Index.cshtml" />
+    <Content Include="Views\Shared\UsuarioEmpresa\_DetalleTrabajador.cshtml" />
+    <Content Include="Views\Shared\UsuarioEmpresa\_ModalRegistroUsuarioEmpresa.cshtml" />
+    <Content Include="Views\UsuarioEmpresa\Perfil.cshtml" />
+    <Content Include="Views\Shared\UsuarioEmpresa\_PerfilUsuario.cshtml" />
+    <Content Include="Views\Empresa\PerfilUsuarioEmpresaLectura.cshtml" />
+    <Content Include="Views\Shared\UsuarioEmpresa\_DetallePublicacion.cshtml" />
+    <Content Include="Views\UsuarioEmpresa\DetallePublicaciones.cshtml" />
+    <Content Include="Views\Shared\UsuarioEmpresa\_ModalEdicionPublicacion.cshtml" />
+    <Content Include="Views\UsuarioEmpresa\PerfilCandidato.cshtml" />
+    <Content Include="Views\Shared\UsuarioEmpresa\_PerfilCandidatoEmpresa.cshtml" />
+    <Content Include="Views\Shared\Empresa\_ModalPlanesEmpresa.cshtml" />
+    <Content Include="Views\Shared\Empresa\_ComentariosPubEmpresa.cshtml" />
+    <Content Include="Views\Empresa\Solicitudes.cshtml" />
+    <Content Include="Views\Shared\Empresa\_SolicitudesEmpresa.cshtml" />
+    <Content Include="Views\Shared\Empresa\_PerfilUsuarioEmpresa.cshtml" />
+    <Content Include="Views\Shared\Empresa\_ListadoPublicacionUsuarioEmpresa.cshtml" />
+    <Content Include="Views\Empresa\PlanesEmpresa.cshtml" />
+    <Content Include="Views\Empresa\Configuracion.cshtml" />
+    <Content Include="Views\Shared\Empresa\_PreguntasEmpresa.cshtml" />
+    <Content Include="Views\Shared\Empresa\_CandidatosPublicaciones.cshtml" />
+    <Content Include="Views\Pagos\Index.cshtml" />
+    <Content Include="Views\Shared\Empresa\_ProcesoPagoPlan.cshtml" />
+    <Content Include="Views\Shared\Empresa\_FiltroPublicaciones.cshtml" />
+    <Content Include="Views\Shared\Empresa\_ModalPreguntaPostulacion.cshtml" />
+    <Content Include="Views\Empresa\PerfilEmpresa.cshtml" />
+    <Content Include="Views\Shared\Empresa\_DetallePerfil.cshtml" />
+    <Content Include="Views\Shared\Empresa\_ModalNotificaciones.cshtml" />
+    <Content Include="Views\Empresa\NotificacionesM.cshtml" />
+    <Content Include="Views\Shared\Empresa\_NotificacionesEmpresa.cshtml" />
+    <Content Include="Views\Shared\Empresa\_MensajesEmpresa.cshtml" />
+    <Content Include="Views\Shared\Empresa\_VotacionPublicacion.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Imagenes\Empresa\" />
     <Folder Include="Resources\" />
-    <Folder Include="Views\Inicio\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

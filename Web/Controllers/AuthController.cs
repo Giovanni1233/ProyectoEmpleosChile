@@ -13,7 +13,7 @@ namespace Web.Controllers
         // GET: Auth
         public ActionResult Index()
         {
-           
+
             return View();
         }
 
@@ -60,7 +60,7 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult RegistroUsuario(string rut, string nombres, string apaterno, string amaterno, 
+        public ActionResult RegistroUsuario(string rut, string nombres, string apaterno, string amaterno,
             string correo, string correoRepetir, string repetirPassword, string password, string passwordRepetir)
         {
             string[] parametros = new string[3];
@@ -72,7 +72,7 @@ namespace Web.Controllers
             {
                 ViewBag.ApplicationActive = true;
 
-                
+
             }
             catch (Exception ex)
             {
@@ -105,9 +105,9 @@ namespace Web.Controllers
                 valores[2] = "N";
 
                 data = svcEmpleos.ValUsuario(parametros, valores).Table;
-                foreach(DataRow rows in data.Tables[0].Rows)
+                foreach (DataRow rows in data.Tables[0].Rows)
                 {
-                    switch(rows["Code"].ToString())
+                    switch (rows["Code"].ToString())
                     {
                         case "200":
                             clUsuario.Rut = rows["Rut"].ToString();
@@ -115,16 +115,10 @@ namespace Web.Controllers
                             code = rows["Code"].ToString();
                             mensaje = "";
                             Session["Usuario"] = rows["Rut"].ToString();
-                            break;
-                        case "400":
-                            code = rows["Code"].ToString();
-                            mensaje = rows["Message"].ToString();
+                            Session["IdUsuario"] = rows["IdUsuario"].ToString();
+                            Session["TipoUsuario"] = rows["TipoUsuario"].ToString();
                             break;
 
-                        case "500":
-                            code = rows["Code"].ToString();
-                            mensaje = rows["Message"].ToString();
-                            break;
 
                         default:
                             code = "600";
@@ -132,13 +126,61 @@ namespace Web.Controllers
                             break;
                     }
                 }
+
+                /* VALIDAMOS SI ES USUARIO DE EMPRESA */
+                if (code != "200")
+                {
+                    parametros[0] = "@USUARIO";
+                    parametros[1] = "@PASSWORD";
+                    parametros[2] = "@TIPO";
+
+                    valores[0] = usuario;
+                    valores[1] = clave;
+                    valores[2] = "E";
+                    DataSet dataUsuario = new DataSet();
+                    dataUsuario = svcEmpleos.ValUsuario(parametros, valores).Table;
+                    if (dataUsuario.Tables[0].Rows.Count > 0)
+                    {
+                        //data = svcEmpleos.ValEmpresa(parametros, valores).Table;
+                        foreach (DataRow rows in dataUsuario.Tables[0].Rows)
+                        {
+                            switch (rows["Code"].ToString())
+                            {
+                                case "200":
+                                    clUsuario.Rut = rows["Rut"].ToString();
+                                    clUsuario.Correo = rows["Correo"].ToString();
+                                    code = rows["Code"].ToString();
+                                    mensaje = "";
+                                    Session["Usuario"] = rows["Rut"].ToString();
+                                    Session["IdUsuario"] = rows["IdUsuario"].ToString();
+                                    Session["TipoUsuario"] = rows["TipoUsuario"].ToString();
+                                    Session["EmpresaID"] = rows["EmpresaID"].ToString();
+                                    break;
+                                case "400":
+                                    code = rows["Code"].ToString();
+                                    mensaje = rows["Message"].ToString();
+                                    break;
+
+                                case "500":
+                                    code = rows["Code"].ToString();
+                                    mensaje = rows["Message"].ToString();
+                                    break;
+
+                                default:
+                                    code = "600";
+                                    mensaje = errorSistema;
+                                    break;
+                            }
+                        }
+                    }
+                }
             }
-            catch(Exception)
+            catch (Exception)
             {
                 code = "600";
                 mensaje = errorSistema;
             }
-          return Json(new { Code = code, Message = mensaje, Usuario = clUsuario });
+            return Json(new { Code = code, Message = mensaje, Usuario = clUsuario, tipo = valores[2] });
         }
 
         [HttpPost]

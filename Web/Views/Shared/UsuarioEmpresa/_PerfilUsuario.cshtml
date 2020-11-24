@@ -1,0 +1,76 @@
+﻿
+@if (ViewBag.ReferenciaDatosPerfil.Count > 0 && ViewBag.ReferenciaDatosPerfil != null)
+{
+    foreach (var item in ViewBag.ReferenciaDatosPerfil as ICollection<Model.Models.UsuarioEmpresa>)
+    {
+        <div class="row">
+            <h3>Información de @item.NombreUsuarioE</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="text-center">
+                    <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+                    <h6>Imagen</h6>
+                </div>
+            </div>
+            <div class="col-sm-9">
+
+                <div class="tab-content">
+                    <div class="tab-pane active text-dark" id="home">
+                        <hr>
+                        <form class="form" action="##" method="post" id="registrationForm">
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="first_name"><h4>Nombre</h4></label>
+                                    <input type="text" class="form-control" name="first_name" id="first_name" placeholder="first name" value="@item.NombreUsuarioE" title="enter your first name if any." readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="last_name"><h4>Apellidos</h4></label>
+                                    <input type="text" class="form-control" name="last_name" id="last_name" placeholder="last name" @item.ApellidoUsuarioE title="enter your last name if any." readonly>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="phone"><h4>Telefono</h4></label>
+                                    <input type="text" class="form-control" name="phone" id="phone" placeholder="enter phone" value="@item.TelefonoUsuarioE" title="enter your phone number if any." readonly>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="email"><h4>Email</h4></label>
+                                    <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com" value="@item.CorreoUsuarioE" title="enter your email." readonly>
+                                </div>
+                            </div>
+
+                        </form>
+
+                        <hr>
+
+                    </div><!--/tab-pane-->
+
+
+                </div><!--/tab-pane-->
+            </div><!--/tab-content-->
+        </div>
+
+    }
+
+}
+else
+{
+<div class="row">
+    <div class="col-md-12">
+        <h2 style="color:#808080"> No existen información del trabajador.</h2>
+
+    </div>
+</div>
+}

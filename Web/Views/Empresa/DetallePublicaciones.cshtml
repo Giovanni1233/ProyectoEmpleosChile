@@ -1,0 +1,32 @@
+﻿@model Model.Models.PublicacionesEmpresa
+
+@{
+    ViewBag.Title = "EditarPublicacion";
+    Layout = "~/Views/Shared/_HeaderMenuEmpresa.cshtml";
+}
+
+<div id="ViewDetallePublicacion" class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin: 20px 0px 0px 20px;">
+    @Html.Partial("Empresa/_DetallePublicacion")
+</div>
+
+<div id="ViewVotacionPublicacion" class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin: 20px 0px 0px 20px;">
+    @Html.Partial("Empresa/_VotacionPublicacion")
+</div>
+
+<hr />
+<div id="ViewCandidatosEmpresa" class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin: 20px 0px 0px 20px;">
+    @Html.Partial("Empresa/_CandidatosPublicaciones")
+</div>
+<hr />
+<div id="ViewComentariosPublicidad" class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin: 20px 0px 0px 20px;">
+    @Html.Partial("Empresa/_ComentariosPubEmpresa")
+</div>
+<!-- MODAL EDICION PUBLICACION -->
+<div class="modal fade" id="modalEdicionPublicacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            @Html.Partial("Empresa/_ModalEdicionPublicacion")
+        </div>
+    </div>
+</div>
+

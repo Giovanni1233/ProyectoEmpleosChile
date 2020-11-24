@@ -1,4 +1,10 @@
 ﻿$(document).ready(function () {
+    // cargamos el ordenamiento principal
+    var ordenamiento = $('input[type = radio][name = radioOrdenamiento]').val();
+    $("#hiddenOrdenamiento").val(ordenamiento);
+
+    $('.collapse').collapse()
+
     // Validar datos
     $(document).on('change', "#rut", function () {
         var rut = $("#rut").val();
@@ -46,7 +52,7 @@
     // Inicio sesion usuario
     $(document).on('click', "#inicioSesion", function () {
         var controller = '';
-        var rut = $("#username").val().replace(/\./g, '');
+        var rut = $("#username").val();
         var password = $("#password").val();
 
         if (rut == "" || rut == null || rut == undefined || password == "" || password == null || password == undefined) {
@@ -121,6 +127,42 @@
         $("#modalRegistroPublicacion").modal("show");
     });
 
+    // Modificar publicacion
+    $(document).on('click', ".btnModificarPublicacion", function () {
+        var controller = '';
+        var valor = $("#valor").val();
+        var descripcion = $("#descripcionPublicacion").val();
+        var id = $("#IdPublicacion").val();
+
+
+        if (valor == 1) // empresa
+        {
+            controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Empresa/";
+        } else { // usuario empresa
+            controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/UsuarioEmpresa/";
+        }
+
+        ajaxActualizarPublicacion(controller, id, descripcion);
+    });
+
+    // Modal edicion publicacion
+    $(document).on('click', "#EditarPublicacion", function () {
+        $("#modalEdicionPublicacion").modal("show");
+    });
+
+
+    // Modal registro usuario empresa
+    $(document).on('click', ".BtnNuevoU", function () {
+
+        $("#modalRegistroUsuarioEmpresa").modal("show");
+    });
+
+    // Modal planes empresa 
+    $(document).on('click', ".PlanesEmpresa", function () {
+        $("#modalPlanesEmpresa").modal("show");
+    });
+
+
     $(document).on('keypress', ".soloNumeros", function (e) {
         tecla = (document.all) ? e.keyCode : e.which;
         if (tecla == 8) {
@@ -154,7 +196,7 @@
         var code = e.keyCode ? e.keyCode : e.which;
 
         if (code === 13) {
-           
+
             $("#inicioSesionEmpresa").trigger("click");
         }
     });
@@ -164,6 +206,181 @@
         var controller = GetControllerAuth();
 
         ajaxGetCiudad(controller, region);
+    });
+
+
+    // Filtros de busqueda publicaciones
+    //$(document).on('click', "#btnGenerar", function () {
+
+    //    var nombre = $("#NombrePublicacion").val();
+    //    var fecha = $("#FechaPublicacion").val();
+    //    controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Empresa/";
+    //    ajaxGetPublicacionFiltros(controller, nombre, fecha);
+    //});
+
+    // Modal Pregunta Postulacion
+    $(document).on('click', ".btnModalNuevaPregunta", function () {
+        $("#nombrePregunta").val('');
+        $("#modalPreguntaPostulacion").modal("show");
+    });
+
+    // Guardar pregunta postulacion
+    $(document).on('click', ".btnGuardarPregunta", function () {
+
+        var controller = '';
+        var valor = $("#nombrePregunta").val();
+        controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Empresa/";
+
+        ajaxGuardarPreguntaPostulacion(controller, valor);
+    });
+
+    // Seccion de activacion / desactivacion de publicacion
+    $(document).on('click', ".ActivarPublicacion", function () {
+        var idPublicacion = $(this).attr("id");
+        var estado = "1";
+        var url = $("#url").val();
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: { 'idPublicacion': idPublicacion, 'estado': estado },
+            success: function () {
+                window.location.reload();
+            }
+        });
+
+    });
+
+    $(document).on('click', ".DesactivarPublicacion", function () {
+        var idPublicacion = $(this).attr("id");
+        var estado = "0";
+        var url = $("#url").val();
+        Swal.fire({
+            title: '¿Desea desactivar la publicación?',
+            text: "Al desactivar la publicación, esta ya no será visible en la página",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, desactivar',
+            cancelButtonText: 'No'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: { 'idPublicacion': idPublicacion, 'estado': estado },
+                    success: function () {
+                        window.location.reload();
+                    }
+                });
+            }
+        })
+    });
+
+
+
+    // Seccion de activacion / desactivacion de preguntas en configuracion
+    $(document).on('click', ".ActivarPregunta", function () {
+        var idPregunta = $(this).attr("id");
+        var estado = "1";
+        var url = $("#url").val();
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: { 'idPregunta': idPregunta, 'estado': estado },
+            success: function () {
+                window.location.reload();
+            }
+        });
+
+    });
+
+    $(document).on('click', ".DesactivarPregunta", function () {
+        var idPregunta = $(this).attr("id");
+        var estado = "0";
+        var url = $("#url").val();
+        Swal.fire({
+            title: '¿Desea desactivar la pregunta?',
+            text: "Al desactivar la pregunta, no podrá visualizarse en el ingreso de publicación",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, desactivar',
+            cancelButtonText: 'No'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: { 'idPregunta': idPregunta, 'estado': estado },
+                    success: function () {
+                        window.location.reload();
+                    }
+                });
+            }
+        })
+    });
+
+    // Modificar publicacion
+    $(document).on('click', ".btnAgregarPregunta", function () {
+        var controller = '';
+        var idPregunta = $("#PreguntaSeleccion").val();
+
+        controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Empresa/";
+
+        ajaxRegistroPreguntasEmpresa(controller, idPregunta);
+    });
+
+    // Escritura de combos
+    $(document).on('keyup', "#NombrePublicacion", function () {
+        var nombre = $("#NombrePublicacion").val();
+        
+        $("#hiddenNombre").val(nombre);
+
+    });
+
+    $(document).on('keyup', "#FechaPublicacion", function () {
+        var fecha = $("#FechaPublicacion").val();
+        
+        $("#hiddenFecha").val(fecha);
+
+    });
+
+    $('input[type=radio][name=radioOrdenamiento]').change(function () {
+        var ordenamiento = $(this).val();
+        $("#hiddenOrdenamiento").val(ordenamiento);
+
+    });
+
+    $(document).on('click', "#FiltroGatillo", function () {
+        $("#buscarFiltros").trigger("click");
+
+    });
+
+
+    // Modal notificaciones
+    $(document).on('click', ".notificacionEmpresa", function () {
+      
+        $("#modalNotificacionesEmpresa").modal("show");
+    });
+
+
+    // Radios votacion
+    $('input[type=radio][name=radioVotacion]').change(function () {
+        var valoracion = $(this).val();
+        var urlValoracion = $("#urlVotacion").val();
+        var idPub = $("#idPublicacionV").val();
+        var idUsuario = $("#idUsuario").val();
+        $.ajax({
+            type: "POST",
+            url: urlValoracion,
+            data: { 'votacion': valoracion, 'idPublicacion': idPub, 'idUsuario': idUsuario },
+            success: function () {
+                window.location.reload();
+            }
+        });
+
     });
 
 });

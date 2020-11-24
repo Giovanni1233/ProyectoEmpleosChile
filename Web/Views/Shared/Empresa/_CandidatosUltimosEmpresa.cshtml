@@ -1,0 +1,48 @@
+﻿@if (ViewBag.referenciaCandidatosPublicacion.Count > 0 && ViewBag.referenciaCandidatosPublicacion != null)
+{
+    <h5>Últimos 5 candidatos</h5>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Nombres</th>
+                <th>Fecha</th>
+                <th>Correo</th>
+                <th>Perfil</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewBag.referenciaCandidatosPublicacion as ICollection<Model.Models.CandidatoEmpleos>)
+            {
+                <tr>
+                    <td>@item.NombreCandidato</td>
+                    <td>@item.FechaSolicitud</td>
+                    <td>@item.CorreoCandidato</td>
+                    <td>
+                        <a class="btn btn-success" href="@Url.Action("PerfilCandidato","Empresa", new { idUsuario =  item.IdCandidato})">Ver</a>
+                    </td>
+
+                </tr>
+            }
+
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+            <div class="error-template">
+                <div class="error-details">
+                    <h4>  No se encontraron candidatos.</h4>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+}
+
+

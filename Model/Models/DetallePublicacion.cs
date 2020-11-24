@@ -13,5 +13,6 @@ namespace Model.Models
         public string DescripcionPublicacion { get; set; }
         public string MontoPublicacion { get; set; }
         public string FechaPublicacion { get; set; }
+        public int EstadoPublicacion { get; set; }
     }
 }

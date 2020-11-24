@@ -1,0 +1,80 @@
+﻿@if (ViewBag.Candidatos.Count > 0 && ViewBag.Candidatos != null)
+{
+
+    <h5>Candidatos de la publicacion</h5>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Nombres</th>
+                <th>Fecha</th>
+                <th>Correo</th>
+                <th>Perfil</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewBag.Candidatos as ICollection<Model.Models.CandidatoEmpleos>)
+            {
+                <tr>
+                    <td>@item.NombreCandidato</td>
+                    <td>@item.FechaSolicitud</td>
+                    <td>@item.CorreoCandidato</td>
+                    <td>
+                        <a class="btn btn-success" href="@Url.Action("PerfilCandidato", "Empresa", new { idUsuario = item.IdCandidato })">Ver</a>
+                    </td>
+
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+}
+
+else
+{
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Nombres</th>
+                        <th>Fecha</th>
+                        <th>Correo</th>
+                        <th>Perfil</th>
+                        <th>Seleccionar</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   
+                    <tr>
+                        <td>Juan Perez</td>
+                        <td>18/11/2020</td>
+                        <td>jperez@gmail.com</td>
+                        <td>
+                            <a class="btn btn-outline-success" href="@Url.Action("PerfilCandidato", "Empresa", new { idUsuario = 1 })">Ver</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-outline-info" href="@Url.Action("ProcesoSeleccion", "Empresa", new { idUsuario = 1, idEmpresa = 1, idPublicacion = 1 })">Seleccionar</a>
+                        </td>
+                        <td>
+                            <span class="badge badge-success">En proceso</span>
+                        </td>
+
+                    </tr>
+                    
+
+                </tbody>
+            </table>
+            @*<div class="error-template">
+            <div class="error-details">
+                <h4>  No se encontraron candidatos.</h4>
+            </div>
+
+        </div>*@
+        </div>
+        
+    </div>
+}
+
+
