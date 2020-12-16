@@ -75,10 +75,10 @@ namespace Web.Controllers
         {
             string code = string.Empty;
             string mensaje = string.Empty;
+            string urlHome = string.Empty;
             string[] parametros = new string[12];
             string[] valores = new string[12];
             DataSet data = new DataSet();
-            string view = string.Empty;
 
             try
             {
@@ -115,7 +115,6 @@ namespace Web.Controllers
                     {
                         case "200":
                             ViewBag.ReferenciaMensaje = rows["Message"].ToString();
-                            view = "Auth/_ModalMensajeRegistro";
                             ViewBag.ReferenciaUsuario = rut.Replace(".", "");
                             ViewBag.ReferenciaPass = password;
 
@@ -127,12 +126,10 @@ namespace Web.Controllers
 
                         case "400":
                             ViewBag.ReferenciaMensaje = rows["Message"].ToString();
-                            view = "App/_ModalMensajeError";
                             break;
 
                         default:
                             ViewBag.ReferenciaMensaje = errorSistema;
-                            view = "App/_ModalMensajeError";
                             break;
                     }
                 }
@@ -140,24 +137,23 @@ namespace Web.Controllers
             catch (Exception ex)
             {
                 ViewBag.ErrorPlataforma = errorSistema;
-                view = "";
             }
 
-            return Json(new { Code = code, Message = mensaje });
+            urlHome = ModuleControlRetorno() + "/App/Inicio";
+            ViewBag.ReferenciaInicio = ModuleControlRetorno() + "/App/Inicio";
+
+            return Json(new { Code = code, Message = mensaje, UrlHome = urlHome });
         }
 
         [HttpPost]
-        public JsonResult InicioSesion(string usuario, string clave)
+        public JsonResult SignInUser(string user, string pass)
         {
             string code = string.Empty;
             string mensaje = string.Empty;
-            var rut = "";
-            var correo = "";
-            var tipo = "";
-            var empresaID = "";
+            string pathRedirect = "";
             string[] parametros = new string[3];
             string[] valores = new string[3];
-            Usuario clUsuario = new Usuario();
+            Usuario usuario = new Usuario();
 
             try
             {
@@ -166,9 +162,9 @@ namespace Web.Controllers
                 parametros[1] = "@PASSWORD";
                 parametros[2] = "@TIPO";
 
-                valores[0] = usuario;
-                valores[1] = clave;
-                valores[2] = "E";
+                valores[0] = user;
+                valores[1] = pass;
+                valores[2] = "N";
 
                 data = svcEmpleos.ValUsuario(parametros, valores).Table;
                 foreach (DataRow rows in data.Tables[0].Rows)
@@ -176,15 +172,12 @@ namespace Web.Controllers
                     switch (rows["Code"].ToString())
                     {
                         case "200":
-                            clUsuario.Rut = rows["Rut"].ToString();
-                            clUsuario.Correo = rows["Correo"].ToString();
+                            usuario.Rut = rows["Rut"].ToString();
+                            usuario.Correo = rows["Correo"].ToString();
                             code = rows["Code"].ToString();
                             mensaje = "";
                             Session["Usuario"] = rows["Rut"].ToString();
-                            Session["IdUsuario"] = rows["IdUsuario"].ToString();
-                            Session["NombreUsuario"] = rows["Nombre"].ToString();
-                            Session["TipoUsuario"] = rows["TipoUsuario"].ToString();
-                            Session["EmpresaID"] = rows["EmpresaID"].ToString();
+                            pathRedirect = ModuleControlRetorno() + "/App/Inicio";
                             break;
                         case "400":
                             code = rows["Code"].ToString();
@@ -208,7 +201,7 @@ namespace Web.Controllers
                 code = "600";
                 mensaje = errorSistema;
             }
-            return Json(new { Code = code, Message = mensaje, Usuario = clUsuario });
+            return Json(new { Code = code, Message = mensaje, User = usuario, PathRedirect = pathRedirect });
         }
 
         [HttpPost]
@@ -399,5 +392,25 @@ namespace Web.Controllers
         }
 
 
+        //PartialView
+        [HttpPost]
+        public ActionResult ViewPartialLoadingSignIn()
+        {
+            return PartialView("_LoadingLogin");
+        }
+
+        [HttpPost]
+        public ActionResult ViewPartialFormSignIn()
+        {
+            return PartialView("Auth/_FormLogin");
+        }
+
+        [HttpPost]
+        public ActionResult ViewPartialErrorSignIn(string message)
+        {
+            ViewBag.Message = message;
+
+            return PartialView("Auth/_ErrorSignIn");
+        }
     }
 }

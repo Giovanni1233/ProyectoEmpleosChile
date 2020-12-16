@@ -3,6 +3,7 @@
   <xs:import schemaLocation="http://localhost/ServicioEmpleosChile/wsServicioEmpleosChile.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:import schemaLocation="http://localhost/ServicioEmpleosChile/wsServicioEmpleosChile.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" />
   <xs:element name="DelImagenesEmpresa">
+  <xs:element name="GetCandidatosPublicacionEmpresa">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q1:ArrayOfstring" />
@@ -40,10 +41,41 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetCandidatosPublicacionEmpresaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="GetCandidatosPublicacionEmpresaResult" nillable="true" type="q3:ServicioEmpleosChile" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCandidatosEmpresa">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q4:ArrayOfstring" />
+        <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q5:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetCandidatosEmpresaResponse">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="GetCandidatosEmpresaResult" nillable="true" type="q9:ServicioEmpleosChile" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="GetCandidatosEmpresaResult" nillable="true" type="q6:ServicioEmpleosChile" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCantidadesSNM">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q7:ArrayOfstring" />
+        <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q8:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCantidadesSNMResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="GetCantidadesSNMResult" nillable="true" type="q9:ServicioEmpleosChile" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -67,6 +99,8 @@
       <xs:sequence>
         <xs:element xmlns:q13="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q13:ArrayOfstring" />
         <xs:element xmlns:q14="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q14:ArrayOfstring" />
+        <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q10:ArrayOfstring" />
+        <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q11:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -89,6 +123,22 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="GetComentariosPublicacionResult" nillable="true" type="q18:ServicioEmpleosChile" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="GetCiudadResult" nillable="true" type="q12:ServicioEmpleosChile" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetComentariosPublicacion">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q13:ArrayOfstring" />
+        <xs:element xmlns:q14="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q14:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetComentariosPublicacionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="GetComentariosPublicacionResult" nillable="true" type="q15:ServicioEmpleosChile" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -97,6 +147,8 @@
       <xs:sequence>
         <xs:element xmlns:q19="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q19:ArrayOfstring" />
         <xs:element xmlns:q20="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q20:ArrayOfstring" />
+        <xs:element xmlns:q16="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q16:ArrayOfstring" />
+        <xs:element xmlns:q17="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q17:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -134,6 +186,52 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="GetDatosEmpresaResult" nillable="true" type="q27:ServicioEmpleosChile" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="GetComunaResult" nillable="true" type="q18:ServicioEmpleosChile" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDatosEmpresa">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q19="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q19:ArrayOfstring" />
+        <xs:element xmlns:q20="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q20:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDatosEmpresaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="GetDatosEmpresaResult" nillable="true" type="q21:ServicioEmpleosChile" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDatosUsuario">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q22="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q22:ArrayOfstring" />
+        <xs:element xmlns:q23="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q23:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDatosUsuarioResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="GetDatosUsuarioResult" nillable="true" type="q24:ServicioEmpleosChile" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDetallePlanes">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q25="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q25:ArrayOfstring" />
+        <xs:element xmlns:q26="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q26:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDetallePlanesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="GetDetallePlanesResult" nillable="true" type="q27:ServicioEmpleosChile" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -187,6 +285,8 @@
       <xs:sequence>
         <xs:element xmlns:q37="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q37:ArrayOfstring" />
         <xs:element xmlns:q38="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q38:ArrayOfstring" />
+        <xs:element xmlns:q28="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q28:ArrayOfstring" />
+        <xs:element xmlns:q29="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q29:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -352,6 +452,45 @@
       <xs:sequence>
         <xs:element xmlns:q70="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q70:ArrayOfstring" />
         <xs:element xmlns:q71="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q71:ArrayOfstring" />
+        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="GetDetallePublicacionResult" nillable="true" type="q30:ServicioEmpleosChile" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDetalleTrabajador">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q31="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q31:ArrayOfstring" />
+        <xs:element xmlns:q32="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q32:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDetalleTrabajadorResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="GetDetalleTrabajadorResult" nillable="true" type="q33:ServicioEmpleosChile" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMensajesEmpresa">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q34="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q34:ArrayOfstring" />
+        <xs:element xmlns:q35="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q35:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMensajesEmpresaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="GetMensajesEmpresaResult" nillable="true" type="q36:ServicioEmpleosChile" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNotificacionesEmpresa">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q37="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q37:ArrayOfstring" />
+        <xs:element xmlns:q38="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q38:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -374,6 +513,13 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q75="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="GetOtrosUsuariosEmpresaResult" nillable="true" type="q75:ServicioEmpleosChile" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNotificacionesEmpresaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="GetNotificacionesEmpresaResult" nillable="true" type="q39:ServicioEmpleosChile" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -491,6 +637,82 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q97="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="GetPreguntasSeleccionadasEmpresaResult" nillable="true" type="q97:ServicioEmpleosChile" />
+        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="GetPaisResult" nillable="true" type="q40:ServicioEmpleosChile" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPlanesEmpresa">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q41="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q41:ArrayOfstring" />
+        <xs:element xmlns:q42="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q42:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPlanesEmpresaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="GetPlanesEmpresaResult" nillable="true" type="q43:ServicioEmpleosChile" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPublicacionesEmpresa">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q44="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q44:ArrayOfstring" />
+        <xs:element xmlns:q45="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q45:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPublicacionesEmpresaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q46="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="GetPublicacionesEmpresaResult" nillable="true" type="q46:ServicioEmpleosChile" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPublicacionesEmpresaFiltro">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q47="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q47:ArrayOfstring" />
+        <xs:element xmlns:q48="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q48:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPublicacionesEmpresaFiltroResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q49="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="GetPublicacionesEmpresaFiltroResult" nillable="true" type="q49:ServicioEmpleosChile" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPreguntasEmpresa">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q50="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q50:ArrayOfstring" />
+        <xs:element xmlns:q51="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q51:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPreguntasEmpresaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q52="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="GetPreguntasEmpresaResult" nillable="true" type="q52:ServicioEmpleosChile" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPreguntasSeleccionadasEmpresa">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q53="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q53:ArrayOfstring" />
+        <xs:element xmlns:q54="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q54:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPreguntasSeleccionadasEmpresaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q55="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="GetPreguntasSeleccionadasEmpresaResult" nillable="true" type="q55:ServicioEmpleosChile" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -533,10 +755,20 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q104="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="GetTarjetaEmpresaResult" nillable="true" type="q104:ServicioEmpleosChile" />
+        <xs:element xmlns:q56="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="GetRegionResult" nillable="true" type="q56:ServicioEmpleosChile" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSolicitudesEmpresa">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q57="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q57:ArrayOfstring" />
+        <xs:element xmlns:q58="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q58:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetTrabajadores">
+  <xs:element name="GetSolicitudesEmpresaResponse">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q105="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q105:ArrayOfstring" />
@@ -556,28 +788,44 @@
       <xs:sequence>
         <xs:element xmlns:q108="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q108:ArrayOfstring" />
         <xs:element xmlns:q109="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q109:ArrayOfstring" />
+        <xs:element xmlns:q59="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="GetSolicitudesEmpresaResult" nillable="true" type="q59:ServicioEmpleosChile" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetUltimosCandidatosEmpresaResponse">
+  <xs:element name="GetTrabajadores">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q110="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="GetUltimosCandidatosEmpresaResult" nillable="true" type="q110:ServicioEmpleosChile" />
+        <xs:element xmlns:q60="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q60:ArrayOfstring" />
+        <xs:element xmlns:q61="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q61:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetUltimoPlanEmpresa">
+  <xs:element name="GetTrabajadoresResponse">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q111="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q111:ArrayOfstring" />
         <xs:element xmlns:q112="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q112:ArrayOfstring" />
+        <xs:element xmlns:q62="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="GetTrabajadoresResult" nillable="true" type="q62:ServicioEmpleosChile" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUltimosCandidatosEmpresa">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q63="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q63:ArrayOfstring" />
+        <xs:element xmlns:q64="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q64:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetUltimoPlanEmpresaResponse">
+  <xs:element name="GetUltimosCandidatosEmpresaResponse">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q113="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="GetUltimoPlanEmpresaResult" nillable="true" type="q113:ServicioEmpleosChile" />
+        <xs:element xmlns:q65="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="GetUltimosCandidatosEmpresaResult" nillable="true" type="q65:ServicioEmpleosChile" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -586,6 +834,8 @@
       <xs:sequence>
         <xs:element xmlns:q114="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q114:ArrayOfstring" />
         <xs:element xmlns:q115="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q115:ArrayOfstring" />
+        <xs:element xmlns:q66="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q66:ArrayOfstring" />
+        <xs:element xmlns:q67="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q67:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -601,6 +851,30 @@
       <xs:sequence>
         <xs:element xmlns:q117="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q117:ArrayOfstring" />
         <xs:element xmlns:q118="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q118:ArrayOfstring" />
+        <xs:element xmlns:q68="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="GetUsuarioResult" nillable="true" type="q68:ServicioEmpleosChile" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUsuarioEmpresa">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q69="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q69:ArrayOfstring" />
+        <xs:element xmlns:q70="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q70:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUsuarioEmpresaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q71="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="GetUsuarioEmpresaResult" nillable="true" type="q71:ServicioEmpleosChile" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetComentarioPublicacion">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q72="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q72:ArrayOfstring" />
+        <xs:element xmlns:q73="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q73:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -641,11 +915,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="SetComentarioPublicacionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q74="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="SetComentarioPublicacionResult" nillable="true" type="q74:ServicioEmpleosChile" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="SetEmpresa">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q126="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q126:ArrayOfstring" />
         <xs:element xmlns:q127="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q127:ArrayOfstring" />
+        <xs:element xmlns:q75="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q75:ArrayOfstring" />
+        <xs:element xmlns:q76="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q76:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -713,6 +996,52 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q140="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="SetPreguntasSeleccionadasEmpresaResult" nillable="true" type="q140:ServicioEmpleosChile" />
+        <xs:element xmlns:q77="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="SetEmpresaResult" nillable="true" type="q77:ServicioEmpleosChile" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetImagenesEmpresa">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q78="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q78:ArrayOfstring" />
+        <xs:element xmlns:q79="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q79:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetImagenesEmpresaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q80="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="SetImagenesEmpresaResult" nillable="true" type="q80:ServicioEmpleosChile" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetPlanesContratadosEmpresa">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q81="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q81:ArrayOfstring" />
+        <xs:element xmlns:q82="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q82:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetPlanesContratadosEmpresaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q83="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="SetPlanesContratadosEmpresaResult" nillable="true" type="q83:ServicioEmpleosChile" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetPreguntasSeleccionadasEmpresa">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q84="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q84:ArrayOfstring" />
+        <xs:element xmlns:q85="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q85:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetPreguntasSeleccionadasEmpresaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q86="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="SetPreguntasSeleccionadasEmpresaResult" nillable="true" type="q86:ServicioEmpleosChile" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -746,11 +1075,28 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="SetPreguntasEmpresaPostulacion">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q87="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q87:ArrayOfstring" />
+        <xs:element xmlns:q88="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q88:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetPreguntasEmpresaPostulacionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q89="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="SetPreguntasEmpresaPostulacionResult" nillable="true" type="q89:ServicioEmpleosChile" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="SetPublicacionesEmpresa">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q147="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q147:ArrayOfstring" />
         <xs:element xmlns:q148="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q148:ArrayOfstring" />
+        <xs:element xmlns:q90="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q90:ArrayOfstring" />
+        <xs:element xmlns:q91="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q91:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -908,6 +1254,82 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q179="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="UpdTarjetaEmpresaResult" nillable="true" type="q179:ServicioEmpleosChile" />
+        <xs:element xmlns:q92="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="SetPublicacionesEmpresaResult" nillable="true" type="q92:ServicioEmpleosChile" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetUsuarioEmpresa">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q93="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q93:ArrayOfstring" />
+        <xs:element xmlns:q94="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q94:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetUsuarioEmpresaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q95="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="SetUsuarioEmpresaResult" nillable="true" type="q95:ServicioEmpleosChile" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetUpdVotacionPublicacion">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q96="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q96:ArrayOfstring" />
+        <xs:element xmlns:q97="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q97:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetUpdVotacionPublicacionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q98="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="SetUpdVotacionPublicacionResult" nillable="true" type="q98:ServicioEmpleosChile" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdADPreguntaEmpresa">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q99="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q99:ArrayOfstring" />
+        <xs:element xmlns:q100="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q100:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdADPreguntaEmpresaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q101="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="UpdADPreguntaEmpresaResult" nillable="true" type="q101:ServicioEmpleosChile" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdADPublicacionEmpresa">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q102="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q102:ArrayOfstring" />
+        <xs:element xmlns:q103="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q103:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdADPublicacionEmpresaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q104="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="UpdADPublicacionEmpresaResult" nillable="true" type="q104:ServicioEmpleosChile" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdPublicacionEmpresa">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q105="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q105:ArrayOfstring" />
+        <xs:element xmlns:q106="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q106:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdPublicacionEmpresaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q107="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="UpdPublicacionEmpresaResult" nillable="true" type="q107:ServicioEmpleosChile" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -916,6 +1338,8 @@
       <xs:sequence>
         <xs:element xmlns:q180="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q180:ArrayOfstring" />
         <xs:element xmlns:q181="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q181:ArrayOfstring" />
+        <xs:element xmlns:q108="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q108:ArrayOfstring" />
+        <xs:element xmlns:q109="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q109:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -923,6 +1347,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q182="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="SetUsuarioResult" nillable="true" type="q182:ServicioEmpleosChile" />
+        <xs:element xmlns:q110="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="SetUsuarioResult" nillable="true" type="q110:ServicioEmpleosChile" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -931,6 +1356,8 @@
       <xs:sequence>
         <xs:element xmlns:q183="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q183:ArrayOfstring" />
         <xs:element xmlns:q184="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q184:ArrayOfstring" />
+        <xs:element xmlns:q111="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q111:ArrayOfstring" />
+        <xs:element xmlns:q112="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q112:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -938,6 +1365,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q185="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="ValEmpresaResult" nillable="true" type="q185:ServicioEmpleosChile" />
+        <xs:element xmlns:q113="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="ValEmpresaResult" nillable="true" type="q113:ServicioEmpleosChile" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -946,6 +1374,8 @@
       <xs:sequence>
         <xs:element xmlns:q186="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q186:ArrayOfstring" />
         <xs:element xmlns:q187="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q187:ArrayOfstring" />
+        <xs:element xmlns:q114="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parametros" nillable="true" type="q114:ArrayOfstring" />
+        <xs:element xmlns:q115="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="valores" nillable="true" type="q115:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -953,6 +1383,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q188="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="ValUsuarioResult" nillable="true" type="q188:ServicioEmpleosChile" />
+        <xs:element xmlns:q116="http://schemas.datacontract.org/2004/07/ServicioEmpleosChile" minOccurs="0" name="ValUsuarioResult" nillable="true" type="q116:ServicioEmpleosChile" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -1,0 +1,16 @@
+﻿span, div {
+    vertical-align: middle;
+}
+
+select, input {
+    vertical-align: middle;
+}
+
+.btnTransition::after {
+    overflow: hidden;
+}
+
+.btnTransition:hover::after {
+    transition: all 5000ms ease;
+    content: "Rechazar Solicitud";
+}

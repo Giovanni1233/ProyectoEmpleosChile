@@ -30,7 +30,9 @@ namespace Web
             bundles.Add(new ScriptBundle("~/bundles/libraryjs").Include(
                 "~/Scripts/Owner/DatePicker.js",
                 "~/Scripts/Owner/Owner.js",
-                "~/Scripts/Owner/FuncionesAjax.js"));
+                "~/Scripts/Owner/Owner1.js",
+                "~/Scripts/Owner/FuncionesAjax.js",
+                "~/Scripts/Owner/FuncionesAjax1.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                 "~/Scripts/jqueryui.js"));

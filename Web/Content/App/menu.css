@@ -1,0 +1,44 @@
+﻿@media (max-width: 1200px) {
+    #eventMenu {
+        display: inline-block;
+    }
+
+    .menuOption {
+        display: none;
+    }
+
+}
+
+@media (min-width: 630px) {
+    #renderUsuarioSignOutResponsive {
+        display: none;
+    }
+}
+
+@media (max-width: 630px){
+    #renderUsuarioSignOut {
+        display: none;
+    }
+
+    .renderUsername {
+        display: none;
+    }
+
+    #renderUsuarioSignOutResponsive {
+        display: inline-block;
+    }
+}
+
+@media (min-width: 1200px){
+    .menuOption {
+        display: inline-block;
+    }
+
+    #eventMenu {
+        display: none;
+    }
+
+    #collapseMenuOptions {
+        display: none;
+    }
+}

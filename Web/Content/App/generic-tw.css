@@ -1,0 +1,272 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300);
+
+.height-5 {
+    height: 5px;
+}
+
+.height-99vh {
+    height: 99vh
+}
+
+.align-vertical-middle {
+    display: flex; 
+    vertical-align: bottom; 
+    align-items: flex-end;
+}
+
+.family-teamwork {
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.new-family-teamwork {
+    font-family: 'Segoe UI', Tahoma, Arial, Helvetica, sans-serif;
+}
+
+.fs-30 {
+    font-size: 30px;
+}
+
+.fs-40 {
+    font-size: 40px;
+}
+
+.fs-20 {
+    font-size: 20px;
+}
+
+.fs-18 {
+    font-size: 18px;
+}
+
+.pst-abs {
+    position: absolute;
+}
+
+.mt-6 {
+    margin-top: 6px;
+}
+
+.mt-2neg {
+    margin-top: -2px;
+}
+
+.mt-1 {
+    margin-top: 1px;
+}
+
+.height-25 {
+    height: 25px;
+}
+
+.width-25 {
+    width: 25px;
+}
+
+.width-90per {
+    width: 90%;
+}
+
+.m-auto {
+    margin: auto;
+}
+
+.ml-auto {
+    margin-left: auto;
+}
+
+.mr-auto {
+    margin-right: auto;
+}
+
+.mt-15 {
+    margin-top: 15px;
+}
+
+.fs-16 {
+    font-size: 16px;
+}
+
+.fw-bold {
+    font-weight: bold;
+}
+
+.ta-left {
+    text-align: left;
+}
+
+.ta-right {
+    text-align: right;
+}
+
+.br-25 {
+    border-radius: 25px;
+}
+
+.height-50 {
+    height: 50px;
+}
+
+.dspl-inlblc {
+    display: inline-block;
+}
+
+.dspl-blc {
+    display: block;
+}
+
+.fs-14 {
+    font-size: 14px;
+}
+
+.fst-normal {
+    font-style: normal;
+}
+
+.mb-8neg {
+    margin-bottom: -8px;
+}
+
+.mt-100 {
+    margin-top: 100px;
+}
+
+.mheight-100 {
+    min-height: 100px;
+}
+
+.content-height {
+    min-height: 500px;
+}
+
+.mt-30 {
+    margin-top: 30px;
+}
+
+.ta-justify {
+    text-align: justify;
+}
+
+.ta-center {
+    text-align: center;
+}
+
+.bl-5-solid-100x3 {
+    border-left: 5px solid rgb(100, 100, 100);
+}
+
+.bl-5-solid-B703FA {
+    border-left: 5px solid #B703FA;
+}
+
+.bl-5-solid-428BCA {
+    border-left: 5px solid #428BCA;
+}
+
+.bl-5-solid-2178379 {
+    border-left: 5px solid rgb(217, 83, 79);
+}
+
+.bl-5-solid-9218492 {
+    border-left: 5px solid rgb(92, 184, 92);
+}
+
+.bl-5-solid-24017378 {
+    border-left: 5px solid rgb(240, 173, 78);
+}
+
+.bl-5-solid-calculado {
+    border-left: 5px solid rgb(93, 173, 226);
+}
+
+.bt-1-solid-200x3 {
+    border-top: 1px solid rgb(200, 200, 200);
+}
+
+.br-1-solid-200x3 {
+    border-right: 1px solid rgb(200, 200, 200);
+}
+
+.bb-1-solid-200x3 {
+    border-bottom: 1px solid rgb(200, 200, 200);
+}
+
+.bl-1-solid-200x3 {
+    border-left: 1px solid rgb(200, 200, 200);
+}
+
+.bl-5-solid-007BFF {
+    border-left: 5px solid #007BFF;
+}
+
+.mheight-180 {
+    min-height: 180px;
+}
+
+.mt-2 {
+    margin-top: 2px;
+}
+
+.mt-80 {
+    margin-top: 80px;
+}
+
+.brd-2 {
+    border-radius: 2px;
+}
+
+.width-40 {
+    width: 40px;
+} 
+
+.height-40 {
+    height: 40px;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+.lh-14 {
+    line-height: 14px;
+}
+
+.fs-25 {
+    font-size: 25px;
+}
+
+.lh-13 {
+    line-height: 13px;
+}
+
+.mt-10 {
+    margin-top: 10px;
+}
+
+.lh-10 {
+    line-height: 10px;
+}
+
+.lh-18 {
+    line-height: 18px;
+}
+
+.lh-20 {
+    line-height: 20px;
+}
+
+.pdt-4 {
+    padding-top: 4px;
+}
+
+.width-100per {
+    width: 100%;
+}
+
+form {
+    display: inline-block;
+    margin: auto;
+}
+
+.input-nofocus:focus {
+    outline: none;
+}

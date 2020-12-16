@@ -1,0 +1,47 @@
+﻿.txd-dashed {
+    text-decoration: dashed !important;
+}
+
+.txd-dotted {
+    text-decoration: dotted !important;
+}
+
+.txd-double {
+    text-decoration: double !important;
+}
+
+.txd-inherit {
+    text-decoration: inherit !important;
+}
+
+.txd-initial {
+    text-decoration: initial !important;
+}
+
+.txd-line-through {
+    text-decoration: line-through !important;
+}
+
+.txd-none {
+    text-decoration: none !important;
+}
+
+.txd-overline {
+    text-decoration: overline !important;
+}
+
+.txd-solid {
+    text-decoration: solid !important;
+}
+
+.txd-underline {
+    text-decoration: underline !important;
+}
+
+.txd-unset {
+    text-decoration: unset !important;
+}
+
+.txd-wavy {
+    text-decoration: wavy !important;
+}

@@ -1,0 +1,142 @@
+﻿/**
+ *
+ *  ARCHIVO CSS CON DECLARACIÓN COMPLETA DE PROPIEDAD
+ *  => display
+ *
+ */
+
+.dspl-block {
+    display: block;
+}
+
+.dspl-compact {
+    display: compact;
+}
+
+.dspl-contents {
+    display: contents;
+}
+
+.dspl-flex {
+    display: flex;
+}
+
+.dspl-grid {
+    display: grid;
+}
+
+.dspl-inherit {
+    display: inherit;
+}
+
+.dspl-initial {
+    display: initial;
+}
+
+.dspl-inline {
+    display: inline;
+}
+
+.dspl-inline-block {
+    display: inline-block;
+}
+
+.dspl-inline-flex {
+    display: inline-flex;
+}
+
+.dspl-inline-grid {
+    display: inline-grid;
+}
+
+.dspl-inline-table {
+    display: inline-table;
+}
+
+.dspl-list-item {
+    display: list-item;
+}
+
+.dspl-market {
+    display: marker;
+}
+
+.dspl-none {
+    display: none;
+}
+
+.dspl-normal {
+    display: normal;
+}
+
+.dspl-ruby {
+    display: ruby;
+}
+
+.dspl-ruby-base {
+    display: ruby-base;
+}
+
+.dspl-ruby-base-container {
+    display: ruby-base-container;
+}
+
+.dspl-ruby-base-group {
+    display: ruby-base-group;
+}
+
+.dspl-ruby-text {
+    display: ruby-text;
+}
+
+.dspl-ruby-text-container {
+    display: ruby-text-container;
+}
+
+.dspl-ruby-text-group {
+    display: ruby-text-group;
+}
+
+.dspl-run-in {
+    display: run-in;
+}
+
+.dspl-table {
+    display: table;
+}
+
+.dspl-table-caption {
+    display: table-caption;
+}
+
+.dspl-table-cell {
+    display: table-cell;
+}
+
+.dspl-table-column {
+    display: table-column;
+}
+
+.dspl-table-column-group {
+    display: table-column-group;
+}
+
+.dspl-table-footer-group {
+    display: table-footer-group;
+}
+
+.dspl-table-header-group {
+    display: table-header-group;
+}
+
+.dspl-table-row {
+    display: table-row;
+}
+
+.dspl-table-row-group {
+    display: table-row-group;
+}
+
+.dspl-unset {
+    display: unset;
+}

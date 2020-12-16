@@ -1,0 +1,1140 @@
+.glyphicon-tw {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    margin-bottom: -7px;
+}
+
+.glyphicon-tw-2 {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    margin-bottom: -3px;
+}
+
+.glyphicon-tw-3 {
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin-bottom: -7px;
+}
+
+.glyphicon-tw-4 {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    margin-bottom: -7px;
+}
+
+.glyphicon-tw-5 {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    margin-bottom: -12px;
+}
+
+.glyphicon-tw-6 {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    margin-bottom: -16px;
+    margin-top: -2px;
+}
+
+.glyphicon-tw-7 {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    margin-bottom: -8px;
+    margin-top: -2px;
+}
+
+.glyphicon-tw-8 {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    margin-bottom: -13px;
+}
+
+.glyphicon-tw-9 {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    margin-top: -3px;
+    right: 0;
+    position: absolute;
+}
+
+.glyphicon-tw-10 {
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+}
+
+.glyphicon-tw-11 {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin-bottom: -4px;
+}
+
+.glyphicon-tw-12 {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    margin-bottom: -9px;
+    margin-top: -3px;
+}
+
+.glyphicon-tw-13 {
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin-bottom: -7px;
+    margin-top: -5px;
+}
+
+.glyphicon-tw-14 {
+    width: 100px;
+    height: 100px;
+    display: block;
+}
+
+.glyphicon-tw-15 {
+    width: 70px;
+    height: 70px;
+    display: block;
+    margin: auto;
+}
+
+.glyphicon-tw-16 {
+    width: 70px;
+    height: 70px;
+    display: inline-block;
+}
+
+.glyphicon-tw-17 {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    margin-bottom: -12px;
+    margin-top: -5px;
+}
+
+.glyphicon-tw-18 {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    margin-bottom: -1px;
+    margin-top: -2px;
+}
+
+.glyphicon-tw-19 {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin-bottom: -1px;
+    margin-top: -2px;
+}
+
+.glyphicon-tw-20 {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    margin: auto;
+}
+
+.glyphicon-tw-21 {
+    width: 60px;
+    height: 60px;
+    display: inline-block;
+}
+
+.glyphicon-tw-teamwork {
+    width: 180px;
+    height: 60px;
+    display: inline-block;
+    margin-bottom: -20px;
+}
+
+.glyphicon-tw-correo {
+    background-image: url(../../Resources/correo.png);
+    background-size: 80%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-password {
+    background-image: url(../../Resources/password.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 60%;
+}
+
+.glyphicon-buscar {
+    background-image: url(../../Resources/lupa-para-buscar.png);
+    background-position: center;
+    background-size: 45%;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-enterprise {
+    background-image: url(../../Resources/fabrica.png);
+    background-position: center;
+    background-size: 70%;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-calendar {
+    background-image: url(../../Resources/datetime.png);
+    background-position: center;
+    background-size: 70%;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-moneda {
+    background-image: url(../../Resources/monedas.png);
+    background-position: center;
+    background-size: 70%;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-usuario {
+    background-image: url(../../Resources/usuario-hombre.png);
+    background-position: center;
+    background-size: 70%;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-protegido {
+    background-image: url(../../Resources/protegido.png);
+    background-position: center;
+    background-size: 70%;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-pagado {
+    background-image: url(../../Resources/corregir.png);
+    background-position: center;
+    background-size: 70%;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-emitido {
+    background-image: url(../../Resources/emitido.png);
+    background-position: center;
+    background-size: 70%;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-sucursal {
+    background-image: url(../../Resources/tienda.png);
+    background-position: center;
+    background-size: 70%;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-trash {
+    background-image: url(../../Resources/basura.png);
+    background-position: center;
+    background-size: 50%;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-edit {
+    background-image: url(../../Resources/lapiz-boton-de-editar.png);
+    background-position: center;
+    background-size: 45%;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-excel {
+    background-image: url(../../Resources/excel.png);
+    background-position: center;
+    background-size: 70%;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-pdf {
+    background-image: url(../../Resources/pdf.png);
+    background-position: center;
+    background-size: 70%;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-add {
+    background-image: url(../../Resources/add.png);
+    background-position: center;
+    background-size: 50%;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-grabar {
+    background-image: url(../../Resources/comprobado.png);
+    background-position: center;
+    background-size: 70%;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-calcular {
+    background-image: url(../../Resources/calculadora.png);
+    background-position: center;
+    background-size: 70%;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-salir {
+    background-image: url(../../Resources/salir.png);
+    background-position: center;
+    background-size: 70%;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-menu {
+    background-image: url(../../Resources/menu.png);
+    background-position: center;
+    background-size: 60%;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-menuclick {
+    background-image: url(../../Resources/menuClick.png);
+    background-position: center;
+    background-size: 60%;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-arright {
+    background-image: url(../../Resources/caret-right.png);
+    background-position: center;
+    background-size: 60%;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-arright-submenu {
+    background-image: url(../../Resources/caret-right-submenu.png);
+    background-position: center;
+    background-size: 60%;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-ardown {
+    background-image: url(../../Resources/ordenar-hacia-abajo.png);
+    background-position: center;
+    background-size: 60%;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-login {
+    background-image: url(../../Resources/entrar.png);
+    background-position: center;
+    background-size: 70%;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-recupclave {
+    background-image: url(../../Resources/olvidoclave.png);
+    background-position: center;
+    background-size: 70%;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-blind-landing {
+    background-image: url(../../Resources/landing2.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-logoteamwork {
+    background-image: url(../../Resources/logo-teamwork-chile.png);
+    background-size: 90%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-enrolado {
+    background-image: url(../../Resources/exito.png);
+    background-size: 90%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-user2 {
+    background-image: url(../../Resources/usuario.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-next {
+    background-image: url(../../Resources/siguiente.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-terminar {
+    background-image: url(../../Resources/terminar.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-recuperarclaveok {
+    background-image: url(../../Resources/e-mail-sobre-abierto.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-blind-system {
+    background-image: url(../../Resources/system.jpg);
+    background-size: 120%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-atrasado {
+    background-image: url(../../Resources/atrasado.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-proximo {
+    background-image: url(../../Resources/proximo.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-lejano {
+    background-image: url(../../Resources/lejano.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-proceso {
+    background-image: url(../../Resources/proceso.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-carpeta {
+    background-image: url(../../Resources/carpeta.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-carpeta2 {
+    background-image: url(../../Resources/carpeta2.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-proceso2 {
+    background-image: url(../../Resources/proceso2.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-buscar {
+    background-image: url(../../Resources/buscar.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-chinche {
+    background-image: url(../../Resources/chinche.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-reasignar {
+    background-image: url(../../Resources/reasignar.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-cancel {
+    background-image: url(../../Resources/cancel.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-check {
+    background-image: url(../../Resources/check.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-documento {
+    background-image: url(../../Resources/documento.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-directorio {
+    background-image: url(../../Resources/carpetax2.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-asignado {
+    background-image: url(../../Resources/asignado.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-error500 {
+    background-image: url(../../Resources/errorNoControlado.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-error500face {
+    background-image: url(../../Resources/triste.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-terminar {
+    background-image: url(../../Resources/terminardo.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-trash2 {
+    background-image: url(../../Resources/borrar.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-actualizar {
+    background-image: url(../../Resources/boton-actualizar.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-pdfEspecial {
+    background-image: url(../../Resources/pdfx2.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-usuarios {
+    background-image: url(../../Resources/usuarios.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-cliente {
+    background-image: url(../../Resources/cliente.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-grafico {
+    background-image: url(../../Resources/grafico.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-grafico2 {
+    background-image: url(../../Resources/graficox2.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-alta {
+    background-image: url(../../Resources/alta.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-alta2 {
+    background-image: url(../../Resources/altax2.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-solb4j {
+    background-image: url(../../Resources/solb4j.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-solb4j2 {
+    background-image: url(../../Resources/solb4jx2.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-renov {
+    background-image: url(../../Resources/renov.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-renov2 {
+    background-image: url(../../Resources/renovx2.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-cargo {
+    background-image: url(../../Resources/cargo.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-cargo2 {
+    background-image: url(../../Resources/cargox2.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-ficha {
+    background-image: url(../../Resources/ficha.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-ficha2 {
+    background-image: url(../../Resources/fichax2.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-upload {
+    background-image: url(../../Resources/upload.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-add2 {
+    background-image: url(../../Resources/add2.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-calendario {
+    background-image: url(../../Resources/calendario.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-system2 {
+    background-image: url(../../Resources/systemx2.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-mensaje2 {
+    background-image: url(../../Resources/mensajex2.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-excel2 {
+    background-image: url(../../Resources/excelx2.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-enviando2 {
+    background-image: url(../../Resources/enviandox2.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-subir2 {
+    background-image: url(../../Resources/subirx2.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-verificardatos2 {
+    background-image: url(../../Resources/verificacion-datosx2.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-urgente {
+    background-image: url(../../Resources/urgente.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-critico {
+    background-image: url(../../Resources/advertencia.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-problema {
+    background-image: url(../../Resources/problema.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-noprioridad {
+    background-image: url(../../Resources/noprioridad.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-informacion {
+    background-image: url(../../Resources/informacion.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-deshacer {
+    background-image: url(../../Resources/deshacer.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-anexos {
+    background-image: url(../../Resources/anexos.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-anexos2 {
+    background-image: url(../../Resources/anexos-x2.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-dinero {
+    background-image: url(../../Resources/dinero.png);
+    background-size: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-entregacelular {
+    background-image: url(../../Resources/entrega-telefono.png);
+    background-size: 60%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-cambiohorario {
+    background-image: url(../../Resources/cambiohorario.png);
+    background-size: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-cambiocargo {
+    background-image: url(../../Resources/cambiocargo.png);
+    background-size: 60%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-admincuenta {
+    background-image: url(../../Resources/revisar.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-domicilio {
+    background-image: url(../../Resources/domicilio.png);
+    background-size: 60%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-laboral {
+    background-image: url(../../Resources/laboral.png);
+    background-size: 60%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-laptop {
+    background-image: url(../../Resources/laptop.png);
+    background-size: 60%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-casco {
+    background-image: url(../../Resources/casco.png);
+    background-size: 60%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-chip {
+    background-image: url(../../Resources/chip.png);
+    background-size: 60%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-bam {
+    background-image: url(../../Resources/bam.png);
+    background-size: 60%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-uniforme {
+    background-image: url(../../Resources/uniforme.png);
+    background-size: 60%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-optsmenu {
+    background-image: url(../../Resources/more-opt.png);
+    background-size: 80%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-documento2 {
+    background-image: url(../../Resources/documento2.png);
+    background-size: 60%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-triste {
+    background-image: url(../../Resources/tristex2.png);
+    background-size: 80%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-feliz {
+    background-image: url(../../Resources/frescox2.png);
+    background-size: 80%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-delete {
+    background-image: url(../../Resources/delete.png);
+    background-size: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-agregar {
+    background-image: url(../../Resources/agregar.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-chrome {
+    background-image: url(../../Resources/chrome-x2.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-opera {
+    background-image: url(../../Resources/opera-x2.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-mozilla {
+    background-image: url(../../Resources/firefox-x2.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-reporte {
+    background-image: url(../../Resources/estadistica.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-check-2 {
+    background-image: url(../../Resources/check-2.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-calendario-2 {
+    background-image: url(../../Resources/calendario-2.png);
+    background-size: 90%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-calendario-3 {
+    background-image: url(../../Resources/calendario-3.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-calculado {
+    background-image: url(../../Resources/calculado.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-pdfReal {
+    background-image: url(../../Resources/pdfcolorreal-x2.png);
+    background-size: 90%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-barcode {
+    background-image: url(../../Resources/codigo-de-barras.png);
+    background-size: 90%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-cheque2 {
+    background-image: url(../../Resources/chequex2.png);
+    background-size: 90%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-transferencia2 {
+    background-image: url(../../Resources/transferenciax2.png);
+    background-size: 90%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-efectivo2 {
+    background-image: url(../../Resources/dinerox2.png);
+    background-size: 90%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-barcodeLanding {
+    background-image: url(../../Resources/ilustracionlecturadocumentos.jpg);
+    background-size: 90%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-labelnuevo2 {
+    background-image: url(../../Resources/nuevox2.png);
+    background-size: 90%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-proveedor {
+    background-image: url(../../Resources/proveedor.png);
+    background-size: 90%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-gastos {
+    background-image: url(../../Resources/gastos.png);
+    background-size: 90%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-barcodereaderLanding {
+    background-image: url(../../Resources/barcodereader.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-cheque {
+    background-image: url(../../Resources/cheque.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-transferbank {
+    background-image: url(../../Resources/transferencia-bancaria.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-manualcash {
+    background-image: url(../../Resources/cash-back.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-descargararchivo {
+    background-image: url(../../Resources/descargaarchivo.png);
+    background-size: 80%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-sugerirtransferencia {
+    background-image: url(../../Resources/sugerirtransferencia.png);
+    background-size: 80%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-finiquitocalculado {
+    background-image: url(../../Resources/finiquitoscalculados.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-finiquitocalculado2 {
+    background-image: url(../../Resources/finiquitoscalculadosx2.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+.glyphicon-tw-listadosimulacion {
+    background-image: url(../../Resources/listadosim.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-listadosimulacion2 {
+    background-image: url(../../Resources/listadosimx2.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-simulador {
+    background-image: url(../../Resources/simulador.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-cargomod {
+    background-image: url(../../Resources/cargomod.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-cargomod2 {
+    background-image: url(../../Resources/cargomodx2.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-buscarselect {
+    background-image: url(../../Resources/buscarselect.png);
+    background-size: 80%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-namecargo {
+    background-image: url(../../Resources/namecargo.png);
+    background-size: 80%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-liqsueldo {
+    background-image: url(../../Resources/liqsueldo.png);
+    background-size: 80%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-complemento {
+    background-image: url(../../Resources/complementox3.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-tw-cargaupload {
+    background-image: url(../../Resources/cargaupload.svg);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+.glyphicon-tw-cargadownload {
+    background-image: url(../../Resources/cargadownload.svg);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}

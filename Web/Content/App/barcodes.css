@@ -1,0 +1,26 @@
+﻿@import url(https://fonts.googleapis.com/css?family=Libre+Barcode+128|Libre+Barcode+128+Text|Libre+Barcode+39|Libre+Barcode+39+Extended|Libre+Barcode+39+Extended+Text|Libre+Barcode+39+Text&display=swap);
+
+
+.barcode39 {
+    font-family: 'Libre Barcode 39', cursive;
+}
+
+.barcode128 {
+    font-family: 'Libre Barcode 128', cursive;
+}
+
+.barcode39ExtendedText {
+    font-family: 'Libre Barcode 39 Extended Text', cursive;
+}
+
+.barcode12Text {
+    font-family: 'Libre Barcode 128 Text', cursive;
+}
+
+.barcode39Extended {
+    font-family: 'Libre Barcode 39 Extended', cursive;
+}
+
+.barcode39Text {
+    font-family: 'Libre Barcode 39 Text', cursive;
+}
