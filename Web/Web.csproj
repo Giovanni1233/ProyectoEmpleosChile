@@ -797,6 +797,8 @@
     <Content Include="Views\Shared\Empresa\_VotacionPublicacion.cshtml" />
     <Content Include="Views\Shared\Auth\_ErrorSignIn.cshtml" />
     <Content Include="Views\Shared\Auth\_ModalRegistroUsuario.cshtml" />
+    <Content Include="Views\Shared\_LoadingLogin.cshtml" />
+    <Content Include="Views\Shared\Auth\_FormLogin.cshtml" />
     <Content Include="Views\Shared\Empresa\_DetalleModalRegistroPub.cshtml" />
     <Content Include="Views\Shared\Empresa\_ErrorMaximoPublicaciones.cshtml" />
     <Content Include="Views\Shared\Empresa\_ErrorMaximoTrabajadores.cshtml" />
@@ -825,6 +827,8 @@
     <Content Include="Views\UsuarioEmpresa\PerfilUsuarioEmpresaLectura.cshtml" />
     <Content Include="Views\Shared\UsuarioEmpresa\_ListadoPublicacionUsuarioEmpresa.cshtml" />
     <Content Include="Views\Shared\Empresa\_PreguntasPorPublicacion.cshtml" />
+    <Content Include="Views\Shared\_LoadingLogin.cshtml" />
+    <Content Include="Views\Shared\Auth\_FormLogin.cshtml" />
     <Content Include="Views\Shared\_LoadingLogin.cshtml" />
     <Content Include="Views\Shared\Auth\_FormLogin.cshtml" />
   </ItemGroup>
