@@ -3,6 +3,11 @@
     var ordenamiento = $('input[type = radio][name = radioOrdenamiento]').val();
     $("#hiddenOrdenamiento").val(ordenamiento);
 
+    var valoracion = $('input[type = radio][name = radioVotacion]').val();
+    $("#hiddenvotoIndicado").val(valoracion);
+
+
+    $('.mdb-select').materialSelect();
     $('.collapse').collapse()
 
     // Validar datos
@@ -151,13 +156,26 @@
 
     // Modal registro usuario empresa
     $(document).on('click', ".BtnNuevoU", function () {
-
         $("#modalRegistroUsuarioEmpresa").modal("show");
     });
 
     // Modal planes empresa 
     $(document).on('click', ".PlanesEmpresa", function () {
         $("#modalPlanesEmpresa").modal("show");
+    });
+
+    $(document).on('click', "#PlanesEmpresaError", function () {
+        $("#modalPlanesEmpresa").modal("show");
+    });
+
+    $(document).on('click', "#PlanAfuera", function () {
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Debe loguearse para contratar un plan',
+            showConfirmButton: false,
+            timer: 1500
+        })
     });
 
 
@@ -299,7 +317,16 @@
             url: url,
             data: { 'idPregunta': idPregunta, 'estado': estado },
             success: function () {
+
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Publicación actualizada con éxito',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
                 window.location.reload();
+
             }
         });
 
@@ -325,6 +352,13 @@
                     url: url,
                     data: { 'idPregunta': idPregunta, 'estado': estado },
                     success: function () {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Publicación actualizada con éxito',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
                         window.location.reload();
                     }
                 });
@@ -335,24 +369,24 @@
     // Modificar publicacion
     $(document).on('click', ".btnAgregarPregunta", function () {
         var controller = '';
-        var idPregunta = $("#PreguntaSeleccion").val();
+        var nombrePregunta = $("#nombrePregunta").val();
 
         controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Empresa/";
 
-        ajaxRegistroPreguntasEmpresa(controller, idPregunta);
+        ajaxRegistroPreguntasEmpresa(controller, nombrePregunta);
     });
 
     // Escritura de combos
     $(document).on('keyup', "#NombrePublicacion", function () {
         var nombre = $("#NombrePublicacion").val();
-        
+
         $("#hiddenNombre").val(nombre);
 
     });
 
     $(document).on('keyup', "#FechaPublicacion", function () {
         var fecha = $("#FechaPublicacion").val();
-        
+
         $("#hiddenFecha").val(fecha);
 
     });
@@ -371,29 +405,9 @@
 
     // Modal notificaciones
     $(document).on('click', ".notificacionEmpresa", function () {
-      
+
         $("#modalNotificacionesEmpresa").modal("show");
     });
-
-
-    // Radios votacion
-    $('input[type=radio][name=radioVotacion]').change(function () {
-        var valoracion = $(this).val();
-        var urlValoracion = $("#urlVotacion").val();
-        var idPub = $("#idPublicacionV").val();
-        var idUsuario = $("#idUsuario").val();
-        $.ajax({
-            type: "POST",
-            url: urlValoracion,
-            data: { 'votacion': valoracion, 'idPublicacion': idPub, 'idUsuario': idUsuario },
-            success: function () {
-                window.location.reload();
-            }
-        });
-
-    });
-
-
 
 
     $(document).on('click', "#registraUsuario", function () {
@@ -433,11 +447,82 @@
 
     });
 
+    // Perfil de la empresa
+    $(document).on('click', "#btnGuardarPerfilEmpresa", function () {
+        var rut = $("#rut").val();
+        var telefono = $("#telefono").val();
+        var correo = $("#correo").val();
+        var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Empresa/";
+
+        ajaxGuardaPerfilEmpresa(controller, rut, telefono, correo);
+    });
+
+    // Responder mensaje
+    $(document).on('click', "#MensajeGu", function () {
+        var idMensaje = $("#idMensaje").val();
+        var idAutor = $("#idReceptor").val();
+        var mensaje = $("#MensajeHM").val();
+        var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Empresa/";
+
+        ajaxResponderMensajeAUsuario(controller, idMensaje, idAutor, mensaje);
+    });
+
+    // Valoracion publicacion
+    $(document).on('click', "#valorarPublicacion", function () {
+
+        var valorvotacion = $('#hiddenvotoIndicado').val();
+        var idPublicacion = $("#idPublicacion").val();
+        var idUsuario = $("#idUsuario").val();
+        var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Empresa/";
+
+        ajaxGuardarValoracionPublicacion(controller, valorvotacion, idPublicacion, idUsuario);
+    });
+
+
+    // Modal Pregunta Postulacion
+    $(document).on('click', "#BtnNuevaT", function () {
+        $("#modalConfiguracionTarjeta").modal("show");
+    });
+
+    $(document).on('click', '#btnActualizarTarjetas', function () {
+        var nombreTar = $('#nombreT').val();
+        var numeroTar = $("#numeroT").val();
+        var fechaTar = $("#fechaT").val();
+        var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Empresa/";
+
+        ajaxActualizarTarjetaEmpresa(controller, nombreTar, numeroTar, fechaTar);
+    });
+
+
+    // Pago plan
+    $(document).on('click', '#btnPagar', function () {
+        var idplan = $('#idPlan').val();
+        var idPlanAnterior = $('#idPlanAnterior').val();
+        var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Empresa/";
+
+        ajaxPagoPlanEmpresa(controller, idplan, idPlanAnterior);
+    });
+
+    // Perfil del usuario empresa
+    $(document).on('click', "#btnGuardarPerfilUsuarioEmpresa", function () {
+        
+        var telefono = $("#telefono").val();
+        var correo = $("#correo").val();
+        var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/UsuarioEmpresa/";
+
+        ajaxGuardaPerfilUsuarioEmpresa(controller, telefono, correo);
+    });
+
 });
+function CambioValor(valor) {
+    var valoracion = valor;
+    $("#hiddenvotoIndicado").val(valoracion);
+}
 
 function ModalShowMensajeRegistro() {
     $("#modalMensajeRegistro").modal("show");
 }
+
 
 function validaRut(rut) {
     var valor = rut.replace(/\./g, '');

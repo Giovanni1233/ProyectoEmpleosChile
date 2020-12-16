@@ -18,6 +18,8 @@
     @Scripts.Render("~/bundles/libraryjs")
     @Styles.Render("~/bundles/appcss")
     @Styles.Render("~/bundles/logincss")
+    @Styles.Render("~/bundles/MaterialDesign")
+    @Styles.Render("https://use.fontawesome.com/releases/v5.8.2/css/all.css")
     <style>
         .btn-link, ul > li > a {
             color: #fff;
@@ -28,11 +30,11 @@
 <body>
     <div style="width: 100%; top: 0px; z-index: 999;" class="header-background">
         <div class="row" style="width: 99%; margin: auto auto auto 5px;">
-            <div class="col-6 col-sm-6 col-md-4 col-lg-2" style="margin-top: 10px;">
+            <div class="col-6 col-sm-6 col-md-4 col-lg-2">
                 <div style="text-align: center;">
 
                     <a href="#">
-                        <img src="~/Resources/LogoWeb.jpg" class="imgLogoHome" style="height: 50px; display: block; margin: auto; cursor:pointer;" />
+                        <img src="#" class="imgLogoHome" style="height: 60px; display: block; margin: auto; cursor:pointer;" />
                     </a>
 
                 </div>
@@ -83,7 +85,7 @@
                                 <a class="nav-link" href="@Url.Action("Inicio", "App")">Inicio</a>
                             </li>
                             <li class="nav-item signInEmpresa">
-                                <a class="btn btn-link border-light" href="javascript:void(0);">Iniciar Sesión</a>
+                                <a class="nav-link" href="javascript:void(0);">Iniciar Sesión</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("Registro","Empresa")">Registrarse</a>
@@ -121,8 +123,17 @@
         </div>
     </div>
 
+    <div class="modal fade" id="modalPlanesEmpresa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                @Html.Partial("Empresa/_ModalPlanesEmpresa")
+            </div>
+        </div>
+    </div>
+
     <div class="row" style=" width: 100%;">
         @RenderBody()
+        @Scripts.Render("~/bundles/appjs")
     </div>
 </body>
 </html>

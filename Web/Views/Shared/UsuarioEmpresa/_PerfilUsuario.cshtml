@@ -3,55 +3,56 @@
 {
     foreach (var item in ViewBag.ReferenciaDatosPerfil as ICollection<Model.Models.UsuarioEmpresa>)
     {
-        <div class="row">
-            <h3>Información de @item.NombreUsuarioE</h3>
-        </div>
+
         <div class="row">
             <div class="col-sm-3">
                 <div class="text-center">
-                    <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+                    @if (ViewBag.ReferenciaImagenUsuario.Count > 0)
+                    {
+                        foreach (var item2 in ViewBag.ReferenciaImagenUsuario as ICollection<Model.Models.ImagenUsuario>)
+                        {
+                            <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(item2.Imagen))" style="max-width:100%;" />
+                        }
+                    }
                     <h6>Imagen</h6>
+                </div>
+                <div class="text-center">
+                    @using (Html.BeginForm("SubirImagenes", "UsuarioEmpresa", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+
+                        <span class="">
+                            <input type="file" name="file" id="file" style="width: 100%;" />
+                        </span>
+                        <br />
+                        <br />
+                        <input type="submit" value="Guardar Imagen" class="submit btn btn-outline-success" />
+                    }
                 </div>
             </div>
             <div class="col-sm-9">
-
+                <div class="row">
+                    <h3>Información de @item.NombreUsuarioE</h3>
+                </div>
                 <div class="tab-content">
                     <div class="tab-pane active text-dark" id="home">
                         <hr>
-                        <form class="form" action="##" method="post" id="registrationForm">
-                            <div class="form-group">
-
-                                <div class="col-xs-6">
-                                    <label for="first_name"><h4>Nombre</h4></label>
-                                    <input type="text" class="form-control" name="first_name" id="first_name" placeholder="first name" value="@item.NombreUsuarioE" title="enter your first name if any." readonly>
-                                </div>
+                        <div class="p-3 py-5">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h4 class="text-right">Información Importante</h4>
                             </div>
-                            <div class="form-group">
-
-                                <div class="col-xs-6">
-                                    <label for="last_name"><h4>Apellidos</h4></label>
-                                    <input type="text" class="form-control" name="last_name" id="last_name" placeholder="last name" @item.ApellidoUsuarioE title="enter your last name if any." readonly>
-                                </div>
+                            <div class="row mt-2">
+                                <div class="col-md-12"><label class="labels">Rut</label><input type="text" autocomplete="off" class="form-control" placeholder="Ingrese su Rut" readonly name="rut" id="rut" value="@item.RutUsuarioE"></div>
+                                <div class="col-md-6"><label class="labels">Nombre</label><input type="text" autocomplete="off" class="form-control" placeholder="Ingrese su nombre" readonly name="nombre" value="@item.NombreUsuarioE"></div>
+                                <div class="col-md-6"><label class="labels">Apellido</label><input type="text" autocomplete="off" class="form-control" value="@item.ApellidoUsuarioE" readonly name="apellido" placeholder="Apellido"></div>
                             </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12"><label class="labels">Telefono</label><input type="text" autocomplete="off" class="form-control" placeholder="Ingrese su telefono" id="telefono" name="telefono" value="@item.TelefonoUsuarioE"></div>
+                                <div class="col-md-12"><label class="labels">Correo</label><input type="text" autocomplete="off" class="form-control" placeholder="enter address" id="correo" name="correo" value="@item.CorreoUsuarioE"></div>
 
-                            <div class="form-group">
 
-                                <div class="col-xs-6">
-                                    <label for="phone"><h4>Telefono</h4></label>
-                                    <input type="text" class="form-control" name="phone" id="phone" placeholder="enter phone" value="@item.TelefonoUsuarioE" title="enter your phone number if any." readonly>
-                                </div>
+                                <div class="mt-5 text-center"><button class="btn btn-success profile-button" id="btnGuardarPerfilUsuarioEmpresa" type="button">Guardar Datos</button></div>
                             </div>
-
-
-                            <div class="form-group">
-
-                                <div class="col-xs-6">
-                                    <label for="email"><h4>Email</h4></label>
-                                    <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com" value="@item.CorreoUsuarioE" title="enter your email." readonly>
-                                </div>
-                            </div>
-
-                        </form>
+                        </div>
 
                         <hr>
 
@@ -67,10 +68,10 @@
 }
 else
 {
-<div class="row">
-    <div class="col-md-12">
-        <h2 style="color:#808080"> No existen información del trabajador.</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <h2 style="color:#808080"> No existen información del trabajador.</h2>
 
+        </div>
     </div>
-</div>
 }

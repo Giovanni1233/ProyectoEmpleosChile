@@ -1,24 +1,70 @@
 ﻿
 @if (ViewBag.PlanesEmpresa.Count > 0)
 {
-    
+
     <hr />
     <div class="row">
         @foreach (var item in ViewBag.PlanesEmpresa as ICollection<Model.Models.PlanesEmpresa>
             )
         {
-            <div class="col-md-4">
-                <div class="card-deck">
-                    <div class="card">
-                        <img class="card-img-top" src="~/Imagenes/algoogo.png" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">@item.NombrePlan</h5>
-                            <p class="card-text"><h6>@item.PrecioPlan</h6></p>
-                        </div>
-                    </div>
+            <div class="col-lg-3 mb-5 mb-lg-0">
+                <div class="bg-white p-5 rounded-lg shadow">
+                    @if (item.NombrePlan == "BASICO")
+                    {
+                        <h1 class="h6 text-uppercase font-weight-bold mb-4">@item.NombrePlan</h1>
+                    }
+                    else if (item.NombrePlan == "ENTERPRISE")
+                    {
+                        <h1 class="h6 text-uppercase font-weight-bold mb-4">@item.NombrePlan</h1>
+                    }
+                    else
+                    {
+                        <h1 class="h6 text-uppercase font-weight-bold mb-4">@item.NombrePlan</h1>
+                    }
+
+                    @if (item.NombrePlan != "NORMAL")
+                    {
+                        <h2 class="h1 font-weight-bold">$ @item.PrecioPlan<span class="text-small font-weight-normal ml-2"></span></h2>
+                    }
+                    else
+                    {
+                        <h2 class="h1 font-weight-bold">$ @item.PrecioPlan<span class="text-small font-weight-normal ml-2"></span></h2>
+                    }
+                    <div class="custom-separator my-4 mx-auto bg-primary"></div>
+
+                    <ul class="list-unstyled my-4 text-small text-left">
+                        @foreach (var item2 in item.detallePlan)
+                        {
+                            if (item.NombrePlan == "NORMAL")
+                            {
+                                <li class="mb-2">
+                                    <i class="fa fa-check mr-1 text-success CheckLi"></i>@item2.CantidadPlan @item2.NombreDetalle
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="mb-2">
+                                    <i class="fa fa-check mr-1 text-success CheckLi"></i>+ @item2.CantidadPlan @item2.NombreDetalle
+                                </li>
+                            }
+
+
+
+                        }
+
+                    </ul>
+                    @if (item.estadoPlan == "1")
+                    {
+                        <p><span class="badge badge-success">Vigente</span></p>
+                    }
+                    else
+                    {
+                        <p><span class="badge badge-danger">No vigente</span></p>
+                    }
 
                 </div>
             </div>
+
 
         }
     </div>
@@ -41,4 +87,3 @@ else
         </div>
     </div>
 }
-

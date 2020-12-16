@@ -18,5 +18,6 @@ namespace Model.Models
         public string TituloPostulacion { get; set; }
 
          public string FechaSolicitud { get; set; }
+        public string EstadoSolicitud { get; set; }
 }
 }

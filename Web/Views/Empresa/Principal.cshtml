@@ -6,15 +6,16 @@
 
 <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin: 20px 0px 0px 20px;">
     <div class="row">
-        <div class="col-md-3 col-3 col-sm-2 col-lg-3" id="ViewFiltros">
+        <div class="col-md-2 col-xl-2 col-sm-12 col-lg-2 border-right" id="ViewFiltros">
             @Html.Partial("Empresa/_FiltroPublicaciones")
         </div>
-        <div class="col-md-9 col-9 col-sm-10 col-lg-9" id="ViewPublicacionesP">
+        <div class="col-md-4 col-xl-4 col-sm-12 col-lg-4 border-right" id="ViewPublicacionesP">
             @Html.Partial("Empresa/_Publicaciones")
         </div>
-
+        <div class="col-md-6 col-xl-6 col-sm-12 col-lg-6" id="ViewDetallePublicacionesP">
+            @Html.Partial("Empresa/_DetallePublicacion")
+        </div>
     </div>
-
 </div>
 
 <div id="ViewUltimosCandidatos" class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin: 20px 0px 0px 20px;">

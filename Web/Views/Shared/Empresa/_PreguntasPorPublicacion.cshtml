@@ -1,0 +1,36 @@
+﻿@if (ViewBag.PreguntasPorPublicacion.Count > 0)
+{
+    <h3>Preguntas por publicación</h3>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-condensed table-hvoer">
+                <thead>
+                    <tr>
+                        <th>Publicación</th>
+                        <th>Pregunta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.PreguntasPorPublicacion as ICollection<Model.Models.PreguntasPorPublicacion>)
+                    {
+                        <tr>
+                            <td>@item.PublicacionTitulo</td>
+                            <td>
+                                @item.PreguntaNombre
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-12" style="margin: 20px 0px 0px 20px;">
+            <h2 style="color:#808080"> No se han seleccionado preguntas a las publicaciones</h2>
+        </div>
+    </div>
+}

@@ -7,7 +7,7 @@ namespace Model.Models
 {
     public class PerfilCandidatoPostulacion
     {
-        public int IdUsuario { get; set; }
+        public string IdUsuario { get; set; }
         public string RutUsuario { get; set; }
         public string NombreUsuario { get; set; }
 

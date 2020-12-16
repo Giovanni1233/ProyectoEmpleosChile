@@ -8,38 +8,43 @@
                 <span> </span>
             </div>
         </div>
+
         <div class="col-md-5 border-right">
+
             <div class="p-3 py-5">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-right">Información Importante</h4>
                 </div>
                 <div class="row mt-2">
-                    <div class="col-md-12"><label class="labels">Rut</label><input type="text" class="form-control" placeholder="Ingrese su Rut" value="@item.rutEmpresa"></div>
-                    <div class="col-md-6"><label class="labels">Nombre</label><input type="text" class="form-control" placeholder="Ingrese su nombre" value="@item.nombreEmpresa"></div>
-                    <div class="col-md-6"><label class="labels">Razon Social</label><input type="text" class="form-control" value="@item.razonEmpresa" placeholder="Razon social"></div>
+                    <div class="col-md-12"><label class="labels">Rut</label><input type="text" class="form-control" placeholder="Ingrese su Rut" readonly name="rut" id="rut" value="@item.rutEmpresa"></div>
+                    <div class="col-md-6"><label class="labels">Nombre</label><input type="text" class="form-control" placeholder="Ingrese su nombre" readonly name="nombre" value="@item.nombreEmpresa"></div>
+                    <div class="col-md-6"><label class="labels">Razon Social</label><input type="text" class="form-control" value="@item.razonEmpresa" readonly name="razon" placeholder="Razon social"></div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-md-12"><label class="labels">Telefono</label><input type="text" class="form-control" placeholder="Ingrese su telefono" value="@item.telefonoEmpresa"></div>
-                    <div class="col-md-12"><label class="labels">Correo</label><input type="text" class="form-control" placeholder="enter address" value="@item.correoEmpresa"></div>
+                    <div class="col-md-12"><label class="labels">Telefono</label><input type="text" class="form-control" placeholder="Ingrese su telefono" id="telefono" name="telefono" value="@item.telefonoEmpresa"></div>
+                    <div class="col-md-12"><label class="labels">Correo</label><input type="text" class="form-control" placeholder="enter address" id="correo" name="correo" value="@item.correoEmpresa"></div>
 
-                    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Guardar</button></div>
+                    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" id="btnGuardarPerfilEmpresa" type="button">Guardar</button></div>
                 </div>
             </div>
+
         </div>
+
         <div class="col-md-4">
             <h4>Imagenes banner 1/4</h4>
-            <div class="borde text-center">
+            <div class="text-center">
                 @using (Html.BeginForm("SubirImagenes", "Empresa", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
-                    <label for="file">Subir Imagen:</label>
-                    <span class="btn btn-default btn-file">
-                        Cargar <input type="file" name="file" id="file" style="width: 100%;" />
+
+                    <span>
+                        <input type="file" name="file" id="file" style="width: 100%;" />
                     </span>
                     <br />
                     <br />
                     <input type="submit" value="Guardar" class="submit btn btn-outline-success" />
                 }
             </div>
+
         </div>
 
     }

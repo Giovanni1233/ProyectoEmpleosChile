@@ -9,6 +9,6 @@ namespace Model.Models
     {
         public string NombrePreguntaSeleccionada { get; set; }
         public int idPreguntaSeleccionada { get; set; }
-        public int EstadoPreguntaSeleccionada { get; set; }
+        public string EstadoPreguntaSeleccionada { get; set; }
     }
 }

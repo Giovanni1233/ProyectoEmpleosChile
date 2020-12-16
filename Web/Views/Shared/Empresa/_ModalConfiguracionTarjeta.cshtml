@@ -1,0 +1,46 @@
+﻿@using (Ajax.BeginForm("GuardarConfiguracionTarjeta", "Empresa", new AjaxOptions()
+{
+    HttpMethod = "POST",
+    UpdateTargetId = "mensajeRegistro",
+    InsertionMode = InsertionMode.Replace,
+    LoadingElementId = "loader"
+}, new { @style = "display: block;" }))
+{
+    <div class="modal-header">
+        <div class="d-block"><h3>Configuración Tarjeta</h3></div>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+    </div>
+    <div class="modal-body">
+
+        <div class="md-form form-sm">
+            <i class="fas fa-user prefix" style="margin-top: 4px;"></i>
+            <input type="text" id="nombreT" name="nombreT" autocomplete="off" class="form-control">
+            <label for="nombreT">Nombre Tarjeta</label>
+        </div>
+
+        <div class="md-form form-sm">
+            <i class="fas fa-pencil-alt prefix" style="margin-top: 4px;"></i>
+            <input type="text" id="numeroT" name="numeroT" autocomplete="off" class="form-control">
+            <label for="numeroT">Número Tarjeta</label>
+        </div>
+
+        <div class="md-form form-sm">
+            <i class="fas fa-calendar-week prefix" style="margin-top: 4px;"></i>
+            <input type="date" name="fechaT" id="fechaT" class="form-control" style="font-family: 'Roboto', sans-serif;" tabindex="10" autocomplete="off" />
+            
+        </div>
+
+        <div class="md-form form-sm">
+            <i class="fas fa-question prefix" style="margin-top: 4px;"></i>
+            <input type="text" id="cvvT" name="cvvT" autocomplete="off" maxlength="3" class="form-control">
+            <label for="cvvT">CVV</label>
+        </div>
+
+        <div class="form-check mb-2 mr-sm-2 text-center">
+            <button class="btn btn-primary guardarTarjetas">
+                <i class="fas fa-save" style="color: #fff;"> Registrar</i>
+            </button>
+        </div>
+    </div>
+}

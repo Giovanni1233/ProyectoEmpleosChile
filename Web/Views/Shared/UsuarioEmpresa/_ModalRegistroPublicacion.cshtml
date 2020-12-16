@@ -1,0 +1,12 @@
+﻿@if (ViewBag.referenciaPlanEmpresa == 1 || ViewBag.referenciaPlanEmpresa == 2 || ViewBag.referenciaPlanEmpresa == 3 || ViewBag.referenciaPlanEmpresa == 4)
+{
+    if (ViewBag.referenciaContadorPublicaciones == ViewBag.PublicacionesPermitidasEmpresa)
+    {
+        @Html.Partial("UsuarioEmpresa/_ErrorMaximoPublicaciones")
+    }
+    else
+    {
+        @Html.Partial("UsuarioEmpresa/_DetalleModalRegistroPub")
+    }
+
+}

@@ -1,0 +1,37 @@
+﻿@if (ViewBag.ReferenciaTrabajadores.Count > 0 && ViewBag.ReferenciaTrabajadores != null)
+{
+    <div class="row">
+        @foreach (var item in ViewBag.ReferenciaTrabajadores as ICollection<Model.Models.DetalleTrabajadores>)
+        {
+            if (item.IdUsuarioE != (string)Session["EmpresaID"])
+            {
+                <div class="col-md-6 col-lg-3 col-xl-3 col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <img src="http://placehold.it/100x150" />
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">@item.RutUsuarioE</h5>
+                            <p class="card-text">@item.NombreUsuarioE - @item.ApellidoUsuarioE</p>
+                            <a href="@Url.Action("PerfilUsuarioEmpresaLectura","UsuarioEmpresa", new { idUsuario = item.IdUsuarioE })" class="btn btn-outline-primary">Ver perfil</a>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+        }
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-12">
+            <h2 style="color:#808080"> No existen trabajadores en la empresa.</h2>
+
+        </div>
+    </div>
+
+}
+
+

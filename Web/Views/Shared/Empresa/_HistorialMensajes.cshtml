@@ -1,0 +1,85 @@
+﻿<div class="row">
+    <div class="col-md-9 col-xl-9 col-lg-9 col-sm-12">
+        <h3>Mensajes</h3>
+    </div>
+    <div class="col-md-3">
+
+    </div>
+</div>
+
+<hr />
+<div class="row">
+    @if (ViewBag.referenciaMensajes.Count > 0)
+    {
+        <div class="col-md-4 col-xl-4 col-lg-4 col-sm-12 border-right" style="overflow:scroll; max-height:470px;">
+            @foreach (var item2 in ViewBag.referenciaMensajes as IEnumerable<Model.Models.MensajesEmpresa>
+                )
+            {
+                <div class="row">
+                    <div class="col-md-12 col-xl-12 col-lg-12 col-xs-12">
+
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+
+                                        <div class="font-weight-bold text-uppercase mb-1">
+                                            <p>Fecha: @item2.FechaMensaje</p>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-auto">
+                                        <p class="font-weight-bold">Autor: @item2.AutorMensaje</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mr-2">Mensaje: </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-auto">
+                                        @item2.Mensaje
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <a href="@Url.Action("NotificacionesM","Empresa", new { idMensaje = item2.idMensaje, idAutor = item2.IdAutor })" id="verHistorialMensajes">Ver historial...</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+
+            }
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-6">
+                <div class="error-template">
+
+                    <div class="error-details">
+                        <h4>   No se encontraron mensajes.</h4>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-3">
+            </div>
+        </div>
+
+    }
+    <div class="col-md-8 col-xl-8 col-lg-8 col-sm-12" id="ViewHistorialM">
+        @Html.Partial("Empresa/_DetalleHistorialMensaje")
+    </div>
+
+</div>
+

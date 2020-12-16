@@ -11,6 +11,7 @@ namespace Model.Models
         public string NombrePlan { get; set; }
         public string PrecioPlan { get; set; }
 
+        public string estadoPlan { get; set; }
         public List<DetallePlan> detallePlan { get; set; }
 
     }

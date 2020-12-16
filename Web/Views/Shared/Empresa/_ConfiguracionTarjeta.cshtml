@@ -1,0 +1,92 @@
+﻿<hr />
+@if (ViewBag.ReferenciaTarjetaEmpresa.Count > 0)
+{
+    <div class="row">
+        @foreach (var item in ViewBag.ReferenciaTarjetaEmpresa as ICollection<Model.Models.TarjetaEmpresa>)
+        {
+            <div class="col-md-3 border-right">
+
+            </div>
+
+            <div class="col-md-5 border-right">
+
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-right">Detalle de la tarjeta de pago</h4>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-12"><label class="labels">Nombre tarjeta</label><input type="text" class="form-control" placeholder="" name="nombre" id="nombreT" value="@item.NombreTarjeta"></div>
+                        <div class="col-md-6"><label class="labels">Numero Tarjeta</label><input type="text" class="form-control" placeholder="" readonly name="numero" id="numeroT" value="@item.NumeroTarjeta"></div>
+                        <div class="col-md-6"><label class="labels">CVV</label><input type="text" class="form-control" value="@item.TarjetaCVV" readonly name="cvv" placeholder=""></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12"><label class="labels">Fecha expiración</label><input type="date" class="form-control" placeholder="" id="fechaT" name="fecha" value="@item.FechaExpiracion"></div>
+
+                        <div class="mt-5 text-center"><button class="btn btn-outline-success profile-button" id="btnActualizarTarjetas" type="button">Actualizar</button></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+                @if (ViewBag.ReferenciaImagenesEmpresa.Count > 0)
+                {
+                    foreach (var item2 in ViewBag.ReferenciaImagenesEmpresa as ICollection<Model.Models.ImagenesBannerEmpresa>)
+                    {
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="pull-right">
+                                            <button type="button" class="close" onclick="EliminarImagen(@item2.IdImagen)" data-dismiss="modal" title="Eliminar imagen" aria-hidden="true">&times;</button>
+                                        </div>
+                                        @item2.NombreImagen
+                                    </div>
+                                    <div class="card-body">
+                                        <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(item2.Imagen))" style="max-width:100%;" />
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                    }
+                }
+                else
+                {
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>Imágenes</h2>
+                            <h4 style="color:#808080">No se encontraron imágenes</h4>
+                        </div>
+                    </div>
+                }
+
+
+            </div>
+
+        }
+
+
+    </div>
+
+
+}
+else
+{
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Detalle de la tarjeta de pago</h4>
+            <button class="btn btn-success" id="BtnNuevaT"><span class="fas fa-plus"></span> Agregar tarjeta</button>
+        </div>
+    </div>
+}
+
+
+<div class="modal fade" id="modalConfiguracionTarjeta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            @Html.Partial("Empresa/_ModalConfiguracionTarjeta")
+        </div>
+    </div>
+</div>

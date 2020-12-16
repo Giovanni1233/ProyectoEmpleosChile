@@ -5,7 +5,7 @@
             )
         {
 
-            <div class="col-lg-4 mb-5 mb-lg-0">
+            <div class="col-lg-3 mb-5 mb-lg-0">
                 <div class="bg-white p-5 rounded-lg shadow">
                     @if (item.NombrePlan == "BASICO")
                     {
@@ -13,36 +13,57 @@
                     }
                     else if (item.NombrePlan == "ENTERPRISE")
                     {
-                        <h1 class="h6 text-uppercase font-weight-bold mb-4 text-">@item.NombrePlan</h1>
+                        <h1 class="h6 text-uppercase font-weight-bold mb-4">@item.NombrePlan</h1>
                     }
                     else
                     {
                         <h1 class="h6 text-uppercase font-weight-bold mb-4">@item.NombrePlan</h1>
                     }
 
-
-                    <h2 class="h1 font-weight-bold">$ @item.PrecioPlan<span class="text-small font-weight-normal ml-2">/ mensual</span></h2>
-
+                    @if (item.NombrePlan != "NORMAL")
+                    {
+                        <h2 class="h1 font-weight-bold">$ @item.PrecioPlan<span class="text-small font-weight-normal ml-2"></span></h2>
+                    }
+                    else
+                    {
+                        <h2 class="h1 font-weight-bold">$ @item.PrecioPlan<span class="text-small font-weight-normal ml-2"></span></h2>
+                    }
                     <div class="custom-separator my-4 mx-auto bg-primary"></div>
 
-                    <ul class="list-unstyled my-5 text-small text-left">
+                    <ul class="list-unstyled my-4 text-small text-left">
                         @foreach (var item2 in item.detallePlan)
                         {
-                            <li class="mb-3">
-                                <i class="fa fa-check mr-2 text-success CheckLi"></i> @item2.NombreDetalle
-                            </li>
+                            if (item.NombrePlan == "NORMAL")
+                            {
+                        <li class="mb-2">
+                            <i class="fa fa-check mr-1 text-success CheckLi"></i>@item2.CantidadPlan @item2.NombreDetalle
+                        </li>
+                            }
+                            else
+                            {
+                                <li class="mb-2">
+                                    <i class="fa fa-check mr-1 text-success CheckLi"></i> + @item2.CantidadPlan @item2.NombreDetalle
+                                </li>
+                            }
+
 
 
                         }
                     </ul>
                     @if (Session["NombreEmpresa"] != null && ((string)Session["NombreEmpresa"]) != "")
                     {
-                        <a href="@Url.Action("Index","Pagos", new { idPlan = item.idPlan })" class="btn btn-primary btn-block p-2 shadow rounded-pill">Seleccionar Plan</a>
-
+                        if (item.NombrePlan != "NORMAL")
+                        {
+                            <a href="@Url.Action("Index", "Pagos", new { idPlan = item.idPlan })" class="btn btn-primary btn-block p-2 shadow rounded-pill">Seleccionar Plan</a>
+                        }
                     }
                     else
                     {
-                        <a href="#" class="btn btn-primary btn-block p-2 shadow rounded-pill">Seleccionar Plan</a>
+                        if (item.NombrePlan != "NORMAL")
+                        {
+                            <a href="javascript:void(0);" class="btn btn-primary btn-block p-2 shadow rounded-pill" id="PlanAfuera">Seleccionar Plan</a>
+                        }
+
                     }
 
                 </div>

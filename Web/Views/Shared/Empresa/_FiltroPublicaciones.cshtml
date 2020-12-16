@@ -1,6 +1,4 @@
-﻿
-
-<div class='col-md-12'>
+﻿<div class="col-12 col-sm-12 col-lg-12 col-xl-12">
     <div class="card">
         <div class="card-header bg-primary text-white">
             <h4>Filtros de búsqueda</h4>
@@ -44,9 +42,11 @@
         <div class="card-footer">
             <div class="form-group">
                 <div>
-                    <button type="button" id="FiltroGatillo" class="btn btn-outline-primary form-control"><i class="fa fa-eye"></i> FILTRAR</button>
+                    <a href="javascript:void(0);" id="FiltroGatillo" class="btn btn-outline-primary btn-block p-2 shadow rounded-pill"><i class="fa fa-eye"></i> FILTRAR</a>
+                    
                     <div class="clearfix">&nbsp;</div>
-                    <button type="button" id="btnLimpiar" class="btn btn-outline-success form-control" onclick="return Limpiar()"><i class="fa fa-trash"></i> LIMPIAR</button>
+                    <a href="javascript:void(0);" id="btnLimpiar" class="btn btn-outline-success btn-block p-2 shadow rounded-pill"><i class="fa fa-trash"></i> LIMPIAR</a>
+                    
                 </div>
                 <div>
                     @using (Ajax.BeginForm("Principal", "Empresa", new AjaxOptions()

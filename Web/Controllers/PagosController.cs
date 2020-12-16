@@ -16,8 +16,13 @@ namespace Web.Controllers
         public ActionResult Index(string idPlan)
         {
             var idEmpresa = Session["EmpresaID"].ToString();
+            EmpresaController empresa = new EmpresaController();
+            ViewBag.Planes = empresa.GetPlanes("");
             ViewBag.referenciaPlanSeleccionado = GetPlanSeleccionado(idEmpresa, idPlan);
-
+            ViewBag.referenciaPlanEmpresa = empresa.GetPlanesContratadosEmpresa(idEmpresa);
+            ViewBag.referenciaTarjetaEmpresa = empresa.GetTarjetasEmpresa(idEmpresa);
+            ViewBag.idPlan = idPlan;
+            ViewBag.idPlanAnterior = empresa.GetPlanAnteriorEmpresa(idEmpresa);
             return View();
         }
 

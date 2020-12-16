@@ -2,22 +2,24 @@
 @if (ViewBag.PublicacionesEmpresa.Count > 0)
 {
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-9 col-sm-12 col-lg-9 col-xl-9">
             <h3>Publicaciones</h3>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 col-lg-3 col-xl-3">
 
         </div>
     </div>
 
     <hr />
-    <div class="row">
-            @foreach (var item in ViewBag.PublicacionesEmpresa as IEnumerable<Model.Models.DetallePublicacion>
+    <div class="detalle" style="overflow:scroll; max-height:800px;">
+        @foreach (var item in ViewBag.PublicacionesEmpresa as IEnumerable<Model.Models.DetallePublicacion>
             )
-            {
-                <div class="col-md-3" id="card-3">
-                    <div class="card shadow"> 
+        {
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12" id="card-3">
+                    <div class="card shadow">
                         <div class="card-body">
+
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
                                     <div class="font-weight-bold text-uppercase mb-1">
@@ -30,7 +32,12 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col mr-2"></div>
+                                <div class="col mr-2">
+                                    @if (item.DiscapacidadPub == "1")
+                                    {
+                                        <span class="badge badge-info">Discapacidad</span>
+                                    }
+                                </div>
                                 <div class="col-auto">
                                     @if (item.EstadoPublicacion == 1)
                                     {
@@ -42,18 +49,24 @@
                                     }
                                 </div>
                             </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p>Total votaciones: @item.ContadorVotos</p>
+                                    <p>Promedio votaciones: @item.PromedioVotos</p>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-footer">
-                            <a href="@Url.Action("DetallePublicaciones", "Empresa", new { id = @item.IdPublicacion })" class="text-primary" title="Ver publicacion" style="width: 100%; color:#808080;">
+                            <a href="@Url.Action("Principal", "Empresa", new { NombrePublicacion = "", FechaPublicacion = "", Ordenamiento = "", IdPublicacion = @item.IdPublicacion })" class="text-primary" title="Ver publicacion" style="width: 100%; color:#808080;">
                                 @item.TituloPublicacion
                             </a>
                         </div>
                     </div>
 
                 </div>
-
-            }
-        <br />
+            </div>
+        }
     </div>
 }
 else

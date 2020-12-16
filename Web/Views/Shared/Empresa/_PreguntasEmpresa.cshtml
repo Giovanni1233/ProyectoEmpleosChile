@@ -1,5 +1,5 @@
 ﻿<div class="row">
-    <button type="button" class="btn btn-outline-info btnModalNuevaPregunta">Nueva Pregunta</button>
+    <!-- <button type="button" class="btn btn-outline-info btnModalNuevaPregunta">Nueva Pregunta</button> -->
 </div>
 @if (ViewBag.referenciaPreguntas.Count > 0 && ViewBag.referenciaPreguntas != null)
 {
@@ -11,13 +11,13 @@
             <form>
                 <div class="form-row align-items-center">
                     <div class="col-auto my-1">
-                        <select class="custom-select mr-sm-2" id="PreguntaSeleccion">
-                            <option selected value="0">Seleccione...</option>
-                            @foreach (var item in ViewBag.referenciaPreguntas as ICollection<Model.Models.PreguntasPublicacion>)
-                            {
-                                <option value="@item.idPregunta">@item.NombrePregunta</option>
-                            }
-                        </select>
+                        <div class="md-form form-sm">
+
+                            <i class="fas fa-question prefix" style="margin-top: 4px;"></i>
+                            <input type="text" id="nombrePregunta" name="nombrePregunta" autocomplete="off" class="form-control">
+                            <label for="nombrePregunta">Nueva Pregunta</label>
+                        </div>
+                        
                         <input type="hidden" name="url" id="url" value="@Url.Action("ActivarDesactivarPregunta","Empresa")" />
                     </div>
 
@@ -51,11 +51,11 @@
                             <tr>
                                 <td>@item.NombrePreguntaSeleccionada</td>
                                 <td>
-                                    @if (item.EstadoPreguntaSeleccionada == 1)
+                                    @if (item.EstadoPreguntaSeleccionada == "1")
                                     {
                                         <button type="button" id="@item.idPreguntaSeleccionada" class="btn btn-outline-danger DesactivarPregunta">Desactivar</button>
                                     }
-                                    else if (item.EstadoPreguntaSeleccionada == 0)
+                                    else if (item.EstadoPreguntaSeleccionada == "0")
                                     {
                                         <button type="button" id="@item.idPreguntaSeleccionada" class="btn btn-outline-info ActivarPregunta">Activar</button>
                                     }

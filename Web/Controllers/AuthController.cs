@@ -151,6 +151,10 @@ namespace Web.Controllers
         {
             string code = string.Empty;
             string mensaje = string.Empty;
+            var rut = "";
+            var correo = "";
+            var tipo = "";
+            var empresaID = "";
             string[] parametros = new string[3];
             string[] valores = new string[3];
             Usuario clUsuario = new Usuario();
@@ -164,7 +168,7 @@ namespace Web.Controllers
 
                 valores[0] = usuario;
                 valores[1] = clave;
-                valores[2] = "N";
+                valores[2] = "E";
 
                 data = svcEmpleos.ValUsuario(parametros, valores).Table;
                 foreach (DataRow rows in data.Tables[0].Rows)
@@ -177,6 +181,10 @@ namespace Web.Controllers
                             code = rows["Code"].ToString();
                             mensaje = "";
                             Session["Usuario"] = rows["Rut"].ToString();
+                            Session["IdUsuario"] = rows["IdUsuario"].ToString();
+                            Session["NombreUsuario"] = rows["Nombre"].ToString();
+                            Session["TipoUsuario"] = rows["TipoUsuario"].ToString();
+                            Session["EmpresaID"] = rows["EmpresaID"].ToString();
                             break;
                         case "400":
                             code = rows["Code"].ToString();

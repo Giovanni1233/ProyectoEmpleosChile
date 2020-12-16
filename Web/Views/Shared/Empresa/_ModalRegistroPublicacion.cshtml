@@ -1,76 +1,12 @@
-﻿@using (Ajax.BeginForm("GuardarPublicacion", "Empresa", new AjaxOptions()
+﻿@if (ViewBag.referenciaPlanEmpresa == 1 || ViewBag.referenciaPlanEmpresa == 2 || ViewBag.referenciaPlanEmpresa == 3 || ViewBag.referenciaPlanEmpresa == 4)
 {
-    HttpMethod = "POST",
-    UpdateTargetId = "mensajeRegistro",
-    InsertionMode = InsertionMode.Replace,
-    LoadingElementId = "loader"
-}, new { @style = "display: block;" }))
-{
-    <div class="modal-header">
-        <div class="d-block"><h3>Nueva Publicación</h3></div>
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-
-    </div>
-    <div class="modal-body">
-
-        <div class="form-group">
-            <label style="margin-bottom: 5px; margin-top:5px;" for="titulo">Titulo</label>
-            <div class="input-group">
-                <input type="hidden" id="id_empresa" name="id_empresa" value="@Session["EmpresaID"]">
-                <input type="hidden" id="id_usuario" name="id_usuario" value="@Session["IdUsuario"]">
-                <input type="text" id="titulo" name="titulo" autocomplete="off" class="form-control" maxlength="50" placeholder="Ingrese Titulo">
-            </div>
-        </div>
-        <div class="form-group">
-            <label style="margin-bottom: 5px; margin-top:5px;" for="descripcion">Descripción</label>
-            <div class="input-group">
-                <textarea class="form-control" name="descripcionNuevaPub" placeholder="Ingrese una descripción" id="descripcionNuevaPub" maxlength="2000"></textarea>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="checkbox">
-                <label>
-                    <input name="discapacidad" type="checkbox" value="1"> Este empleo es apto para personas con discapacidad.
-                </label>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label style="margin-bottom: 5px; margin-top:5px;" for="tipo">Área de empleo</label>
-            <select name="area" id="area" class="form-control">
-                <option value="1">Informatica y Tecnologia</option>
-                <option value="2">Atencion al Cliente</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label style="margin-bottom: 5px; margin-top:5px;" for="tipo">Subárea de empleo</label>
-            <select name="subarea" id="subarea" class="form-control">
-                <option value="1">Internet</option>
-                <option value="2">Sistemas</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label style="margin-bottom: 5px; margin-top:5px;" for="tipo">Tipo de Publicación</label>
-            <select name="tipo" id="tipo" class="form-control">
-                <option value="1">Búsqueda</option>
-                <option value="2">Oferta</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label style="margin-bottom: 5px; margin-top:5px;" for="monto">Monto</label>
-            <div class="input-group">
-                <input type="text" id="monto" name="monto" autocomplete="off" class="form-control" maxlength="50" placeholder="Ingrese monto">
-            </div>
-        </div>
-        <div class="form-check mb-2 mr-sm-2 text-center">
-            <button class="btn btn-primary guardarPublicacion">
-                <i class="fas fa-save" style="color: #fff;"> Registrar</i>
-            </button>
-        </div>
-    </div>
+    if (ViewBag.referenciaContadorPublicaciones == ViewBag.PublicacionesPermitidasEmpresa)
+    {
+        @Html.Partial("Empresa/_ErrorMaximoPublicaciones")
+    }
+    else
+    {
+        @Html.Partial("Empresa/_DetalleModalRegistroPub")
+    }
 
 }

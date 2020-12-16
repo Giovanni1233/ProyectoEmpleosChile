@@ -10,13 +10,13 @@
         {
             <div class="form-group">
                 <input type="hidden" id="IdPublicacion" name="IdPublicacion" value="@item.IdPublicacion" />
-                <input type="hidden" name="valor" id="valor" value="2" />
+                <input type="hidden" name="valor" id="valor" value="1" />
                 <input type="text" class="form-control" id="TituloPublicacion" name="TituloPublicacion" value="@item.TituloPublicacion" readonly />
             </div>
 
             <br />
             <div class="form-group">
-                <textarea class="form-control descripcion" name="descripcion" placeholder="Ingrese una descripción" rows="5" id="descripcion" style="min-height:250px; max-height:250px;" >@item.DescripcionPublicacion</textarea>
+                <textarea class="form-control" name="descripcionPublicacion" placeholder="Ingrese una descripción" maxlength="2000" id="descripcionPublicacion" style="min-height:250px; max-height:250px;">@item.DescripcionPublicacion</textarea>
             </div>
             <br />
             <div class="form-group">

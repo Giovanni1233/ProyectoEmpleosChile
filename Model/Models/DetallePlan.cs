@@ -8,5 +8,6 @@ namespace Model.Models
     public class DetallePlan
     {
         public string NombreDetalle { get; set; }
+        public string CantidadPlan { get; set; }
     }
 }

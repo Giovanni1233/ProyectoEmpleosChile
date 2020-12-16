@@ -1,0 +1,108 @@
+﻿<div class="p-3 py-5" style="overflow:scroll; max-height:470px;">
+    @if (ViewBag.referenciaHistorialConversacion.Count > 0)
+    {
+        foreach (var item2 in ViewBag.referenciadetalleMensaje as IEnumerable<Model.Models.MensajesEmpresa>
+               )
+        {
+
+            <div class="row">
+                <div class="col mr-2"><h5 class="font-weight-bold">Historial de Mensaje: @item2.Mensaje</h5></div>
+
+            </div>
+        }
+        <br />
+
+        foreach (var item3 in ViewBag.referenciaHistorialConversacion as IEnumerable<Model.Models.HistorialMensajesEmpresa>
+            )
+        {
+            <div class="row">
+                @*idReceptor = item3.idUsuarioR*@
+                <div class="col-md-12 col-xl-12 col-lg-12 col-xs-12">
+
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+
+                            <div class="font-weight-bold text-uppercase mb-1">
+                                <p>Emisor: @item3.EmisorH</p>
+                                <p>Receptor: @item3.ReceptorH</p>
+                            </div>
+
+                        </div>
+                        <div class="col-auto">
+                            <p class="font-weight-bold">Fecha: @item3.FechaMensajeH</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col mr-2">Mensaje: </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-auto">
+                            @item3.MensajeH
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <hr />
+        }
+
+        <hr />
+        <div class="row">
+            <label for="comment">Nuevo Mensaje:</label>
+            <input type="hidden" name="idMensaje" id="idMensaje" value="@ViewBag.idMensaje" />
+            <input type="hidden" name="idReceptor" id="idReceptor" value="@ViewBag.idReceptor" />
+            <textarea class="form-control" rows="5" style="resize:none; width:100%; max-width:100%;" name="MensajeHM" id="MensajeHM"></textarea>
+            <br />
+            <input type="button" id="MensajeGu" class="btn btn-success" style="float:right;" name="MensajeGu" value="Enviar" />
+            <br />
+        </div>
+
+
+
+    }
+    else
+    {
+        foreach (var item2 in ViewBag.referenciadetalleMensaje as IEnumerable<Model.Models.MensajesEmpresa>
+              )
+        {
+            <div class="row">
+            <div class="col mr-2"><h5 class="font-weight-bold">Historial de Mensaje: @item2.Mensaje</h5></div>
+
+        </div>
+    }
+    <br />
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+            <div class="error-template">
+
+                <div class="error-details">
+                    <h4>   No se encontró historial de la conversación.</h4>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+    <hr />
+    if (ViewBag.referenciaIdMensaje != "0")
+    {
+        <div class="row">
+            <label for="comment">Nuevo Mensaje:</label>
+            <input type="hidden" name="idMensaje" id="idMensaje" value="@ViewBag.idMensaje" />
+            <input type="hidden" name="idReceptor" id="idReceptor" value="@ViewBag.idReceptor" />
+            <textarea class="form-control" rows="5" style="resize:none; width:100%; max-width:100%;" name="MensajeHM" id="MensajeHM"></textarea>
+            <br />
+            <input type="button" id="MensajeGu" class="btn btn-success" style="float:right;" name="MensajeGu" value="Enviar" />
+            <br />
+        </div>
+
+    }
+
+}
+    </div>

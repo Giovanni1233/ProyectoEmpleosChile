@@ -1,26 +1,59 @@
-﻿@if (ViewBag.DetallePublicacion.Count > 0)
+﻿@if (ViewBag.DetallePublicacionContador > 0)
 {
     <h3>Detalle Publicacion</h3>
-   <a href="@Url.Action("Index", "UsuarioEmpresa")" class="btn border">Volver</a>
     <hr />
-    foreach (var item in ViewBag.DetallePublicacion as ICollection<Model.Models.DetallePublicacion>)
-    {
-        <div class="jumbotron">
-            <h1 class="display-4">@item.TituloPublicacion</h1>
-            <p>@item.DescripcionPublicacion</p>
-            <hr class="my-4" />
-            <p>@item.AutorPublicacion - @item.FechaPublicacion</p>
-            <button type="button" id="EditarPublicacion" class="btn btn-primary">Editar</button>
+    <a href="@Url.Action("Index", "UsuarioEmpresa", new { NombrePublicacion = "", FechaPublicacion = "", Ordenamiento = "", IdPublicacion = "0" })" class="btn border">Cerrar</a>
+    <div class="detalle" style="overflow:scroll; max-height:800px;">
+        @foreach (var item in ViewBag.DetallePublicacion as ICollection<Model.Models.DetallePublicacion>
+            )
+        {
+            <div class="jumbotron">
+                <h1 class="display-4">@item.TituloPublicacion</h1>
+                <p>@item.DescripcionPublicacion</p>
+                <hr class="my-4" />
+                <p>@item.AutorPublicacion - @item.FechaPublicacion</p>
+                <input type="hidden" name="url" id="url" value="@Url.Action("ActivarDesactivarPub","UsuarioEmpresa")" />
+                <button type="button" id="EditarPublicacion" class="btn btn-primary">Editar</button>
+                @if (item.EstadoPublicacion == 1)
+                {
+                    <button type="button" id="@item.IdPublicacion" class="btn btn-outline-danger DesactivarPublicacion">Desactivar</button>
+                }
+                else if (item.EstadoPublicacion == 0)
+                {
+                    <button type="button" id="@item.IdPublicacion" class="btn btn-outline-info ActivarPublicacion">Activar</button>
+                }
+            </div>
+        }
+        <div id="ViewVotacionPublicacion" class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin: 20px 0px 0px 20px;">
+            @Html.Partial("UsuarioEmpresa/_VotacionPublicacion")
         </div>
-    }
+
+        <hr />
+        <div id="ViewCandidatosEmpresa" class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin: 20px 0px 0px 20px;">
+            @Html.Partial("UsuarioEmpresa/_CandidatosPublicaciones")
+        </div>
+        <hr />
+        <div id="ViewComentariosPublicidad" class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin: 20px 0px 0px 20px;">
+            @Html.Partial("UsuarioEmpresa/_ComentariosPubEmpresa")
+        </div>
+        <!-- MODAL EDICION PUBLICACION -->
+        <div class="modal fade" id="modalEdicionPublicacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    @Html.Partial("UsuarioEmpresa/_ModalEdicionPublicacion")
+                </div>
+            </div>
+        </div>
+
+    </div>
 
 
 }
 else
 {
     <div class="row">
-        <div class="col-md-12">
-            <h2 style="color:#808080"> No se puede mostrar el detalle</h2>
+        <div class="col-md-12" style="margin: 20px 0px 0px 20px;">
+            <h2 style="color:#808080"> No se ha seleccionado ninguna publicación</h2>
 
         </div>
     </div>

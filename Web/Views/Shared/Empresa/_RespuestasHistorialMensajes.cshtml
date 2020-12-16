@@ -1,0 +1,24 @@
+﻿@using (Ajax.BeginForm("GuardarMensajeEmpresa", "Empresa", new AjaxOptions()
+{
+    HttpMethod = "POST",
+    UpdateTargetId = "mensajeRegistro",
+    InsertionMode = InsertionMode.Replace,
+    LoadingElementId = "loader"
+}, new { @style = "display: block;" }))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-8">
+
+                <label for="comment">Nuevo Mensaje:</label>
+                <textarea class="form-control" rows="5" style="resize:none; width:100%; max-width:100%;" name="MensajeHM" id="MensajeHM"></textarea>
+                <br />
+                <input type="submit" id="MensajeGu" class="btn btn-success" style="float:right;" name="MensajeGu" value="Guardar" />
+                <br />
+
+            </div>
+        </div>
+    </div>
+}
+
+

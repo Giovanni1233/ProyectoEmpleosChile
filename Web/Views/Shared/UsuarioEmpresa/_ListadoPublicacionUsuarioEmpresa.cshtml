@@ -1,0 +1,40 @@
+﻿
+@if (ViewBag.PublicacionesUsuarioEmpresa != null && ViewBag.PublicacionesUsuarioEmpresa.Count > 0)
+{
+    <h3>Publicaciones</h3>
+    <hr />
+    <table class="table table-condensed table-hover">
+        <thead>
+            <tr>
+                <th>Titulo</th>
+                <th>Fecha</th>
+                <th>Descripción</th>
+                <th>Monto</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewBag.PublicacionesUsuarioEmpresa as ICollection<Model.Models.DetallePublicacion>)
+            {
+                <tr>
+                    <td>@item.TituloPublicacion</td>
+                    <td>@item.FechaPublicacion</td>
+                    <td>@item.DescripcionPublicacion</td>
+                    <td>@item.MontoPublicacion</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+
+}
+else
+{
+    <div class="row">
+        <div class="col-md-12">
+            <h2 style="color:#808080">NO EXISTEN PUBLICACIONES</h2>
+
+        </div>
+    </div>
+
+}

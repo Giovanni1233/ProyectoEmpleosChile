@@ -146,6 +146,8 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Imagenes\algoogo.png" />
+    <Content Include="Imagenes\giova LETRA arial.png" />
+    <Content Include="Imagenes\giovanni LETRA ARIAL.png" />
     <Content Include="MaterialDesign\css\addons-pro\cards-extended.css" />
     <Content Include="MaterialDesign\css\addons-pro\cards-extended.min.css" />
     <Content Include="MaterialDesign\css\addons-pro\chat.css" />
@@ -525,7 +527,6 @@
     <Content Include="Views\Empresa\CandidatosEmpresa.cshtml" />
     <Content Include="Views\Shared\Empresa\_CandidatosEmpresa.cshtml" />
     <Content Include="Views\Shared\Empresa\_Trabajadores.cshtml" />
-    <Content Include="Views\Shared\UsuarioEmpresa\_PublicacionPorTrabajador.cshtml" />
     <Content Include="Views\Empresa\Trabajadores.cshtml" />
     <Content Include="Views\UsuarioEmpresa\Index.cshtml" />
     <Content Include="Views\Shared\UsuarioEmpresa\_DetalleTrabajador.cshtml" />
@@ -533,11 +534,6 @@
     <Content Include="Views\UsuarioEmpresa\Perfil.cshtml" />
     <Content Include="Views\Shared\UsuarioEmpresa\_PerfilUsuario.cshtml" />
     <Content Include="Views\Empresa\PerfilUsuarioEmpresaLectura.cshtml" />
-    <Content Include="Views\Shared\UsuarioEmpresa\_DetallePublicacion.cshtml" />
-    <Content Include="Views\UsuarioEmpresa\DetallePublicaciones.cshtml" />
-    <Content Include="Views\Shared\UsuarioEmpresa\_ModalEdicionPublicacion.cshtml" />
-    <Content Include="Views\UsuarioEmpresa\PerfilCandidato.cshtml" />
-    <Content Include="Views\Shared\UsuarioEmpresa\_PerfilCandidatoEmpresa.cshtml" />
     <Content Include="Views\Shared\Empresa\_ModalPlanesEmpresa.cshtml" />
     <Content Include="Views\Shared\Empresa\_ComentariosPubEmpresa.cshtml" />
     <Content Include="Views\Empresa\Solicitudes.cshtml" />
@@ -561,6 +557,34 @@
     <Content Include="Views\Shared\Empresa\_VotacionPublicacion.cshtml" />
     <Content Include="Views\Shared\Auth\_ErrorSignIn.cshtml" />
     <Content Include="Views\Shared\Auth\_ModalRegistroUsuario.cshtml" />
+    <Content Include="Views\Shared\Empresa\_DetalleModalRegistroPub.cshtml" />
+    <Content Include="Views\Shared\Empresa\_ErrorMaximoPublicaciones.cshtml" />
+    <Content Include="Views\Shared\Empresa\_ErrorMaximoTrabajadores.cshtml" />
+    <Content Include="Views\Shared\UsuarioEmpresa\_DetalleModalRegistroUsuarioEmp.cshtml" />
+    <Content Include="Views\Empresa\HistorialMensajes.cshtml" />
+    <Content Include="Views\Shared\Empresa\_DetalleHistorialMensaje.cshtml" />
+    <Content Include="Views\Shared\Empresa\_HistorialMensajes.cshtml" />
+    <Content Include="Views\Shared\Empresa\_RespuestasHistorialMensajes.cshtml" />
+    <Content Include="Views\Shared\Empresa\_ConfiguracionTarjeta.cshtml" />
+    <Content Include="Views\Shared\Empresa\_ModalConfiguracionTarjeta.cshtml" />
+    <Content Include="Views\UsuarioEmpresa\Trabajadores.cshtml" />
+    <Content Include="Views\UsuarioEmpresa\CandidatosEmpresa.cshtml" />
+    <Content Include="Views\Shared\UsuarioEmpresa\_Trabajadores.cshtml" />
+    <Content Include="Views\Shared\UsuarioEmpresa\_PublicacionPorTrabajador.cshtml" />
+    <Content Include="Views\Shared\UsuarioEmpresa\_FiltroPublicaciones.cshtml" />
+    <Content Include="Views\Shared\UsuarioEmpresa\_DetallePublicacion.cshtml" />
+    <Content Include="Views\Shared\UsuarioEmpresa\_ModalRegistroPublicacion.cshtml" />
+    <Content Include="Views\Shared\UsuarioEmpresa\_ErrorMaximoPublicaciones.cshtml" />
+    <Content Include="Views\Shared\UsuarioEmpresa\_DetalleModalRegistroPub.cshtml" />
+    <Content Include="Views\Shared\UsuarioEmpresa\_VotacionPublicacion.cshtml" />
+    <Content Include="Views\Shared\UsuarioEmpresa\_CandidatosPublicaciones.cshtml" />
+    <Content Include="Views\Shared\UsuarioEmpresa\_ComentariosPubEmpresa.cshtml" />
+    <Content Include="Views\Shared\UsuarioEmpresa\_ModalEdicionPublicacion.cshtml" />
+    <Content Include="Views\Shared\UsuarioEmpresa\_CandidatosEmpresa.cshtml" />
+    <Content Include="Views\Shared\UsuarioEmpresa\_PerfilUsuarioEmpresa.cshtml" />
+    <Content Include="Views\UsuarioEmpresa\PerfilUsuarioEmpresaLectura.cshtml" />
+    <Content Include="Views\Shared\UsuarioEmpresa\_ListadoPublicacionUsuarioEmpresa.cshtml" />
+    <Content Include="Views\Shared\Empresa\_PreguntasPorPublicacion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Imagenes\Empresa\" />

@@ -5,7 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@ViewBag.Title</title>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
     @Styles.Render("~/bundles/bootstrapcss")
     @Styles.Render("~/bundles/jqueryuicss")
@@ -40,40 +42,78 @@
                 <nav id="navbar-example2" class="navbar">
 
                     <ul class="nav nav-pills">
-                        <li class="nav-item">
-                            <a class="btn btn-link border-light" href="#">Publica tu oferta</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="@ViewBag.ReferenciaRegistro">Registrarse</a>
-                        </li>
+                        @if (Session["Usuario"] != null && ((string)Session["Usuario"]) != "")
+                        {
+                            if (((string)Session["TipoUsuario"]) == "N")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link border-light" href="#">Publica tu oferta</a>
+                                </li>
+                            }
+                           
+
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="@ViewBag.ReferenciaRegistro">Registrarse</a>
+                            </li>
+                        }
+
                     </ul>
+
+
                 </nav>
             </div>
             <div class="col-3 col-sm-3 col-md-4 col-lg-5 float-right">
                 <nav id="navbar-example2" class="navbar">
 
                     <ul class="nav nav-pills">
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("Index","Empresa")">Empresas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Publicaciones</a>
-                        </li>
                         @if (Session["Usuario"] != null && ((string)Session["Usuario"]) != "")
                         {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Nombre Usuario</a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#one">Perfil</a>
-                                    <div role="separator" class="dropdown-divider"></div>
-                                    <a class="dropdown-item signOut" href="#three">Cerrar Sesión</a>
-                                </div>
-                            </li>
+                            if (((string)Session["TipoUsuario"]) == "N")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link NewPublicacion" href="javascript:void(0);">Publicar</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@Session["NombreUsuario"]</a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#one">Perfil</a>
+                                        <div role="separator" class="dropdown-divider"></div>
+                                        <a class="dropdown-item signOut" href="#three">Cerrar Sesión</a>
+                                    </div>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Index","UsuarioEmpresa")">Inicio</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link NewPublicacion" href="javascript:void(0);">Publicar</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@Session["NombreUsuario"]</a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="@Url.Action("Trabajadores","UsuarioEmpresa")">Trabajadores</a>
+                                        <a class="dropdown-item" href="@Url.Action("CandidatosEmpresa","UsuarioEmpresa")">Candidatos</a>
+                                        <a class="dropdown-item" href="@Url.Action("Perfil","UsuarioEmpresa")">Perfil</a>
+                                        <div role="separator" class="dropdown-divider"></div>
+                                        <a class="dropdown-item signOut" href="javascript:void(0);">Cerrar Sesión</a>
+                                    </div>
+                                </li>
+
+                            }
+
                         }
                         else
                         {
+                            <li class="nav-item">
+                                <a class="nav-link border-light" href="@Url.Action("Index","Empresa")">Empresa</a>
+                            </li>
                             <li class="nav-item signIn">
-                                <a class="btn btn-link border-light" href="#">Iniciar Sesión</a>
+                                <a class="nav-link border-light" href="#">Iniciar Sesión</a>
                             </li>
                         }
                     </ul>
@@ -91,6 +131,15 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="modalRegistroPublicacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                @Html.Partial("UsuarioEmpresa/_ModalRegistroPublicacion")
+            </div>
+        </div>
+    </div>
+
     <div class="row" style=" width: 100%;">
         @RenderBody()
 
