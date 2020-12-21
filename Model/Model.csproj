@@ -125,6 +125,7 @@
     <Compile Include="Models\DetallePlan.cs" />
     <Compile Include="Models\DetallePublicacion.cs" />
     <Compile Include="Models\DetalleTrabajadores.cs" />
+    <Compile Include="Models\DevolucionEmpresa.cs" />
     <Compile Include="Models\EducacionUsuario.cs" />
     <Compile Include="Models\Empresa.cs" />
     <Compile Include="Models\EmpresaRegistro.cs" />
@@ -133,9 +134,11 @@
     <Compile Include="Models\HistorialMensajesEmpresa.cs" />
     <Compile Include="Models\IdiomasUsuario.cs" />
     <Compile Include="Models\ImagenesBannerEmpresa.cs" />
+    <Compile Include="Models\ImagenEmpresaPerfil.cs" />
     <Compile Include="Models\ImagenUsuario.cs" />
     <Compile Include="Models\MensajesEmpresa.cs" />
     <Compile Include="Models\NotificacionEmpresa.cs" />
+    <Compile Include="Models\PagosRealizadosEmpresa.cs" />
     <Compile Include="Models\PlanesEmpresa.cs" />
     <Compile Include="Models\PreguntasPorPublicacion.cs" />
     <Compile Include="Models\PreguntasPublicacion.cs" />

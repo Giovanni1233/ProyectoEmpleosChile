@@ -20,7 +20,7 @@ namespace Web.Controllers
         public ActionResult Index(string NombrePublicacion = "", string FechaPublicacion = "", string Ordenamiento = "", string IdPublicacion = "0")
         {
             var idUsuario = Session["IdUsuario"].ToString();
-            var idEmpresa = Session["EmpresaID"].ToString();
+            var idEmpresa = Session["IDempresa"].ToString();
             
             if (NombrePublicacion == "" && FechaPublicacion == "")
             {
@@ -76,7 +76,7 @@ namespace Web.Controllers
 
         public ActionResult CandidatosEmpresa()
         {
-            var idEmpresa = Session["EmpresaID"].ToString();
+            var idEmpresa = Session["IDempresa"].ToString();
             ViewBag.ReferenciaCandidatosEmpresa = empresa.GetCandidatosEmpresa(idEmpresa);
             // Se debe borrar pronto
             ViewBag.referenciaPlanEmpresa = empresa.GetPlanesContratadosEmpresa(idEmpresa);
@@ -90,7 +90,7 @@ namespace Web.Controllers
         public ActionResult Trabajadores()
         {
             var idUsuario = Session["IdUsuario"].ToString();
-            var idEmpresa = Session["EmpresaID"].ToString();
+            var idEmpresa = Session["IDempresa"].ToString();
             ViewBag.ReferenciaTrabajadores = GetTrabajadoresEmpresa(idUsuario, idEmpresa);
             // Se debe borrar pronto
             ViewBag.referenciaPlanEmpresa = empresa.GetPlanesContratadosEmpresa(idEmpresa);
@@ -104,7 +104,7 @@ namespace Web.Controllers
 
         public ActionResult PerfilUsuarioEmpresaLectura(string idUsuario)
         {
-            var idEmpresa = Session["EmpresaID"].ToString();
+            var idEmpresa = Session["IDempresa"].ToString();
             ViewBag.PublicacionesUsuarioEmpresa = GetPublicaciones("", idUsuario);
             ViewBag.ReferenciaDatosPerfil = GetDatosUsuarioEmpresa(idUsuario, "");
             // Se debe borrar pronto
@@ -650,7 +650,7 @@ namespace Web.Controllers
                     view = "Index";//"App/_ModalMensajeError";
                     return View(view);
                 }
-
+                var idEmpresa = Session["IDempresa"].ToString();
                 parametros[0] = "@ID_LOGINEMPRESA";
                 parametros[1] = "@ID_EMPRESA";
                 parametros[2] = "@TITULO";
@@ -663,7 +663,7 @@ namespace Web.Controllers
                 parametros[9] = "@FECHA_MAX";
 
                 valores[0] = id_usuario;
-                valores[1] = id_empresa;
+                valores[1] = idEmpresa;
                 valores[2] = titulo;
                 valores[3] = descripcionNuevaPub;
                 valores[4] = tipo;
@@ -932,6 +932,85 @@ namespace Web.Controllers
 
 
             return RedirectToAction("Perfil");
+        }
+
+
+        [HttpPost]
+        public JsonResult InicioSesion(string usuario, string clave)
+        {
+            string code = string.Empty;
+            string mensaje = string.Empty;
+            string[] parametros = new string[3];
+            string[] valores = new string[3];
+            Usuario clUsuario = new Usuario();
+
+            try
+            {
+                DataSet data = new DataSet();
+                parametros[0] = "@USUARIO";
+                parametros[1] = "@PASSWORD";
+                parametros[2] = "@TIPO";
+
+                valores[0] = usuario;
+                valores[1] = clave;
+                valores[2] = "E";
+
+                data = svcEmpleos.ValUsuario(parametros, valores).Table;
+                foreach (DataRow rows in data.Tables[0].Rows)
+                {
+                    switch (rows["Code"].ToString())
+                    {
+                        case "200":
+                            clUsuario.Rut = rows["Rut"].ToString();
+                            clUsuario.Correo = rows["Correo"].ToString();
+                            code = rows["Code"].ToString();
+                            mensaje = "";
+                            Session["Usuario"] = rows["Rut"].ToString();
+                            Session["IdUsuario"] = rows["IdUsuario"].ToString();
+                            Session["NombreUsuario"] = rows["Nombre"].ToString();
+                            Session["TipoUsuario"] = rows["TipoUsuario"].ToString();
+                            Session["IDempresa"] = rows["EmpresaID"].ToString();
+                            break;
+                        case "400":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        case "500":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        default:
+                            code = "600";
+                            mensaje = errorSistema;
+                            break;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                code = "600";
+                mensaje = errorSistema;
+            }
+            return Json(new { Code = code, Message = mensaje, Usuario = clUsuario });
+        }
+
+        [HttpPost]
+        public JsonResult CerrarSesion()
+        {
+            var retorno = string.Empty;
+            Session.Clear();
+
+            retorno = "/App/Index"; // ModuleControlRetorno() + "/Index";
+
+            return Json(new { Retorno = retorno });
+        }
+
+        [HttpPost]
+        public ActionResult ViewPartialLoadingSignIn()
+        {
+            return PartialView("_LoadingLogin");
         }
         #endregion
 

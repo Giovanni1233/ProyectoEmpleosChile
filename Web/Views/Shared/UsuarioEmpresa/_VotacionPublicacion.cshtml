@@ -8,9 +8,9 @@
     <div class="col-md-12">
 
         <input type="hidden" name="idPublicacion" value="@ViewBag.IdPublicacion" id="idPublicacion" />
-        @if (Session["EmpresaID"] != null && ((string)Session["EmpresaID"]) != "")
+        @if (Session["IDempresa"] != null && ((string)Session["IDempresa"]) != "")
         {
-            <input type="hidden" name="idUsuario" value="@Session["EmpresaID"]" id="idUsuario" />
+            <input type="hidden" name="idUsuario" value="@Session["IDempresa"]" id="idUsuario" />
         }
         else if (Session["IdUsuario"] != null && ((string)Session["IdUsuario"]) != "")
         {

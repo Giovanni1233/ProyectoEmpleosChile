@@ -80,6 +80,11 @@ namespace Web
             bundles.Add(new StyleBundle("~/bundles/MaterialDesign").Include(
                 "~/MaterialDesign/css/mdb.min.css"
                 ));
+
+            bundles.Add(new StyleBundle("~/bundles/Plugins").Include(
+                "~/Plugins/dropify-master/dist/js/dropify.min.js",
+                "~/Plugins/dropify-master/dist/css/dropify.min.css"
+                ));
         }
     }
 }

@@ -210,7 +210,7 @@ namespace Web.Controllers
             var retorno = string.Empty;
             Session.Clear();
 
-            retorno = "/App/Index"; // ModuleControlRetorno() + "/Index";
+            retorno = "/Empresa/Index"; // ModuleControlRetorno() + "/Index";
 
             return Json(new { Retorno = retorno });
         }

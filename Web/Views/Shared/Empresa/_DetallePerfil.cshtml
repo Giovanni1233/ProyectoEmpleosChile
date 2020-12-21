@@ -3,9 +3,34 @@
     {
         <div class="col-md-3 border-right">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                <img class="rounded-circle mt-5" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQF2psCzfbB611rnUhxgMi-lc2oB78ykqDGYb4v83xQ1pAbhPiB&usqp=CAU">
-                <span class="font-weight-bold">@item.nombreEmpresa</span><span class="text-black-50">@item.correoEmpresa</span>
-                <span> </span>
+                <div class="col-sm-12">
+                    <div class="text-center">
+                        <p>@item.nombreEmpresa - @item.correoEmpresa</p>
+                        @if (ViewBag.ReferenciaImagenPerfilEmpresa.Count > 0)
+                        {
+                            foreach (var item2 in ViewBag.ReferenciaImagenPerfilEmpresa as ICollection<Model.Models.ImagenEmpresaPerfil>)
+                            {
+                                <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(item2.Imagen))" style="max-width:100%;" />
+                                <br />
+                                <p>@item2.NombreImagen</p>
+                            }
+                        }
+                        
+                    </div>
+                    <div class="text-center">
+                        @using (Html.BeginForm("SubirImagenPerfil", "Empresa", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+
+                        <span class="">
+                            <input type="file" id="input-file-now file" name="file" onchange="validoArchivo(this)" data-height="200" data-default-file />
+                            <!-- <input type="file" name="file" id="file" style="width: 100%;" /> -->
+                        </span>
+                            <br />
+                            <br />
+                            <input type="submit" value="Guardar Imagen" class="submit btn btn-outline-success" />
+                        }
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -31,13 +56,13 @@
         </div>
 
         <div class="col-md-4">
-            <h4>Imagenes banner 1/4</h4>
+            <h4>Imagenes banner @ViewBag.ReferenciaImagenesEmpresa.Count / 4</h4>
             <div class="text-center">
                 @using (Html.BeginForm("SubirImagenes", "Empresa", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
 
                     <span>
-                        <input type="file" name="file" id="file" style="width: 100%;" />
+                        <input type="file" id="input-file-now files" name="file" onchange="validoArchivo(this)" data-height="200" data-default-file />
                     </span>
                     <br />
                     <br />

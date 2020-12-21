@@ -10,6 +10,7 @@
     $('.mdb-select').materialSelect();
     $('.collapse').collapse()
 
+
     // Validar datos
     $(document).on('change', "#rut", function () {
         var rut = $("#rut").val();
@@ -63,6 +64,7 @@
             //$("#loginError").html('Ingrese su rut y contraseña para iniciar sesión');
             return;
         }
+
         controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Auth/";
         ajaxInicioSesion(controller, rut, password);
     });
@@ -102,8 +104,8 @@
             alert('Ingrese su rut y contraseña para iniciar sesión');
             return;
         }
-        controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Empresa/";
-        ajaxInicioSesionEmpresa(controller, rut, password);
+            ajaxViewPartialLoadingEmpresa(rut, password);
+       
     });
 
     // Cerrar sesion usuario
@@ -113,6 +115,29 @@
         ajaxCierraSesionEmpresa(controller);
     });
 
+    // Modal Inicio usuario empresa
+    $(document).on('click', ".signInUsuarioEmpresa", function () {
+        $("#username").val('');
+        $("#password").val('');
+        $("#loginError").html('');
+
+        $("#modalSignInUsuarioEmpresa").modal("show");
+    });
+
+    // Inicio sesion usuario empresa
+    $(document).on('click', "#inicioSesionUsuarioEmpresa", function () {
+        var controller = '';
+        var rut = $("#usernameUE").val().replace(/\./g, '');
+        var password = $("#passwordUE").val();
+
+        if (rut == "" || rut == null || rut == undefined || password == "" || password == null || password == undefined) {
+            alert('Ingrese su rut y contraseña para iniciar sesión');
+            return;
+        }
+        ajaxViewPartialLoadingUsuarioEmpresa(rut, password);
+        //controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/UsuarioEmpresa/";
+        //ajaxInicioSesionUsuarioEmpresa(controller, rut, password);
+    });
 
     $(document).on('keydown', ".soloLetras", function (e) {
         var tecla = (document.all) ? e.keyCode : e.which;
@@ -488,9 +513,10 @@
         var nombreTar = $('#nombreT').val();
         var numeroTar = $("#numeroT").val();
         var fechaTar = $("#fechaT").val();
+        var montoTar = $("#montoD").val();
         var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Empresa/";
 
-        ajaxActualizarTarjetaEmpresa(controller, nombreTar, numeroTar, fechaTar);
+        ajaxActualizarTarjetaEmpresa(controller, nombreTar, numeroTar, fechaTar, montoTar);
     });
 
 
@@ -511,6 +537,17 @@
         var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/UsuarioEmpresa/";
 
         ajaxGuardaPerfilUsuarioEmpresa(controller, telefono, correo);
+    });
+
+
+    // Asignacion de preguntas para publicaciones
+    $(document).on('click', ".GuardarAsignacionPP", function () {
+
+        var publicacion = $("#publicacion").val();
+        var pregunta = $("#pregunta").val();
+        var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Empresa/";
+
+        ajaxGuardaAsignacionPreguntaPublicacion(controller, publicacion, pregunta);
     });
 
 });

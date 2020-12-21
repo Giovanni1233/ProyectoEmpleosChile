@@ -47,6 +47,7 @@
 
                     <ul class="nav nav-pills">
 
+
                         @if (Session["NombreEmpresa"] != null && ((string)Session["NombreEmpresa"]) != "")
                         {
                             <li class="nav-item">
@@ -63,13 +64,14 @@
                                     <a class="dropdown-item" href="@Url.Action("Solicitudes","Empresa")">Solicitudes &nbsp;&nbsp;<span class="badge badge-success">@Session["ContadorSolicitudes"]</span></a>
                                     @*<a class="dropdown-item" href="#one">Publicaciones</a>*@
                                     <a class="dropdown-item" href="@Url.Action("PerfilEmpresa","Empresa")">Perfil</a>
+                                    <a class="dropdown-item" href="@Url.Action("PagosEmpresa","Empresa")">Pagos Y devoluciones</a>
                                     <a class="dropdown-item" href="@Url.Action("Configuracion","Empresa")">Configuracion</a>
                                     <a class="dropdown-item" href="@Url.Action("NotificacionesM","Empresa")">
                                         Not. <span class="badge badge-danger"><span class="fa fa-bell"></span>&nbsp;@Session["ContadorNotificaciones"]</span>
                                         / Men. <span class="badge badge-info"><span class="fa fa-envelope"></span>&nbsp;@Session["ContadorMensajes"]</span>
                                     </a>
                                     <div role="separator" class="dropdown-divider"></div>
-                                    <a class="dropdown-item signOutEmpresa" href="javascript:void(0);">Cerrar Sesión</a>
+                                    <a class="dropdown-item signOut" href="javascript:void(0);">Cerrar Sesión</a>
                                 </div>
                             </li>
                             <!-- SE DEBE QUITAR -->
@@ -81,15 +83,42 @@
                         }
                         else
                         {
-                            <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("Inicio", "App")">Inicio</a>
-                            </li>
-                            <li class="nav-item signInEmpresa">
-                                <a class="nav-link" href="javascript:void(0);">Iniciar Sesión</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("Registro","Empresa")">Registrarse</a>
-                            </li>
+                            if (Session["Usuario"] != null && ((string)Session["Usuario"]) != "")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Index","UsuarioEmpresa")">Inicio</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link NewPublicacion" href="javascript:void(0);">Publicar</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@Session["NombreUsuario"]</a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="@Url.Action("Trabajadores","UsuarioEmpresa")">Trabajadores</a>
+                                        <a class="dropdown-item" href="@Url.Action("CandidatosEmpresa","UsuarioEmpresa")">Candidatos</a>
+                                        <a class="dropdown-item" href="@Url.Action("Perfil","UsuarioEmpresa")">Perfil</a>
+                                        <div role="separator" class="dropdown-divider"></div>
+                                        <a class="dropdown-item signOut" href="javascript:void(0);">Cerrar Sesión</a>
+                                    </div>
+                                </li>
+
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Inicio", "App")">Inicio</a>
+                                </li>
+                                <li class="nav-item signInEmpresa">
+                                    <a class="nav-link" href="javascript:void(0);">Iniciar Sesión</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Registro","Empresa")">Registrarse</a>
+                                </li>
+                                <li class="nav-item signInUsuarioEmpresa">
+                                    <a class="nav-link" href="javascript:void(0);">Inicio Usuario Empresa</a>
+                                </li>
+                            }
+
                         }
                     </ul>
                 </nav>
@@ -103,6 +132,14 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 @Html.Partial("Empresa/_ModalInicioSesionEmpresa")
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalSignInUsuarioEmpresa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                @Html.Partial("UsuarioEmpresa/_ModalInicioSesionUsuarioEmpresa")
             </div>
         </div>
     </div>

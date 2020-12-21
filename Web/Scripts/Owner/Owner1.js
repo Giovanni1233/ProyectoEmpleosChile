@@ -122,7 +122,7 @@
 
         if (user !== "" && user !== null && user !== undefined) {
             if (!user.includes("@")) {
-                user = formateaRut(usuario);
+                user = formateaRut(user);
             }
         }
     });

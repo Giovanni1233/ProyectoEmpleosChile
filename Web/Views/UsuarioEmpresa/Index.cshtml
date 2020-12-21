@@ -1,9 +1,17 @@
 ﻿
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_HeaderMenu.cshtml";
+    Layout = "~/Views/Shared/_HeaderMenuEmpresa.cshtml";
 }
 
+<div class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin: 20px 0px 0px 20px;">
+    <div class="row">
+        <div class="col-md-12 col-xl-12 col-sm-12 col-lg-12 border-right" id="ViewFiltros">
+            @Html.Partial("UsuarioEmpresa/_FiltroPublicaciones")
+        </div>
+    </div>
+</div>
+<hr />
 <div id="ViewDetalleTrabajadores" class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin: 20px 0px 0px 20px;">
     @Html.Partial("UsuarioEmpresa/_DetalleTrabajador")
 </div>
