@@ -410,43 +410,6 @@
     });
 
 
-    $(document).on('click', "#registraUsuario", function () {
-        var rut = $("#rut").val();
-        var nombre1 = $("#nombre1").val();
-        var nombre2 = $("#nombre2").val();
-        var apellidoP = $("#apellidoP").val();
-        var apellidoM = $("#apellidoM").val();
-        var correo = $("#correo").val();
-        var correoRepetir = $("#correoRepetir").val();
-        var password = $("#passWord").val();
-        var passwordRepetir = $("#passWordRepetir").val();
-        var fechaNacimiento = $("#fechaNacimiento").val();
-        var controller = GetControllerAuth();
-        var error = validarErrorIngreso();
-
-        document.getElementById('errorRegistro').innerHTML = error;
-
-        //if (error == "" || error == null || error == undefined) {
-
-        //ajaxRegistroUsuario(controller, rut, nombre1, nombre2, apellidoP, apellidoM,
-        //    correo, correoRepetir, password, passwordRepetir, fechaNacimiento);
-        $("#modalRegistroUsuario").modal("show");
-        //}
-    });
-
-    //se ejecuta al cerrar un modal
-    $("#modalRegistroUsuario").on('hide.bs.modal', function () {
-        $("#username").val('');
-        $("#password").val('');
-        $("#loginError").html('');
-
-        $("#modalSignIn").modal("show");
-    });
-
-    $("#modalSignIn").on('hide.bs.modal', function () {
-
-    });
-
     // Perfil de la empresa
     $(document).on('click', "#btnGuardarPerfilEmpresa", function () {
         var rut = $("#rut").val();

@@ -18,13 +18,6 @@
     @Styles.Render("~/bundles/appcss")
     @Styles.Render("~/bundles/MaterialDesign")
     @Styles.Render("https://use.fontawesome.com/releases/v5.8.2/css/all.css")
-
-
-    <style>
-        .btn-link, ul > li > a {
-            color: #fff;
-        }
-    </style>
 </head>
 
 <body>
@@ -50,8 +43,6 @@
                                     <a class="nav-link border-light" href="#">Publica tu oferta</a>
                                 </li>
                             }
-                           
-
                         }
                         else
                         {
@@ -69,51 +60,27 @@
                 <nav id="navbar-example2" class="navbar">
 
                     <ul class="nav nav-pills">
-                        @if (Session["Usuario"] != null && ((string)Session["Usuario"]) != "")
+                        @if (ViewBag.ReferenciaIdUser != null && ViewBag.ReferenciaIdUser != "")
                         {
-                            if (((string)Session["TipoUsuario"]) == "N")
-                            {
-                                <li class="nav-item">
+                            <li class="nav-item">
                                     <a class="nav-link NewPublicacion" href="javascript:void(0);">Publicar</a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@Session["NombreUsuario"]</a>
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@ViewBag.ReferenciaUserName</a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#one">Perfil</a>
+                                        <a class="dropdown-item" href="#">Perfil</a>
                                         <div role="separator" class="dropdown-divider"></div>
-                                        <a class="dropdown-item signOut" href="#three">Cerrar Sesión</a>
+                                        <a class="dropdown-item" id="signOutUser" href="#">Cerrar Sesión</a>
                                     </div>
-                                </li>
-                            }
-                            else
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("Index","UsuarioEmpresa")">Inicio</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link NewPublicacion" href="javascript:void(0);">Publicar</a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@Session["NombreUsuario"]</a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="@Url.Action("Trabajadores","UsuarioEmpresa")">Trabajadores</a>
-                                        <a class="dropdown-item" href="@Url.Action("CandidatosEmpresa","UsuarioEmpresa")">Candidatos</a>
-                                        <a class="dropdown-item" href="@Url.Action("Perfil","UsuarioEmpresa")">Perfil</a>
-                                        <div role="separator" class="dropdown-divider"></div>
-                                        <a class="dropdown-item signOut" href="javascript:void(0);">Cerrar Sesión</a>
-                                    </div>
-                                </li>
-
-                            }
-
+                            </li>
                         }
                         else
                         {
                             <li class="nav-item">
                                 <a class="nav-link border-light" href="@Url.Action("Index","Empresa")">Empresa</a>
                             </li>
-                            <li class="nav-item signIn">
-                                <a class="nav-link border-light" href="#">Iniciar Sesión</a>
+                            <li class="nav-item menu">
+                                <a class="nav-link border-light modalSignIn" href="#">Iniciar Sesión</a>
                             </li>
                         }
                     </ul>

@@ -108,6 +108,9 @@ namespace Web.Controllers
                 valores[10] = string.IsNullOrEmpty(apellidoM) ? "" : apellidoM;
                 valores[11] = fechaNacimiento;
 
+                urlHome = ModuleControlRetorno() + "/App/Inicio";
+                ViewBag.ReferenciaInicio = ModuleControlRetorno() + "/App/Inicio";
+
                 data = svcEmpleos.SetUsuario(parametros, valores).Table;
                 foreach (DataRow rows in data.Tables[0].Rows)
                 {
@@ -118,36 +121,38 @@ namespace Web.Controllers
                             ViewBag.ReferenciaUsuario = rut.Replace(".", "");
                             ViewBag.ReferenciaPass = password;
 
-                            Session["IdUser"] = rows["Id"].ToString();
-                            Session["UserApplication"] = rows["Rut"].ToString();
-                            Session["UserNameApplication"] = rows["Nombre"].ToString();
+                            //Session["IdUser"] = rows["Id"].ToString();
+                            //Session["User"] = rows["Rut"].ToString();
+                            //Session["UserName"] = rows["Nombre"].ToString();
+                            //Session["UserType"] = rows["Tipo"].ToString();
 
+                            code = rows["Code"].ToString();
                             break;
 
                         case "400":
-                            ViewBag.ReferenciaMensaje = rows["Message"].ToString();
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
                             break;
 
                         default:
-                            ViewBag.ReferenciaMensaje = errorSistema;
+                            code = "500";
+                            mensaje = errorSistema;
                             break;
                     }
                 }
             }
             catch (Exception ex)
             {
-                ViewBag.ErrorPlataforma = errorSistema;
+                code = "600";
+                mensaje = errorSistema;
             }
-
-            urlHome = ModuleControlRetorno() + "/App/Inicio";
-            ViewBag.ReferenciaInicio = ModuleControlRetorno() + "/App/Inicio";
 
             return Json(new { Code = code, Message = mensaje, UrlHome = urlHome });
         }
 
         [HttpPost]
         public JsonResult SignInUser(string user, string pass)
-        {
+         {
             string code = string.Empty;
             string mensaje = string.Empty;
             string pathRedirect = "";
@@ -176,27 +181,26 @@ namespace Web.Controllers
                             usuario.Correo = rows["Correo"].ToString();
                             code = rows["Code"].ToString();
                             mensaje = "";
-                            Session["Usuario"] = rows["Rut"].ToString();
                             pathRedirect = ModuleControlRetorno() + "/App/Inicio";
+
+                            Session["IdUser"] = rows["IdUsuario"].ToString();
+                            Session["UserName"] = rows["Nombre"].ToString();
+                            Session["UserType"] = rows["TipoUsuario"].ToString();
                             break;
                         case "400":
                             code = rows["Code"].ToString();
                             mensaje = rows["Message"].ToString();
+                            usuario.Rut = rows["Rut"].ToString();
                             break;
 
                         case "500":
                             code = rows["Code"].ToString();
-                            mensaje = rows["Message"].ToString();
-                            break;
-
-                        default:
-                            code = "600";
                             mensaje = errorSistema;
                             break;
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 code = "600";
                 mensaje = errorSistema;
@@ -205,14 +209,14 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult CerrarSesion()
+        public JsonResult SignOut()
         {
             var retorno = string.Empty;
             Session.Clear();
 
-            retorno = "/App/Index"; // ModuleControlRetorno() + "/Index";
+            retorno = ModuleControlRetorno() + "/App/Inicio";
 
-            return Json(new { Retorno = retorno });
+            return Json(new { Home = retorno });
         }
 
         [HttpPost]
@@ -361,7 +365,6 @@ namespace Web.Controllers
         {
             string domainReal = string.Empty;
             string domain = string.Empty;
-            string prefixDomain = string.Empty;
 
             #region "CONTROL DE RETORNO"
 
@@ -377,17 +380,15 @@ namespace Web.Controllers
                 }
 
                 domain = "http://" + domainReal + "/";
-                prefixDomain = Request.Url.AbsoluteUri.Split('/')[3];
             }
             else
             {
                 domain = "http://" + Request.Url.AbsoluteUri.Split('/')[2];
-                prefixDomain = "";
             }
 
             #endregion
 
-            return domain + prefixDomain;
+            return domain;
 
         }
 

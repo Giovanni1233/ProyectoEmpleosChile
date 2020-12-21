@@ -2,29 +2,29 @@
     background-color: #428bca;
 }
 
-.btn-teamwork:hover {
-    background-color: #4C779B;
-    color: #fff;
-}
+    .btn-teamwork:hover {
+        background-color: #4C779B;
+        color: #fff;
+    }
 
 .btn-create {
     background-color: #B703FA;
     color: #fff;
 }
 
-.btn-create:hover {
-    background-color: #9606CB;
-    color: #fff;
-}
+    .btn-create:hover {
+        background-color: #9606CB;
+        color: #fff;
+    }
 
 .btn-anulado {
     background-color: rgb(100, 100, 100);
 }
 
-.btn-anulado:hover {
-    background-color: rgb(150, 150, 150);
-    color: #fff;
-}
+    .btn-anulado:hover {
+        background-color: rgb(150, 150, 150);
+        color: #fff;
+    }
 
 .btn-disabled {
     background-color: rgb(200, 200, 200);
@@ -47,3 +47,11 @@
     line-height: 0.1;
     border-radius: 30px;
 }
+
+.btn-link, ul > li > a {
+    color: #FFFFFF;
+}
+
+    .btn-link, ul > li > a:hover {
+        background-color: #FFFFFF;
+    }

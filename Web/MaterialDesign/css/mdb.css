@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 /*!
  * Material Design for Bootstrap 4
  * Version: MDB PRO 4.8.8
@@ -5940,7 +5940,7 @@ body.scrollable {
     position: absolute;
     transition: color 0.2s; }
     .md-form .prefix.active {
-      color: #4285f4; }
+      /*color: #4285f4*/; }
   .md-form.form-lg .validate {
     margin-bottom: 2.8rem; }
   .md-form.form-lg label {

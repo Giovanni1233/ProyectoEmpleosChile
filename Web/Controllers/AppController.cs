@@ -27,6 +27,15 @@ namespace Web.Controllers
             ViewBag.ReferenciaInicio = ModuleControlRetorno() + "/App/Inicio";
             ViewBag.ReferenciaRegistro = ModuleControlRetorno() + "/Auth/RegistroUsuario";
 
+            if (Session["IdUser"] != null && Session["IdUser"].ToString() != "")
+                ViewBag.ReferenciaIdUser = Session["IdUser"].ToString();
+
+            if (Session["UserName"] != null && Session["UserName"].ToString() != "")
+                ViewBag.ReferenciaUserName = Session["UserName"].ToString();
+
+            if (Session["UserType"] != null && Session["UserType"].ToString() != "")
+                ViewBag.ReferenciaUserType = Session["UserType"].ToString();
+
 
             return View();
         }

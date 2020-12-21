@@ -1,8 +1,8 @@
-﻿function ajaxSignInUser(controller, usuario, password) {
+﻿function ajaxSignInUser(controller, user, pass) {
     $.ajax({
         type: 'POST',
         url: controller + 'SignInUser',
-        data: '{ usuario: "' + btoa(usuario) + '",  clave: "' + btoa(password) + '"}',
+        data: '{ user: "' + user + '",  pass: "' + pass + '"}',
         dataType: 'json',
         contentType: 'application/json',
         async: true,
@@ -11,7 +11,7 @@
                 window.location.href = response.PathRedirect;
             }
             else {
-                ajaxViewPartialFormSignIn(controller, response.Message, atob(response.Correo));
+                ajaxViewPartialFormSignIn(controller, response.Message, response.User.Rut);
             }
         },
         error: function (xhr) {
@@ -20,15 +20,15 @@
     });
 }
 
-function ajaxCierraSesion(controller) {
+function ajaxSignOut(controller) {
     $.ajax({
         type: 'POST',
-        url: controller + 'CerrarSesion',
+        url: controller + 'SignOut',
         dataType: 'json',
         contentType: 'application/json',
         async: true,
         success: function (response) {
-            window.location.href = response.Retorno;
+            window.location.href = response.Home;
         }
     });
 }
@@ -82,33 +82,27 @@ function ajaxRegistroUsuario(controller, rut, nombre1, nombre2, apellidoP, apell
         contentType: 'application/json',
         async: true,
         success: function (response) {
-
-            $("#modalRegistroUsuario").modal("show");
+            if (response.Code != '600') {
+                if (response.Code === '200') {
+                    $("#modalRegistroUsuario").modal("show");
+                }
+                else {
+                    document.getElementById('errorRegistro').innerHTML = response.Message;
+                }
+            }
+            else {
+                document.getElementById('errorRegistro').innerHTML = response.Message;
+            }
         },
         error: function (xhr) {
-
+            document.getElementById('errorRegistro').innerHTML = response.Message;
         }
     });
 }
 
 
 //PartialView
-function ajaxViewPartialErrorSignIn(controller, message) {
-    $.ajax({
-        type: 'POST',
-        url: controller + 'ViewPartialErrorSignIn',
-        data: '{ message: "' + message + '" }',
-        dataType: 'json',
-        contentType: 'application/json',
-        async: true,
-        error: function (xhr) {
-            $("#errorSignIn").html(xhr.responseText);
-        }
-    });
-}
-
-
-function ajaxViewPartialLoadingSignIn(controller, username, password) {
+function ajaxViewPartialLoadingSignIn(controller, username, pass) {
     $.ajax({
         type: 'POST',
         url: controller + 'ViewPartialLoadingSignIn',
@@ -118,13 +112,12 @@ function ajaxViewPartialLoadingSignIn(controller, username, password) {
         async: true,
         error: function (xhr) {
             $("#contentLogin").html(xhr.responseText);
-
-            ajaxSignInUser(controller, username, password);
+            ajaxSignInUser(controller, username, pass);
         }
     });
 }
 
-function ajaxViewPartialFormSignIn(controller, message, correo) {
+function ajaxViewPartialFormSignIn(controller, message, user) {
     $.ajax({
         type: 'POST',
         url: controller + 'ViewPartialFormSignIn',
@@ -134,7 +127,7 @@ function ajaxViewPartialFormSignIn(controller, message, correo) {
         async: true,
         error: function (xhr) {
             $("#contentLogin").html(xhr.responseText);
-            $("#username").val(correo);
+            $("#username").val(user);
             ajaxViewPartialErrorSignIn(controller, message);
         }
     });
@@ -150,6 +143,8 @@ function ajaxViewPartialErrorSignIn(controller, message) {
         async: true,
         error: function (xhr) {
             $("#errorSignIn").html(xhr.responseText);
+
+            $("#username").focus();
         }
     });
 }

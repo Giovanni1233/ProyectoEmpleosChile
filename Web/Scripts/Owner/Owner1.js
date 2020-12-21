@@ -1,5 +1,4 @@
 ﻿$(document).ready(function () {
-
     $(document).on('keydown', ".soloLetras", function (e) {
         let tecla = (document.all) ? e.keyCode : e.which;
         if (tecla == 8) return true;
@@ -29,6 +28,21 @@
     });
 
 
+    $(document).on("keyup", "#username", function (e) {
+        var code = e.keyCode ? e.keyCode : e.which;
+        if (code === 13) {
+            $("#signInUser").trigger("click");
+        }
+    });
+
+    $(document).on("keyup", "#userPassword", function (e) {
+        var code = e.keyCode ? e.keyCode : e.which;
+        if (code === 13) {
+            $("#signInUser").trigger("click");
+        }
+    });
+
+
     $(document).on('click', "#registraUsuario", function () {
         let rut = $("#rut").val();
         let nombre1 = $("#nombre1").val();
@@ -40,15 +54,19 @@
         let password = $("#passWord").val();
         let passwordRepetir = $("#passWordRepetir").val();
         let fechaNacimiento = $("#fechaNacimiento").val();
-        let controller = GetControllerAuth();
+        let domain = getControllerAuth();
         let error = validateErrorIngreso(rut, nombre1, apellidoP, correo, correoRepetir, password, passwordRepetir, fechaNacimiento);
 
-        document.getElementById('errorRegistro').innerHTML = error;
-        $("#modalRegistroUsuario").modal("show");
-
         if (error == "" || error == null || error == undefined) {
-            ajaxRegistroUsuario(controller, rut, nombre1, nombre2, apellidoP, apellidoM, correo, correoRepetir, password, passwordRepetir, fechaNacimiento);
-            $("#modalRegistroUsuario").modal("show");
+            ajaxRegistroUsuario(domain, rut, nombre1, nombre2, apellidoP, apellidoM, correo, correoRepetir, password, passwordRepetir, fechaNacimiento);
+        }
+        else {
+            if (error == null || error == undefined) {
+                document.getElementById('errorRegistro').innerHTML = 'Ha ocurrido un error inesperado, favor intetarlo nuevamente!';
+            }
+            else {
+                document.getElementById('errorRegistro').innerHTML = error;
+            }
         }
     });
 
@@ -58,21 +76,35 @@
 
     $(document).on('click', "#signInUser", function (e) {
         e.preventDefault();
-        let domain = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + '/Auth/';
+        let domain = getControllerAuth();
         let user = $("#username").val();
-        let pass = $("#password").val();
+        let pass = $("#userPassword").val();
 
 
         ajaxViewPartialLoadingSignIn(domain, user, pass);
     });
 
+    $(document).on('click', ".modalSignIn", function () {
+        $("#username").val('');
+        $("#signInUser").val('');
+        $("#loginError").html('');
+
+        $("#modalSignIn").modal("show");
+    });
+
+    $(document).on('click', "#signOutUser", function () {
+        let domain = getControllerAuth();
+
+        ajaxSignOut(domain);
+    });
+
 
     $(document).on('change', "#ciudad", function () {
         let ciudad = $("#ciudad").val();
-        let controller = GetControllerAuth();
+        let domain = getControllerAuth();
 
         if (parseInt(ciudad) > 0) {
-            ajaxGetComuna(controller, ciudad);
+            ajaxGetComuna(domain, ciudad);
         }
         else {
             $("#comuna").html('<option value="0">Seleccione...</option>');
@@ -82,7 +114,7 @@
     $(document).on('change', "#correo", function () {
         let mail = $("#correo").val();
         if (mail != "" && mail != null && mail != undefined) {
-            if (ValidateEmail(mail)) {
+            if (validateEmail(mail)) {
                 $("#mailError").html('');
             }
             else {
@@ -97,9 +129,9 @@
 
     $(document).on('change', "#region", function () {
         let region = $("#region").val();
-        let controller = GetControllerAuth();
+        let domain = getControllerAuth();
 
-        ajaxGetCiudad(controller, region);
+        ajaxGetCiudad(domain, region);
     });
 
     $(document).on('change', "#rut", function () {
@@ -122,7 +154,8 @@
 
         if (user !== "" && user !== null && user !== undefined) {
             if (!user.includes("@")) {
-                user = formateaRut(usuario);
+                user = formatRut(user);
+                $("#username").val(user);
             }
         }
     });
@@ -130,34 +163,31 @@
 
     //se ejecuta al cerrar un modal
     $("#modalRegistroUsuario").on('hide.bs.modal', function () {
-        $("#username").val('');
-        $("#password").val('');
-        $("#loginError").html('');
-
-        //$("#modalSignIn").modal("show");
-
-
+        window.location.href = getControllerApp() + "Inicio";
     });
 
     $("#modalSignIn").on('hide.bs.modal', function () {
-
+        $("#username").val('');
+        $("#signInUser").val('');
+        $("#errorSignIn").html('');
     });
 
 });
 
 
 //FUNCTIONS
-function ModalShowMensajeRegistro() {
+function modalShowMensajeRegistro() {
     $("#modalMensajeRegistro").modal("show");
 }
 
 function formatRut(rut) {
+    let rutPuntos = "";
     let actual = rut.replace(/^0+/, "");
     if (actual != '' && actual.length > 1) {
         let sinPuntos = actual.replace(/\./g, "");
         let actualLimpio = sinPuntos.replace(/-/g, "");
         let inicio = actualLimpio.substring(0, actualLimpio.length - 1);
-        let rutPuntos = "";
+        
         let i = 0;
         let j = 1;
         for (i = inicio.length - 1; i >= 0; i--) {
@@ -201,7 +231,7 @@ function validateErrorIngreso(rut, nombre, apellidoP, correo, correoRepetir, pas
         error += '<li>Debe ingresar un correo.</li>'
     }
     else {
-        if (!ValidateEmail(correo)) {
+        if (!validateEmail(correo)) {
             error += '<li>Correo ingresado no es valido';
         }
         else {
@@ -280,7 +310,7 @@ function validateRut(rut) {
     return true;
 }
 
-function ValidateEmail(inputText) {
+function validateEmail(inputText) {
     let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (inputText.match(mailformat)) {
         return true;
@@ -296,34 +326,16 @@ function validateOnlyNumber(inputText) {
 }
 
 
-function GetControllerAuth() {
+function getControllerAuth() {
     let prefixDomain = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2];
-    let prefix = "";
+    let prefix = "/Auth/";
 
-    if (window.location.href.split('/')[2].indexOf(atob("bG9jYWxob3N0OjQ0MzA0")) !== -1) {
-        if ((window.location.href.split('/').length - 1) === 5) {
-            prefix = prefix + "/" + window.location.href.split('/')[window.location.href.split('/').length - 1] + "/";
-        } else {
-            if (window.location.href.split('/')[3] != "") {
-                prefix = prefix + "/" + window.location.href.split('/')[3] + "/";
-            }
-            else {
-                prefix = prefix + "/Auth/";
-            }
+    return prefixDomain + prefix;
+}
 
-        }
-    }
-    else {
-        if ((window.location.href.split('/').length - 1) === 5) {
-            prefix = prefix + "/" + window.location.href.split('/')[3] + "/" + window.location.href.split('/')[window.location.href.split('/').length - 2] + "/";
-        } else {
-            prefix = prefix + "/" + window.location.href.split('/')[3] + "/";
-        }
-    }
-
-    if (prefix == "") {
-        prefix = "/Auth/";
-    }
+function getControllerApp() {
+    let prefixDomain = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2];
+    let prefix = "/App/";
 
     return prefixDomain + prefix;
 }

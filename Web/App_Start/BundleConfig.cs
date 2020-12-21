@@ -29,9 +29,9 @@ namespace Web
 
             bundles.Add(new ScriptBundle("~/bundles/libraryjs").Include(
                 "~/Scripts/Owner/DatePicker.js",
-                "~/Scripts/Owner/Owner.js",
+                //"~/Scripts/Owner/Owner.js",
                 "~/Scripts/Owner/Owner1.js",
-                "~/Scripts/Owner/FuncionesAjax.js",
+                //"~/Scripts/Owner/FuncionesAjax.js",
                 "~/Scripts/Owner/FuncionesAjax1.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
@@ -70,7 +70,6 @@ namespace Web
                 "~/Content/App/margin.css",
                 "~/Content/App/menu.css",
                 "~/Content/App/padding.css",
-                "~/Content/App/paginator.css",
                 "~/Content/App/teamwork-auth.css",
                 "~/Content/App/teamwork-files.css",
                 "~/Content/App/text-decoration.css",
