@@ -1,0 +1,47 @@
+﻿@if (ViewBag.PagosRealizadosEmpresa.Count > 0 && ViewBag.PagosRealizadosEmpresa != null)
+{
+    <h3>Pagos realizados</h3>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th>Nombre Plan</th>
+                        <th>Monto</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.PagosRealizadosEmpresa as ICollection<Model.Models.PagosRealizadosEmpresa>)
+                    {
+                        <tr>
+                            <td>@item.NombrePlan</td>
+                            <td>
+                                @item.MontoPagado
+                            </td>
+                            <td>@item.FechaPago</td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+            <div class="error-template">
+                <div class="error-details">
+                    <h4>  No se encontraron pagos</h4>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+}

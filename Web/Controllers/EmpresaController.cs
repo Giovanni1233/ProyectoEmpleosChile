@@ -46,7 +46,8 @@ namespace Web.Controllers
             ViewBag.PublicacionesPermitidasEmpresa = GetCandiPubliTrabaPreguntPermitidas(idEmpresa, "1");
             ViewBag.TrabajadoresPermitidosEmpresa = GetCandiPubliTrabaPreguntPermitidas(idEmpresa, "2");
             ViewBag.referenciaContadorPublicaciones = GetPublicaciones(idEmpresa, "").Count();
-            ViewBag.PreguntasPorPublicacion = GetPreguntasPorPublicacion(idEmpresa);
+            ViewBag.PreguntasPorPublicacionTodas = GetPreguntasPorPublicacionTodas(idEmpresa);
+            ViewBag.PublicacionesEmpresa = GetPublicaciones(idEmpresa, "");
             ViewBag.Planes = GetPlanes("");
 
             return View();
@@ -117,6 +118,7 @@ namespace Web.Controllers
             ViewBag.referenciaContadorPublicaciones = GetPublicaciones(empresa, "").Count();
             ViewBag.ReferenciaTarjetaEmpresa = GetTarjetasEmpresa(empresa);
             ViewBag.ReferenciaImagenesEmpresa = GetImagenesBannerEmpresa(empresa);
+            ViewBag.ReferenciaImagenPerfilEmpresa = GetImagenDePerfilEmpresa(empresa);
             ViewBag.Planes = GetPlanes("");
             return View();
         }
@@ -180,6 +182,7 @@ namespace Web.Controllers
                 ViewBag.ReferenciaComentarioPubEmpresa = GetComentariosPublicacion(IdPublicacion);
                 ViewBag.IdPublicacion = IdPublicacion;
                 ViewBag.VotoRealizado = GetVotoPorUsuario(empresa, IdPublicacion);
+                ViewBag.PreguntasPorPublicacionId = GetPreguntasPorPublicacionId(IdPublicacion);
 
                 //ViewBag.CountVotosTotales = GetVotosTotales(IdPublicacion);
                 //ViewBag.PromedioVotosPublicacion = GetPromedioVotosPublicacion(IdPublicacion);
@@ -232,6 +235,14 @@ namespace Web.Controllers
             ViewBag.TrabajadoresPermitidosEmpresa = GetCandiPubliTrabaPreguntPermitidas(idEmpresa, "2");
             ViewBag.referenciaContadorPublicaciones = GetPublicaciones(idEmpresa, "").Count();
             ViewBag.Planes = GetPlanes("");
+            return View();
+        }
+
+        public ActionResult PagosEmpresa()
+        {
+            var idEmpresa = Session["EmpresaID"].ToString();
+            ViewBag.PagosRealizadosEmpresa = GetPagosEmpresa(idEmpresa);
+            ViewBag.DevolucionesEmpresa = GetDevolucionesEmpresa(idEmpresa);
             return View();
         }
         #endregion
@@ -833,6 +844,62 @@ namespace Web.Controllers
             }
             return clDetallePub;
         }
+
+        public List<DevolucionEmpresa> GetDevolucionesEmpresa(string idEmpresa)
+        {
+            string code = string.Empty;
+            string mensaje = string.Empty;
+            string[] parametros = new string[1];
+            string[] valores = new string[1];
+            parametros[0] = "@ID_EMPRESA";
+            valores[0] = idEmpresa;
+            List<DevolucionEmpresa> clDevolucionEmpresa = new List<DevolucionEmpresa>();
+
+            DataSet data = new DataSet();
+
+            try
+            {
+                data = svcEmpleos.GetDevolucionEmpresa(parametros, valores).Table;
+                foreach (DataRow rows in data.Tables[0].Rows)
+                {
+                    switch (rows["Code"].ToString())
+                    {
+                        case "200":
+                            clDevolucionEmpresa.Add(
+                                new DevolucionEmpresa
+                                {
+                                    MontoDevolucion = rows["MontoDevolucion"].ToString(),
+                                    NumeroTarjeta = rows["NumeroTarjeta"].ToString(),
+                                    Plan_Actual = rows["PlanActual"].ToString(),
+                                    Plan_Anterior = rows["PlanAnterior"].ToString()
+                                });
+                            mensaje = "";
+                            break;
+                        case "400":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        case "500":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        default:
+                            code = "600";
+                            mensaje = errorSistema;
+                            break;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                code = "600";
+                mensaje = errorSistema;
+            }
+            return clDevolucionEmpresa;
+        }
         public List<EducacionUsuario> GetEducacionUsuario(string idUsuario)
         {
             string code = string.Empty;
@@ -1154,7 +1221,60 @@ namespace Web.Controllers
             }
             return clIdiomasUsuario;
         }
+        public List<ImagenEmpresaPerfil> GetImagenDePerfilEmpresa(string idEmpresa)
+        {
+            string code = string.Empty;
+            string mensaje = string.Empty;
+            string[] parametros = new string[1];
+            string[] valores = new string[1];
+            parametros[0] = "@ID_EMPRESA";
+            valores[0] = idEmpresa;
+            List<ImagenEmpresaPerfil> clImagenEmpresa = new List<ImagenEmpresaPerfil>();
 
+            DataSet data = new DataSet();
+
+            try
+            {
+                data = svcEmpleos.GetImagenPerfilEmpresa(parametros, valores).Table;
+                foreach (DataRow rows in data.Tables[0].Rows)
+                {
+                    switch (rows["Code"].ToString())
+                    {
+                        case "200":
+                            clImagenEmpresa.Add(
+                                new ImagenEmpresaPerfil
+                                {
+                                    Imagen = (byte[])rows["Imagen"],
+                                    NombreImagen = rows["NombreImagen"].ToString(),
+                                    IdImagen = rows["IdImagen"].ToString()
+                                });
+                            mensaje = "";
+                            break;
+                        case "400":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        case "500":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        default:
+                            code = "600";
+                            mensaje = errorSistema;
+                            break;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                code = "600";
+                mensaje = errorSistema;
+            }
+            return clImagenEmpresa;
+        }
         public List<ImagenesBannerEmpresa> GetImagenesBannerEmpresa(string idEmpresa)
         {
             string code = string.Empty;
@@ -1208,6 +1328,61 @@ namespace Web.Controllers
                 mensaje = errorSistema;
             }
             return clImagenesBanner;
+        }
+
+        public List<PagosRealizadosEmpresa> GetPagosEmpresa(string parametro = "")
+        {
+            string code = string.Empty;
+            string mensaje = string.Empty;
+            string[] parametros = new string[1];
+            string[] valores = new string[1];
+            parametros[0] = "@IDL_EMPRESA";
+            valores[0] = parametro;
+            List<PagosRealizadosEmpresa> clPagosEmpresa = new List<PagosRealizadosEmpresa>();
+            DataSet data = new DataSet();
+            try
+            {
+                data = svcEmpleos.GetPagosEmpresa(parametros, valores).Table;
+                foreach (DataRow rows in data.Tables[0].Rows)
+                {
+                    switch (rows["Code"].ToString())
+                    {
+                        case "200":
+                            clPagosEmpresa.Add(
+                                new PagosRealizadosEmpresa
+                                {
+                                   FechaPago = rows["FechaPago"].ToString(),
+                                    MontoPagado = rows["MontoPagado"].ToString(),
+                                    NombrePlan = rows["NombrePlan"].ToString(),
+
+                                });
+
+
+                            mensaje = "";
+                            break;
+                        case "400":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        case "500":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        default:
+                            code = "600";
+                            mensaje = errorSistema;
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                code = "600";
+                mensaje = errorSistema;
+            }
+            return clPagosEmpresa;
         }
         public List<PlanesEmpresa> GetPlanes(string parametro = "")
         {
@@ -1472,20 +1647,21 @@ namespace Web.Controllers
             }
             return idplan;
         }
-        public List<PreguntasPorPublicacion> GetPreguntasPorPublicacion(string idEmpresa)
+
+        public List<PreguntasPorPublicacion> GetPreguntasPorPublicacionId(string idPublicacion)
         {
             string code = string.Empty;
             string mensaje = string.Empty;
 
             string[] parametros = new string[1];
             string[] valores = new string[1];
-            parametros[0] = "@ID_EMPRESA";
-            valores[0] = idEmpresa;
+            parametros[0] = "@ID_PUBLICACION";
+            valores[0] = idPublicacion;
             DataSet datas = new DataSet();
             List<PreguntasPorPublicacion> clPreguntasPorPubliEmp = new List<PreguntasPorPublicacion>();
             try
             {
-                datas = svcEmpleos.GetPreguntasPorPublicacionEmpresa(parametros, valores).Table; // GetCandidatosEmpresa
+                datas = svcEmpleos.GetPreguntasPorPublicacionId(parametros, valores).Table; // GetCandidatosEmpresa
 
                 foreach (DataRow rows in datas.Tables[0].Rows)
                 {
@@ -1496,8 +1672,9 @@ namespace Web.Controllers
                                 new PreguntasPorPublicacion
                                 {
                                     PreguntaNombre = rows["Pregunta"].ToString(),
-                                    PublicacionTitulo = rows["Publicacion"].ToString()
-                                }); ;
+                                    PublicacionTitulo = rows["Publicacion"].ToString(),
+                                    Id = rows["IdPregunta"].ToString()
+                                });
 
                             mensaje = "";
                             break;
@@ -1525,6 +1702,62 @@ namespace Web.Controllers
             }
             return clPreguntasPorPubliEmp;
         }
+        public List<PreguntasPorPublicacion> GetPreguntasPorPublicacionTodas(string idEmpresa)
+        {
+            string code = string.Empty;
+            string mensaje = string.Empty;
+
+            string[] parametros = new string[1];
+            string[] valores = new string[1];
+            parametros[0] = "@ID_EMPRESA";
+            valores[0] = idEmpresa;
+            DataSet datas = new DataSet();
+            List<PreguntasPorPublicacion> clPreguntasPorPubliEmp = new List<PreguntasPorPublicacion>();
+            try
+            {
+                datas = svcEmpleos.GetPreguntasPorPublicacionEmpresa(parametros, valores).Table; // GetCandidatosEmpresa
+
+                foreach (DataRow rows in datas.Tables[0].Rows)
+                {
+                    switch (rows["Code"].ToString())
+                    {
+                        case "200":
+                            clPreguntasPorPubliEmp.Add(
+                                new PreguntasPorPublicacion
+                                {
+                                    PreguntaNombre = rows["Pregunta"].ToString(),
+                                    PublicacionTitulo = rows["Publicacion"].ToString(),
+                                    Id = rows["IdPregunta"].ToString()
+                                });
+
+                            mensaje = "";
+                            break;
+                        case "400":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        case "500":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        default:
+                            code = "600";
+                            mensaje = errorSistema;
+                            break;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                code = "600";
+                mensaje = errorSistema;
+            }
+            return clPreguntasPorPubliEmp;
+        }
+
+
         public List<PreguntasPublicacion> GetPreguntasPublicacion(string idEmpresa)
         {
             string code = string.Empty;
@@ -1930,6 +2163,7 @@ namespace Web.Controllers
                                     NombreTarjeta = rows["NombreTarjeta"].ToString(),
                                     NumeroTarjeta = rows["NumeroTarjeta"].ToString(),
                                     TarjetaCVV = rows["TarjetaCVV"].ToString(),
+                                    MontoDisponible = rows["MontoDisponible"].ToString(),
                                 });
 
                             mensaje = "";
@@ -2565,22 +2799,23 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult ActualizarConfiguracionTarjeta(string nombreT, string numeroT, string fechaT, string error = "")
+        public JsonResult ActualizarConfiguracionTarjeta(string nombreT, string numeroT, string fechaT, string montoT, string error = "")
         {
             string view = string.Empty;
             var codigo = "0";
             try
             {
 
-                string[] parametros = new string[4];
-                string[] valores = new string[4];
+                string[] parametros = new string[5];
+                string[] valores = new string[5];
                 var IdEmpresa = Session["EmpresaID"].ToString();
 
                 DataSet data = new DataSet();
 
                 if (string.IsNullOrEmpty(nombreT) || string.IsNullOrWhiteSpace(nombreT) ||
                     string.IsNullOrEmpty(numeroT) || string.IsNullOrWhiteSpace(numeroT) ||
-                    string.IsNullOrEmpty(fechaT) || string.IsNullOrWhiteSpace(fechaT)
+                    string.IsNullOrEmpty(fechaT) || string.IsNullOrWhiteSpace(fechaT) ||
+                    string.IsNullOrEmpty(montoT) || string.IsNullOrWhiteSpace(montoT)
                     )
                 {
 
@@ -2600,12 +2835,14 @@ namespace Web.Controllers
                 parametros[1] = "@NOMBRE_TARJETA";
                 parametros[2] = "@NUMERO_TARJETA";
                 parametros[3] = "@FECHA_EXPIRACION";
+                parametros[4] = "@MONTO_DISPONIBLE";
 
 
                 valores[0] = IdEmpresa;
                 valores[1] = nombreT;
                 valores[2] = numeroT;
                 valores[3] = fechaT;
+                valores[4] = montoT;
 
 
                 data = svcEmpleos.UpdTarjetaEmpresa(parametros, valores).Table;
@@ -2782,6 +3019,70 @@ namespace Web.Controllers
 
             return Json(new { data = "1" }, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public JsonResult GuardarAsignacionPreguntasPublicacion(string publicacion, string pregunta)
+        {
+
+            string view = string.Empty;
+            var codigo = "0";
+            try
+            {
+                string[] parametros = new string[2];
+                string[] valores = new string[2];
+
+                // Variables vacias
+                //string razonsocial = string.Empty;
+
+                DataSet data = new DataSet();
+
+
+                parametros[0] = "@ID_PUBLICACION";
+                parametros[1] = "@ID_PREGUNTA";
+
+
+                valores[0] = publicacion;
+                valores[1] = pregunta;
+
+
+                data = svcEmpleos.SetPreguntasSeleccionadasPublicacionEmpresa(parametros, valores).Table;
+
+                foreach (DataRow rows in data.Tables[0].Rows)
+                {
+                    switch (rows["Code"].ToString())
+                    {
+                        case "200":
+
+                            view = "Configuracion";
+                            //ViewBag.ReferenciaCatalogo = ModuleRetornoCatalogo();
+                            codigo = "1";
+                            break;
+
+                        case "400":
+                            view = "Configuracion";
+                            codigo = "-1";
+                            break;
+                        case "500":
+                            view = "Configuracion";
+                            codigo = "-1";
+                            break;
+                        default:
+                            view = "Configuracion";
+                            codigo = "-1";
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ReferenciaMensaje = errorSistema;
+                codigo = "-1";
+            }
+
+
+            return Json(new { data = codigo }, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public JsonResult GuardarVotacionPublicacion(string votacion, string idPublicacion, string idUsuario, string error = "")
         {
@@ -2916,14 +3217,14 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult GuardarConfiguracionTarjeta(string nombreT, string numeroT, string fechaT, string cvvT, string error = "")
+        public ActionResult GuardarConfiguracionTarjeta(string nombreT, string numeroT, string fechaT, string cvvT, string montoT, string error = "")
         {
             string view = string.Empty;
 
             try
             {
-                string[] parametros = new string[5];
-                string[] valores = new string[5];
+                string[] parametros = new string[6];
+                string[] valores = new string[6];
                 var IdEmpresa = Session["EmpresaID"].ToString();
 
                 DataSet data = new DataSet();
@@ -2931,7 +3232,8 @@ namespace Web.Controllers
                 if (string.IsNullOrEmpty(nombreT) || string.IsNullOrWhiteSpace(nombreT) ||
                     string.IsNullOrEmpty(numeroT) || string.IsNullOrWhiteSpace(numeroT) ||
                     string.IsNullOrEmpty(cvvT) || string.IsNullOrWhiteSpace(cvvT) ||
-                    string.IsNullOrEmpty(fechaT) || string.IsNullOrWhiteSpace(fechaT)
+                    string.IsNullOrEmpty(fechaT) || string.IsNullOrWhiteSpace(fechaT) ||
+                    string.IsNullOrEmpty(montoT) || string.IsNullOrWhiteSpace(montoT)
                     )
                 {
 
@@ -2952,6 +3254,7 @@ namespace Web.Controllers
                 parametros[2] = "@NUMERO_TARJETA";
                 parametros[3] = "@FECHA_EXPIRACION";
                 parametros[4] = "@CVV";
+                parametros[5] = "@MONTO_TARJETA";
 
 
                 valores[0] = IdEmpresa;
@@ -2959,6 +3262,7 @@ namespace Web.Controllers
                 valores[2] = numeroT;
                 valores[3] = fechaT;
                 valores[4] = cvvT;
+                valores[5] = montoT;
 
 
                 data = svcEmpleos.SetTarjetaEmpresa(parametros, valores).Table;
@@ -3175,6 +3479,7 @@ namespace Web.Controllers
 
             return Json(new { data = "1" }, JsonRequestBehavior.AllowGet);
         }
+
         [HttpPost]
         public ActionResult GuardarPublicacion(string titulo, string id_empresa, string id_usuario, string tipo, string descripcionNuevaPub, string monto, string discapacidad,
         string area, string subarea, string error = "")
@@ -3594,9 +3899,47 @@ namespace Web.Controllers
             conexion.Close();
             return RedirectToAction("PerfilEmpresa");
         }
+
+        public ActionResult SubirImagenPerfil(HttpPostedFileBase file)
+        {
+            string Query = "";
+            byte[] archivo = null;
+            Stream myStream = file.InputStream;
+            using (MemoryStream ms = new MemoryStream())
+            {
+                myStream.CopyTo(ms);
+                archivo = ms.ToArray();
+            }
+            string idEmpresa = Session["EmpresaID"].ToString();
+            var existe = GetImagenDePerfilEmpresa(idEmpresa).Count();
+
+            if (existe == 0)
+            {
+                Query = "INSERT INTO IMAGEN_PERFIL_EMPRESA (ID_EMPRESA, NOMBRE_IMAGEN, IMAGEN) VALUES (@ID_EMPRESA, @NOMBRE, @IMAGEN)";
+            }
+            else
+            {
+                Query = "UPDATE IMAGEN_PERFIL_EMPRESA SET NOMBRE_IMAGEN = @NOMBRE, IMAGEN = @IMAGEN WHERE ID_EMPRESA = @ID_EMPRESA";
+            }
+            conexion.Open();
+            SqlCommand comando = new SqlCommand(Query, conexion);
+            comando.Parameters.AddWithValue("@ID_EMPRESA", idEmpresa);
+            comando.Parameters.AddWithValue("@NOMBRE", file.FileName);
+            comando.Parameters.AddWithValue("@IMAGEN", archivo);
+            comando.ExecuteNonQuery();
+            conexion.Close();
+
+
+            return RedirectToAction("PerfilEmpresa");
+        }
         #endregion
 
         #region ControlRetorno
+        [HttpPost]
+        public ActionResult ViewPartialLoadingSignIn()
+        {
+            return PartialView("_LoadingLogin");
+        }
         private string ModuleControlRetorno()
         {
             string domainReal = string.Empty;

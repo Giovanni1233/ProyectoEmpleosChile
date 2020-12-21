@@ -28,13 +28,17 @@
             @Html.Partial("Empresa/_VotacionPublicacion")
         </div>
 
-        <hr />
+        <br />
         <div id="ViewCandidatosEmpresa" class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin: 20px 0px 0px 20px;">
             @Html.Partial("Empresa/_CandidatosPublicaciones")
         </div>
-        <hr />
+        <br />
         <div id="ViewComentariosPublicidad" class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin: 20px 0px 0px 20px;">
             @Html.Partial("Empresa/_ComentariosPubEmpresa")
+        </div>
+        <br />
+        <div id="ViewPreguntasPublicidad" class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin: 20px 0px 0px 20px;">
+            @Html.Partial("Empresa/_PreguntasPorPublicacionEmpresa")
         </div>
         <!-- MODAL EDICION PUBLICACION -->
         <div class="modal fade" id="modalEdicionPublicacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -51,11 +55,16 @@
 }
 else
 {
-    <div class="row">
-        <div class="col-md-12" style="margin: 20px 0px 0px 20px;">
-            <h2 style="color:#808080"> No se ha seleccionado ninguna publicación</h2>
 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="error-template">
+                <div class="error-details">
+                    <h4>  No se ha seleccionado alguna publicación.</h4>
+                </div>
+
+            </div>
         </div>
     </div>
 
-}
+    }

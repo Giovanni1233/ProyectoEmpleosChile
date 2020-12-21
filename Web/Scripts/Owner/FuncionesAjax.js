@@ -4,7 +4,7 @@
             usuario = formateaRut(usuario);
         }
     }
- 
+
     $.ajax({
         type: 'POST',
         url: controller + 'InicioSesion',
@@ -32,7 +32,7 @@
 
                     location.reload();
                 }
-                
+
             }
             else {
                 $("#loginError").html(response.Message);
@@ -61,7 +61,7 @@ function ajaxCierraSesion(controller) {
 // Empresa
 
 function ajaxInicioSesionEmpresa(controller, usuario, password) {
-    
+
     if (!usuario.includes("@")) {
         if (validaRut(usuario)) {
             usuario = formateaRut(usuario);
@@ -114,7 +114,7 @@ function ajaxGetCiudad(controller, region) {
         contentType: 'application/json',
         async: true,
         success: function (response) {
-            
+
         }
     });
 }
@@ -216,7 +216,7 @@ function ajaxRegistroPreguntasEmpresa(controller, nombrePregunta) {
             if (response.data == 1) {
                 window.location.reload();
             }
-            
+
         }
     });
 }
@@ -267,7 +267,7 @@ function ajaxGuardaPerfilEmpresa(controller, rutE, telefonoE, correoE) {
                 })
                 window.location.reload();
             }
-            
+
         }
     });
 }
@@ -346,6 +346,24 @@ function ajaxGuardarValoracionPublicacion(controller, valorvotacion, idPublicaci
 }
 
 // Actualizar tarjeta empresa
+function ajaxActualizarTarjetaEmpresa(controller, nombre, numero, fecha, monto) {
+
+    $.ajax({
+        type: 'POST',
+        url: controller + 'ActualizarConfiguracionTarjeta',
+        data: '{ nombreT: "' + nombre + '", numeroT: "' + numero + '", fechaT: "' + fecha + '", montoT: "' + monto + '"}',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: true,
+        success: function (response) {
+            if (response.data == 1) {
+                window.location.reload();
+            }
+        }
+    });
+}
+
+// Pago plan empresa
 function ajaxPagoPlanEmpresa(controller, idPlan, idPlanAnterior) {
 
     $.ajax({
@@ -356,7 +374,7 @@ function ajaxPagoPlanEmpresa(controller, idPlan, idPlanAnterior) {
         contentType: 'application/json',
         async: true,
         success: function (response) {
-            
+
             if (response.data == 1) {
                 Swal.fire({
                     position: 'center',
@@ -463,4 +481,186 @@ function ajaxGuardaPerfilUsuarioEmpresa(controller, telefonoE, correoE) {
 
         }
     });
+}
+
+
+// Asignacion de preguntas por publicacion
+function ajaxGuardaAsignacionPreguntaPublicacion(controller, publicacion, pregunta) {
+
+    $.ajax({
+        type: 'POST',
+        url: controller + 'GuardarAsignacionPreguntasPublicacion',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: true,
+        data: '{ publicacion: "' + publicacion + '", pregunta: "' + pregunta + '" }',
+        success: function (response) {
+            if (response.data == "1") {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Pregunta asignada con éxito',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                window.location.reload();
+            }
+            else if (response.data == "-1") {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Ha ocurrido un error al asignar.',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                window.location.reload();
+            }
+
+        }
+    });
+}
+
+
+
+
+// Inicio Sesion Usuario Empresa
+
+function ajaxInicioSesionUsuarioEmpresa(controller, usuario, password) {
+
+    if (!usuario.includes("@")) {
+        if (validaRut(usuario)) {
+            usuario = formateaRut(usuario);
+        }
+    }
+    $.ajax({
+        type: 'POST',
+        url: controller + 'InicioSesion',
+        data: '{ usuario: "' + usuario + '",  clave: "' + password + '"}',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: true,
+        success: function (response) {
+            if (response.Code == "200") {
+
+                location.href = "/UsuarioEmpresa/Index";
+            }
+            else {
+                $("#loginError").html(response.Message);
+                $(".signInLoaderContent").hide();
+            }
+        },
+        error: function (xhr) {
+            $("#loginError").html('Ha ocurrido algo inesperado en la plataforma, intentelo mas tarde');
+        }
+    });
+}
+
+function ajaxCierraSesionEmpresa(controller) {
+    $.ajax({
+        type: 'POST',
+        url: controller + 'CerrarSesion',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: true,
+        success: function (response) {
+            window.location.href = response.Retorno;
+        }
+    });
+}
+
+// Loading empresa
+function ajaxViewPartialLoadingEmpresa(username, password) {
+    controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Empresa/";
+
+    $.ajax({
+        type: 'POST',
+        url: controller + 'ViewPartialLoadingSignIn',
+        data: '{ }',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: true,
+        error: function (xhr) {
+            $("#contentLoginE").html(xhr.responseText);
+            var tiempo = setInterval(Tiempo(),3000);
+            
+            if (tiempo > 0) {
+                ajaxInicioSesionEmpresa(controller, username, password);
+            }
+        }
+    });
+   
+}
+
+// Loading usuario empresa
+function ajaxViewPartialLoadingEmpresa(username, password) {
+    controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Empresa/";
+
+    $.ajax({
+        type: 'POST',
+        url: controller + 'ViewPartialLoadingSignIn',
+        data: '{ }',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: true,
+        error: function (xhr) {
+            $("#contentLoginE").html(xhr.responseText);
+            var tiempo = setInterval(Tiempo(), 3000);
+
+            if (tiempo > 0) {
+                ajaxInicioSesionEmpresa(controller, username, password);
+            }
+        }
+    });
+
+}
+
+
+// Loading usuario empresa
+function ajaxViewPartialLoadingUsuarioEmpresa(username, password) {
+    controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/UsuarioEmpresa/";
+
+    $.ajax({
+        type: 'POST',
+        url: controller + 'ViewPartialLoadingSignIn',
+        data: '{ }',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: true,
+        error: function (xhr) {
+            $("#contentLoginUE").html(xhr.responseText);
+            var tiempo = setInterval(Tiempo(), 3000);
+
+            if (tiempo > 0) {
+                
+                ajaxInicioSesionUsuarioEmpresa(controller, username, password);
+            }
+        }
+    });
+
+}
+
+function Tiempo() {
+    var valor = 1;
+    return valor;
+}
+
+function validoArchivo(archivo) {
+
+    var extensiones_permitidas = [".jpg", ".jpeg", ".png"];
+    var rutayarchivo = archivo.value;
+    archivoNombre = archivo.files[0].name;
+    var ultimo_punto = archivo.value.lastIndexOf(".");
+    var extension = rutayarchivo.slice(ultimo_punto, rutayarchivo.length);
+    if (extensiones_permitidas.indexOf(extension) == -1) {
+        Swal.fire({
+            position: 'center',
+            type: 'warning',
+            title: 'Extensión de archivo no valida.',
+            showConfirmButton: false,
+            timer: 2500
+        })
+
+        document.getElementById(archivo.id).value = "";
+        return;
+    }
 }

@@ -1,0 +1,50 @@
+﻿
+@if (ViewBag.DevolucionesEmpresa.Count > 0 && ViewBag.DevolucionesEmpresa != null)
+{
+    <h3>Pagos realizados</h3>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th>Número Tarjeta</th>
+                        <th>Monto Devolucion</th>
+                        <th>Plan Anterior</th>
+                        <th>Plan Actual</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.DevolucionesEmpresa as ICollection<Model.Models.DevolucionEmpresa>)
+                    {
+                    <tr>
+                        <td>@item.NumeroTarjeta</td>
+                        <td>
+                            @item.MontoDevolucion
+                        </td>
+                        <td>@item.Plan_Anterior</td>
+                        <td>@item.Plan_Actual</td>
+                    </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+            <div class="error-template">
+                <div class="error-details">
+                    <h4>  No se encontraron devoluciones</h4>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+}

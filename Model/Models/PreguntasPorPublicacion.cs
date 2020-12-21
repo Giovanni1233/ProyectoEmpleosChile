@@ -7,6 +7,7 @@ namespace Model.Models
 {
     public class PreguntasPorPublicacion
     {
+        public string Id { get; set; }
         public string PublicacionTitulo { get; set; }
         public string PreguntaNombre { get; set; }
     }

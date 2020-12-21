@@ -11,5 +11,6 @@ namespace Model.Models
         public string NumeroTarjeta { get; set; }
         public string FechaExpiracion { get; set; }
         public string TarjetaCVV { get; set; }
+        public string MontoDisponible { get; set; }
     }
 }

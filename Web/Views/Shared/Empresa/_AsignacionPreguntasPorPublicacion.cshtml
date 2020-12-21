@@ -1,0 +1,85 @@
+﻿<div class="row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin: 20px 0px 0px 20px;">
+        <h3>Preguntas por publicación</h3>
+    </div>
+
+</div>
+<div class="row">
+    <table class="table table-responsive-lg table-bordered">
+        <tr>
+            <td>
+                <div class="form-group">
+                    <div class='input-group'>
+                        <h4>Pregunta</h4>
+                    </div>
+                </div>
+                <div class="md-form form-sm">
+                    <select class="mdb-select md-form" name="pregunta" id="pregunta" searchable="Buscar pregunta..">
+                        <option value="" disabled selected>Seleccione Pregunta</option>
+                        @foreach (var item in ViewBag.PreguntasSeleccionadasEmpresa as ICollection<Model.Models.PreguntasSeleccionadas>)
+                        {
+                            <option value="@item.idPreguntaSeleccionada">@item.NombrePreguntaSeleccionada</option>
+                        }
+
+                    </select>
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                    <div class='input-group'>
+                        <h4>Publicación</h4>
+                    </div>
+                </div>
+                <div class="md-form form-sm">
+                    <select class="mdb-select md-form" name="publicacion" id="publicacion" searchable="Buscar publicacion..">
+                        <option value="" disabled selected>Seleccione Publicacion</option>
+                        @foreach (var item in ViewBag.PublicacionesEmpresa as ICollection<Model.Models.DetallePublicacion>)
+                        {
+                            <option value="@item.IdPublicacion">@item.TituloPublicacion</option>
+                        }
+
+                    </select>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="row">
+    <button type="button" id="Pregunta" class="btn btn-outline-info GuardarAsignacionPP">Guardar</button>
+</div>
+@if (ViewBag.PreguntasPorPublicacionTodas.Count > 0)
+{
+
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-condensed table-hvoer">
+                <thead>
+                    <tr>
+                        <th>Publicación</th>
+                        <th>Pregunta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.PreguntasPorPublicacionTodas as ICollection<Model.Models.PreguntasPorPublicacion>)
+                    {
+                        <tr>
+                            <td>@item.PublicacionTitulo</td>
+                            <td>
+                                @item.PreguntaNombre
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-12" style="margin: 20px 0px 0px 20px;">
+            <h2 style="color:#808080"> No se han seleccionado preguntas a las publicaciones</h2>
+        </div>
+    </div>
+}
