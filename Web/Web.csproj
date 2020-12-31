@@ -875,6 +875,7 @@
     <Content Include="Views\Shared\Empresa\_DetallePagosEmpresa.cshtml" />
     <Content Include="Views\Empresa\PagosEmpresa.cshtml" />
     <Content Include="Views\Shared\Empresa\_DetalleDevoluciones.cshtml" />
+    <Content Include="Views\Shared\App\_FileUpload.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Imagenes\Empresa\" />

@@ -10,7 +10,7 @@ namespace Web.Controllers
     {
         WebAPI.ServicioEmpleosChile.ServicioEmpleosChileClient svcEmpleos = new WebAPI.ServicioEmpleosChile.ServicioEmpleosChileClient();
         string errorSistema = "Ha ocurrido algo inesperado en la plataforma, intentelo mas tarde";
-        // GET: Auth
+        
         public ActionResult Index()
         {
 
@@ -68,7 +68,7 @@ namespace Web.Controllers
             return View();
         }
 
-
+        #region JSON
         [HttpPost]
         public JsonResult RegistroUsuario(string rut, string nombre1, string nombre2, string apellidoP, string apellidoM,
             string correo, string correoRepetir, string password, string passwordRepetir, string fechaNacimiento)
@@ -112,6 +112,7 @@ namespace Web.Controllers
                 ViewBag.ReferenciaInicio = ModuleControlRetorno() + "/App/Inicio";
 
                 data = svcEmpleos.SetUsuario(parametros, valores).Table;
+
                 foreach (DataRow rows in data.Tables[0].Rows)
                 {
                     switch (rows["Code"].ToString())
@@ -152,7 +153,7 @@ namespace Web.Controllers
 
         [HttpPost]
         public JsonResult SignInUser(string user, string pass)
-         {
+        {
             string code = string.Empty;
             string mensaje = string.Empty;
             string pathRedirect = "";
@@ -218,7 +219,9 @@ namespace Web.Controllers
 
             return Json(new { Home = retorno });
         }
+        #endregion
 
+        #region GET
         [HttpPost]
         public JsonResult GetCiudad(string region)
         {
@@ -359,8 +362,9 @@ namespace Web.Controllers
 
             return data;
         }
+        #endregion
 
-
+        #region OTHERS
         private string ModuleControlRetorno()
         {
             string domainReal = string.Empty;
@@ -391,9 +395,9 @@ namespace Web.Controllers
             return domain;
 
         }
+        #endregion
 
-
-        //PartialView
+        #region PARTIALVIEWS
         [HttpPost]
         public ActionResult ViewPartialLoadingSignIn()
         {
@@ -413,5 +417,6 @@ namespace Web.Controllers
 
             return PartialView("Auth/_ErrorSignIn");
         }
+        #endregion
     }
 }

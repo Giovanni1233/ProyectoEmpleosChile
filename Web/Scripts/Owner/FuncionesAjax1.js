@@ -148,3 +148,20 @@ function ajaxViewPartialErrorSignIn(controller, message) {
         }
     });
 }
+
+
+
+//CURRICULUM
+function ajaxDeleteCV(controller, user) {
+    $.ajax({
+        type: 'POST',
+        url: controller + 'DeleteCV',
+        data: '{ user: "' + user + '"}',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: true,
+        success: function (response) {
+            //
+        }
+    });
+}

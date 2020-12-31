@@ -62,10 +62,10 @@
         }
         else {
             if (error == null || error == undefined) {
-                document.getElementById('errorRegistro').innerHTML = 'Ha ocurrido un error inesperado, favor intetarlo nuevamente!';
+                document.getElementById('errorRegistro').innerHTML = `<ul style="background-color: #FFDADA; width: 100%; padding: 15px; border-radius: 25px; list-style-type:none"><li>Ha ocurrido un error inesperado, favor intetarlo nuevamente!!</li></ul>`;
             }
             else {
-                document.getElementById('errorRegistro').innerHTML = error;
+                document.getElementById('errorRegistro').innerHTML = `<ul style="background-color: #FFDADA; width: 100%; padding: 15px; border-radius: 25px; list-style-type:none">${error}</ul>`;
             }
         }
     });
@@ -172,6 +172,10 @@
         $("#errorSignIn").html('');
     });
 
+
+    $(document).on('click', "#uploadfile", function () {
+        $("#fileCV").trigger("click");
+    });
 });
 
 
@@ -339,3 +343,31 @@ function getControllerApp() {
 
     return prefixDomain + prefix;
 }
+
+
+
+
+//CURRICULUM
+function uploadCV(file) {
+    let domain = getControllerApp();
+    let filename = file.files[0].name;
+    let extension = filename.slice(filename.lastIndexOf("."), filename.length);
+
+    if (extension !== ".pdf") {
+        e.preventDefault();
+        document.getElementById(file.id).value = "";
+    }
+    else {
+        $("#uploadCVFile").trigger("click");
+    }
+}
+
+
+function deleteCV(e) {
+    let user = e.dataset.user;
+    let domain = getControllerApp();
+
+    ajaxDeleteCV(domain, user);
+}
+
+
