@@ -29,9 +29,9 @@ namespace Web
 
             bundles.Add(new ScriptBundle("~/bundles/libraryjs").Include(
                 "~/Scripts/Owner/DatePicker.js",
-                //"~/Scripts/Owner/Owner.js",
+                "~/Scripts/Owner/Owner.js",
                 "~/Scripts/Owner/Owner1.js",
-                //"~/Scripts/Owner/FuncionesAjax.js",
+                "~/Scripts/Owner/FuncionesAjax.js",
                 "~/Scripts/Owner/FuncionesAjax1.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
@@ -73,7 +73,11 @@ namespace Web
                 "~/Content/App/teamwork-auth.css",
                 "~/Content/App/teamwork-files.css",
                 "~/Content/App/text-decoration.css",
-                "~/Content/App/width.css"
+                "~/Content/App/width.css",
+                "~/Content/App/EstilosCarrusel.css",
+                "~/Content/App/TabsMenuPerfil.css",
+                "~/Content/App/EstilosPerfilProfesional.css",
+                "~/Content/App/EstilosInicio.css"
                 ));
 
             bundles.Add(new StyleBundle("~/bundles/MaterialDesign").Include(

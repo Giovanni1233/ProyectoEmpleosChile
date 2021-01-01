@@ -1,0 +1,67 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body boxx way_steps">
+                <h4 class="card-title text-center">Claves para el éxito</h4>
+                <ul class="camino_trabajos">
+                    <li>
+                        <span>01</span>
+                        <p class="text-center"><b>Imagen profesional</b></p>
+                        <p class="text-center">Preséntate con tu foto de perfil.</p>
+                    </li>
+                    <li>
+                        <span>02</span>
+                        <p class="text-center"><b>Curriculum actualizado</b></p>
+                        <p class="text-center">Actualiza tu CV regularmente.</p>
+                    </li>
+                    <li>
+                        <span>03</span>
+                        <p class="text-center"><b>Tus puntos fuertes</b></p>
+                        <p class="text-center">Da a conocer tus oficios.</p>
+                    </li>
+                    <li>
+                        <span>04</span>
+                        <p class="text-center"><b>Búsqueda inteligente</b></p>
+                        <p class="text-center">Busca empleos con palabras claves.</p>
+                    </li>
+                    <li>
+                        <span>05</span>
+                        <p class="text-center"><b>Tus habilidades</b></p>
+                        <p class="text-center">Da a conocer tus habilidades.</p>
+                    </li>
+                    <li>
+                        <span>06</span>
+                        <p class="text-center"><b>Ingresa regularmente.</b></p>
+                        <p class="text-center">Conoce gente nueva.</p>
+                    </li>
+                    <li>
+                        <span>07</span>
+                        <p class="text-center"><b>Destino... !Un progreso profesional¡</b></p>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+
+            <div class="card-body">
+                <h5 class="card-title">Empresas que trabajan con nosotros</h5>
+                @foreach (var item in ViewBag.ReferenciaEmpresasConPlan as ICollection<Model.Models.EmpresasPlanVigentes>)
+                {
+                    <div class="col-sm-6">
+                        <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(item.ImagenEmpresa))" style="max-width:100%; max-height:200px;" />
+                        <br />
+                        @item.NombreEmpresa
+                    </div>
+
+                }
+            </div>
+
+        </div>
+    </div>
+</div>

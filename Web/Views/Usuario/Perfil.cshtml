@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "Perfil";
+    Layout = "~/Views/Shared/_HeaderMenu.cshtml";
+}
+
+    <div id="ViewDetallePublicacion" class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin: 20px 0px 0px 20px;">
+        <h2>Perfil de @Session["UserName"]</h2>
+        <hr />
+
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item border-right border-top border-left border-bottom" style="width:25%;">
+                <a class="nav-link text-center text-center" id="pills-area-tab" data-target="#pills-area" data-toggle="tab" href="#pills-area" role="tab" aria-controls="pills-area" aria-selected="true"><span class="fa fa-home">&nbsp;</span> Mi área</a>
+            </li>
+            <li class="nav-item" style="width:25%;">
+                <a class="nav-link text-center border-right border-top border-bottom" id="pills-postulaciones-tab" data-toggle="tab" href="#pills-postulaciones" role="tab" aria-controls="pills-postulaciones" aria-selected="false"><span class="fa fa-list">&nbsp;</span> Postulaciones</a>
+            </li>
+            <li class="nav-item" style="width:25%;">
+                <a class="nav-link text-center border-right border-top border-bottom" id="pills-curriculum-tab" data-toggle="tab" href="#pills-curriculum" role="tab" aria-controls="pills-curriculum" aria-selected="false"><span class="fa fa-clipboard">&nbsp;</span> Curriculum</a>
+            </li>
+            @*<li class="nav-item" style="width:16.6%;">
+                <a class="nav-link text-center border-right border-top  border-bottom" id="pills-publicaciones-tab" data-toggle="pill" href="#pills-publicaciones" role="tab" aria-controls="pills-publicaciones" aria-selected="false">Publicaciones</a>
+            </li>
+            <li class="nav-item" style="width:16.6%;">
+                <a class="nav-link text-center border-right border-top  border-bottom" id="pills-oficios-tab" data-toggle="pill" href="#pills-oficios" role="tab" aria-controls="pills-oficios" aria-selected="false">Oficios</a>
+            </li>*@
+            <li class="nav-item" style="width:25%;">
+                <a class="nav-link text-center border-right border-top  border-bottom" id="pills-mensajes-tab" data-toggle="tab" href="#pills-mensajes" role="tab" aria-controls="pills-mensajes" aria-selected="false"><span class="fa fa-envelope">&nbsp;</span> Mensajes</a>
+            </li>
+        </ul>
+        <hr />
+        <div class="tab-content border" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-area" role="tabpanel" aria-labelledby="pills-area-tab">
+                <h4>Mi Área</h4>
+                @Html.Partial("Usuario/_AreaUsuario")
+            </div>
+            <div class="tab-pane fade" id="pills-postulaciones" role="tabpanel" aria-labelledby="pills-postulaciones-tab">
+                <h4>Mis Postulaciones</h4>
+                @Html.Partial("Usuario/_Postulaciones")
+            </div>
+            <div class="tab-pane fade" id="pills-curriculum" role="tabpanel" aria-labelledby="pills-curriculum-tab">
+                <h4>Mi Curriculum</h4>
+                @Html.Partial("Usuario/_Curriculum")
+            </div>
+            <div class="tab-pane fade" id="pills-publicaciones" role="tabpanel" aria-labelledby="pills-publicaciones-tab">
+                <h4>Mis Publicaciones</h4>
+                @Html.Partial("Usuario/_Publicaciones")
+            </div>
+            <div class="tab-pane fade" id="pills-oficios" role="tabpanel" aria-labelledby="pills-oficios-tab">
+                <h4>Mis Oficios</h4>
+                @Html.Partial("Usuario/_Oficios")
+            </div>
+            <div class="tab-pane fade" id="pills-mensajes" role="tabpanel" aria-labelledby="pills-mensajes-tab">
+                <h4>Mis Mensajes</h4>
+                @Html.Partial("Usuario/_Mensajes")
+            </div>
+        </div>
+    </div>

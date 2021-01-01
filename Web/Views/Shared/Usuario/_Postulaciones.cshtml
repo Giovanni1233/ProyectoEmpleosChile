@@ -1,0 +1,46 @@
+﻿@if (ViewBag.PostulacionesUsuario.Count > 0)
+{
+
+    <div class="detalle">
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>Titulo</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.PostulacionesUsuario as IEnumerable<Model.Models.DetallePostulacion>)
+                {
+                    <tr>
+                        <th>@item.TituloPublicacion</th>
+                        <th>@item.FechaSolicitud</th>
+                        <th>@item.EstadoSolicitud</th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+            <div class="error-template">
+
+                <div class="error-details">
+                    <h4>   No se encontraron postulaciones.</h4>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+
+}

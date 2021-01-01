@@ -1,0 +1,26 @@
+﻿<div class="row content">
+
+    <!-- Texto central con información -->
+    <div class="col-sm-12 text-left">
+        <h1 class="text-center">Encuentra todo lo que buscas</h1>
+        <p class="text-center">Date a conocer de una nueva forma.</p>
+        <hr>
+        <div class="col-md-12">
+            <h3>Nuestros suscriptores</h3>
+            <br>
+            <div class="row">
+                @foreach (var item in ViewBag.ReferenciaEmpresasConPlan as ICollection<Model.Models.EmpresasPlanVigentes>)
+                {
+                    <div class="col-sm-3">
+                        <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(item.ImagenEmpresa))" style="max-width:100%;" />
+                        <br />
+                        <p class="text-center"><b><a class="text-primary" href="@Url.Action("PerfilEmpresaLectura","App", new { idEmpresa = item.idEmpresa })">@item.NombreEmpresa</a></b></p>
+                    </div>
+
+                }
+
+            </div>
+        </div><br>
+    </div>
+
+</div>

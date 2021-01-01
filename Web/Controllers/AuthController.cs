@@ -183,7 +183,7 @@ namespace Web.Controllers
                             code = rows["Code"].ToString();
                             mensaje = "";
                             pathRedirect = ModuleControlRetorno() + "/App/Inicio";
-
+                            var useer = rows["TipoUsuario"].ToString();
                             Session["IdUser"] = rows["IdUsuario"].ToString();
                             Session["UserName"] = rows["Nombre"].ToString();
                             Session["UserType"] = rows["TipoUsuario"].ToString();

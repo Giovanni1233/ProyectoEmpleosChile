@@ -1,0 +1,117 @@
+﻿
+.camino_trabajos li {
+    position: relative;
+    padding: 0 45px 15px
+}
+
+    .camino_trabajos li span {
+        position: absolute;
+        top: -6px;
+        font-size: 32px
+    }
+
+    .camino_trabajos li:before {
+        content: "";
+        width: 14px;
+        position: absolute;
+        top: 9px;
+        border: 1px dashed #000;
+        box-sizing: border-box;
+    }
+
+    .camino_trabajos li:after {
+        content: "";
+        height: 80%;
+        position: absolute;
+        top: 9px;
+        border: 1px dashed #000;
+        box-sizing: border-box;
+    }
+
+    .camino_trabajos li:nth-child(2n) span {
+        right: 0
+    }
+
+    .camino_trabajos li:nth-child(2n):after, .camino_trabajos li:nth-child(2n):before {
+        left: 16px
+    }
+
+    .camino_trabajos li:nth-child(odd) span {
+        left: 0
+    }
+
+    .camino_trabajos li:nth-child(odd):after, .camino_trabajos li:nth-child(odd):before {
+        right: 16px
+    }
+
+    .camino_trabajos li:first-child span {
+        color: #f8d931
+    }
+
+    .camino_trabajos li:first-child:after, .camino_trabajos li:first-child:before {
+        border-color: #f8d931
+    }
+
+    .camino_trabajos li:nth-child(2) span {
+        color: #f59c26
+    }
+
+    .camino_trabajos li:nth-child(2):after, .camino_trabajos li:nth-child(2):before {
+        border-color: #f59c26
+    }
+
+    .camino_trabajos li:nth-child(3) span {
+        color: #f84a2c
+    }
+
+    .camino_trabajos li:nth-child(3):after, .camino_trabajos li:nth-child(3):before {
+        border-color: #f84a2c
+    }
+
+    .camino_trabajos li:nth-child(4) span {
+        color: #b72270
+    }
+
+    .camino_trabajos li:nth-child(4):after, .camino_trabajos li:nth-child(4):before {
+        border-color: #b72270
+    }
+
+    .camino_trabajos li:nth-child(5) span {
+        color: #8508a0
+    }
+
+    .camino_trabajos li:nth-child(5):after, .camino_trabajos li:nth-child(5):before {
+        border-color: #8508a0
+    }
+
+    .camino_trabajos li:nth-child(6) span {
+        color: #46108f
+    }
+
+    .camino_trabajos li:nth-child(6):after, .camino_trabajos li:nth-child(6):before {
+        border-color: #46108f
+    }
+
+    .camino_trabajos li:nth-child(7) span {
+        color: #1558ce
+    }
+
+    .camino_trabajos li:nth-child(7):after, .camino_trabajos li:nth-child(7):before {
+        display: none
+    }
+
+
+
+.boxx.way_steps {
+    background-image: url(https://candidato.computrabajo.cl/c/cl/img/way_job.svg?v=14);
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    padding-bottom: 85px;
+}
+
+.camino_trabajos > li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+

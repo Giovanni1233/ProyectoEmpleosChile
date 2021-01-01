@@ -1,0 +1,139 @@
+﻿<div class="row">
+    <div class="col-md-12 border-right">
+        <div class="py-8">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4 class="text-right">Datos Personales</h4>
+            </div>
+            @if (ViewBag.ReferenciaDatosUsuarioNormal.Count > 0)
+            {
+                foreach (var itemdatos in ViewBag.ReferenciaDatosUsuarioNormal as ICollection<Model.Models.DatosUsuario>)
+                {
+                    <div class="row mt-2">
+                        <div class="col-md-12"><label class="labels">Rut</label><input type="text" class="form-control" placeholder="Ingrese su Rut" readonly name="rut" id="rut" value="@itemdatos.Rut"></div>
+                        <div class="col-md-6"><label class="labels">Primer Nombre</label><input type="text" class="form-control" placeholder="Ingrese su nombre" name="nombre1" id="nombre1" value="@itemdatos.Nombre1"></div>
+                        <div class="col-md-6"><label class="labels">Segundo Nombre</label><input type="text" class="form-control" placeholder="Ingrese su nombre" name="nombre2" id="nombre2" value="@itemdatos.Nombre2"></div>
+                        <div class="col-md-6"><label class="labels">Apellido Paterno</label><input type="text" class="form-control" name="apellido1" id="apellido1" value="@itemdatos.ApellidoP"></div>
+                        <div class="col-md-6"><label class="labels">Apellido Materno</label><input type="text" class="form-control" name="apellido2" id="apellido2" value="@itemdatos.ApellidoM"></div>
+
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6"><label class="labels">Telefono</label><input type="text" class="form-control" autocomplete="off" placeholder="Ingrese su telefono" id="telefonoPerfil" name="telefonoPerfil" value="@itemdatos.Telefono"></div>
+                        <div class="col-md-6"><label class="labels">Correo</label><input type="text" class="form-control" autocomplete="off" placeholder="" id="correoPerfil" name="correoPerfil" value="@itemdatos.Correo"></div>
+                        @*<div class="col-md-6"><label class="labels">Contraseña</label><input type="password" class="form-control" placeholder="" id="password" name="password" value="@itemdatos.Password"></div>
+                            <div class="col-md-6"><label class="labels">Repetir Contraseña</label><input type="password" class="form-control" placeholder="" id="repetirPassword" name="repetirPassword" value="@itemdatos.Password"></div>*@
+                        <div class="col-md-12"><label class="labels">Descripcion</label><textarea class="form-control" autocomplete="off" rows="5" style="resize:none; width:100%; max-width:100%;" name="descripcionPersonal" id="descripcionPersonal">@itemdatos.Descripcion</textarea></div>
+
+                    </div>
+                }
+
+            }
+            else
+            {
+
+            }
+            <hr />
+            <hr />
+        </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 border-right">
+        <div class="p-3 py-8">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4 class="text-right">Perfil Profesional</h4>
+            </div>
+            <div id="ViewDetalleExperiencias" class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="row mt-3">
+                    @if (ViewBag.referenciaPerfilProfesional.Count > 0)
+                    {
+                        foreach (var itemperfil in ViewBag.referenciaPerfilProfesional as ICollection<Model.Models.PerfilProfesionalUsuario>)
+                        {
+                            <div class="col-md-12"><label class="labels">Cargo o titulo breve del curriculum</label><input type="text" class="form-control" autocomplete="off" placeholder="" id="tituloPerfilProfesional" name="tituloPerfilProfesional" value="@itemperfil.TituloPerfil"></div>
+                            <div class="col-md-12"><label class="labels">Descripcion breve de tu perfil profesional</label><textarea class="form-control" autocomplete="off" rows="5" style="resize:none; width:100%; max-width:100%;" name="descripcionPerfilProfesional" id="descripcionPerfilProfesional">@itemperfil.DescripcionPerfil</textarea></div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="col-md-12"><label class="labels">Cargo o titulo breve del curriculum</label><input type="text" class="form-control" autocomplete="off" placeholder="" id="tituloPerfilProfesional" name="tituloPerfilProfesional" value=""></div>
+                        <div class="col-md-12">
+                            <label class="labels">Descripcion breve de tu perfil profesional</label><textarea class="form-control" autocomplete="off" rows="5" style="resize:none; width:100%; max-width:100%;" name="descripcionPerfilProfesional" id="descripcionPerfilProfesional"></textarea>
+                        </div>
+                    }
+
+
+                </div>
+                <br />
+                <div class="row">
+                    <a href="javascript:void(0);" class="btn btn-primary" id="btnAgregarPerfilProfesional"><span class="fa fa-plus-circle">&nbsp;&nbsp;</span> Guardar</a>
+                </div>
+                <hr />
+                <hr />
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-12 border-right">
+        <div class="p-3 py-8">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4 class="text-right">Experiencias Profesional</h4>
+            </div>
+            <div id="ViewDetalleExperiencias" class="col-12 col-sm-12 col-md-12 col-lg-12">
+                @Html.Partial("Usuario/_DetalleExperiencias")
+                <hr />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 border-right">
+        <div class="p-3 py-8">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4 class="text-right">Formación Academica</h4>
+            </div>
+            <div id="ViewDetalleEducacion" class="col-12 col-sm-12 col-md-12 col-lg-12">
+                @Html.Partial("Usuario/_DetalleEducacion")
+                <hr />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 border-right">
+        <div class="p-3 py-8">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4 class="text-right">Idiomas</h4>
+            </div>
+
+        </div>
+        <div id="ViewDetalleIdiomas" class="col-12 col-sm-12 col-md-12 col-lg-12">
+            @Html.Partial("Usuario/_DetalleIdiomas")
+            <hr />
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-md-12 border-right">
+        <div class="p-3 py-8">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4 class="text-right">Habilidades</h4>
+            </div>
+            <div id="ViewDetalleHabilidades" class="col-12 col-sm-12 col-md-12 col-lg-12">
+                @Html.Partial("Usuario/_DetalleHabilidades")
+                <hr />
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 text-center">
+        <a href="javascript:void(0);" class="btn btn-success" id="btnGuardarPerfilUsuario"><span class="fa fa-save">&nbsp;&nbsp;</span> Guardar</a>
+    </div>
+</div>

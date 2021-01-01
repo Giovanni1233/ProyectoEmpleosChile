@@ -15,7 +15,7 @@ namespace Model.Models
         public string FechaPublicacion { get; set; }
         public int EstadoPublicacion { get; set; }
         public string DiscapacidadPub { get; set; }
-
+        public string IdAutor { get; set; }
         public string ContadorVotos { get; set; }
         public string PromedioVotos { get; set; }
     }

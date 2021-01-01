@@ -19,5 +19,6 @@ namespace Model.Models
 
          public string FechaSolicitud { get; set; }
         public string EstadoSolicitud { get; set; }
+        public byte[] ImagendelUsuario { get; set; }
 }
 }

@@ -15,6 +15,8 @@ namespace Web.Controllers
     {
         WebAPI.ServicioEmpleosChile.ServicioEmpleosChileClient svcEmpleosChile = new ServicioEmpleosChileClient();
         string errorSistema = "Ha ocurrido algo inesperado en la plataforma, intentelo mas tarde";
+        EmpresaController empresa = new EmpresaController();
+        UsuarioController usuario = new UsuarioController();
 
 
         public ActionResult Index()
@@ -39,27 +41,31 @@ namespace Web.Controllers
 
                 #region TRASLADAR A METODO CORRESPONDIENTE
                 data = GetCurriculum(Session["IdUser"].ToString());
-                foreach (DataRow rows in data.Tables[0].Rows)
+                if(data.Tables[0].Rows.Count > 0)
                 {
-                    switch (rows["Code"].ToString())
+                    foreach (DataRow rows in data.Tables[0].Rows)
                     {
-                        case "200":
-                            ViewBag.ReferenciaIdUser = rows["IdUsuario"].ToString();
-                            ViewBag.ReferenciaDocumento = rows["Documento"].ToString();
-                            ViewBag.ReferenciaUrlCV = ModuleControlRetorno() + "/App/DownloadCV?url=" + rows["Url"].ToString() + "&documento=" + rows["Documento"].ToString();
-                            break;
+                        switch (rows["Code"].ToString())
+                        {
+                            case "200":
+                                ViewBag.ReferenciaIdUser = rows["IdUsuario"].ToString();
+                                ViewBag.ReferenciaDocumento = rows["Documento"].ToString();
+                                ViewBag.ReferenciaUrlCV = ModuleControlRetorno() + "/App/DownloadCV?url=" + rows["Url"].ToString() + "&documento=" + rows["Documento"].ToString();
+                                break;
 
-                        case "400":
-                            ViewBag.ReferenciaMsg1 = rows["Message1"].ToString();
-                            ViewBag.ReferenciaMsg2 = rows["Message2"].ToString();
-                            break;
+                            case "400":
+                                ViewBag.ReferenciaMsg1 = rows["Message1"].ToString();
+                                ViewBag.ReferenciaMsg2 = rows["Message2"].ToString();
+                                break;
 
-                        default:
-                            ViewBag.ReferenciaMsg1 = "Puedes adjuntar tu CV!!";
-                            ViewBag.ReferenciaMsg2 = "(.pdf)";
-                            break;
+                            default:
+                                ViewBag.ReferenciaMsg1 = "Puedes adjuntar tu CV!!";
+                                ViewBag.ReferenciaMsg2 = "(.pdf)";
+                                break;
+                        }
                     }
                 }
+                
                 #endregion
             }
             else
@@ -74,6 +80,7 @@ namespace Web.Controllers
             if (Session["UserType"] != null && Session["UserType"].ToString() != "")
                 ViewBag.ReferenciaUserType = Session["UserType"].ToString();
 
+            ViewBag.ReferenciaEmpresasConPlan = empresa.GetEmpresasPlanesVigente();
 
 
             return View();
@@ -157,9 +164,293 @@ namespace Web.Controllers
             {
 
             }
-
             return RedirectToAction("Inicio");
         }
+
+        #endregion
+        public ActionResult Empleos(string nombrePublicacion = "", string comuna = "", string idPublicacion = "", string fecha = "", string sueldo = "")
+        {
+            string idusuario = "";
+            ViewBag.ReferenciaInicio = ModuleControlRetorno() + "/App/Inicio";
+            ViewBag.ReferenciaRegistro = ModuleControlRetorno() + "/Auth/RegistroUsuario";
+
+            if (Session["IdUser"] != null && Session["IdUser"].ToString() != "")
+                ViewBag.ReferenciaIdUser = Session["IdUser"].ToString();
+
+            if (Session["UserName"] != null && Session["UserName"].ToString() != "")
+                ViewBag.ReferenciaUserName = Session["UserName"].ToString();
+
+            if (Session["UserType"] != null && Session["UserType"].ToString() != "")
+                ViewBag.ReferenciaUserType = Session["UserType"].ToString();
+
+            ViewBag.ReferenciaBusquedaEmpleos = GetOfertasEmpleos(nombrePublicacion, comuna, fecha, sueldo);
+            ViewBag.ReferenciaComentarioPubEmpresa = empresa.GetComentariosPublicacion(idPublicacion);
+            ViewBag.DetallePublicacionContador = empresa.GetDetallePublicacion(idPublicacion).Count();
+            ViewBag.DetallePublicacion = empresa.GetDetallePublicacion(idPublicacion);
+            ViewBag.PreguntasPorPublicacionId = empresa.GetPreguntasPorPublicacionId(idPublicacion);
+
+
+
+            ViewBag.IdPublicacion = idPublicacion;
+
+            if (Session["IdUser"] == null)
+            {
+                idusuario = "";
+            }
+            else
+            {
+                idusuario = Session["IdUser"].ToString();
+            }
+            ViewBag.referenciaSolicitud = usuario.GetSolicitudUsuario(idusuario, idPublicacion);
+            ViewBag.VotoRealizado = empresa.GetVotoPorUsuario(idusuario, idPublicacion);
+
+            return View();
+        }
+
+        public ActionResult PerfilEmpresaLectura(string idEmpresa = "")
+        {
+            ViewBag.ReferenciaInicio = ModuleControlRetorno() + "/App/Inicio";
+            ViewBag.ReferenciaRegistro = ModuleControlRetorno() + "/Auth/RegistroUsuario";
+            if (Session["IdUser"] != null && Session["IdUser"].ToString() != "")
+                ViewBag.ReferenciaIdUser = Session["IdUser"].ToString();
+
+            if (Session["UserName"] != null && Session["UserName"].ToString() != "")
+                ViewBag.ReferenciaUserName = Session["UserName"].ToString();
+
+            if (Session["UserType"] != null && Session["UserType"].ToString() != "")
+                ViewBag.ReferenciaUserType = Session["UserType"].ToString();
+
+            ViewBag.ReferenciaDatosEmpresa = empresa.GetDatosEmpresa(idEmpresa);
+            ViewBag.ReferenciaImagenPerfilEmpresa = empresa.GetImagenDePerfilEmpresa(idEmpresa);
+            ViewBag.referenciaIdEmpresa = idEmpresa;
+            foreach (var item in ViewBag.ReferenciaDatosEmpresa)
+            {
+                ViewBag.referenciaNombreEmpresa = item.nombreEmpresa;
+            }
+            ViewBag.PublicacionesEmpresa = empresa.GetPublicaciones(idEmpresa, "");
+
+            return View();
+        }
+
+        #region ObtencionDatos
+        public List<DetallePublicacion> GetOfertasEmpleos(string nombrePublicacion, string comuna, string fecha = "", string sueldo = "")
+        {
+            string code = string.Empty;
+            string mensaje = string.Empty;
+            string[] parametros = new string[4];
+            string[] valores = new string[4];
+            parametros[0] = "@NOMBRE_PUBLICACION";
+            parametros[1] = "@COMUNA";
+            parametros[2] = "@FECHA";
+            parametros[3] = "@SUELDO";
+            valores[0] = nombrePublicacion;
+            valores[1] = comuna;
+            valores[2] = fecha;
+            valores[3] = sueldo;
+
+            List<DetallePublicacion> clPublicacionEmpresa = new List<DetallePublicacion>();
+            DataSet data = new DataSet();
+            try
+            {
+                data = svcEmpleosChile.GetOfertasEmpleos(parametros, valores).Table;
+                foreach (DataRow rows in data.Tables[0].Rows)
+                {
+
+                    switch (rows["Code"].ToString())
+                    {
+                        case "200":
+                            clPublicacionEmpresa.Add(
+                                new DetallePublicacion
+                                {
+                                    TituloPublicacion = rows["Titulo"].ToString(),
+                                    IdPublicacion = (int)rows["IdPublicacion"],
+                                    AutorPublicacion = rows["Autor"].ToString(),
+                                    FechaPublicacion = rows["Fecha"].ToString(),
+                                    EstadoPublicacion = (int)rows["Estado"],
+                                    DiscapacidadPub = rows["Discapacidad"].ToString(),
+                                    ContadorVotos = rows["ContadorVotos"].ToString(),
+                                    PromedioVotos = rows["PromedioVotos"].ToString(),
+                                    DescripcionPublicacion = rows["Descripcion"].ToString(),
+                                    MontoPublicacion = rows["Monto"].ToString()
+                                });
+
+                            mensaje = "";
+                            break;
+                        case "400":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        case "500":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        default:
+                            code = "600";
+                            mensaje = errorSistema;
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                code = "600";
+                mensaje = errorSistema;
+            }
+            return clPublicacionEmpresa;
+        }
+
+        public JsonResult CargarDatosPreguntas(string idPublicacion)
+        {
+            try
+            {
+                var preguntas = empresa.GetPreguntasPorPublicacionId(idPublicacion);
+                return Json(new { datos = preguntas }, JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception ex)
+            {
+                return Json(new { datos = "" }, JsonRequestBehavior.AllowGet);
+            }
+            
+        }
+        #endregion
+
+        #region metodosGuardarDatos
+        [HttpPost]
+        public ActionResult GuardarComentario(string Id_Publicacion, string Comentario, string error = "")
+        {
+            string view = string.Empty;
+
+            try
+            {
+                string[] parametros = new string[3];
+                string[] valores = new string[3];
+
+                DataSet data = new DataSet();
+
+                if (string.IsNullOrEmpty(Id_Publicacion) || string.IsNullOrWhiteSpace(Id_Publicacion) ||
+                    string.IsNullOrEmpty(Comentario) || string.IsNullOrWhiteSpace(Comentario)
+                    )
+                {
+
+                    //ViewBag.ReferenciaMensaje = "Debe completar todos los campos oblicatorios(*)";
+                    view = "Principal";//"App/_ModalMensajeError";
+                    return View(view);
+                }
+
+                if (error == "true")
+                {
+                    //ViewBag.ReferenciaMensaje = "Algunos datos ingresados tienen un formato no valido.";
+                    view = "Principal";//"App/_ModalMensajeError";
+                    return View(view);
+                }
+
+                parametros[0] = "@ID_PUBLICACION";
+                parametros[1] = "@DESCRIPCION_COMENTARIO";
+                parametros[2] = "@ID_USUARIO";
+
+
+                valores[0] = Id_Publicacion;
+                valores[1] = Comentario;
+                valores[2] = Session["IdUser"].ToString();
+
+
+                data = svcEmpleosChile.SetComentarioPublicacion(parametros, valores).Table;
+
+                foreach (DataRow rows in data.Tables[0].Rows)
+                {
+                    switch (rows["Code"].ToString())
+                    {
+                        case "200":
+                            ViewBag.ReferenciaMensaje = rows["Message"].ToString();
+                            view = "Inicio";
+                            //ViewBag.ReferenciaCatalogo = ModuleRetornoCatalogo();
+                            break;
+
+                        case "400":
+                            ViewBag.ReferenciaMensaje = rows["Message"].ToString();
+                            view = "Inicio";
+                            break;
+                        case "500":
+                            ViewBag.ReferenciaMensaje = errorSistema;
+                            view = "Inicio";
+                            break;
+                        default:
+                            ViewBag.ReferenciaMensaje = errorSistema;
+                            view = "Inicio";
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ReferenciaMensaje = errorSistema;
+                view = "Inicio";
+            }
+
+            return RedirectToAction(view);
+        }
+
+
+        [HttpPost]
+        public JsonResult GuardarVotacionPublicacion(string votacion, string idPublicacion, string error = "")
+        {
+            string view = string.Empty;
+
+            try
+            {
+                string[] parametros = new string[3];
+                string[] valores = new string[3];
+
+                DataSet data = new DataSet();
+
+                parametros[0] = "@VOTACION";
+                parametros[1] = "@ID_PUBLICACION";
+                parametros[2] = "@ID_USUARIO";
+
+
+                valores[0] = votacion;
+                valores[1] = idPublicacion;
+                valores[2] = Session["IdUser"].ToString();
+
+
+                data = svcEmpleosChile.SetUpdVotacionPublicacion(parametros, valores).Table;
+
+                foreach (DataRow rows in data.Tables[0].Rows)
+                {
+                    switch (rows["Code"].ToString())
+                    {
+                        case "200":
+                            ViewBag.ReferenciaMensaje = rows["Message"].ToString();
+                            view = "Inicio";
+                            //ViewBag.ReferenciaCatalogo = ModuleRetornoCatalogo();
+                            break;
+
+                        case "400":
+                            ViewBag.ReferenciaMensaje = rows["Message"].ToString();
+                            view = "Inicio";
+                            break;
+                        case "500":
+                            ViewBag.ReferenciaMensaje = errorSistema;
+                            view = "Inicio";
+                            break;
+                        default:
+                            ViewBag.ReferenciaMensaje = errorSistema;
+                            view = "Inicio";
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ReferenciaMensaje = errorSistema;
+                view = "Inicio";
+            }
+            return Json(new { data = "1" }, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
 
         public ActionResult DownloadCV(string url, string documento)
         {
@@ -239,7 +530,6 @@ namespace Web.Controllers
             }
             return data;
         }
-        #endregion
-
+       
     }
 }

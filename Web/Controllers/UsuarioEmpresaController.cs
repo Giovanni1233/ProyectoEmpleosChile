@@ -21,19 +21,14 @@ namespace Web.Controllers
         {
             var idUsuario = Session["IdUsuario"].ToString();
             var idEmpresa = Session["IDempresa"].ToString();
+
+
+            ViewBag.PublicacionesEmpresa = empresa.GetPublicacionFiltros(idEmpresa, NombrePublicacion, FechaPublicacion, Ordenamiento, idUsuario);
             
-            if (NombrePublicacion == "" && FechaPublicacion == "")
-            {
-                ViewBag.PublicacionesEmpresa = empresa.GetPublicaciones(idEmpresa, idUsuario);
-            }
-            else
-            {
-                ViewBag.PublicacionesEmpresa = empresa.GetPublicacionFiltros(idEmpresa, NombrePublicacion, FechaPublicacion, Ordenamiento, idUsuario);
-            }
-            
+
             ViewBag.ReferenciaGetDetalleTrabajadores = GetDetalleTrabajador(idUsuario);
             // Planes
-           
+
             ViewBag.referenciaPlanEmpresa = empresa.GetPlanesContratadosEmpresa(idEmpresa);
             ViewBag.PublicacionesPermitidasEmpresa = empresa.GetCandiPubliTrabaPreguntPermitidas(idEmpresa, "1");
             ViewBag.TrabajadoresPermitidosEmpresa = empresa.GetCandiPubliTrabaPreguntPermitidas(idEmpresa, "2");
@@ -43,6 +38,11 @@ namespace Web.Controllers
             // Detalle publicacion
             ViewBag.DetallePublicacionContador = empresa.GetDetallePublicacion(IdPublicacion).Count();
             ViewBag.DetallePublicacion = empresa.GetDetallePublicacion(IdPublicacion);
+            foreach (var item in ViewBag.DetallePublicacion)
+            {
+                ViewBag.ContadorVotos = item.ContadorVotos;
+                ViewBag.PromedioVotos = item.PromedioVotos;
+            }
             ViewBag.Candidatos = empresa.GetCandidatosPublicacion(IdPublicacion);
             ViewBag.ReferenciaComentarioPubEmpresa = empresa.GetComentariosPublicacion(IdPublicacion);
             ViewBag.IdPublicacion = IdPublicacion;
@@ -108,7 +108,7 @@ namespace Web.Controllers
             ViewBag.PublicacionesUsuarioEmpresa = GetPublicaciones("", idUsuario);
             ViewBag.ReferenciaDatosPerfil = GetDatosUsuarioEmpresa(idUsuario, "");
             // Se debe borrar pronto
-            
+
             ViewBag.referenciaPlanEmpresa = empresa.GetPlanesContratadosEmpresa(idEmpresa);
             ViewBag.PublicacionesPermitidasEmpresa = empresa.GetCandiPubliTrabaPreguntPermitidas(idEmpresa, "1");
             ViewBag.TrabajadoresPermitidosEmpresa = empresa.GetCandiPubliTrabaPreguntPermitidas(idEmpresa, "2");
@@ -329,7 +329,7 @@ namespace Web.Controllers
             return clPublicacionEmpresa;
         }
 
-       
+
         public List<DetallePublicacion> GetDetallePublicacion(string id)
         {
             string code = string.Empty;
@@ -618,7 +618,7 @@ namespace Web.Controllers
         {
             string view = string.Empty;
             string estado = "1";
-            if(discapacidad == null)
+            if (discapacidad == null)
             {
                 discapacidad = "0";
             }
@@ -914,7 +914,7 @@ namespace Web.Controllers
             string idUsuario = Session["IdUsuario"].ToString();
             var existe = GetImagenUsuario(idUsuario).Count();
 
-            if(existe == 0)
+            if (existe == 0)
             {
                 Query = "INSERT INTO IMAGENES_USUARIO (ID_USUARIO, NOMBRE_IMAGEN, IMAGEN) VALUES (@ID_USUARIO, @NOMBRE, @IMAGEN)";
             }

@@ -1,0 +1,88 @@
+﻿<div class="row" style="margin-bottom:10px;">
+    <div class="col-md-6">
+        <label class="labels">Habilidad</label>
+        <select class="mdb-select md-form" name="habilidadID" id="habilidadID" searchable="Habilidad..">
+            <option value="" disabled selected>Seleccione una opción</option>
+            @foreach (var itemIdioma in ViewBag.referenciaHabilidades as ICollection<Model.Models.Habilidad>)
+            {
+                <option value="@itemIdioma.idHabilidad">@itemIdioma.nombreHabilidad</option>
+            }
+
+        </select>
+    </div>
+    <div class="col-md-6">
+        <label class="labels">Nivel</label>
+        <select class="mdb-select md-form" name="nivelHabilidad" id="nivelHabilidad" searchable="Nivel Habilidad..">
+            <option value="" disabled selected>Seleccione una opción</option>
+            <option value="0">Bajo</option>
+            <option value="1">Medio</option>
+            <option value="2">Alto</option>
+
+        </select>
+    </div>
+
+</div>
+<div class="row">
+    <a href="javascript:void(0);" class="btn btn-primary" id="btnAgregarHabilidad"><span class="fa fa-plus-circle">&nbsp;&nbsp;</span> Agregar</a>
+</div>
+<br />
+@if (ViewBag.referenciaHabilidadesUsuario.Count > 0)
+{
+    <div class="row">
+        <br />
+        <h5>Habilidades registradas</h5>
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>Habilidad</th>
+                    <th>Nivel</th>
+                    <th align="center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var itemhabilidad in ViewBag.referenciaHabilidadesUsuario as ICollection<Model.Models.HabilidadesUsuario>)
+                {
+                    <tr>
+                        <td>
+                            @itemhabilidad.HabilidadNombre
+                        </td>
+                        <td>
+                            @if (itemhabilidad.HabilidadNivel == "0")
+                            {
+                                <p>Bajo</p>
+                            }
+                            else if (itemhabilidad.HabilidadNivel == "1")
+                            {
+                                <p>Medio</p>
+                            }
+                            else if (itemhabilidad.HabilidadNivel == "2")
+                            {
+                                <p>Alto</p>
+                            }
+
+                        </td>
+
+                        <td>
+                            <a href="javascript:void(0);" style="font-size:16px;" class="text-danger" onclick="return EliminarHabilidad(@itemhabilidad.HabilidadId);" title="Eliminar"><span class="far fa-times-circle"></span></a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+    <hr />
+}
+else
+{
+    <div class="error-template">
+
+        <div class="error-details">
+            <h6>   No se encontraron habilidades registradas.</h6>
+
+        </div>
+
+    </div>
+    <hr />
+}

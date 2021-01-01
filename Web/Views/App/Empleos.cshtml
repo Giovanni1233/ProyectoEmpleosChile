@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Empleos";
+    Layout = "~/Views/Shared/_HeaderMenu.cshtml";
+}
+
+<div class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin: 20px 0px 0px 20px;">
+    <div class="row">
+
+        <div class="col-md-12 col-xl-12 col-sm-12 col-lg-12" id="ViewFiltros">
+            @Html.Partial("App/_FiltroPublicaciones")
+        </div>
+    </div>
+</div>
+<hr />
+<div class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin: 20px 0px 0px 20px;">
+
+    <div class="row">
+        <div class="col-md-6 col-xl-6 col-sm-12 col-lg-6 border-right" id="ViewPublicacionesP">
+            @Html.Partial("App/_Publicaciones")
+        </div>
+        <div class="col-md-6 col-xl-6 col-sm-12 col-lg-6" id="ViewDetallePublicacionesP">
+            @Html.Partial("App/_DetallePublicacion")
+        </div>
+    </div>
+</div>
+
+@*<div id="ViewUltimosCandidatos" class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin: 20px 0px 0px 20px;">
+    @Html.Partial("App/_BusquedasRelacionadas")
+</div>*@

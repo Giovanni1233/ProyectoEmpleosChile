@@ -204,11 +204,11 @@ function ajaxRegistroUsuario(controller, rut, nombre1, nombre2, apellidoP, apell
 
 // Configuracion Seleccion de preguntas
 
-function ajaxRegistroPreguntasEmpresa(controller, nombrePregunta) {
+function ajaxRegistroPreguntasEmpresa(controller, nombrePregunta, tipoPregunta) {
     $.ajax({
         type: 'POST',
         url: controller + 'GuardarAsignacionPreguntas',
-        data: '{ nombrePregunta: "' + nombrePregunta + '"}',
+        data: '{ nombrePregunta: "' + nombrePregunta + '", tipoPregunta: "' + tipoPregunta + '"}',
         dataType: 'json',
         contentType: 'application/json',
         async: true,
@@ -328,12 +328,12 @@ function ajaxResponderMensajeAUsuario(controller, idMensaje, idAutor, mensaje) {
 }
 
 // Votacion
-function ajaxGuardarValoracionPublicacion(controller, valorvotacion, idPublicacion, idUsuario) {
+function ajaxGuardarValoracionPublicacion(controller, valorvotacion, idPublicacion) {
 
     $.ajax({
         type: 'POST',
         url: controller + 'GuardarVotacionPublicacion',
-        data: '{ votacion: "' + valorvotacion + '", idPublicacion: "' + idPublicacion + '", idUsuario: "' + idUsuario + '"}',
+        data: '{ votacion: "' + valorvotacion + '", idPublicacion: "' + idPublicacion + '"}',
         dataType: 'json',
         contentType: 'application/json',
         async: true,

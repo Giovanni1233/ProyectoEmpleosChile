@@ -7,42 +7,279 @@
 {
     foreach (var item in ViewBag.ReferenciaDatosUsuario as ICollection<Model.Models.PerfilCandidatoPostulacion>)
     {
-        <div class="emp-profile">
-            <form method="post">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="profile-img">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt="" />
+        <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            @if (ViewBag.referenciaImagenPerfil.Count > 0)
+                            {
+                                foreach (var item2 in ViewBag.referenciaImagenPerfil as ICollection<Model.Models.ImagenUsuarioPerfil>)
+                                {
+                                    <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(item2.Imagen))" style="max-width:100%; height:250px;" />
+                                    <br />
+                                    <p class="text-center">@item2.NombreImagen</p>
+                                }
+                            }
+                            else
+                            {
+                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                            }
 
+                            <div class="mt-3">
+                                <h4>@item.NombreUsuario</h4>
+                                <p class="text-secondary mb-1">@ViewBag.referenciatituloperfilUsuario</p>
+                                <p class="text-muted font-size-sm">@ViewBag.referenciaDetallePerfil</p>
+
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-9">
-                        <div class="profile-head">
-                            <h5>
-                                Nombre: @item.NombreUsuario - Apellido Paterno: @item.ApellidoMUsuario - Apellido Materno: @item.ApellidoPUsuario
-                            </h5>
-                            <h6>
-                                @item.CorreoUsuario
-                            </h6>
-                            <p class="proile-rating">RANKINGS : <span>8/10</span></p>
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="informacion-tab" data-toggle="tab" href="#informacion" role="tab" aria-controls="informacion" aria-selected="true">Información</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="experiencia-tab" data-toggle="tab" href="#experiencia" role="tab" aria-controls="experiencia" aria-selected="false">Experiencia</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="educacion-tab" data-toggle="tab" href="#educacion" role="tab" aria-controls="educacion" aria-selected="false">Educación</a>
-                                </li>
-                            </ul>
-                        </div>
-
-                    </div>
-
                 </div>
-                <br />
-                <div class="row">
+                <hr />
+                <div class="card mt-3">
+                    <p><h3>Ver Curriculum</h3></p>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Rut Usuario</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                @item.RutUsuario
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Nombre Completo</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                @item.NombreUsuario @item.ApellidoPUsuario @item.ApellidoMUsuario
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Correo</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                @item.CorreoUsuario
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Teléfono</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                @item.TelefonoUsuario
+                            </div>
+                        </div>
+                        <hr>
+
+                    </div>
+                </div>
+                <hr />
+                <div class="row gutters-sm">
+                    <div class="col-sm-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Habilidades</i></h6>
+                                @if (ViewBag.ReferenciaHabilidadesUsuario.Count > 0)
+                                {
+                                    <ul style="list-style:none;">
+                                        @foreach (var hab in ViewBag.ReferenciaHabilidadesUsuario as ICollection<Model.Models.HabilidadesUsuario>)
+                                        {
+                                            <li>@hab.HabilidadNombre</li>
+                                        }
+                                    </ul>
+                                }
+                                else
+                                {
+                                    <div class="error-template">
+                                        <div class="error-details">
+                                            <h4>No hay descripción de habilidades.</h4>
+                                        </div>
+                                    </div>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Experiencias</i></h6>
+                                @if (ViewBag.ReferenciaExperienciasUsuario.Count > 0)
+                                {
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Nombre Empresa</th>
+                                                <th>Descripcion de la empresa</th>
+                                                <th>Fecha</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var exp in ViewBag.ReferenciaExperienciasUsuario as ICollection
+                                            <Model.Models.ExperienciaUsuario>
+                                                )
+                                            {
+                                                <tr>
+                                                    <td>@exp.Nombre</td>
+                                                    <td>@exp.Descripcion</td>
+                                                    <td>@exp.Fecha_Inicio</td>
+
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                }
+                                else
+                                {
+                                    <div class="error-template">
+                                        <div class="error-details">
+                                            <h4>No hay experiencias de empleos anteriores.</h4>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="row gutters-sm">
+                    <div class="col-sm-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Educacion</i></h6>
+                                @if (ViewBag.ReferenciaEducacionUsuario.Count > 0)
+                                {
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Titulo</th>
+                                                <th>Fecha</th>
+                                                <th>Institución</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var edu in ViewBag.ReferenciaEducacionUsuario as ICollection
+                                            <Model.Models.EducacionUsuario>
+                                                )
+                                            {
+                                                <tr>
+                                                    <td>@edu.TituloEducacion</td>
+                                                    <td>@edu.FechaDesdeEducacion</td>
+                                                    <td>@edu.InstitucionEducacion</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+
+                                }
+                                else
+                                {
+                                    <div class="error-template">
+                                        <div class="error-details">
+                                            <h4>No hay descripción de estudios.</h4>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Idiomas</i></h6>
+                                @if (ViewBag.ReferenciaIdiomasUsuario.Count > 0)
+                                {
+                                    <ul style="list-style:none;">
+                                        @foreach (var idiomas in ViewBag.ReferenciaIdiomasUsuario as ICollection<Model.Models.IdiomasUsuario>)
+                                        {
+                                            <li>
+                                                @idiomas.NombreIdioma - Nivel:
+                                                @if (idiomas.NivelIdioma == "0")
+                                                {
+                                                    <b>Bajo</b>
+                                                }
+                                                else if (idiomas.NivelIdioma == "1")
+                                                {
+                                                    <b>Medio</b>
+                                                }
+                                                else if (idiomas.NivelIdioma == "2")
+                                                {
+                                                    <b>Alto</b>
+                                                }
+                                                else if (idiomas.NivelIdioma == "3")
+                                                {
+                                                    <b>Nativo</b>
+                                                }
+                                            </li>
+                                        }
+                                    </ul>
+                                }
+                                else
+                                {
+                                    <div class="error-template">
+                                        <div class="error-details">
+                                            <h4>No hay descripción de idiomas.</h4>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+@*@if (ViewBag.ReferenciaDatosUsuario != null)
+    {
+        foreach (var item in ViewBag.ReferenciaDatosUsuario as ICollection<Model.Models.PerfilCandidatoPostulacion>)
+        {
+            <div class="emp-profile">
+                <form method="post">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="profile-img">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt="" />
+
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="profile-head">
+                                <h5>
+                                    Nombre: @item.NombreUsuario
+                                </h5>
+                                <p> Apellido Paterno: @item.ApellidoMUsuario - Apellido Materno: @item.ApellidoPUsuario</p>
+
+                                <h6>
+                                    @item.CorreoUsuario
+                                </h6>
+                                <p class="proile-rating">RANKINGS : <span>8/10</span></p>
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="informacion-tab" data-toggle="tab" href="#informacion" role="tab" aria-controls="informacion" aria-selected="true">Información</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="experiencia-tab" data-toggle="tab" href="#experiencia" role="tab" aria-controls="experiencia" aria-selected="false">Experiencia</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="educacion-tab" data-toggle="tab" href="#educacion" role="tab" aria-controls="educacion" aria-selected="false">Educación</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <br />
                     <hr />
                     <div class="col-md-3">
 
@@ -212,10 +449,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </form>
-        </div>
+                </form>
+            </div>
 
-    }
+        }
 
-}
+    }*@

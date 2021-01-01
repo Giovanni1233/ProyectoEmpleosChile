@@ -12,5 +12,6 @@ namespace Model.Models
         public string AutorMensaje { get; set; }
         public string FechaMensaje { get; set; }
         public string IdAutor { get; set; }
+        public string IdReceptor { get; set; }
     }
 }

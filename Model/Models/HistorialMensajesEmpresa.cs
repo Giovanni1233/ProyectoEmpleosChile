@@ -9,9 +9,10 @@ namespace Model.Models
     {
         public string MensajeH { get; set; }
         public string IdMensajeH { get; set; }
-        public string IdEmpresaH { get; set; }
+        public string idAutorM { get; set; }
         public string EmisorH { get; set; }
         public string ReceptorH { get; set; }
         public string FechaMensajeH { get; set; }
+        public string IdReceptorH { get; set; }
     }
 }

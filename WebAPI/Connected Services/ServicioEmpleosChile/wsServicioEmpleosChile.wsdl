@@ -9,6 +9,30 @@
       <xsd:import schemaLocation="http://localhost/ServicioEmpleosChile/wsServicioEmpleosChile.svc?xsd=xsd4" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="IServicioEmpleosChile_DelEducacionUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:DelEducacionUsuario" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_DelEducacionUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DelEducacionUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_DelExperienciasUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:DelExperienciasUsuario" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_DelExperienciasUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DelExperienciasUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_DelHabilidadesUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:DelHabilidadesUsuario" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_DelHabilidadesUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DelHabilidadesUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_DelIdiomasUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:DelIdiomasUsuario" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_DelIdiomasUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DelIdiomasUsuarioResponse" />
+  </wsdl:message>
   <wsdl:message name="IServicioEmpleosChile_DelImagenesEmpresa_InputMessage">
     <wsdl:part name="parameters" element="tns:DelImagenesEmpresa" />
   </wsdl:message>
@@ -32,6 +56,12 @@
   </wsdl:message>
   <wsdl:message name="IServicioEmpleosChile_GetCandidatosEmpresa_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetCandidatosEmpresaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GetCandiPubliTrabaPreguntPermitidas_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCandiPubliTrabaPreguntPermitidas" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GetCandiPubliTrabaPreguntPermitidas_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCandiPubliTrabaPreguntPermitidasResponse" />
   </wsdl:message>
   <wsdl:message name="IServicioEmpleosChile_GetCantidadesSNM_InputMessage">
     <wsdl:part name="parameters" element="tns:GetCantidadesSNM" />
@@ -57,6 +87,12 @@
   <wsdl:message name="IServicioEmpleosChile_GetComuna_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetComunaResponse" />
   </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GetContadorPostulacionUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetContadorPostulacionUsuario" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GetContadorPostulacionUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetContadorPostulacionUsuarioResponse" />
+  </wsdl:message>
   <wsdl:message name="IServicioEmpleosChile_GetContadorUsuarioEmpresa_InputMessage">
     <wsdl:part name="parameters" element="tns:GetContadorUsuarioEmpresa" />
   </wsdl:message>
@@ -74,6 +110,12 @@
   </wsdl:message>
   <wsdl:message name="IServicioEmpleosChile_GetDatosUsuario_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetDatosUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GetDatosUsuarioPerfil_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDatosUsuarioPerfil" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GetDatosUsuarioPerfil_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDatosUsuarioPerfilResponse" />
   </wsdl:message>
   <wsdl:message name="IServicioEmpleosChile_GetDetalleMensajeDelUsuario_InputMessage">
     <wsdl:part name="parameters" element="tns:GetDetalleMensajeDelUsuario" />
@@ -105,11 +147,23 @@
   <wsdl:message name="IServicioEmpleosChile_GetDevolucionEmpresa_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetDevolucionEmpresaResponse" />
   </wsdl:message>
-  <wsdl:message name="IServicioEmpleosChile_GetEducacionUsuario_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetEducacionUsuario" />
+  <wsdl:message name="IServicioEmpleosChile_GetEducacionesUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEducacionesUsuario" />
   </wsdl:message>
-  <wsdl:message name="IServicioEmpleosChile_GetEducacionUsuario_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetEducacionUsuarioResponse" />
+  <wsdl:message name="IServicioEmpleosChile_GetEducacionesUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEducacionesUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GetEmpresasPlanesVigentes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEmpresasPlanesVigentes" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GetEmpresasPlanesVigentes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEmpresasPlanesVigentesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GetEmpleosAdaptadosAPerfil_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEmpleosAdaptadosAPerfil" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GetEmpleosAdaptadosAPerfil_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEmpleosAdaptadosAPerfilResponse" />
   </wsdl:message>
   <wsdl:message name="IServicioEmpleosChile_GetExperienciaUsuario_InputMessage">
     <wsdl:part name="parameters" element="tns:GetExperienciaUsuario" />
@@ -123,6 +177,12 @@
   <wsdl:message name="IServicioEmpleosChile_GetFechaTerminoPlan_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetFechaTerminoPlanResponse" />
   </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GetHabilidades_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetHabilidades" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GetHabilidades_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetHabilidadesResponse" />
+  </wsdl:message>
   <wsdl:message name="IServicioEmpleosChile_GetHabilidadesUsuario_InputMessage">
     <wsdl:part name="parameters" element="tns:GetHabilidadesUsuario" />
   </wsdl:message>
@@ -134,6 +194,18 @@
   </wsdl:message>
   <wsdl:message name="IServicioEmpleosChile_GetHistorialMensajesEmpresa_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetHistorialMensajesEmpresaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GetHistorialMensajesUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetHistorialMensajesUsuario" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GetHistorialMensajesUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetHistorialMensajesUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GetIdiomas_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetIdiomas" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GetIdiomas_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetIdiomasResponse" />
   </wsdl:message>
   <wsdl:message name="IServicioEmpleosChile_GetIdiomasUsuario_InputMessage">
     <wsdl:part name="parameters" element="tns:GetIdiomasUsuario" />
@@ -153,17 +225,35 @@
   <wsdl:message name="IServicioEmpleosChile_GetImagenPerfilEmpresa_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetImagenPerfilEmpresaResponse" />
   </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GetImagenPerfilUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetImagenPerfilUsuario" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GetImagenPerfilUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetImagenPerfilUsuarioResponse" />
+  </wsdl:message>
   <wsdl:message name="IServicioEmpleosChile_GetImagenUsuario_InputMessage">
     <wsdl:part name="parameters" element="tns:GetImagenUsuario" />
   </wsdl:message>
   <wsdl:message name="IServicioEmpleosChile_GetImagenUsuario_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetImagenUsuarioResponse" />
   </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GetInstituciones_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetInstituciones" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GetInstituciones_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetInstitucionesResponse" />
+  </wsdl:message>
   <wsdl:message name="IServicioEmpleosChile_GetMensajesEmpresa_InputMessage">
     <wsdl:part name="parameters" element="tns:GetMensajesEmpresa" />
   </wsdl:message>
   <wsdl:message name="IServicioEmpleosChile_GetMensajesEmpresa_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetMensajesEmpresaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GetMensajesUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMensajesUsuario" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GetMensajesUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMensajesUsuarioResponse" />
   </wsdl:message>
   <wsdl:message name="IServicioEmpleosChile_GetNotificacionesEmpresa_InputMessage">
     <wsdl:part name="parameters" element="tns:GetNotificacionesEmpresa" />
@@ -189,6 +279,12 @@
   <wsdl:message name="IServicioEmpleosChile_GetPagosEmpresa_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetPagosEmpresaResponse" />
   </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GetPerfilProfesionalUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPerfilProfesionalUsuario" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GetPerfilProfesionalUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPerfilProfesionalUsuarioResponse" />
+  </wsdl:message>
   <wsdl:message name="IServicioEmpleosChile_GetPlanesEmpresa_InputMessage">
     <wsdl:part name="parameters" element="tns:GetPlanesEmpresa" />
   </wsdl:message>
@@ -201,17 +297,23 @@
   <wsdl:message name="IServicioEmpleosChile_GetPublicacionesEmpresa_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetPublicacionesEmpresaResponse" />
   </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GetPostulacionesUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPostulacionesUsuario" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GetPostulacionesUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPostulacionesUsuarioResponse" />
+  </wsdl:message>
   <wsdl:message name="IServicioEmpleosChile_GetPublicacionesEmpresaFiltro_InputMessage">
     <wsdl:part name="parameters" element="tns:GetPublicacionesEmpresaFiltro" />
   </wsdl:message>
   <wsdl:message name="IServicioEmpleosChile_GetPublicacionesEmpresaFiltro_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetPublicacionesEmpresaFiltroResponse" />
   </wsdl:message>
-  <wsdl:message name="IServicioEmpleosChile_GetCandiPubliTrabaPreguntPermitidas_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetCandiPubliTrabaPreguntPermitidas" />
+  <wsdl:message name="IServicioEmpleosChile_GetPublicacionesUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPublicacionesUsuario" />
   </wsdl:message>
-  <wsdl:message name="IServicioEmpleosChile_GetCandiPubliTrabaPreguntPermitidas_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetCandiPubliTrabaPreguntPermitidasResponse" />
+  <wsdl:message name="IServicioEmpleosChile_GetPublicacionesUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPublicacionesUsuarioResponse" />
   </wsdl:message>
   <wsdl:message name="IServicioEmpleosChile_GetPreguntasEmpresa_InputMessage">
     <wsdl:part name="parameters" element="tns:GetPreguntasEmpresa" />
@@ -249,6 +351,12 @@
   <wsdl:message name="IServicioEmpleosChile_GetSolicitudesEmpresa_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetSolicitudesEmpresaResponse" />
   </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GetSolicitudUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSolicitudUsuario" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GetSolicitudUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSolicitudUsuarioResponse" />
+  </wsdl:message>
   <wsdl:message name="IServicioEmpleosChile_GetTarjetaEmpresa_InputMessage">
     <wsdl:part name="parameters" element="tns:GetTarjetaEmpresa" />
   </wsdl:message>
@@ -260,6 +368,12 @@
   </wsdl:message>
   <wsdl:message name="IServicioEmpleosChile_GetTrabajadores_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetTrabajadoresResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GetOfertasEmpleos_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOfertasEmpleos" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_GetOfertasEmpleos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOfertasEmpleosResponse" />
   </wsdl:message>
   <wsdl:message name="IServicioEmpleosChile_GetUltimosCandidatosEmpresa_InputMessage">
     <wsdl:part name="parameters" element="tns:GetUltimosCandidatosEmpresa" />
@@ -309,17 +423,59 @@
   <wsdl:message name="IServicioEmpleosChile_SetEmpresa_OutputMessage">
     <wsdl:part name="parameters" element="tns:SetEmpresaResponse" />
   </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_SetEducacionUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetEducacionUsuario" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_SetEducacionUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetEducacionUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_SetExperienciasUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetExperienciasUsuario" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_SetExperienciasUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetExperienciasUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_SetHabilidadesUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetHabilidadesUsuario" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_SetHabilidadesUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetHabilidadesUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_SetIdiomaUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetIdiomaUsuario" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_SetIdiomaUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetIdiomaUsuarioResponse" />
+  </wsdl:message>
   <wsdl:message name="IServicioEmpleosChile_SetImagenesEmpresa_InputMessage">
     <wsdl:part name="parameters" element="tns:SetImagenesEmpresa" />
   </wsdl:message>
   <wsdl:message name="IServicioEmpleosChile_SetImagenesEmpresa_OutputMessage">
     <wsdl:part name="parameters" element="tns:SetImagenesEmpresaResponse" />
   </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_SetMensajes_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetMensajes" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_SetMensajes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetMensajesResponse" />
+  </wsdl:message>
   <wsdl:message name="IServicioEmpleosChile_SetPagosEmpresa_InputMessage">
     <wsdl:part name="parameters" element="tns:SetPagosEmpresa" />
   </wsdl:message>
   <wsdl:message name="IServicioEmpleosChile_SetPagosEmpresa_OutputMessage">
     <wsdl:part name="parameters" element="tns:SetPagosEmpresaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_SetPostuloEmpleo_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetPostuloEmpleo" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_SetPostuloEmpleo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetPostuloEmpleoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_SetUpdPerfilProfesionalUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetUpdPerfilProfesionalUsuario" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_SetUpdPerfilProfesionalUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetUpdPerfilProfesionalUsuarioResponse" />
   </wsdl:message>
   <wsdl:message name="IServicioEmpleosChile_SetPlanesContratadosEmpresa_InputMessage">
     <wsdl:part name="parameters" element="tns:SetPlanesContratadosEmpresa" />
@@ -350,6 +506,12 @@
   </wsdl:message>
   <wsdl:message name="IServicioEmpleosChile_SetRespuestaMensajeUsuario_OutputMessage">
     <wsdl:part name="parameters" element="tns:SetRespuestaMensajeUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_SetRespuestaMensajeReceptor_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetRespuestaMensajeReceptor" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_SetRespuestaMensajeReceptor_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetRespuestaMensajeReceptorResponse" />
   </wsdl:message>
   <wsdl:message name="IServicioEmpleosChile_SetPublicacionesEmpresa_InputMessage">
     <wsdl:part name="parameters" element="tns:SetPublicacionesEmpresa" />
@@ -405,6 +567,12 @@
   <wsdl:message name="IServicioEmpleosChile_UpdEstadoSolicitudUsuario_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdEstadoSolicitudUsuarioResponse" />
   </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_UpdDatosUsuarioPerfil_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdDatosUsuarioPerfil" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEmpleosChile_UpdDatosUsuarioPerfil_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdDatosUsuarioPerfilResponse" />
+  </wsdl:message>
   <wsdl:message name="IServicioEmpleosChile_UpdPerfilEmpresa_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdPerfilEmpresa" />
   </wsdl:message>
@@ -442,6 +610,22 @@
     <wsdl:part name="parameters" element="tns:ValUsuarioResponse" />
   </wsdl:message>
   <wsdl:portType name="IServicioEmpleosChile">
+    <wsdl:operation name="DelEducacionUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/DelEducacionUsuario" message="tns:IServicioEmpleosChile_DelEducacionUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/DelEducacionUsuarioResponse" message="tns:IServicioEmpleosChile_DelEducacionUsuario_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DelExperienciasUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/DelExperienciasUsuario" message="tns:IServicioEmpleosChile_DelExperienciasUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/DelExperienciasUsuarioResponse" message="tns:IServicioEmpleosChile_DelExperienciasUsuario_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DelHabilidadesUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/DelHabilidadesUsuario" message="tns:IServicioEmpleosChile_DelHabilidadesUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/DelHabilidadesUsuarioResponse" message="tns:IServicioEmpleosChile_DelHabilidadesUsuario_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DelIdiomasUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/DelIdiomasUsuario" message="tns:IServicioEmpleosChile_DelIdiomasUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/DelIdiomasUsuarioResponse" message="tns:IServicioEmpleosChile_DelIdiomasUsuario_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="DelImagenesEmpresa">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/DelImagenesEmpresa" message="tns:IServicioEmpleosChile_DelImagenesEmpresa_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/DelImagenesEmpresaResponse" message="tns:IServicioEmpleosChile_DelImagenesEmpresa_OutputMessage" />
@@ -457,6 +641,10 @@
     <wsdl:operation name="GetCandidatosEmpresa">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetCandidatosEmpresa" message="tns:IServicioEmpleosChile_GetCandidatosEmpresa_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetCandidatosEmpresaResponse" message="tns:IServicioEmpleosChile_GetCandidatosEmpresa_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCandiPubliTrabaPreguntPermitidas">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetCandiPubliTrabaPreguntPermitidas" message="tns:IServicioEmpleosChile_GetCandiPubliTrabaPreguntPermitidas_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetCandiPubliTrabaPreguntPermitidasResponse" message="tns:IServicioEmpleosChile_GetCandiPubliTrabaPreguntPermitidas_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetCantidadesSNM">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetCantidadesSNM" message="tns:IServicioEmpleosChile_GetCantidadesSNM_InputMessage" />
@@ -474,6 +662,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetComuna" message="tns:IServicioEmpleosChile_GetComuna_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetComunaResponse" message="tns:IServicioEmpleosChile_GetComuna_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetContadorPostulacionUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetContadorPostulacionUsuario" message="tns:IServicioEmpleosChile_GetContadorPostulacionUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetContadorPostulacionUsuarioResponse" message="tns:IServicioEmpleosChile_GetContadorPostulacionUsuario_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetContadorUsuarioEmpresa">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetContadorUsuarioEmpresa" message="tns:IServicioEmpleosChile_GetContadorUsuarioEmpresa_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetContadorUsuarioEmpresaResponse" message="tns:IServicioEmpleosChile_GetContadorUsuarioEmpresa_OutputMessage" />
@@ -485,6 +677,10 @@
     <wsdl:operation name="GetDatosUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetDatosUsuario" message="tns:IServicioEmpleosChile_GetDatosUsuario_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetDatosUsuarioResponse" message="tns:IServicioEmpleosChile_GetDatosUsuario_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDatosUsuarioPerfil">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetDatosUsuarioPerfil" message="tns:IServicioEmpleosChile_GetDatosUsuarioPerfil_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetDatosUsuarioPerfilResponse" message="tns:IServicioEmpleosChile_GetDatosUsuarioPerfil_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetDetalleMensajeDelUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetDetalleMensajeDelUsuario" message="tns:IServicioEmpleosChile_GetDetalleMensajeDelUsuario_InputMessage" />
@@ -506,9 +702,17 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetDevolucionEmpresa" message="tns:IServicioEmpleosChile_GetDevolucionEmpresa_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetDevolucionEmpresaResponse" message="tns:IServicioEmpleosChile_GetDevolucionEmpresa_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetEducacionUsuario">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetEducacionUsuario" message="tns:IServicioEmpleosChile_GetEducacionUsuario_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetEducacionUsuarioResponse" message="tns:IServicioEmpleosChile_GetEducacionUsuario_OutputMessage" />
+    <wsdl:operation name="GetEducacionesUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetEducacionesUsuario" message="tns:IServicioEmpleosChile_GetEducacionesUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetEducacionesUsuarioResponse" message="tns:IServicioEmpleosChile_GetEducacionesUsuario_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpresasPlanesVigentes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetEmpresasPlanesVigentes" message="tns:IServicioEmpleosChile_GetEmpresasPlanesVigentes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetEmpresasPlanesVigentesResponse" message="tns:IServicioEmpleosChile_GetEmpresasPlanesVigentes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpleosAdaptadosAPerfil">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetEmpleosAdaptadosAPerfil" message="tns:IServicioEmpleosChile_GetEmpleosAdaptadosAPerfil_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetEmpleosAdaptadosAPerfilResponse" message="tns:IServicioEmpleosChile_GetEmpleosAdaptadosAPerfil_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetExperienciaUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetExperienciaUsuario" message="tns:IServicioEmpleosChile_GetExperienciaUsuario_InputMessage" />
@@ -518,6 +722,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetFechaTerminoPlan" message="tns:IServicioEmpleosChile_GetFechaTerminoPlan_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetFechaTerminoPlanResponse" message="tns:IServicioEmpleosChile_GetFechaTerminoPlan_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetHabilidades">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetHabilidades" message="tns:IServicioEmpleosChile_GetHabilidades_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetHabilidadesResponse" message="tns:IServicioEmpleosChile_GetHabilidades_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetHabilidadesUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetHabilidadesUsuario" message="tns:IServicioEmpleosChile_GetHabilidadesUsuario_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetHabilidadesUsuarioResponse" message="tns:IServicioEmpleosChile_GetHabilidadesUsuario_OutputMessage" />
@@ -525,6 +733,14 @@
     <wsdl:operation name="GetHistorialMensajesEmpresa">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetHistorialMensajesEmpresa" message="tns:IServicioEmpleosChile_GetHistorialMensajesEmpresa_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetHistorialMensajesEmpresaResponse" message="tns:IServicioEmpleosChile_GetHistorialMensajesEmpresa_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetHistorialMensajesUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetHistorialMensajesUsuario" message="tns:IServicioEmpleosChile_GetHistorialMensajesUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetHistorialMensajesUsuarioResponse" message="tns:IServicioEmpleosChile_GetHistorialMensajesUsuario_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIdiomas">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetIdiomas" message="tns:IServicioEmpleosChile_GetIdiomas_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetIdiomasResponse" message="tns:IServicioEmpleosChile_GetIdiomas_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetIdiomasUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetIdiomasUsuario" message="tns:IServicioEmpleosChile_GetIdiomasUsuario_InputMessage" />
@@ -538,13 +754,25 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetImagenPerfilEmpresa" message="tns:IServicioEmpleosChile_GetImagenPerfilEmpresa_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetImagenPerfilEmpresaResponse" message="tns:IServicioEmpleosChile_GetImagenPerfilEmpresa_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetImagenPerfilUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetImagenPerfilUsuario" message="tns:IServicioEmpleosChile_GetImagenPerfilUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetImagenPerfilUsuarioResponse" message="tns:IServicioEmpleosChile_GetImagenPerfilUsuario_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetImagenUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetImagenUsuario" message="tns:IServicioEmpleosChile_GetImagenUsuario_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetImagenUsuarioResponse" message="tns:IServicioEmpleosChile_GetImagenUsuario_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetInstituciones">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetInstituciones" message="tns:IServicioEmpleosChile_GetInstituciones_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetInstitucionesResponse" message="tns:IServicioEmpleosChile_GetInstituciones_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetMensajesEmpresa">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetMensajesEmpresa" message="tns:IServicioEmpleosChile_GetMensajesEmpresa_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetMensajesEmpresaResponse" message="tns:IServicioEmpleosChile_GetMensajesEmpresa_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMensajesUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetMensajesUsuario" message="tns:IServicioEmpleosChile_GetMensajesUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetMensajesUsuarioResponse" message="tns:IServicioEmpleosChile_GetMensajesUsuario_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetNotificacionesEmpresa">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetNotificacionesEmpresa" message="tns:IServicioEmpleosChile_GetNotificacionesEmpresa_InputMessage" />
@@ -562,6 +790,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetPagosEmpresa" message="tns:IServicioEmpleosChile_GetPagosEmpresa_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetPagosEmpresaResponse" message="tns:IServicioEmpleosChile_GetPagosEmpresa_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetPerfilProfesionalUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetPerfilProfesionalUsuario" message="tns:IServicioEmpleosChile_GetPerfilProfesionalUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetPerfilProfesionalUsuarioResponse" message="tns:IServicioEmpleosChile_GetPerfilProfesionalUsuario_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetPlanesEmpresa">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetPlanesEmpresa" message="tns:IServicioEmpleosChile_GetPlanesEmpresa_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetPlanesEmpresaResponse" message="tns:IServicioEmpleosChile_GetPlanesEmpresa_OutputMessage" />
@@ -570,13 +802,17 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetPublicacionesEmpresa" message="tns:IServicioEmpleosChile_GetPublicacionesEmpresa_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetPublicacionesEmpresaResponse" message="tns:IServicioEmpleosChile_GetPublicacionesEmpresa_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetPostulacionesUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetPostulacionesUsuario" message="tns:IServicioEmpleosChile_GetPostulacionesUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetPostulacionesUsuarioResponse" message="tns:IServicioEmpleosChile_GetPostulacionesUsuario_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetPublicacionesEmpresaFiltro">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetPublicacionesEmpresaFiltro" message="tns:IServicioEmpleosChile_GetPublicacionesEmpresaFiltro_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetPublicacionesEmpresaFiltroResponse" message="tns:IServicioEmpleosChile_GetPublicacionesEmpresaFiltro_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetCandiPubliTrabaPreguntPermitidas">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetCandiPubliTrabaPreguntPermitidas" message="tns:IServicioEmpleosChile_GetCandiPubliTrabaPreguntPermitidas_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetCandiPubliTrabaPreguntPermitidasResponse" message="tns:IServicioEmpleosChile_GetCandiPubliTrabaPreguntPermitidas_OutputMessage" />
+    <wsdl:operation name="GetPublicacionesUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetPublicacionesUsuario" message="tns:IServicioEmpleosChile_GetPublicacionesUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetPublicacionesUsuarioResponse" message="tns:IServicioEmpleosChile_GetPublicacionesUsuario_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetPreguntasEmpresa">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetPreguntasEmpresa" message="tns:IServicioEmpleosChile_GetPreguntasEmpresa_InputMessage" />
@@ -602,6 +838,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetSolicitudesEmpresa" message="tns:IServicioEmpleosChile_GetSolicitudesEmpresa_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetSolicitudesEmpresaResponse" message="tns:IServicioEmpleosChile_GetSolicitudesEmpresa_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetSolicitudUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetSolicitudUsuario" message="tns:IServicioEmpleosChile_GetSolicitudUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetSolicitudUsuarioResponse" message="tns:IServicioEmpleosChile_GetSolicitudUsuario_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetTarjetaEmpresa">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetTarjetaEmpresa" message="tns:IServicioEmpleosChile_GetTarjetaEmpresa_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetTarjetaEmpresaResponse" message="tns:IServicioEmpleosChile_GetTarjetaEmpresa_OutputMessage" />
@@ -609,6 +849,10 @@
     <wsdl:operation name="GetTrabajadores">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetTrabajadores" message="tns:IServicioEmpleosChile_GetTrabajadores_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetTrabajadoresResponse" message="tns:IServicioEmpleosChile_GetTrabajadores_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOfertasEmpleos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetOfertasEmpleos" message="tns:IServicioEmpleosChile_GetOfertasEmpleos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetOfertasEmpleosResponse" message="tns:IServicioEmpleosChile_GetOfertasEmpleos_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetUltimosCandidatosEmpresa">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/GetUltimosCandidatosEmpresa" message="tns:IServicioEmpleosChile_GetUltimosCandidatosEmpresa_InputMessage" />
@@ -642,13 +886,41 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/SetEmpresa" message="tns:IServicioEmpleosChile_SetEmpresa_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/SetEmpresaResponse" message="tns:IServicioEmpleosChile_SetEmpresa_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="SetEducacionUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/SetEducacionUsuario" message="tns:IServicioEmpleosChile_SetEducacionUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/SetEducacionUsuarioResponse" message="tns:IServicioEmpleosChile_SetEducacionUsuario_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetExperienciasUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/SetExperienciasUsuario" message="tns:IServicioEmpleosChile_SetExperienciasUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/SetExperienciasUsuarioResponse" message="tns:IServicioEmpleosChile_SetExperienciasUsuario_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetHabilidadesUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/SetHabilidadesUsuario" message="tns:IServicioEmpleosChile_SetHabilidadesUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/SetHabilidadesUsuarioResponse" message="tns:IServicioEmpleosChile_SetHabilidadesUsuario_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetIdiomaUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/SetIdiomaUsuario" message="tns:IServicioEmpleosChile_SetIdiomaUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/SetIdiomaUsuarioResponse" message="tns:IServicioEmpleosChile_SetIdiomaUsuario_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="SetImagenesEmpresa">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/SetImagenesEmpresa" message="tns:IServicioEmpleosChile_SetImagenesEmpresa_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/SetImagenesEmpresaResponse" message="tns:IServicioEmpleosChile_SetImagenesEmpresa_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="SetMensajes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/SetMensajes" message="tns:IServicioEmpleosChile_SetMensajes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/SetMensajesResponse" message="tns:IServicioEmpleosChile_SetMensajes_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="SetPagosEmpresa">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/SetPagosEmpresa" message="tns:IServicioEmpleosChile_SetPagosEmpresa_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/SetPagosEmpresaResponse" message="tns:IServicioEmpleosChile_SetPagosEmpresa_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetPostuloEmpleo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/SetPostuloEmpleo" message="tns:IServicioEmpleosChile_SetPostuloEmpleo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/SetPostuloEmpleoResponse" message="tns:IServicioEmpleosChile_SetPostuloEmpleo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetUpdPerfilProfesionalUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/SetUpdPerfilProfesionalUsuario" message="tns:IServicioEmpleosChile_SetUpdPerfilProfesionalUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/SetUpdPerfilProfesionalUsuarioResponse" message="tns:IServicioEmpleosChile_SetUpdPerfilProfesionalUsuario_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SetPlanesContratadosEmpresa">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/SetPlanesContratadosEmpresa" message="tns:IServicioEmpleosChile_SetPlanesContratadosEmpresa_InputMessage" />
@@ -669,6 +941,10 @@
     <wsdl:operation name="SetRespuestaMensajeUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/SetRespuestaMensajeUsuario" message="tns:IServicioEmpleosChile_SetRespuestaMensajeUsuario_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/SetRespuestaMensajeUsuarioResponse" message="tns:IServicioEmpleosChile_SetRespuestaMensajeUsuario_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetRespuestaMensajeReceptor">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/SetRespuestaMensajeReceptor" message="tns:IServicioEmpleosChile_SetRespuestaMensajeReceptor_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/SetRespuestaMensajeReceptorResponse" message="tns:IServicioEmpleosChile_SetRespuestaMensajeReceptor_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SetPublicacionesEmpresa">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/SetPublicacionesEmpresa" message="tns:IServicioEmpleosChile_SetPublicacionesEmpresa_InputMessage" />
@@ -706,6 +982,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/UpdEstadoSolicitudUsuario" message="tns:IServicioEmpleosChile_UpdEstadoSolicitudUsuario_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/UpdEstadoSolicitudUsuarioResponse" message="tns:IServicioEmpleosChile_UpdEstadoSolicitudUsuario_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="UpdDatosUsuarioPerfil">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/UpdDatosUsuarioPerfil" message="tns:IServicioEmpleosChile_UpdDatosUsuarioPerfil_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/UpdDatosUsuarioPerfilResponse" message="tns:IServicioEmpleosChile_UpdDatosUsuarioPerfil_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="UpdPerfilEmpresa">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEmpleosChile/UpdPerfilEmpresa" message="tns:IServicioEmpleosChile_UpdPerfilEmpresa_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioEmpleosChile/UpdPerfilEmpresaResponse" message="tns:IServicioEmpleosChile_UpdPerfilEmpresa_OutputMessage" />
@@ -733,6 +1013,42 @@
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServicioEmpleosChile" type="tns:IServicioEmpleosChile">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="DelEducacionUsuario">
+      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/DelEducacionUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelExperienciasUsuario">
+      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/DelExperienciasUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelHabilidadesUsuario">
+      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/DelHabilidadesUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelIdiomasUsuario">
+      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/DelIdiomasUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="DelImagenesEmpresa">
       <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/DelImagenesEmpresa" style="document" />
       <wsdl:input>
@@ -762,6 +1078,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetCandidatosEmpresa">
       <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/GetCandidatosEmpresa" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCandiPubliTrabaPreguntPermitidas">
+      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/GetCandiPubliTrabaPreguntPermitidas" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -805,6 +1130,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetContadorPostulacionUsuario">
+      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/GetContadorPostulacionUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetContadorUsuarioEmpresa">
       <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/GetContadorUsuarioEmpresa" style="document" />
       <wsdl:input>
@@ -825,6 +1159,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetDatosUsuario">
       <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/GetDatosUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDatosUsuarioPerfil">
+      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/GetDatosUsuarioPerfil" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -877,8 +1220,26 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetEducacionUsuario">
-      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/GetEducacionUsuario" style="document" />
+    <wsdl:operation name="GetEducacionesUsuario">
+      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/GetEducacionesUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpresasPlanesVigentes">
+      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/GetEmpresasPlanesVigentes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpleosAdaptadosAPerfil">
+      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/GetEmpleosAdaptadosAPerfil" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -904,6 +1265,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetHabilidades">
+      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/GetHabilidades" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetHabilidadesUsuario">
       <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/GetHabilidadesUsuario" style="document" />
       <wsdl:input>
@@ -915,6 +1285,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetHistorialMensajesEmpresa">
       <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/GetHistorialMensajesEmpresa" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHistorialMensajesUsuario">
+      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/GetHistorialMensajesUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIdiomas">
+      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/GetIdiomas" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -949,6 +1337,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetImagenPerfilUsuario">
+      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/GetImagenPerfilUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetImagenUsuario">
       <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/GetImagenUsuario" style="document" />
       <wsdl:input>
@@ -958,8 +1355,26 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetInstituciones">
+      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/GetInstituciones" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetMensajesEmpresa">
       <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/GetMensajesEmpresa" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMensajesUsuario">
+      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/GetMensajesUsuario" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1003,6 +1418,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetPerfilProfesionalUsuario">
+      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/GetPerfilProfesionalUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetPlanesEmpresa">
       <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/GetPlanesEmpresa" style="document" />
       <wsdl:input>
@@ -1021,6 +1445,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetPostulacionesUsuario">
+      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/GetPostulacionesUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetPublicacionesEmpresaFiltro">
       <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/GetPublicacionesEmpresaFiltro" style="document" />
       <wsdl:input>
@@ -1030,8 +1463,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetCandiPubliTrabaPreguntPermitidas">
-      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/GetCandiPubliTrabaPreguntPermitidas" style="document" />
+    <wsdl:operation name="GetPublicacionesUsuario">
+      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/GetPublicacionesUsuario" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1093,6 +1526,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetSolicitudUsuario">
+      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/GetSolicitudUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetTarjetaEmpresa">
       <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/GetTarjetaEmpresa" style="document" />
       <wsdl:input>
@@ -1104,6 +1546,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetTrabajadores">
       <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/GetTrabajadores" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOfertasEmpleos">
+      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/GetOfertasEmpleos" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1183,6 +1634,42 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="SetEducacionUsuario">
+      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/SetEducacionUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetExperienciasUsuario">
+      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/SetExperienciasUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetHabilidadesUsuario">
+      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/SetHabilidadesUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetIdiomaUsuario">
+      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/SetIdiomaUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="SetImagenesEmpresa">
       <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/SetImagenesEmpresa" style="document" />
       <wsdl:input>
@@ -1192,8 +1679,35 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="SetMensajes">
+      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/SetMensajes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="SetPagosEmpresa">
       <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/SetPagosEmpresa" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPostuloEmpleo">
+      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/SetPostuloEmpleo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetUpdPerfilProfesionalUsuario">
+      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/SetUpdPerfilProfesionalUsuario" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1239,6 +1753,15 @@
     </wsdl:operation>
     <wsdl:operation name="SetRespuestaMensajeUsuario">
       <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/SetRespuestaMensajeUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetRespuestaMensajeReceptor">
+      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/SetRespuestaMensajeReceptor" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1320,6 +1843,15 @@
     </wsdl:operation>
     <wsdl:operation name="UpdEstadoSolicitudUsuario">
       <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/UpdEstadoSolicitudUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdDatosUsuarioPerfil">
+      <soap:operation soapAction="http://tempuri.org/IServicioEmpleosChile/UpdDatosUsuarioPerfil" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

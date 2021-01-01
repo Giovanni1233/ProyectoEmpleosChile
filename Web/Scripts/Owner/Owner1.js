@@ -1,4 +1,6 @@
-﻿$(document).ready(function () {
+﻿var seleccionado;
+$(document).ready(function () {
+    
     $(document).on('keydown', ".soloLetras", function (e) {
         let tecla = (document.all) ? e.keyCode : e.which;
         if (tecla == 8) return true;
@@ -173,9 +175,247 @@
     });
 
 
+    // Navbar agregado 26/12/2020
+    const triggerTabList = [].slice.call(document.querySelectorAll('#myTab a'))
+    triggerTabList.forEach((triggerEl) => {
+        const tabTrigger = new mdb.Tab(triggerEl)
+
+        triggerEl.addEventListener('click', (e) => {
+            e.preventDefault()
+            tabTrigger.show()
+        })
+    })
+
+    // agregado 26/12/2020
+    $(document).on('click', "#pills-area-tab", function () {
+        $("#pills-postulaciones-tab").css("color", "#007bff");
+        $("#pills-curriculum-tab").css("color", "#007bff");
+        $("#pills-publicaciones-tab").css("color", "#007bff");
+        $("#pills-oficios-tab").css("color", "#007bff");
+        $("#pills-mensajes-tab").css("color", "#007bff");
+        $(this).css("color", "#ffffff");
+    });
+    $(document).on('click', "#pills-postulaciones-tab", function () {
+        $("#pills-area-tab").css("color", "#007bff");
+        $("#pills-curriculum-tab").css("color", "#007bff");
+        $("#pills-publicaciones-tab").css("color", "#007bff");
+        $("#pills-oficios-tab").css("color", "#007bff");
+        $("#pills-mensajes-tab").css("color", "#007bff");
+        $(this).css("color", "#ffffff");
+    });
+    $(document).on('click', "#pills-curriculum-tab", function () {
+        $("#pills-postulaciones-tab").css("color", "#007bff");
+        $("#pills-area-tab").css("color", "#007bff");
+        $("#pills-publicaciones-tab").css("color", "#007bff");
+        $("#pills-oficios-tab").css("color", "#007bff");
+        $("#pills-mensajes-tab").css("color", "#007bff");
+        $(this).css("color", "#ffffff");
+    });
+    $(document).on('click', "#pills-publicaciones-tab", function () {
+        $("#pills-postulaciones-tab").css("color", "#007bff");
+        $("#pills-curriculum-tab").css("color", "#007bff");
+        $("#pills-area-tab").css("color", "#007bff");
+        $("#pills-oficios-tab").css("color", "#007bff");
+        $("#pills-mensajes-tab").css("color", "#007bff");
+        $(this).css("color", "#ffffff");
+    });
+    $(document).on('click', "#pills-oficios-tab", function () {
+        $("#pills-postulaciones-tab").css("color", "#007bff");
+        $("#pills-curriculum-tab").css("color", "#007bff");
+        $("#pills-publicaciones-tab").css("color", "#007bff");
+        $("#pills-area-tab").css("color", "#007bff");
+        $("#pills-mensajes-tab").css("color", "#007bff");
+        $(this).css("color", "#ffffff");
+    });
+    $(document).on('click', "#pills-mensajes-tab", function () {
+        $("#pills-postulaciones-tab").css("color", "#007bff");
+        $("#pills-curriculum-tab").css("color", "#007bff");
+        $("#pills-publicaciones-tab").css("color", "#007bff");
+        $("#pills-oficios-tab").css("color", "#007bff");
+        $("#pills-area-tab").css("color", "#007bff");
+        $(this).css("color", "#ffffff");
+    });
+
     $(document).on('click', "#uploadfile", function () {
         $("#fileCV").trigger("click");
     });
+    // Funciones agregadas Giovanni Diaz
+
+    // Modal mensaje a empresa
+    $(document).on('click', '#btnEnviarMensaje', function () {
+        var usuario = $("#UsuarioSesion").val();
+        if (usuario != "") {
+            $("#modalMensajeAEmpresa").modal("show");
+        }
+        else {
+            // Levanta modal
+            $("#modalSignIn").modal("show");
+        }
+       
+    });
+
+    $(document).on('click', '.btnGuardarMensaje', function () {
+        var idEmpresa = $("#idEmpresa").val();
+        var mensaje = $("#mensajeEmpresa").val();
+
+        var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Usuario/";
+        ajaxEnviarMensajeAEmpresa(controller, idEmpresa, mensaje);
+    });
+
+
+    // Responder mensaje
+    $(document).on('click', "#MensajeGuardarReceptor", function () {
+        var idMensaje = $("#idMensajeUS").val();
+        var idAutor = $("#idReceptorUS").val();
+        var mensaje = $("#MensajeHMUS").val();
+        var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Usuario/";
+        ajaxResponderMensajeAReceptor(controller, idMensaje, idAutor, mensaje);
+    });
+
+
+    // guardar experiencias perfil usuario
+    $(document).on('click', "#btnAgregarExperiencia", function () {
+        var empresaNombre = $("#empresaNombre").val();
+        var destacoEmpresa = $("#destacoEmpresa").val();
+        var mejorarEmpresa = $("#mejorarEmpresa").val();
+        var fechaD = $("#fechaDesde").val();
+        var fechaH = $("#fechaHasta").val();
+        var actualmente = $("#actualmente").val();
+        var recomendacion = $("#recomendacion").val();
+        var descripcion = $("#descripcionExperiencia").val();
+        
+        var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Usuario/";
+        
+        ajaxRegistroExperienciaPerfilUsuario(controller, empresaNombre, destacoEmpresa, mejorarEmpresa, fechaD, fechaH, actualmente, descripcion, recomendacion);
+    });
+
+    // guardar educacion perfil usuario
+    $(document).on('click', "#btnAgregarEducacion", function () {
+        var centroNombre = $("#centroNombre").val();
+        var estadoEdu = $("#estadoEdu").val();
+        var tituloNombreEdu = $("#tituloNombreEdu").val();
+        var fechaD = $("#fechaDesdeEdu").val();
+        var fechaH = $("#fechaHastaEdu").val();
+        var descripcion = $("#descripcionEducacion").val();
+
+        var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Usuario/";
+
+        ajaxRegistroEducacionPerfilUsuario(controller, centroNombre, estadoEdu, tituloNombreEdu, fechaD, fechaH, descripcion);
+    });
+
+    $(document).on('change', '#estadoEdu', function () {
+        var estado = $("#estadoEdu").val();
+        if (estado == 0) {
+            $("#tituloEducacionDiv").css("display", "block");
+        }
+        else {
+            $("#tituloEducacionDiv").css("display", "none");
+        }
+    });
+
+
+    // guardar idioma perfil usuario
+    $(document).on('click', "#btnAgregarIdioma", function () {
+        var idiomaId = $("#idiomaId").val();
+        var nivelIdioma = $("#nivelIdioma").val();
+
+        var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Usuario/";
+
+        ajaxRegistroIdiomaPerfilUsuario(controller, idiomaId, nivelIdioma);
+    });
+
+    // guardar habilidad perfil usuario
+    $(document).on('click', "#btnAgregarHabilidad", function () {
+        var habilidadID = $("#habilidadID").val();
+        var nivelHabilidad = $("#nivelHabilidad").val();
+
+        var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Usuario/";
+
+        ajaxRegistroHabilidadPerfilUsuario(controller, habilidadID, nivelHabilidad);
+       
+    });
+
+    // guardar perfil usuario
+    $(document).on('click', "#btnGuardarPerfilUsuario", function () {
+        var nombre1 = $("#nombre1").val();
+        var nombre2 = $("#nombre2").val();
+        var apellido1 = $("#apellido1").val();
+        var apellido2 = $("#apellido2").val();
+        var telefono = $("#telefonoPerfil").val();
+        var correo = $("#correoPerfil").val();
+        var descripcion = $("#descripcionPersonal").val();
+
+        var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Usuario/";
+        
+        ajaxRegistroPerfilUsuario(controller, nombre1, nombre2, apellido1, apellido2, telefono, correo, descripcion);
+
+    });
+
+    // perfil profesional usuario
+    $(document).on('click', "#btnAgregarPerfilProfesional", function () {
+        var tituloperfil = $("#tituloPerfilProfesional").val();
+        var descripcionperfil = $("#descripcionPerfilProfesional").val();
+
+        var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Usuario/";
+
+        ajaxRegistroPerfilProfesionalUsuario(controller, tituloperfil, descripcionperfil);
+
+    });
+
+
+    // funcionamiento tabs
+    
+    $(document).on('click', "#pills-area-tab", function () {
+        if (window.location.pathname != window.location.href + "#pills-area-tab") {
+            var url = window.location.pathname + "#pills-area-tab";
+            window.location.href = url;
+           
+        }
+        
+    });
+
+    if (window.location.hash == "#pills-area-tab") { $("#pills-area-tab").trigger('click'); }
+
+    $(document).on('click', "#pills-postulaciones-tab", function () {
+        if (window.location.pathname != window.location.href + "#pills-postulaciones-tab") {
+            var url = window.location.pathname + "#pills-postulaciones-tab";
+            window.location.href = url;
+        }
+        
+    });
+    if (window.location.hash == "#pills-postulaciones-tab") { $("#pills-postulaciones-tab").trigger('click'); }
+    
+    $(document).on('click', "#pills-curriculum-tab", function () {
+        if (window.location.pathname != window.location.href + "#pills-curriculum-tab") {
+            var url = window.location.pathname + "#pills-curriculum-tab";
+            window.location.href = url;
+        }
+    });
+    if (window.location.hash == "#pills-curriculum-tab") { $("#pills-curriculum-tab").trigger('click'); }
+    
+    //$(document).on('click', "#pills-mensajes-tab", function () {
+    //    if (window.location.pathname != window.location.href + "#pills-mensajes-tab") {
+    //        var url = window.location.pathname + "#pills-mensajes-tab";
+    //        window.location.href = url;
+    //    }
+    //});
+    //if (window.location.hash == "#pills-mensajes-tab") { $("#pills-mensajes-tab").trigger('click'); }
+
+
+    //BtnGuardarRespuestasPreguntas y enviar postulacion
+    $(document).on('click', '#btnEnviarPreguntas', function () {
+        debugger;
+        var datosDiv1 = $("#preguntasSinDescripcion").html();
+        var datosDiv2 = $("#preguntasConDescripcion").html();
+        $("#preguntasSinDescripcion :input").each(function (e) {
+            id = this.id;
+            // show id 
+            alert("#" + id);
+        });
+
+    });
+
+    
 });
 
 

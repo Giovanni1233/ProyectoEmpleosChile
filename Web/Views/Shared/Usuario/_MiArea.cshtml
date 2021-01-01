@@ -1,0 +1,102 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <div class="p-3 py-8">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Encuentra tu empleo ahora</h5>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table">
+                                        <tr>
+                                            <td style="vertical-align:middle;">
+                                                <div class="md-form form-sm" style="margin: auto;">
+                                                    <input type="text" id="nombrePublicacion" name="nombrePublicacion1" class="form-control soloLetras" style="font-family: 'Roboto', sans-serif;" maxlength="100" tabindex="2" autocomplete="off" />
+                                                    <label for="oferta">Ingrese una oferta a buscar </label>
+                                                </div>
+
+                                            </td>
+                                            <td style="vertical-align:middle;">
+                                                <div class="form-group">
+
+                                                    <select class="mdb-select md-form" name="comuna" id="comuna" searchable="Buscar Comuna..">
+                                                        <option disabled selected value="0">Seleccione comuna</option>
+                                                        <option value="1">Maipu</option>
+                                                        <option value="2">Santiago</option>
+
+                                                    </select>
+
+                                                </div>
+
+                                            </td>
+                                            <td style="vertical-align:middle;">
+                                                <a href="javascript:void(0);" id="buscarFiltrosApp" class="btn btn-outline-success btn-block p-2 shadow rounded-pill"><i class="fa fa-eye"></i> BUSCAR</a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    @using (Ajax.BeginForm("Empleos", "App", null, new AjaxOptions()
+                                    {
+                                        HttpMethod = "POST",
+                                        UpdateTargetId = "ViewDetalleEmpleos",
+                                        InsertionMode = InsertionMode.Replace,
+                                        LoadingElementId = "loader"
+                                    }, new { @style = "display: none;" }))
+                                    {
+                                        <input type="hidden" name="nombrePublicacion" id="hiddenNombreOferta" />
+                                        <input type="hidden" name="comuna" id="hiddenComuna" />
+                                        <button type="submit" style="display:none" id="buscarFiltrosApp2" class="btn btn-outline-primary form-control"><i class="fa fa-eye"></i> FILTRAR</button>
+                                    }
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Avisos que se adaptan a tu perfil</h5>
+                            @if (ViewBag.referenciaEmpleosAPerfil.Count > 0)
+                            {
+                                foreach (var itemempleos in ViewBag.referenciaEmpleosAPerfil as ICollection<Model.Models.DetallePublicacion>)
+                                {
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12" style="box-shadow:none;" id="card-3">
+                                            <div class="border" style="padding:15px; border: 5px;">
+                                                <div class="row no-gutters align-items-center">
+                                                    <a href="@Url.Action("Empleos", "App", new { nombrePublicacion = "", comuna = "", idPublicacion = itemempleos.IdPublicacion })" class="text-primary" title="Ver publicacion" style="width: 100%; color:#808080;">
+                                                        @itemempleos.TituloPublicacion
+                                                    </a>
+                                                </div>
+                                                <div class="row no-gutters align-items-center">
+                                                    <div class="col mr-2">
+                                                        <div class="font-weight-bold text-uppercase mb-1">
+                                                            @itemempleos.FechaPublicacion
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <p><a class="text-primary" href="@Url.Action("PerfilEmpresaLectura","App", new { idEmpresa =  @itemempleos.IdAutor })"> @itemempleos.AutorPublicacion</a></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

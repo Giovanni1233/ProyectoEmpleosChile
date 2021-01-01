@@ -1,11 +1,12 @@
 ﻿$(document).ready(function () {
+   
     // cargamos el ordenamiento principal
     var ordenamiento = $('input[type = radio][name = radioOrdenamiento]').val();
     $("#hiddenOrdenamiento").val(ordenamiento);
 
-    var valoracion = $('input[type = radio][name = radioVotacion]').val();
-    $("#hiddenvotoIndicado").val(valoracion);
-
+    $('input[type=radio][name=radioVotacion]').change(function () {
+        $("#hiddenvotoIndicado").val(this.value);
+    });
 
     $('.mdb-select').materialSelect();
     $('.collapse').collapse()
@@ -79,7 +80,7 @@
 
     // Cerrar sesion usuario
     $(document).on('click', ".signOut", function () {
-        var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Auth/";
+        var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Empresa/";
 
         ajaxCierraSesion(controller);
     });
@@ -203,7 +204,7 @@
         })
     });
 
-
+   
     $(document).on('keypress', ".soloNumeros", function (e) {
         tecla = (document.all) ? e.keyCode : e.which;
         if (tecla == 8) {
@@ -395,10 +396,11 @@
     $(document).on('click', ".btnAgregarPregunta", function () {
         var controller = '';
         var nombrePregunta = $("#nombrePregunta").val();
+        var tipoPregunta = $("#tipoPregunta").val();
 
         controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Empresa/";
 
-        ajaxRegistroPreguntasEmpresa(controller, nombrePregunta);
+        ajaxRegistroPreguntasEmpresa(controller, nombrePregunta, tipoPregunta);
     });
 
     // Escritura de combos
@@ -459,11 +461,10 @@
     $(document).on('click', "#valorarPublicacion", function () {
 
         var valorvotacion = $('#hiddenvotoIndicado').val();
-        var idPublicacion = $("#idPublicacion").val();
-        var idUsuario = $("#idUsuario").val();
-        var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Empresa/";
+        var idPublicacion = $("#idPublicacionV").val();
+        var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/App/";
 
-        ajaxGuardarValoracionPublicacion(controller, valorvotacion, idPublicacion, idUsuario);
+        ajaxGuardarValoracionPublicacion(controller, valorvotacion, idPublicacion);
     });
 
 
@@ -701,3 +702,47 @@ function GetControllerAuth() {
 
     return prefixDomain + prefix;
 }
+
+
+// Filtros App
+
+// Escritura de combos
+$(document).on('keyup', "#nombrePublicacion", function () {
+    var nombre = $("#nombrePublicacion").val();
+
+    $("#hiddenNombreOferta").val(nombre);
+
+});
+
+$(document).on('change', "#comuna", function () {
+    var fecha = $("#comuna").val();
+
+    $("#hiddenComuna").val(fecha);
+
+});
+
+$(document).on('click', "#buscarFiltrosApp", function () {
+    $("#buscarFiltrosApp2").trigger("click");
+
+});
+
+// filtros pagina 2
+$(document).on('click', "#buscarFiltrosAppPublicacion", function () {
+    $("#buscarFiltrosPagEmpleos").trigger("click");
+
+});
+
+// Escritura de combos
+$(document).on('keyup', "#nombrePublicacionPag2", function () {
+    var nombre = $("#nombrePublicacionPag2").val();
+
+    $("#hiddenNombre2").val(nombre);
+
+});
+
+$(document).on('change', "#sueldoBusqueda", function () {
+    var sueldo = $("#sueldoBusqueda").val();
+
+    $("#hiddenSueldo").val(sueldo);
+
+});

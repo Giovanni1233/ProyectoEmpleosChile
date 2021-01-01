@@ -1,0 +1,79 @@
+﻿<nav class="navbar navbar-expand-lg" id="panelFiltros2">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="col-sm-12">
+            <table class="table table-bordered table-responsive-lg">
+                <tr>
+                    <td style="vertical-align:middle; opacity: 1; background: #ffffff; color: #000;">
+                        <div class="md-form form-sm">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h5>Filtros</h5>
+                                </div>
+                            </div>
+                        </div>
+
+                    </td>
+                    <td style="vertical-align:middle; opacity: 1; background: #ffffff; color: #000;">
+                        <div class="md-form form-sm" style="margin: auto;">
+                            <input type="text" id="nombrePublicacionPag2" name="nombrePublicacionPag2" class="form-control soloLetras" style="font-family: 'Roboto', sans-serif;" maxlength="100" tabindex="2" autocomplete="off" />
+                            <label for="oferta">Ingrese una oferta u oficio a buscar </label>
+                        </div>
+
+                    </td> 
+                    @*<td style="vertical-align:middle;">
+                        <div class="form-group">
+
+                            <select class="mdb-select md-form" name="fecha" id="fecha" searchable="Buscar fecha..">
+                                <option disabled selected value="0">Seleccione una fecha</option>
+                                <option value="1">Urgente</option>
+                                <option value="2">Hace 1 mes</option>
+                                <option value="3">Hace 3 meses</option>
+                                <option value="4">Hace 6 meses</option>
+                                <option value="5">Hace 1 año</option>
+                            </select>
+
+                        </div>
+
+                    </td>*@
+                    
+                    <td style="vertical-align:middle; opacity: 1; background: #ffffff; color: #000;">
+                        <div class="form-group">
+
+                            <select class="mdb-select md-form" name="sueldoBusqueda" id="sueldoBusqueda" searchable="Buscar sueldo..">
+                                <option disabled selected value="0">Seleccione un sueldo</option>
+                                <option value="1">0 - 300.000</option>
+                                <option value="2">301.000 - 600.000</option>
+                                <option value="3">601.000 - 1.000.000</option>
+                                <option value="4">Mayor a 1.000.000</option>
+                            </select>
+
+                        </div>
+                    </td>
+                    <td style="vertical-align:middle; opacity: 1; background: #ffffff; color: #000;">
+                        <a href="javascript:void(0);" id="buscarFiltrosAppPublicacion" class="btn btn-success btn-block p-2 shadow rounded-pill"><i class="fa fa-eye"></i> BUSCAR</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="form-group">
+            <div>
+                @using (Ajax.BeginForm("Empleos", "App", new AjaxOptions()
+                {
+                    HttpMethod = "POST",
+                    UpdateTargetId = "ViewPublicacionesP",
+                    InsertionMode = InsertionMode.Replace,
+                    LoadingElementId = "loader"
+                }, new { @style = "display: none;" }))
+                {
+                    <input type="hidden" name="nombrePublicacion" id="hiddenNombre2" />
+                    <input type="hidden" name="fecha" id="hiddenFecha" />
+                    <input type="hidden" name="sueldo" id="hiddenSueldo" />
+                    <button type="submit" style="display:none" id="buscarFiltrosPagEmpleos" class="btn btn-outline-primary form-control"><i class="fa fa-eye"></i> FILTRAR</button>
+
+                }
+            </div>
+        </div>
+
+    </div>
+</nav>
+<hr />

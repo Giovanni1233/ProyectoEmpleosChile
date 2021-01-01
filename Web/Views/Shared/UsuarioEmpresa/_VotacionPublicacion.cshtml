@@ -6,27 +6,14 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-
-        <input type="hidden" name="idPublicacion" value="@ViewBag.IdPublicacion" id="idPublicacion" />
-        @if (Session["IDempresa"] != null && ((string)Session["IDempresa"]) != "")
+        @if (ViewBag.ContadorVotos != null && ViewBag.ContadorVotos != "")
         {
-            <input type="hidden" name="idUsuario" value="@Session["IDempresa"]" id="idUsuario" />
-        }
-        else if (Session["IdUsuario"] != null && ((string)Session["IdUsuario"]) != "")
-        {
-            <input type="hidden" name="idUsuario" value="@Session["IdUsuario"]" id="idUsuario" />
-        }
-        @if (ViewBag.VotoRealizado == null || ViewBag.VotoRealizado == "0")
-        {
-            <div class="row">
-                <p><h6>Aún no se han realizado votaciones para esta publicación</h6></p>
-            </div>
+            <p>Total votaciones: @ViewBag.ContadorVotos</p>
+            <p>Promedio votaciones: @ViewBag.PromedioVotos</p>
         }
         else
         {
-            <div class="row">
-                <p><h6>Su voto para esta publicación fue de: @ViewBag.VotoRealizado </h6></p>
-            </div>
+            <p class="text-center"><h6>Aún no se han realizado votaciones para esta publicación</h6></p>
         }
 
     </div>

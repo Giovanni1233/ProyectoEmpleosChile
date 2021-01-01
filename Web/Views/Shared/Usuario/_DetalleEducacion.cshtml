@@ -1,0 +1,105 @@
+﻿<div class="row" style="margin-bottom:10px;">
+    <div class="col-md-12">
+
+        <select class="mdb-select md-form" name="centroNombre" id="centroNombre" searchable="Estado..">
+            <option value="" disabled selected>Seleccione una institución</option>
+            @foreach (var itemInst in ViewBag.referenciaInstituciones as ICollection<Model.Models.Instituciones>)
+            {
+                <option value="@itemInst.IdInstitucion">@itemInst.nombreInstitucion</option>
+            }
+
+        </select>
+        @*<div class="col-md-12"><label class="labels">Centro educativo</label><input type="text" class="form-control" placeholder="Ingrese centro educativo" style="margin-bottom:10px;" name="centroNombre" id="centroNombre" value=""></div>*@
+    </div>
+</div>
+<div class="row" style="margin-bottom:10px;">
+    <div class="col-md-6">
+        <label class="labels">Desde</label>
+        <input type="date" name="fechaDesdeEdu" id="fechaDesdeEdu" class="form-control" style="font-family: 'Roboto', sans-serif; margin-bottom:10px;" tabindex="10" autocomplete="off" />
+    </div>
+    <div class="col-md-6">
+        <label class="labels">Hasta</label>
+        <input type="date" name="fechaHastaEdu" id="fechaHastaEdu" class="form-control" style="font-family: 'Roboto', sans-serif;" tabindex="10" autocomplete="off" />
+    </div>
+
+</div>
+<div class="row" style="margin-bottom:10px;">
+    <div class="col-md-6">
+        <label class="labels">Descripcion</label>
+        <textarea class="form-control" rows="5" style="resize:none; width:100%; max-width:100%;" name="descripcionEducacion" id="descripcionEducacion"></textarea>
+    </div>
+    <div class="col-md-6">
+        <label class="labels">Estado educación</label>
+        <select class="mdb-select md-form" name="estadoEdu" id="estadoEdu" searchable="Estado..">
+            <option value="" disabled selected>Seleccione una opción</option>
+            <option value="0">Titulado</option>
+            <option value="1">Cursando</option>
+            <option value="2">Abandonado</option>
+
+        </select>
+    </div>
+
+
+</div>
+<div class="row" id="tituloEducacionDiv" style="margin-bottom:10px; display:none;">
+    <div class="col-md-12"><label class="labels">Titulo</label><input type="text" class="form-control" autocomplete="off" placeholder="Ingrese titulo" style="margin-bottom:10px;" name="tituloNombreEdu" id="tituloNombreEdu" value=""></div>
+
+</div>
+<div class="row">
+    <a href="javascript:void(0);" class="btn btn-primary" id="btnAgregarEducacion"><span class="fa fa-plus-circle">&nbsp;&nbsp;</span> Agregar</a>
+</div>
+<br />
+@if (ViewBag.referenciaEducacionUsuario.Count > 0)
+{
+    <div class="row">
+        <br />
+        <h5>Formaciones registradas</h5>
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>Titulo</th>
+                    <th>Centro formación</th>
+                    <th>Fecha Desde / Hasta</th>
+                    <th align="center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var itemedu in ViewBag.referenciaEducacionUsuario as ICollection<Model.Models.EducacionUsuario>)
+                {
+                    <tr>
+                        <td>
+                            @if (itemedu.TituloEducacion == "")
+                            {
+                                <p>Cursando</p>
+                            }
+                            else
+                            {
+                                @itemedu.TituloEducacion
+                            }
+                        </td>
+                        <td>@itemedu.InstitucionEducacion</td>
+                        <td>@itemedu.FechaDesdeEducacion / @itemedu.FechaHastaEducacion</td>
+                        <td>
+                            <a href="javascript:void(0);" style="font-size:16px;" class="text-danger" onclick="return EliminarEducacion(@itemedu.IdEducacion);" title="Eliminar"><span class="far fa-times-circle"></span></a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+    <hr />
+}
+else
+{
+    <div class="error-template">
+
+        <div class="error-details">
+            <h6>   No se encontraron instituciones registradas.</h6>
+
+        </div>
+
+    </div>
+    <hr />
+}

@@ -1,0 +1,92 @@
+﻿<div class="row" style="margin-bottom:10px;">
+    <div class="col-md-6">
+        <label class="labels">Idioma</label>
+        <select class="mdb-select md-form" name="idiomaId" id="idiomaId" searchable="Idioma..">
+            <option value="" disabled selected>Seleccione una opción</option>
+            @foreach (var itemIdioma in ViewBag.referenciaIdiomas as ICollection<Model.Models.Idioma>)
+            {
+                <option value="@itemIdioma.idIdioma">@itemIdioma.nombreIdioma</option>
+            }
+
+        </select>
+    </div>
+    <div class="col-md-6">
+        <label class="labels">Nivel</label>
+        <select class="mdb-select md-form" name="nivelIdioma" id="nivelIdioma" searchable="Nivel idioma..">
+            <option value="" disabled selected>Seleccione una opción</option>
+            <option value="0">Bajo</option>
+            <option value="1">Medio</option>
+            <option value="2">Alto</option>
+            <option value="3">Nativo</option>
+
+        </select>
+    </div>
+
+</div>
+<div class="row">
+    <a href="javascript:void(0);" class="btn btn-primary" id="btnAgregarIdioma"><span class="fa fa-plus-circle">&nbsp;&nbsp;</span> Agregar</a>
+</div>
+<br />
+@if (ViewBag.referenciaIdiomasUsuario.Count > 0)
+{
+    <div class="row">
+        <br />
+        <h5>Idiomas registrados</h5>
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>Idioma</th>
+                    <th>Nivel</th>
+                    <th align="center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var itemidioma in ViewBag.referenciaIdiomasUsuario as ICollection<Model.Models.IdiomasUsuario>)
+                {
+                    <tr>
+                        <td>
+                            @itemidioma.NombreIdioma
+                        </td>
+                        <td>
+                            @if (itemidioma.NivelIdioma == "0")
+                            {
+                                <p>Bajo</p>
+                            }
+                            else if (itemidioma.NivelIdioma == "1")
+                            {
+                                <p>Medio</p>
+                            }
+                            else if (itemidioma.NivelIdioma == "2")
+                            {
+                                <p>Alto</p>
+                            }
+                            else if (itemidioma.NivelIdioma == "3")
+                            {
+                                <p>Nativo</p>
+                            }
+                        </td>
+
+                        <td>
+                            <a href="javascript:void(0);" style="font-size:16px;" class="text-danger" onclick="return EliminarIdioma(@itemidioma.idIdioma);" title="Eliminar"><span class="far fa-times-circle"></span></a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+    <hr />
+}
+else
+{
+    <div class="error-template">
+
+        <div class="error-details">
+            <h6>   No se encontraron idiomas registradas.</h6>
+
+        </div>
+
+    </div>
+    <hr />
+}

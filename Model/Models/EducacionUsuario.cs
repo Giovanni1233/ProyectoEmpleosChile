@@ -7,6 +7,7 @@ namespace Model.Models
 {
     public class EducacionUsuario
     {
+        public string IdEducacion { get; set; }
         public string TituloEducacion { get; set; }
         public string DescripcionEducacion { get; set; }
         public string InstitucionEducacion { get; set; }

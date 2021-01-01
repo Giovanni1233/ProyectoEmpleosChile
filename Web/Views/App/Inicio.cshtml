@@ -17,12 +17,27 @@
     }
 
 
-
-    <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin: 20px 0px 0px 20px;">
-        @Html.Partial("App/_Filtros")
+    <div id="ViewFiltros" class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin: 20px 0px 0px 20px;">
+        @Html.Partial("App/_InformacionEmpleosChile")
     </div>
+    @*<div class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin: 20px 0px 0px 20px;">
+            @Html.Partial("App/_Filtros")
+        </div>*@
+    <div id="ViewFiltros" class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin: 20px 0px 0px 20px;">
+        @Html.Partial("App/_EmpresasConPlanes")
+    </div>
+
+    @*<div id="ViewFiltros" class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin: 20px 0px 0px 20px;">
+            @Html.Partial("App/_EmpleosSolicitados")
+        </div>*@
 
     <div id="ViewFiltros" class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin: 20px 0px 0px 20px;">
-        @Html.Partial("App/_Empleos")
+        @Html.Partial("Empresa/_Nosotros")
     </div>
+
+ 
+
+
+
+
 }

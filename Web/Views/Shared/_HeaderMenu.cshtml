@@ -9,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
+
     @Styles.Render("~/bundles/bootstrapcss")
     @Styles.Render("~/bundles/jqueryuicss")
     @Scripts.Render("~/bundles/jquery")
@@ -33,14 +34,17 @@
 
             <div class="col-3 col-sm-3 col-md-4 col-lg-5 float-left">
                 <nav id="navbar-example2" class="navbar">
-
+                    
                     <ul class="nav nav-pills">
-                        @if (Session["Usuario"] != null && ((string)Session["Usuario"]) != "")
+                        <li class="nav-item">
+                            <a class="nav-link border-light" href="@Url.Action("Inicio","App")">Inicio</a>
+                        </li>
+                        @if (ViewBag.ReferenciaIdUser != null && ViewBag.ReferenciaIdUser != "")
                         {
-                            if (((string)Session["TipoUsuario"]) == "N")
+                            if (ViewBag.ReferenciaUserType == "N")
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link border-light" href="#">Publica tu oferta</a>
+                                    <a class="nav-link NewPublicacion" href="javascript:void(0);">Publica tu oferta</a>
                                 </li>
                             }
                         }
@@ -49,6 +53,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="@ViewBag.ReferenciaRegistro">Registrarse</a>
                             </li>
+
                         }
 
                     </ul>
@@ -62,20 +67,21 @@
                     <ul class="nav nav-pills">
                         @if (ViewBag.ReferenciaIdUser != null && ViewBag.ReferenciaIdUser != "")
                         {
-                            <li class="nav-item">
-                                    <a class="nav-link NewPublicacion" href="javascript:void(0);">Publicar</a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@ViewBag.ReferenciaUserName</a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">Perfil</a>
-                                        <div role="separator" class="dropdown-divider"></div>
-                                        <a class="dropdown-item" id="signOutUser" href="#">Cerrar Sesión</a>
-                                    </div>
+                            
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@ViewBag.ReferenciaUserName</a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="@Url.Action("Perfil","Usuario")">Perfil</a>
+                                    <a class="dropdown-item" href="@Url.Action("PerfilInformal","Usuario")">Perfil Informal (Oficios)</a>
+                                    <a class="dropdown-item" href="@Url.Action("Curriculum","Usuario")">Mi Curriculum</a>
+                                    <div role="separator" class="dropdown-divider"></div>
+                                    <a class="dropdown-item" id="signOutUser" href="#">Cerrar Sesión</a>
+                                </div>
                             </li>
                         }
                         else
                         {
+                            
                             <li class="nav-item">
                                 <a class="nav-link border-light" href="@Url.Action("Index","Empresa")">Empresa</a>
                             </li>

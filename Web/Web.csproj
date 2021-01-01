@@ -124,6 +124,7 @@
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\PagosController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\UsuarioEmpresaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -139,7 +140,10 @@
     <Content Include="Content\App\cursor.css" />
     <Content Include="Content\App\display.css" />
     <Content Include="Content\App\estiloPublicaciones.css" />
+    <Content Include="Content\App\EstilosCarrusel.css" />
     <Content Include="Content\App\estilosError.css" />
+    <Content Include="Content\App\EstilosInicio.css" />
+    <Content Include="Content\App\EstilosPerfilProfesional.css" />
     <Content Include="Content\App\estilosPlanes.css" />
     <Content Include="Content\App\estilosPlanes2.css" />
     <Content Include="Content\App\font-size.css" />
@@ -153,6 +157,7 @@
     <Content Include="Content\App\menu.css" />
     <Content Include="Content\App\padding.css" />
     <Content Include="Content\App\paginator.css" />
+    <Content Include="Content\App\TabsMenuPerfil.css" />
     <Content Include="Content\App\teamwork-auth.css" />
     <Content Include="Content\App\teamwork-files.css" />
     <Content Include="Content\App\text-decoration.css" />
@@ -167,12 +172,18 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Imagenes\algoogo.png" />
+    <Content Include="Imagenes\Documento.jpg" />
     <Content Include="Imagenes\giova LETRA arial.png" />
     <Content Include="Imagenes\giovanni LETRA ARIAL.png" />
+    <Content Include="Imagenes\ImagenImportante.png" />
+    <Content Include="Imagenes\Inicio2.jpg" />
     <Content Include="Imagenes\Nosotros\AccesoSel.jpg" />
     <Content Include="Imagenes\Nosotros\NovedadesSel.png" />
     <Content Include="Imagenes\Nosotros\PersonalSel.jpg" />
     <Content Include="Imagenes\Nosotros\Sobre ti.jpg" />
+    <Content Include="Imagenes\Obreros2.jpg" />
+    <Content Include="Imagenes\Procesos.jpg" />
+    <Content Include="Imagenes\SubeTuFoto.jpg" />
     <Content Include="MaterialDesign\css\addons-pro\cards-extended.css" />
     <Content Include="MaterialDesign\css\addons-pro\cards-extended.min.css" />
     <Content Include="MaterialDesign\css\addons-pro\chat.css" />
@@ -666,6 +677,7 @@
     <Content Include="Plugins\dropify-master\src\sass\demo\_variables.scss" />
     <Content Include="Plugins\dropify-master\src\sass\dropify.scss" />
     <Content Include="Plugins\dropify-master\src\sass\_dropify-font.scss" />
+    <Content Include="FilesCV\MTJDViBIw6ljdG9yIFBhcmFkYS5wZGY=.pdf" />
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery-3.5.1.min.js" />
@@ -875,6 +887,39 @@
     <Content Include="Views\Shared\Empresa\_DetallePagosEmpresa.cshtml" />
     <Content Include="Views\Empresa\PagosEmpresa.cshtml" />
     <Content Include="Views\Shared\Empresa\_DetalleDevoluciones.cshtml" />
+    <Content Include="Views\Shared\App\_InformacionEmpleosChile.cshtml" />
+    <Content Include="Views\Shared\App\_EmpresasRegistradas.cshtml" />
+    <Content Include="Views\Shared\App\_EmpleosSolicitados.cshtml" />
+    <Content Include="Views\Shared\App\_EmpresasConPlanes.cshtml" />
+    <Content Include="Views\App\Empleos.cshtml" />
+    <Content Include="Views\App\PerfilEmpresaLectura.cshtml" />
+    <Content Include="Views\Shared\App\_DetallePerfil.cshtml" />
+    <Content Include="Views\Shared\App\Principal.cshtml" />
+    <Content Include="Views\Shared\App\_FiltroPublicaciones.cshtml" />
+    <Content Include="Views\Shared\App\_DetallePublicacion.cshtml" />
+    <Content Include="Views\Shared\App\_Publicaciones.cshtml" />
+    <Content Include="Views\Usuario\Perfil.cshtml" />
+    <Content Include="Views\Shared\Usuario\_AreaUsuario.cshtml" />
+    <Content Include="Views\Shared\Usuario\_Postulaciones.cshtml" />
+    <Content Include="Views\Shared\Usuario\_Curriculum.cshtml" />
+    <Content Include="Views\Shared\Usuario\_Publicaciones.cshtml" />
+    <Content Include="Views\Shared\Usuario\_Oficios.cshtml" />
+    <Content Include="Views\Shared\Usuario\_Mensajes.cshtml" />
+    <Content Include="Views\Shared\App\_ModalMensajeAEmpresa.cshtml" />
+    <Content Include="Views\Shared\Usuario\_HistorialMensajes.cshtml" />
+    <Content Include="Views\Shared\Usuario\_DetalleHistorialMensaje.cshtml" />
+    <Content Include="Views\Shared\Usuario\_DetalleCurriculum.cshtml" />
+    <Content Include="Views\Shared\Usuario\_DetalleHabilidades.cshtml" />
+    <Content Include="Views\Shared\Usuario\_DetalleIdiomas.cshtml" />
+    <Content Include="Views\Shared\Usuario\_DetalleExperiencias.cshtml" />
+    <Content Include="Views\Shared\Usuario\_DetalleEducacion.cshtml" />
+    <Content Include="Views\Shared\Usuario\_ApartadoSubirCurriculum.cshtml" />
+    <Content Include="Views\Shared\Usuario\_ApartadoAreaPerfil.cshtml" />
+    <Content Include="Views\Shared\Usuario\_MiArea.cshtml" />
+    <Content Include="Views\Shared\Usuario\_ApartadoInformacionExtraArea.cshtml" />
+    <Content Include="Views\Shared\App\_ComentariosUsuarios.cshtml" />
+    <Content Include="Views\Shared\App\_VotacionPublicacionUsuarios.cshtml" />
+    <Content Include="Views\Shared\App\_ModalPreguntasPublicacion.cshtml" />
     <Content Include="Views\Shared\App\_FileUpload.cshtml" />
   </ItemGroup>
   <ItemGroup>

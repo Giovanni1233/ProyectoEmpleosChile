@@ -1,4 +1,5 @@
-﻿function ajaxSignInUser(controller, user, pass) {
+﻿
+function ajaxSignInUser(controller, user, pass) {
     $.ajax({
         type: 'POST',
         url: controller + 'SignInUser',
@@ -147,6 +148,291 @@ function ajaxViewPartialErrorSignIn(controller, message) {
             $("#username").focus();
         }
     });
+}
+
+
+// Agregado giovanni diaz 26-12-2020
+function ajaxEnviarMensajeAEmpresa(controller, empresa, mensaje) {
+    $.ajax({
+        type: 'POST',
+        url: controller + 'GuardarEnvioMensajeAEmpresa',
+        data: '{ idEmpresa: "' + empresa + '", mensaje: "' + mensaje + '"}',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: true,
+        success: function (response) {
+            if (response.data == 1) {
+                window.location.reload();
+            }
+        }
+    });
+}
+
+// Responder mensaje a usuario
+
+function ajaxResponderMensajeAReceptor(controller, idMensaje, idAutor, mensaje) {
+
+    $.ajax({
+        type: 'POST',
+        url: controller + 'GuardarRespuestaMensajeAReceptor',
+        data: '{ idMensaje: "' + idMensaje + '", idAutor: "' + idAutor + '", mensaje: "' + mensaje + '"}',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: true,
+        success: function (response) {
+            if (response.data == 1) {
+                window.location.reload();
+            }
+        }
+    });
+}
+
+
+
+// guardar experiencia en perfil usuario
+
+function ajaxRegistroExperienciaPerfilUsuario(controller, empresaNombre, destacoEmpresa, mejorarEmpresa, fechaD, fechaH, actualmente, descripcion, recomendacion) {
+
+    $.ajax({
+        type: 'POST',
+        url: controller + 'GuardarExperienciaPerfilUsuario',
+        data: '{ empresaNombre: "' + empresaNombre + '", recomendacion: "' + recomendacion + '", descripcion: "' + descripcion + '", destacoEmpresa: "' + destacoEmpresa + '", mejorarEmpresa: "' + mejorarEmpresa + '", fechaD: "' + fechaD + '", fechaH: "' + fechaH + '", actualmente: "' + actualmente + '"}',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: true,
+        success: function (response) {
+            if (response.data == 1) {
+                window.location.reload();
+            }
+        }
+    });
+}
+
+
+function EliminarExperiencia(idExperiencia) {
+    var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Usuario/";
+    $.ajax({
+        type: 'POST',
+        url: controller + 'EliminarExperienciaPerfilUsuario',
+        data: '{ idExperiencia: "' + idExperiencia + '"}',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: true,
+        success: function (response) {
+            if (response.data == 1) {
+                window.location.reload();
+            }
+        }
+    });
+}
+
+
+// guardar educacion usuario perfil 
+function ajaxRegistroEducacionPerfilUsuario(controller, centroNombre, estadoEdu, tituloNombreEdu, fechaD, fechaH, descripcion) {
+
+    $.ajax({
+        type: 'POST',
+        url: controller + 'GuardarEducacionPerfilUsuario',
+        data: '{ centroNombre: "' + centroNombre + '", estadoEdu: "' + estadoEdu + '", tituloNombreEdu: "' + tituloNombreEdu + '", descripcion: "' + descripcion + '", fechaD: "' + fechaD + '", fechaH: "' + fechaH + '"}',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: true,
+        success: function (response) {
+            if (response.data == 1) {
+                window.location.reload();
+            }
+        }
+    });
+}
+
+function EliminarEducacion(idEducacion) {
+    var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Usuario/";
+    $.ajax({
+        type: 'POST',
+        url: controller + 'EliminarEducacionPerfilUsuario',
+        data: '{ idEducacion: "' + idEducacion + '"}',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: true,
+        success: function (response) {
+            if (response.data == 1) {
+                window.location.reload();
+            }
+        }
+    });
+}
+
+// // guardar idioma usuario perfil 
+function ajaxRegistroIdiomaPerfilUsuario(controller, idiomaId, nivelIdioma) {
+
+    $.ajax({
+        type: 'POST',
+        url: controller + 'GuardarIdiomaPerfilUsuario',
+        data: '{ idIdioma: "' + idiomaId + '", nivel: "' + nivelIdioma + '"}',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: true,
+        success: function (response) {
+            if (response.data == 1) {
+                window.location.reload();
+            }
+        }
+    });
+}
+
+function EliminarIdioma(idIdioma) {
+    var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Usuario/";
+    $.ajax({
+        type: 'POST',
+        url: controller + 'EliminarIdiomaPerfilUsuario',
+        data: '{ idIdioma: "' + idIdioma + '"}',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: true,
+        success: function (response) {
+            if (response.data == 1) {
+                window.location.reload();
+            }
+        }
+    });
+}
+
+
+// // guardar habilidad usuario perfil 
+function ajaxRegistroHabilidadPerfilUsuario(controller, habilidadID, nivelHabilidad) {
+
+    $.ajax({
+        type: 'POST',
+        url: controller + 'GuardarHabilidadPerfilUsuario',
+        data: '{ idHabilidad: "' + habilidadID + '", nivel: "' + nivelHabilidad + '"}',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: true,
+        success: function (response) {
+            if (response.data == 1) {
+                window.location.reload();
+            }
+        }
+    });
+}
+
+function EliminarHabilidad(idHabilidad) {
+    var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Usuario/";
+    $.ajax({
+        type: 'POST',
+        url: controller + 'EliminarHabilidadPerfilUsuario',
+        data: '{ IdHabilidad: "' + idHabilidad + '"}',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: true,
+        success: function (response) {
+            if (response.data == 1) {
+                window.location.reload();
+            }
+        }
+    });
+}
+
+// // guardar datos usuario perfil 
+function ajaxRegistroPerfilUsuario(controller, nombre1, nombre2, apellido1, apellido2, telefono, correo, descripcion) {
+
+    $.ajax({
+        type: 'POST',
+        url: controller + 'GuardarDatosPerfilUsuario',
+        data: '{ nombre1: "' + nombre1 + '",nombre2: "' + nombre2 + '",apellido1: "' + apellido1 + '",apellido2: "' + apellido2 + '", telefonoPerfil: "' + telefono + '", correoPerfil: "' + correo + '", descripcionPersonal: "' + descripcion + '"}',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: true,
+        success: function (response) {
+            if (response.data == 1) {
+                window.location.reload();
+            }
+        }
+    });
+}
+
+// // guardar datos usuario perfil 
+function ajaxRegistroPerfilProfesionalUsuario(controller, tituloperfil, descripcionperfil) {
+
+    $.ajax({
+        type: 'POST',
+        url: controller + 'GuardarDatosPerfilProfesionalUsuario',
+        data: '{ tituloperfil: "' + tituloperfil + '", descripcionperfil: "' + descripcionperfil + '" }',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: true,
+        success: function (response) {
+            if (response.data == 1) {
+                window.location.reload();
+            }
+        }
+    });
+}
+
+
+// postulacion a empleo
+function PostularEmpleo(dato1, idPublicacion) {
+    var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/App/";
+    $.ajax({
+        type: 'POST',
+        url: controller + 'CargarDatosPreguntas',
+        data: '{ idPublicacion: "' + idPublicacion + '" }',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: true,
+        success: function (response) {
+            if (response.datos != "") {
+                $("#preguntasSinDescripcion").empty();
+                for (var i = 0; i < response.datos.length; i++) {
+                        $('#preguntasSinDescripcion').append('<label>' + response.datos[i].PreguntaNombre + ': </label><input type = "text" class="form-control" name = "inputMultiples[]"  id = "' + response.datos[i].NombreCorto + '" /> ');
+                   
+                }
+                //$.each(response.datos, function (i, val) {
+                //    if (val.TipoPregunta == "1") {
+
+                //        $('.preguntasSinDescripcion').append('<label>' + val.PreguntaNombre + ': </label><input type = "text" class="form-control" name = "' + val.NombreCorto + '"  id = "' + val.NombreCorto + '" /> ');
+                //    }
+
+                //    if (val.TipoPregunta == "2") {
+                //        $('.preguntasConDescripcion').append('<label for="val.Nombre">' + val.PreguntaNombre + ': </label><textarea class= "form-control" rows = "5" style = "resize:none; width:100%; max-width:100%;" name = "' + val.NombreCorto + '" id = "' + val.NombreCorto + '" ></textarea >')
+                //    }
+                   
+                //});
+                $("#modalPreguntasPublicacion").modal("show");
+            }
+        }
+    });
+
+
+
+    //if (idUsuario == 0) {
+    //    Swal.fire({
+    //        position: 'center',
+    //        icon: 'error',
+    //        title: 'Debe loguearse para postular',
+    //        showConfirmButton: false,
+    //        timer: 1500
+    //    })
+    //    return false;
+    //}
+    //else {
+
+    //    var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Usuario/";
+    //    $.ajax({
+    //        type: 'POST',
+    //        url: controller + 'GuardarPostulacionEmpleo',
+    //        data: '{ idPublicacion: "' + idPublicacion + '" }',
+    //        dataType: 'json',
+    //        contentType: 'application/json',
+    //        async: true,
+    //        success: function (response) {
+    //            if (response.data == 1) {
+    //                window.location.reload();
+    //            }
+    //        }
+    //    });
+    //}
+
 }
 
 

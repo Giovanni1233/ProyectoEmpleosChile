@@ -1,0 +1,102 @@
+﻿@*<a data-toggle="collapse" href="#collapseExperiencia" role="button" aria-expanded="false" id="collapseExperienciaBTN"><span class="fa fa-plus-circle"> </span> Añadir</a>
+
+    <div class="collapse" id="collapseExperiencia">*@
+<div class="row" style="margin-bottom:10px;">
+    <div class="col-md-12"><label class="labels">Empresa</label><input type="text" autocomplete="off" class="form-control" placeholder="Ingrese empresa" style="margin-bottom:10px;" name="empresaNombre" id="empresaNombre" value=""></div>
+
+</div>
+<div class="row">
+
+    <div class="col-md-6"><label class="labels">Qué destacarías de la empresa</label><input type="text" autocomplete="off" class="form-control" style="margin-bottom:10px;" placeholder="Ejemplo: Trato de personas" name="destacoEmpresa" id="destacoEmpresa" value=""></div>
+    <div class="col-md-6"><label class="labels">Qué mejorarías de la empresa</label><input type="text" autocomplete="off" class="form-control" style="margin-bottom:10px;" placeholder="Ejemplo: No hay descanso para las personas" name="mejorarEmpresa" id="mejorarEmpresa" value=""></div>
+</div>
+<div class="row" style="margin-bottom:10px;">
+    <div class="col-md-6">
+        <label class="labels">Desde</label>
+        <input type="date" name="fechaDesde" id="fechaDesde" class="form-control" style="font-family: 'Roboto', sans-serif; margin-bottom:10px;" tabindex="10" autocomplete="off" />
+    </div>
+    <div class="col-md-6">
+        <label class="labels">Hasta</label>
+        <input type="date" name="fechaHasta" id="fechaHasta" class="form-control" style="font-family: 'Roboto', sans-serif;" tabindex="10" autocomplete="off" />
+    </div>
+
+</div>
+<div class="row" style="margin-bottom:10px;">
+    <div class="col-md-6">
+        <label class="labels">Descripcion</label>
+        <textarea class="form-control" rows="5" style="resize:none; width:100%; max-width:100%;" name="descripcionExperiencia" id="descripcionExperiencia"></textarea>
+    </div>
+    <div class="col-md-6">
+        <label class="labels">Recomendación</label>
+        <select class="mdb-select md-form" name="recomendacion" id="recomendacion" searchable="Recomendacion..">
+            <option value="" disabled selected>Seleccione una opción</option>
+            <option value="1">Si</option>
+            <option value="0">No</option>
+
+        </select>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <input name="actualmente" type="checkbox" id="actualmente" value="1"> <label class="labels" for="actualmente">Actualmente</label>
+    </div>
+
+
+</div>
+<div class="row">
+    <a href="javascript:void(0);" class="btn btn-primary" id="btnAgregarExperiencia"><span class="fa fa-plus-circle">&nbsp;&nbsp;</span> Agregar</a>
+</div>
+@*</div>*@
+
+<br />
+@if (ViewBag.referenciaExperienciasUsuario.Count > 0)
+{
+    <div class="row">
+        <br />
+        <h5>Experiencias registradas</h5>
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>Nombre empresa</th>
+                    <th>Fecha</th>
+                    <th align="center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var itemexp in ViewBag.referenciaExperienciasUsuario as ICollection<Model.Models.ExperienciaUsuario>)
+                {
+                    <tr>
+                        <td>@itemexp.Nombre</td>
+                        @if (itemexp.Fecha_Termino == "01-01-1900 0:00:00")
+                        {
+                            <td>@Html.ValueFor(modelItem => itemexp.Fecha_Inicio, "{0:dd/MM/yyyy}") - Actual</td>
+                        }
+                        else
+                        {
+                            <td>@Html.ValueFor(modelItem => itemexp.Fecha_Inicio, "{0:dd/MM/yyyy}") - @Html.ValueFor(modelItem => itemexp.Fecha_Termino, "{0:dd/MM/yyyy}")</td>
+                        }
+                        <td>
+                            <a href="javascript:void(0);" style="font-size:16px;" class="text-danger" onclick="return EliminarExperiencia(@itemexp.IdExperiencia);" title="Eliminar"><span class="far fa-times-circle"></span></a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+    <hr />
+}
+else
+{
+    <div class="error-template">
+
+        <div class="error-details">
+            <h6>   No se encontraron experiencias.</h6>
+
+        </div>
+
+    </div>
+    <hr />
+}

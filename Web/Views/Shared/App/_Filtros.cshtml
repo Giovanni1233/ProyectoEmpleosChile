@@ -1,22 +1,47 @@
 ﻿<div class="row">
-    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
-        <input type="text" class="form-control" placeholder="Buscar empleo...">
+    <div class="col-md-12">
+        <h3>Busca tu empleo ideal</h3>
+        <table class="table">
+
+            <tr>
+                <td style="vertical-align:middle;">
+                    <div class="md-form form-sm" style="margin: auto;">
+                        <input type="text" id="nombrePublicacion" name="nombrePublicacion1" class="form-control soloLetras" style="font-family: 'Roboto', sans-serif;" maxlength="100" tabindex="2" autocomplete="off" />
+                        <label for="oferta">Ingrese una oferta a buscar </label>
+                    </div>
+
+                </td>
+                <td style="vertical-align:middle;">
+                    <div class="form-group">
+
+                        <select class="mdb-select md-form" name="comuna" id="comuna" searchable="Buscar Comuna..">
+                            <option disabled selected value="0">Seleccione comuna</option>
+                            <option value="1">Maipu</option>
+                            <option value="2">Santiago</option>
+
+                        </select>
+
+                    </div>
+
+                </td>
+                <td style="vertical-align:middle;">
+                    <a href="javascript:void(0);" id="buscarFiltrosApp" class="btn btn-success btn-block p-2 shadow rounded-pill"><i class="fa fa-eye"></i> BUSCAR</a>
+                </td>
+            </tr>
+        </table>
+        @using (Ajax.BeginForm("Empleos", "App", new AjaxOptions()
+        {
+            HttpMethod = "POST",
+            UpdateTargetId = "ViewDetalleEmpleos",
+            InsertionMode = InsertionMode.Replace,
+            LoadingElementId = "loader"
+        }, new { @style = "display: none;" }))
+        {
+            <input type="hidden" name="nombrePublicacion" id="hiddenNombreOferta" />
+            <input type="hidden" name="comuna" id="hiddenComuna" />
+            <button type="submit" style="display:none" id="buscarFiltrosApp2" class="btn btn-outline-primary form-control"><i class="fa fa-eye"></i> FILTRAR</button>
+        }
     </div>
 
-    <div class="col-6 col-sm-6 col-md-6 col-lg-3">
-        <select class="form-control">
-            <option value="">Seleccione Comuna</option>
-            <option>Comuna 1</option>
-            <option>Comuna 2</option>
-            <option>Comuna 3</option>
-            <option>Comuna 4</option>
-            <option>Comuna 5</option>
-        </select>
-    </div>
 
-    <div class="col-6 col-sm-6 col-md-6 col-lg-2">
-        <button class="btn btn-primary">
-            <i class="fas fa-search"> Buscar </i>
-        </button>
-    </div>
 </div>

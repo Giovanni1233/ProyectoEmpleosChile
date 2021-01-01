@@ -17,13 +17,20 @@
                             <input type="text" id="nombrePregunta" name="nombrePregunta" autocomplete="off" class="form-control">
                             <label for="nombrePregunta">Nueva Pregunta</label>
                         </div>
-                        
+
                         <input type="hidden" name="url" id="url" value="@Url.Action("ActivarDesactivarPregunta","Empresa")" />
                     </div>
+                    <div class="col-auto my-1">
+                        <select class="mdb-select md-form" name="tipoPregunta" id="tipoPregunta" searchable="Buscar tipo pregunta..">
+                            <option value="" disabled selected>Seleccione un tipo</option>
+                            <option value="1">No descripción</option>
+                            <option value="2">Descripción</option>
 
+                        </select>
+                    </div>
                     <div class="col-auto my-1">
                         <button type="button" class="btn btn-outline-success btnAgregarPregunta">Agregar</button>
-                        
+
                     </div>
                 </div>
             </form>

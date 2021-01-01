@@ -10,5 +10,7 @@ namespace Model.Models
         public string Id { get; set; }
         public string PublicacionTitulo { get; set; }
         public string PreguntaNombre { get; set; }
+        public string TipoPregunta { get; set; }
+        public string NombreCorto { get; set; }
     }
 }

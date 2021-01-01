@@ -24,36 +24,48 @@
                         <a class="btn btn-success" href="@Url.Action("PerfilCandidato", "Empresa", new { idUsuario = item.IdCandidato })">Ver</a>
                     </td>
                     <td>
-                        @if (item.EstadoSolicitud == "0")
+                        @if (item.EstadoSolicitud == "1")
                         {
-                            <a href="javascript:void(0);" class="text-info font-weight-bold" title="Ver Curriculum" onclick="ActualizarEstadoSolicitud(@item.IdCandidato, 1, @ViewBag.IdPublicacion);">Ver Curriculum</a>
-                        }
-                        else if (item.EstadoSolicitud == "1")
-                        {
-                            <a href="javascript:void(0);" class="text-primary font-weight-bold" title="Seleccionar candidato" onclick="ActualizarEstadoSolicitud(@item.IdCandidato, 2, @ViewBag.IdPublicacion);">Seleccionar Candidato</a>
+                            <a href="javascript:void(0);" class="text-info font-weight-bold" title="Ver Curriculum" onclick="ActualizarEstadoSolicitud(@item.IdCandidato, 2, @ViewBag.IdPublicacion);">Ver Curriculum</a>
                         }
                         else if (item.EstadoSolicitud == "2")
                         {
-                            <a href="javascript:void(0);" class="text-success font-weight-bold" title="Ultima etapa candidato" onclick="ActualizarEstadoSolicitud(@item.IdCandidato, 3, @ViewBag.IdPublicacion);">Finalista Candidato</a>
+                            <a href="javascript:void(0);" class="text-primary font-weight-bold" title="Seleccionar candidato" onclick="ActualizarEstadoSolicitud(@item.IdCandidato, 3, @ViewBag.IdPublicacion);">Seleccionar Candidato</a>
+                        }
+                        else if (item.EstadoSolicitud == "3")
+                        {
+                            <a href="javascript:void(0);" class="text-success font-weight-bold" title="Ultima etapa candidato" onclick="ActualizarEstadoSolicitud(@item.IdCandidato, 4, @ViewBag.IdPublicacion);">Finalista Candidato</a>
+                        }
+                        else if (item.EstadoSolicitud == "4")
+                        {
+                            <a href="javascript:void(0);" class="text-success font-weight-bold" title="Ultima etapa candidato" onclick="ActualizarEstadoSolicitud(@item.IdCandidato, 5, @ViewBag.IdPublicacion);">Contratar Candidato</a>
+                        }
+                        else
+                        {
+                            <p class="text-primary"><h5>Contratado</h5></p>
                         }
 
                     </td>
                     <td>
-                        @if (item.EstadoSolicitud == "0")
+                        @if (item.EstadoSolicitud == "1")
                         {
                             <span class="badge badge-info">Ingresada</span>
                         }
-                        else if (item.EstadoSolicitud == "1")
+                        else if (item.EstadoSolicitud == "2")
                         {
                             <span class="badge badge-info">Curriculum visto</span>
                         }
-                        else if (item.EstadoSolicitud == "2")
+                        else if (item.EstadoSolicitud == "3")
                         {
                             <span class="badge badge-warning">Candidato en siguiente prueba</span>
                         }
-                        else
+                        else if (item.EstadoSolicitud == "4")
                         {
                             <span class="badge badge-success">Candidato seleccionado</span>
+                        }
+                        else
+                        {
+                            <span class="badge badge-primary">Candidato contratado</span>
                         }
                     </td>
                 </tr>

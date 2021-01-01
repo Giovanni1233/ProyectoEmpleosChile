@@ -17,5 +17,6 @@ namespace Model.Models
         public string Vigente { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
+
     }
 }
