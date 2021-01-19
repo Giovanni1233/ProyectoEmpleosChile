@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="e0d9865f-baee-4a95-8146-e636b8ca7142" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="220dc28c-7a87-4210-9c70-d157b0147324" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,13 +22,13 @@
     <MetadataSource Address="http://localhost/ServicioEmpleosChile/wsServicioEmpleosChile.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="wsServicioEmpleosChile.xsd" MetadataType="Schema" ID="ad6c0138-77e8-4ec5-b100-24d24ca261a8" SourceId="1" SourceUrl="http://localhost/ServicioEmpleosChile/wsServicioEmpleosChile.svc?xsd=xsd1" />
-    <MetadataFile FileName="wsServicioEmpleosChile1.xsd" MetadataType="Schema" ID="029e433e-ddca-49d2-86bb-1ead31380f73" SourceId="1" SourceUrl="http://localhost/ServicioEmpleosChile/wsServicioEmpleosChile.svc?xsd=xsd0" />
-    <MetadataFile FileName="wsServicioEmpleosChile2.xsd" MetadataType="Schema" ID="d1f4f1be-7d7f-4c75-8550-c36d97b60a7d" SourceId="1" SourceUrl="http://localhost/ServicioEmpleosChile/wsServicioEmpleosChile.svc?xsd=xsd3" />
-    <MetadataFile FileName="wsServicioEmpleosChile3.xsd" MetadataType="Schema" ID="d20f216c-b64d-4aeb-9f73-b9b9588549bb" SourceId="1" SourceUrl="http://localhost/ServicioEmpleosChile/wsServicioEmpleosChile.svc?xsd=xsd2" />
-    <MetadataFile FileName="wsServicioEmpleosChile.wsdl" MetadataType="Wsdl" ID="fb90ca85-1ed4-40c7-943a-c470fd186e42" SourceId="1" SourceUrl="http://localhost/ServicioEmpleosChile/wsServicioEmpleosChile.svc?wsdl" />
-    <MetadataFile FileName="wsServicioEmpleosChile4.xsd" MetadataType="Schema" ID="21e2c61c-51e6-4094-a46b-b9e976f33228" SourceId="1" SourceUrl="http://localhost/ServicioEmpleosChile/wsServicioEmpleosChile.svc?xsd=xsd4" />
-    <MetadataFile FileName="wsServicioEmpleosChile.disco" MetadataType="Disco" ID="96bb4d30-92de-4989-ac05-b68cb47a76c9" SourceId="1" SourceUrl="http://localhost/ServicioEmpleosChile/wsServicioEmpleosChile.svc?disco" />
+    <MetadataFile FileName="wsServicioEmpleosChile.xsd" MetadataType="Schema" ID="5687af45-61c8-4943-a068-7d80a96f1331" SourceId="1" SourceUrl="http://localhost/ServicioEmpleosChile/wsServicioEmpleosChile.svc?xsd=xsd1" />
+    <MetadataFile FileName="wsServicioEmpleosChile1.xsd" MetadataType="Schema" ID="bef4fc63-df6e-416e-9a11-5fada3ebb08d" SourceId="1" SourceUrl="http://localhost/ServicioEmpleosChile/wsServicioEmpleosChile.svc?xsd=xsd0" />
+    <MetadataFile FileName="wsServicioEmpleosChile2.xsd" MetadataType="Schema" ID="c655ae08-ae17-4267-87ed-7d4947ca781d" SourceId="1" SourceUrl="http://localhost/ServicioEmpleosChile/wsServicioEmpleosChile.svc?xsd=xsd3" />
+    <MetadataFile FileName="wsServicioEmpleosChile3.xsd" MetadataType="Schema" ID="02ab803f-5ad6-4baf-8107-8faf23f5dfa2" SourceId="1" SourceUrl="http://localhost/ServicioEmpleosChile/wsServicioEmpleosChile.svc?xsd=xsd2" />
+    <MetadataFile FileName="wsServicioEmpleosChile.wsdl" MetadataType="Wsdl" ID="f281c3ea-70f7-48d3-a8cd-c694c4a5179a" SourceId="1" SourceUrl="http://localhost/ServicioEmpleosChile/wsServicioEmpleosChile.svc?wsdl" />
+    <MetadataFile FileName="wsServicioEmpleosChile4.xsd" MetadataType="Schema" ID="5c2db9e2-14db-4f8e-a00e-12c253af46f6" SourceId="1" SourceUrl="http://localhost/ServicioEmpleosChile/wsServicioEmpleosChile.svc?xsd=xsd4" />
+    <MetadataFile FileName="wsServicioEmpleosChile.disco" MetadataType="Disco" ID="5656e37e-cff5-4ba0-8c17-6d94b4e63426" SourceId="1" SourceUrl="http://localhost/ServicioEmpleosChile/wsServicioEmpleosChile.svc?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

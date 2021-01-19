@@ -44,61 +44,14 @@ namespace Web.Controllers
                 {
                     ViewBag.ReferenciaIdUser = Session["IdUser"].ToString();
 
-            if (Session["UserName"] != null && Session["UserName"].ToString() != "")
-                ViewBag.ReferenciaUserName = Session["UserName"].ToString();
+                    if (Session["UserName"] != null && Session["UserName"].ToString() != "")
+                        ViewBag.ReferenciaUserName = Session["UserName"].ToString();
 
-            if (Session["UserType"] != null && Session["UserType"].ToString() != "")
-                ViewBag.ReferenciaUserType = Session["UserType"].ToString();
+                    if (Session["UserType"] != null && Session["UserType"].ToString() != "")
+                        ViewBag.ReferenciaUserType = Session["UserType"].ToString();
 
-            ViewBag.ReferenciaEmpresasConPlan = empresa.GetEmpresasPlanesVigente();
-
-
-            if (Session["IdUser"] != null && Session["IdUser"].ToString() != "")
-            {
-                ViewBag.ReferenciaIdUser = Session["IdUser"].ToString();
-
-                    #region TRASLADAR A METODO CORRESPONDIENTE
-                    data = GetCurriculum(Session["IdUser"].ToString());
-                    if (data.Tables[0].Rows.Count > 0)
-                    {
-                        foreach (DataRow rows in data.Tables[0].Rows)
-                        {
-                            switch (rows["Code"].ToString())
-                            {
-                                case "200":
-                                    ViewBag.ReferenciaIdUser = rows["IdUsuario"].ToString();
-                                    ViewBag.ReferenciaDocumento = rows["Documento"].ToString();
-                                    ViewBag.ReferenciaUrlCV = ModuleControlRetorno() + "App/DownloadCV?url=" + rows["Url"].ToString() + "&documento=" + rows["Documento"].ToString();
-                                    break;
-
-                                case "400":
-                                    ViewBag.ReferenciaMsg1 = rows["Message1"].ToString();
-                                    ViewBag.ReferenciaMsg2 = rows["Message2"].ToString();
-                                    break;
-
-                                default:
-                                    ViewBag.ReferenciaMsg1 = "Puedes adjuntar tu CV!!";
-                                    ViewBag.ReferenciaMsg2 = "(.pdf)";
-                                    break;
-                            }
-                        }
-                    }
-
-                    #endregion
+                    ViewBag.ReferenciaEmpresasConPlan = empresa.GetEmpresasPlanesVigente();
                 }
-                else
-                {
-                    ViewBag.ReferenciaMsg1 = "Puedes adjuntar tu CV!!";
-                    ViewBag.ReferenciaMsg2 = "(.pdf)";
-                }
-
-                if (Session["UserName"] != null && Session["UserName"].ToString() != "")
-                    ViewBag.ReferenciaUserName = Session["UserName"].ToString();
-
-                if (Session["UserType"] != null && Session["UserType"].ToString() != "")
-                    ViewBag.ReferenciaUserType = Session["UserType"].ToString();
-
-                ViewBag.ReferenciaEmpresasConPlan = empresa.GetEmpresasPlanesVigente();
             }
             catch (Exception ex)
             {
@@ -121,10 +74,8 @@ namespace Web.Controllers
 
             #region "CONTROL DE RETORNO"
             if (!Request.Url.AbsoluteUri.Split('/')[2].Contains("localhost:44304"))
-                //if (!url.Split('/')[2].Contains("localhost:44304"))
             {
                 if (!Request.Url.AbsoluteUri.Split('/')[2].Contains("localhost"))
-                //if (!url.Split('/')[2].Contains("localhost"))
                 {
                     domainReal = Request.Url.AbsoluteUri.Split('/')[2];
                 }
