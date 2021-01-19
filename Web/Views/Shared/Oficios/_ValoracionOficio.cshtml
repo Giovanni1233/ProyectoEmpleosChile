@@ -1,0 +1,53 @@
+﻿<div class="col-3 col-sm-12 col-md-3 col-lg-12" id="divDescriocionOficio">
+    <h5 style="margin-top: 10px;">Valoración</h5>
+
+    @if (ViewBag.ReferenciaValoracionOficio != null)
+    {
+        if (ViewBag.ReferenciaCantidadValoracion != null)
+        {
+            if (Convert.ToDouble(ViewBag.ReferenciaCantidadValoracion) > 0)
+            {
+                <p>
+                    <span>Total Votos: @ViewBag.ReferenciaCantidadValoracion</span>
+                </p>
+            }
+            else
+            {
+                <p>
+                    <span>Total Votos: 0</span>
+                </p>
+            }
+        }
+        else
+        {
+            <p>
+                <span>Total Votos: 0</span>
+            </p>
+        }
+
+        foreach (Model.Models.ValoracionOficio item in (List<Model.Models.ValoracionOficio>)ViewBag.ReferenciaValoracionOficio)
+        {
+            <span class="fa fa-star @item.Checked" style="font-size: 25px;"></span>
+        }
+
+
+    }
+    else
+    {
+        <span id="rating1" class="fa fa-star" style="font-size: 25px;"></span>
+        <span id="rating2" class="fa fa-star" style="font-size: 25px;"></span>
+        <span id="rating3" class="fa fa-star" style="font-size: 25px;"></span>
+        <span id="rating4" class="fa fa-star" style="font-size: 25px;"></span>
+        <span id="rating5" class="fa fa-star" style="font-size: 25px;"></span>
+    }
+</div>
+
+<style>
+    /*.fa {
+        font-size: 25px;
+    }*/
+
+    .checked {
+        color: orange;
+    }
+</style>

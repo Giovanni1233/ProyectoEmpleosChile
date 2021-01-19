@@ -1,0 +1,51 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <h3>Encuantra el servicio que necesites</h3>
+        <table class="table">
+
+            <tr>
+                <td style="vertical-align:middle;">
+                    <div class="md-form form-sm" style="margin: auto;">
+                        <input type="text" id="nombrePublicacion" name="nombrePublicacion1" class="form-control soloLetras" style="font-family: 'Roboto', sans-serif;" maxlength="100" tabindex="2" autocomplete="off" />
+                        <label for="oferta">Ingrese busqueda</label>
+                    </div>
+
+                </td>
+                <td style="vertical-align:middle;">
+                    <div class="form-group">
+
+                        <select class="mdb-select md-form" name="comuna" id="comuna" searchable="Buscar Comuna..">
+                            <option disabled selected value="0">Seleccione comuna</option>
+                            @if (ViewBag.ReferenciaComuna != null)
+                            {
+                                foreach (Model.Models.Comuna item in (List<Model.Models.Comuna>)ViewBag.ReferenciaComuna)
+                                {
+                                    <option value="@item.Id">@item.Nombre</option>
+                                }
+                            }
+                        </select>
+
+                    </div>
+
+                </td>
+                <td style="vertical-align:middle;">
+                    <a href="javascript:void(0);" id="buscarFiltrosApp" class="btn btn-success btn-block p-2 shadow rounded-pill"><i class="fa fa-eye"></i> BUSCAR</a>
+                </td>
+            </tr>
+        </table>
+        @using (Ajax.BeginForm("Empleos", "App", new AjaxOptions()
+        {
+            HttpMethod = "POST",
+            UpdateTargetId = "ViewDetalleEmpleos",
+            InsertionMode = InsertionMode.Replace,
+            LoadingElementId = "loader"
+        }, new { @style = "display: none;" }))
+        {
+            <input type="hidden" name="nombrePublicacion" id="hiddenNombreOferta" />
+            <input type="hidden" name="comuna" id="hiddenComuna" />
+            <button type="submit" style="display:none" id="buscarFiltrosApp2" class="btn btn-outline-primary form-control"><i class="fa fa-eye"></i> FILTRAR</button>
+        }
+    </div>
+
+
+</div>

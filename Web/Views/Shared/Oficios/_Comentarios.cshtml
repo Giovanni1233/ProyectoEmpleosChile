@@ -1,0 +1,33 @@
+﻿<div class="col-3 col-sm-12 col-md-3 col-lg-12" id="divComentariosOficio">
+    <h5 style="margin-top: 10px;">Comentarios: </h5>
+
+    @if (ViewBag.ReferenciaComentarioOficio != null)
+    {
+        if (ViewBag.ReferenciaComentarioOficio.Count > 0)
+        {
+            foreach (Model.Models.ComentarioOficio item in (List<Model.Models.ComentarioOficio>)ViewBag.ReferenciaComentarioOficio)
+            {
+
+                <div style="width: 100%; border: solid 1px; border-radius: 15px; margin-bottom:5px; padding:5px;">
+                    @if (item.Valoracion.Count > 0)
+                    {
+                        foreach (Model.Models.ValoracionOficio itemV in (List<Model.Models.ValoracionOficio>)item.Valoracion)
+                        {
+                            <span class="fa fa-star @itemV.Checked" style="font-size: 12px;"></span>
+                        }
+                    }
+                    else
+                    {
+                        <span id="rating1" class="fa fa-star" style="font-size: 12px;"></span>
+                        <span id="rating2" class="fa fa-star" style="font-size: 12px;"></span>
+                        <span id="rating3" class="fa fa-star" style="font-size: 12px;"></span>
+                        <span id="rating4" class="fa fa-star" style="font-size: 12px;"></span>
+                        <span id="rating5" class="fa fa-star" style="font-size: 12px;"></span>
+                    }
+
+
+                    <div>@item.Comentario</div>
+                </div>
+            }
+        }
+    }

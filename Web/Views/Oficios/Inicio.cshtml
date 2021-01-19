@@ -1,0 +1,22 @@
+﻿@{
+    if (ViewBag.ApplicationActive != null)
+    {
+        if (ViewBag.ApplicationActive)
+        {
+            Layout = "~/Views/Shared/_HeaderMenu.cshtml";
+            ViewBag.Title = "Empleos Chile | Inicio";
+        }
+        else
+        {
+            Response.Redirect(ViewBag.ReferenciaInicio);
+        }
+    }
+    else
+    {
+        Response.Redirect(ViewBag.ReferenciaInicio);
+    }
+}
+
+<div id="ViewFiltros" class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin: 20px 0px 0px 20px;">
+    @Html.Partial("Oficios/_InformacionOficios")
+</div>
