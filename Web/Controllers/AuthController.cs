@@ -3,12 +3,13 @@ using System.Web.Mvc;
 using Model.Models;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Web.Controllers
 {
     public class AuthController : Controller
     {
-        WebAPI.ServicioEmpleosChile.ServicioEmpleosChileClient svcEmpleos = new WebAPI.ServicioEmpleosChile.ServicioEmpleosChileClient();
+        WebAPI.ServicioEmpleosChile.ServicioEmpleosChileClient svcEmpleosChile = new WebAPI.ServicioEmpleosChile.ServicioEmpleosChileClient();
         string errorSistema = "Ha ocurrido algo inesperado en la plataforma, intentelo mas tarde";
         
         public ActionResult Index()
@@ -27,8 +28,9 @@ namespace Web.Controllers
             try
             {
                 ViewBag.ApplicationActive = true;
-                ViewBag.ReferenciaInicio = ModuleControlRetorno() + "/App/Inicio";
-                ViewBag.ReferenciaRegistro = ModuleControlRetorno() + "/Auth/RegistroUsuario";
+                ViewBag.ReferenciaInicio = ModuleControlRetorno() + "App/Inicio";
+                ViewBag.ReferenciaRegistro = ModuleControlRetorno() + "Auth/RegistroUsuario";
+                ViewBag.ReferenciaOficio = ModuleControlRetorno() + "Oficios/Inicio";
 
                 data = GetPais();
                 if (data.Tables.Count > 0)
@@ -108,10 +110,10 @@ namespace Web.Controllers
                 valores[10] = string.IsNullOrEmpty(apellidoM) ? "" : apellidoM;
                 valores[11] = fechaNacimiento;
 
-                urlHome = ModuleControlRetorno() + "/App/Inicio";
-                ViewBag.ReferenciaInicio = ModuleControlRetorno() + "/App/Inicio";
+                urlHome = ModuleControlRetorno() + "App/Inicio";
+                ViewBag.ReferenciaInicio = ModuleControlRetorno() + "App/Inicio";
 
-                data = svcEmpleos.SetUsuario(parametros, valores).Table;
+                data = svcEmpleosChile.SetUsuario(parametros, valores).Table;
 
                 foreach (DataRow rows in data.Tables[0].Rows)
                 {
@@ -152,7 +154,7 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult SignInUser(string user, string pass)
+        public JsonResult SignInUser(string user, string pass, string controller)
         {
             string code = string.Empty;
             string mensaje = string.Empty;
@@ -183,7 +185,7 @@ namespace Web.Controllers
                             usuario.Correo = rows["Correo"].ToString();
                             code = rows["Code"].ToString();
                             mensaje = "";
-                            pathRedirect = ModuleControlRetorno() + "/App/Inicio";
+                            pathRedirect = ModuleControlRetorno() + controller + "/Inicio";
                             var useer = rows["TipoUsuario"].ToString();
                             Session["IdUser"] = rows["IdUsuario"].ToString();
                             Session["UserName"] = rows["Nombre"].ToString();
@@ -216,7 +218,7 @@ namespace Web.Controllers
             var retorno = string.Empty;
             Session.Clear();
 
-            retorno = ModuleControlRetorno() + "/App/Inicio";
+            retorno = ModuleControlRetorno() + "App/Inicio";
 
             return Json(new { Home = retorno });
         }
@@ -306,7 +308,7 @@ namespace Web.Controllers
 
             try
             {
-                data = svcEmpleos.GetCiudad(parametros, valores).Table;
+                data = svcEmpleosChile.GetCiudad(parametros, valores).Table;
             }
             catch (Exception ex)
             {
@@ -322,7 +324,7 @@ namespace Web.Controllers
 
             try
             {
-                data = svcEmpleos.GetComuna(parametros, valores).Table;
+                data = svcEmpleosChile.GetComuna(parametros, valores).Table;
             }
             catch (Exception ex)
             {
@@ -338,7 +340,7 @@ namespace Web.Controllers
 
             try
             {
-                data = svcEmpleos.GetPais().Table;
+                data = svcEmpleosChile.GetPais().Table;
             }
             catch (Exception ex)
             {
@@ -354,7 +356,7 @@ namespace Web.Controllers
 
             try
             {
-                data = svcEmpleos.GetRegion().Table;
+                data = svcEmpleosChile.GetRegion().Table;
             }
             catch (Exception ex)
             {
@@ -370,6 +372,7 @@ namespace Web.Controllers
         {
             string domainReal = string.Empty;
             string domain = string.Empty;
+            string prefixDomain = string.Empty;
 
             #region "CONTROL DE RETORNO"
 
@@ -385,16 +388,33 @@ namespace Web.Controllers
                 }
 
                 domain = "http://" + domainReal + "/";
+                prefixDomain = Request.Url.AbsoluteUri.Split('/')[3] + "/";
             }
             else
             {
-                domain = "http://" + Request.Url.AbsoluteUri.Split('/')[2];
+                domain = "http://" + Request.Url.AbsoluteUri.Split('/')[2] + "/";
+                prefixDomain = "";
             }
 
             #endregion
 
-            return domain;
+            return domain + prefixDomain;
 
+        }
+
+        private bool ModuleApplicationActive()
+        {
+            return Session["IdUser"] != null;
+        }
+
+        private string EncodeToBase64(string encode)
+        {
+            return Convert.ToBase64String(Encoding.UTF8.GetBytes(encode));
+        }
+
+        private string DecodeFromBase64(string decode)
+        {
+            return Encoding.UTF8.GetString(Convert.FromBase64String(decode));
         }
         #endregion
 

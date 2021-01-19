@@ -22,19 +22,27 @@ namespace Web.Controllers
         public ActionResult Index()
         {
             ViewBag.ApplicationActive = true;
-            ViewBag.ReferenciaHome = ModuleControlRetorno() + "/App/Inicio";
+            ViewBag.ReferenciaInicio = ModuleControlRetorno() + "App/Inicio";
+            ViewBag.ReferenciaHome = ModuleControlRetorno() + "App/Inicio";
 
             return View();
         }
 
         public ActionResult Inicio()
         {
-            DataSet data = new DataSet();
+            try
+            {
+                DataSet data = new DataSet();
 
-            ViewBag.ApplicationActive = true;
-            ViewBag.ReferenciaInicio = ModuleControlRetorno() + "/App/Inicio";
-            ViewBag.ReferenciaRegistro = ModuleControlRetorno() + "/Auth/RegistroUsuario";
+                ViewBag.ApplicationActive = true;
+                ViewBag.ReferenciaInicio = ModuleControlRetorno() + "App/Inicio";
+                ViewBag.ReferenciaHome = ModuleControlRetorno() + "App/Inicio";
+                ViewBag.ReferenciaRegistro = ModuleControlRetorno() + "Auth/RegistroUsuario";
+                ViewBag.ReferenciaOficio = ModuleControlRetorno() + "Oficios/Inicio";
 
+                if (Session["IdUser"] != null && Session["IdUser"].ToString() != "")
+                {
+                    ViewBag.ReferenciaIdUser = Session["IdUser"].ToString();
 
             if (Session["UserName"] != null && Session["UserName"].ToString() != "")
                 ViewBag.ReferenciaUserName = Session["UserName"].ToString();
@@ -49,13 +57,53 @@ namespace Web.Controllers
             {
                 ViewBag.ReferenciaIdUser = Session["IdUser"].ToString();
 
-            }
-            else
-            {
-                ViewBag.ReferenciaMsg1 = "Puedes adjuntar tu CV!!";
-                ViewBag.ReferenciaMsg2 = "(.pdf)";
-            }
+                    #region TRASLADAR A METODO CORRESPONDIENTE
+                    data = GetCurriculum(Session["IdUser"].ToString());
+                    if (data.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow rows in data.Tables[0].Rows)
+                        {
+                            switch (rows["Code"].ToString())
+                            {
+                                case "200":
+                                    ViewBag.ReferenciaIdUser = rows["IdUsuario"].ToString();
+                                    ViewBag.ReferenciaDocumento = rows["Documento"].ToString();
+                                    ViewBag.ReferenciaUrlCV = ModuleControlRetorno() + "App/DownloadCV?url=" + rows["Url"].ToString() + "&documento=" + rows["Documento"].ToString();
+                                    break;
 
+                                case "400":
+                                    ViewBag.ReferenciaMsg1 = rows["Message1"].ToString();
+                                    ViewBag.ReferenciaMsg2 = rows["Message2"].ToString();
+                                    break;
+
+                                default:
+                                    ViewBag.ReferenciaMsg1 = "Puedes adjuntar tu CV!!";
+                                    ViewBag.ReferenciaMsg2 = "(.pdf)";
+                                    break;
+                            }
+                        }
+                    }
+
+                    #endregion
+                }
+                else
+                {
+                    ViewBag.ReferenciaMsg1 = "Puedes adjuntar tu CV!!";
+                    ViewBag.ReferenciaMsg2 = "(.pdf)";
+                }
+
+                if (Session["UserName"] != null && Session["UserName"].ToString() != "")
+                    ViewBag.ReferenciaUserName = Session["UserName"].ToString();
+
+                if (Session["UserType"] != null && Session["UserType"].ToString() != "")
+                    ViewBag.ReferenciaUserType = Session["UserType"].ToString();
+
+                ViewBag.ReferenciaEmpresasConPlan = empresa.GetEmpresasPlanesVigente();
+            }
+            catch (Exception ex)
+            {
+
+            }
 
             return View();
         }
@@ -72,10 +120,11 @@ namespace Web.Controllers
             string prefixDomain = string.Empty;
 
             #region "CONTROL DE RETORNO"
-
             if (!Request.Url.AbsoluteUri.Split('/')[2].Contains("localhost:44304"))
+                //if (!url.Split('/')[2].Contains("localhost:44304"))
             {
                 if (!Request.Url.AbsoluteUri.Split('/')[2].Contains("localhost"))
+                //if (!url.Split('/')[2].Contains("localhost"))
                 {
                     domainReal = Request.Url.AbsoluteUri.Split('/')[2];
                 }
@@ -85,11 +134,11 @@ namespace Web.Controllers
                 }
 
                 domain = "http://" + domainReal + "/";
-                prefixDomain = Request.Url.AbsoluteUri.Split('/')[3];
+                prefixDomain = Request.Url.AbsoluteUri.Split('/')[3] + "/";
             }
             else
             {
-                domain = "http://" + Request.Url.AbsoluteUri.Split('/')[2];
+                domain = "http://" + Request.Url.AbsoluteUri.Split('/')[2] + "/";
                 prefixDomain = "";
             }
 
@@ -98,49 +147,116 @@ namespace Web.Controllers
             return domain + prefixDomain;
 
         }
+
+        private bool ModuleApplicationActive()
+        {
+            return Session["IdUser"] != null;
+        }
+
+        private string EncodeToBase64(string encode)
+        {
+            return Convert.ToBase64String(Encoding.UTF8.GetBytes(encode));
+        }
+
+        private string DecodeFromBase64(string decode)
+        {
+            return Encoding.UTF8.GetString(Convert.FromBase64String(decode));
+        }
         #endregion
 
 
 
         #region TRASLADAR A METODO CORRESPONDIENTE
-        
+        public ActionResult SetFileCV(HttpPostedFileBase file)
+        {
+            string[] parametros = new string[3];
+            string[] valores = new string[3];
+            Curriculum curriculum = new Curriculum();
+
+            try
+            {
+                DataSet data = new DataSet();
+                var fileName = EncodeToBase64(Session["IdUser"].ToString() + file.FileName);
+
+                file.SaveAs(Server.MapPath("~/FilesCV/" + fileName + ".pdf"));
+                if (System.IO.File.Exists(Server.MapPath("~/FilesCV/" + fileName + ".pdf")))
+                {
+                    parametros[0] = "@USUARIO";
+                    parametros[1] = "@DOCUMENTO";
+                    parametros[2] = "@URL";
+
+                    valores[0] = Session["IdUser"].ToString();
+                    valores[1] = file.FileName;
+                    valores[2] = "~/FilesCV/" + fileName + ".pdf";
+
+                    data = svcEmpleosChile.SetCurriculum(parametros, valores).Table;
+
+                }
+                else
+                {
+
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ApplicationActive = ModuleApplicationActive();
+                ViewBag.ReferenciaInicio = ModuleControlRetorno() + "App/Inicio";
+            }
+            return RedirectToAction("Inicio");
+        }
 
         #endregion
+
         public ActionResult Empleos(string nombrePublicacion = "", string comuna = "", string idPublicacion = "", string fecha = "", string sueldo = "")
         {
-            string idusuario = "";
-            ViewBag.ReferenciaInicio = ModuleControlRetorno() + "/App/Inicio";
-            ViewBag.ReferenciaRegistro = ModuleControlRetorno() + "/Auth/RegistroUsuario";
-
-            if (Session["IdUser"] != null && Session["IdUser"].ToString() != "")
-                ViewBag.ReferenciaIdUser = Session["IdUser"].ToString();
-
-            if (Session["UserName"] != null && Session["UserName"].ToString() != "")
-                ViewBag.ReferenciaUserName = Session["UserName"].ToString();
-
-            if (Session["UserType"] != null && Session["UserType"].ToString() != "")
-                ViewBag.ReferenciaUserType = Session["UserType"].ToString();
-
-            ViewBag.ReferenciaBusquedaEmpleos = GetOfertasEmpleos(nombrePublicacion, comuna, fecha, sueldo);
-            ViewBag.ReferenciaComentarioPubEmpresa = empresa.GetComentariosPublicacion(idPublicacion);
-            ViewBag.DetallePublicacionContador = empresa.GetDetallePublicacion(idPublicacion).Count();
-            ViewBag.DetallePublicacion = empresa.GetDetallePublicacion(idPublicacion);
-            ViewBag.PreguntasPorPublicacionId = empresa.GetPreguntasPorPublicacionId(idPublicacion);
-
-
-
-            ViewBag.IdPublicacion = idPublicacion;
-
-            if (Session["IdUser"] == null)
+            try
             {
-                idusuario = "";
+                string idusuario = "";
+
+                ViewBag.ApplicationActive = true;
+                ViewBag.ReferenciaInicio = ModuleControlRetorno() + "App/Inicio";
+                ViewBag.ReferenciaHome = ModuleControlRetorno() + "App/Inicio";
+                ViewBag.ReferenciaRegistro = ModuleControlRetorno() + "Auth/RegistroUsuario";
+                ViewBag.ReferenciaOficio = ModuleControlRetorno() + "Oficios/Inicio";
+
+                if (Session["IdUser"] != null && Session["IdUser"].ToString() != "")
+                    ViewBag.ReferenciaIdUser = Session["IdUser"].ToString();
+
+                if (Session["UserName"] != null && Session["UserName"].ToString() != "")
+                    ViewBag.ReferenciaUserName = Session["UserName"].ToString();
+
+                if (Session["UserType"] != null && Session["UserType"].ToString() != "")
+                    ViewBag.ReferenciaUserType = Session["UserType"].ToString();
+
+                ViewBag.ReferenciaBusquedaEmpleos = GetOfertasEmpleos(nombrePublicacion, comuna, fecha, sueldo);
+                ViewBag.ReferenciaComentarioPubEmpresa = empresa.GetComentariosPublicacion(idPublicacion);
+                ViewBag.DetallePublicacionContador = empresa.GetDetallePublicacion(idPublicacion).Count();
+                ViewBag.DetallePublicacion = empresa.GetDetallePublicacion(idPublicacion);
+                ViewBag.PreguntasPorPublicacionId = empresa.GetPreguntasPorPublicacionId(idPublicacion);
+
+
+
+                ViewBag.IdPublicacion = idPublicacion;
+
+                if (Session["IdUser"] == null)
+                {
+                    idusuario = "";
+                }
+                else
+                {
+                    idusuario = Session["IdUser"].ToString();
+                }
+                ViewBag.ApplicationActive = ModuleApplicationActive();
+                ViewBag.ReferenciaInicio = ModuleControlRetorno() + "App/Inicio";
+
+                ViewBag.referenciaSolicitud = usuario.GetSolicitudUsuario(idusuario, idPublicacion);
+                ViewBag.VotoRealizado = empresa.GetVotoPorUsuario(idusuario, idPublicacion);
             }
-            else
+            catch (Exception ex)
             {
-                idusuario = Session["IdUser"].ToString();
+                ViewBag.ApplicationActive = ModuleApplicationActive();
+                ViewBag.ReferenciaInicio = ModuleControlRetorno() + "App/Inicio";
             }
-            ViewBag.referenciaSolicitud = usuario.GetSolicitudUsuario(idusuario, idPublicacion);
-            ViewBag.VotoRealizado = empresa.GetVotoPorUsuario(idusuario, idPublicacion);
 
             
             return View();
@@ -148,8 +264,8 @@ namespace Web.Controllers
 
         public ActionResult PerfilEmpresaLectura(string idEmpresa = "")
         {
-            ViewBag.ReferenciaInicio = ModuleControlRetorno() + "/App/Inicio";
-            ViewBag.ReferenciaRegistro = ModuleControlRetorno() + "/Auth/RegistroUsuario";
+            ViewBag.ReferenciaInicio = ModuleControlRetorno() + "App/Inicio";
+            ViewBag.ReferenciaRegistro = ModuleControlRetorno() + "Auth/RegistroUsuario";
             if (Session["IdUser"] != null && Session["IdUser"].ToString() != "")
                 ViewBag.ReferenciaIdUser = Session["IdUser"].ToString();
 

@@ -1,9 +1,11 @@
 ﻿
 function ajaxSignInUser(controller, user, pass) {
+    let prefixDomain = window.location.href.split('/')[3] === 'Auth' ? 'App' : window.location.href.split('/')[3];
+
     $.ajax({
         type: 'POST',
         url: controller + 'SignInUser',
-        data: '{ user: "' + user + '",  pass: "' + pass + '"}',
+        data: '{ user: "' + user + '",  pass: "' + pass + '",  controller: "' + prefixDomain + '"}',
         dataType: 'json',
         contentType: 'application/json',
         async: true,
@@ -101,6 +103,104 @@ function ajaxRegistroUsuario(controller, rut, nombre1, nombre2, apellidoP, apell
     });
 }
 
+function ajaxSetTagOficio(controller, oficio) {
+    $.ajax({
+        type: 'POST',
+        url: controller + 'SetTagOficio',
+        data: '{ oficio: "' + oficio + '"}',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: true,
+        success: function (response) {
+            if (response.Code !== "600") {
+                if (response.Code === "200") {
+                    let oficio = '';
+                    let oficioUser = '';
+
+                    for (i = 0; i < response.Oficios.length; i++) {
+                        oficio += `<option data-tag="${response.Oficios[i].IdTag}">${response.Oficios[i].Nombre}</option>`;
+                    }
+                    document.getElementById("tagOficios").innerHTML = oficio;
+
+
+                    oficioUser += `<div style="display: inline-block;">`;
+                    for (i = 0; i < response.OficiosUser.length; i++) {
+                        oficioUser += `<button class="btn btn-primary" onclick="delTagOficio(this)" data-tag="${response.OficiosUser[i].IdTag}" style="font-family: 'Roboto', sans-serif; font-size: 13px; border-radius: 25px; padding:10px; margin-top:5px;">
+                                           <span>${response.OficiosUser[i].Nombre}</span>
+                                           <i class="fas fa-trash"></i>
+                                       </button>`;
+                    }
+                    oficioUser += `</div>`;
+                    document.getElementById("tagOficioUser").innerHTML = oficioUser;
+                    $("#tagOficio").val('');
+                }
+            }
+        }
+    });
+}
+
+function ajaxDelTagOficio(controller, oficio) {
+    $.ajax({
+        type: 'POST',
+        url: controller + 'DelTagOficio',
+        data: '{ oficio: "' + oficio + '"}',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: true,
+        success: function (response) {
+            if (response.Code !== "600") {
+                if (response.Code === "200") {
+                    let oficio = '';
+                    let oficioUser = '';
+
+                    for (i = 0; i < response.Oficios.length; i++) {
+                        oficio += `<option data-tag="${response.Oficios[i].IdTag}">${response.Oficios[i].Nombre}</option>`;
+                    }
+                    document.getElementById("tagOficios").innerHTML = oficio;
+
+
+                    oficioUser += `<div style="display: inline-block;">`;
+                    for (i = 0; i < response.OficiosUser.length; i++) {
+                        oficioUser += `<button class="btn btn-primary" onclick="delTagOficio(this)" data-tag="${response.OficiosUser[i].IdTag}" style="font-family: 'Roboto', sans-serif; font-size: 13px; border-radius: 25px; padding:10px; margin-top:5px;">
+                                           <span>${response.OficiosUser[i].Nombre}</span>
+                                           <i class="fas fa-trash"></i>
+                                       </button>`;
+                    }
+                    oficioUser += `</div>`;
+                    document.getElementById("tagOficioUser").innerHTML = oficioUser;
+                }
+            }
+        }
+    });
+}
+
+function ajaxSetDescripcionOficio(controller, descripcion) {
+    $.ajax({
+        type: 'POST',
+        url: controller + 'SetDescripcionOficio',
+        data: '{ descripcion: "' + descripcion + '"}',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: true,
+        success: function (response) {
+            if (response.Code !== "600") {
+                if (response.Code === "200") {
+                    let descripcion = '';
+
+                    descripcion = `<h5>Descripción</h5>
+
+                                   <button id="updDescripcionOficio" class="btn btn-primary btn-sm">
+                                       <i class="fas fa-edit"> Editar</i>
+                                   </button>
+                                   <textarea id="oficioDescripcion" class="form-control" style="width:100%; height:200px;">${response.DescripcionOficio}</textarea>`;
+
+                    document.getElementById('divDescriocionOficio').innerHTML = descripcion;
+                }
+            }
+        }
+    });
+}
+
 
 //PartialView
 function ajaxViewPartialLoadingSignIn(controller, username, pass) {
@@ -169,7 +269,6 @@ function ajaxEnviarMensajeAEmpresa(controller, empresa, mensaje) {
 }
 
 // Responder mensaje a usuario
-
 function ajaxResponderMensajeAReceptor(controller, idMensaje, idAutor, mensaje) {
 
     $.ajax({
@@ -190,7 +289,6 @@ function ajaxResponderMensajeAReceptor(controller, idMensaje, idAutor, mensaje) 
 
 
 // guardar experiencia en perfil usuario
-
 function ajaxRegistroExperienciaPerfilUsuario(controller, empresaNombre, destacoEmpresa, mejorarEmpresa, fechaD, fechaH, actualmente, descripcion, recomendacion) {
 
     $.ajax({
@@ -540,7 +638,6 @@ function ajaxRegistroPerfilUsuario(controller, nombre1, nombre2, apellido1, apel
         }
     });
 }
-
 // // guardar datos usuario perfil 
 function ajaxRegistroPerfilProfesionalUsuario(controller, tituloperfil, descripcionperfil) {
 
@@ -558,8 +655,6 @@ function ajaxRegistroPerfilProfesionalUsuario(controller, tituloperfil, descripc
         }
     });
 }
-
-
 // postulacion a empleo
 function PostularEmpleo(dato1, idPublicacion) {
     if (dato1 != 0) {

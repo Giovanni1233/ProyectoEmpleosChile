@@ -98,6 +98,12 @@ namespace WebAPI.ServicioEmpleosChile {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEmpleosChile/DelCurriculum", ReplyAction="http://tempuri.org/IServicioEmpleosChile/DelCurriculumResponse")]
         System.Threading.Tasks.Task<WebAPI.ServicioEmpleosChile.ServicioEmpleosChile> DelCurriculumAsync(string[] Parametros, string[] valores);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEmpleosChile/DelTagOficioUsuario", ReplyAction="http://tempuri.org/IServicioEmpleosChile/DelTagOficioUsuarioResponse")]
+        WebAPI.ServicioEmpleosChile.ServicioEmpleosChile DelTagOficioUsuario(string[] Parametros, string[] valores);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEmpleosChile/DelTagOficioUsuario", ReplyAction="http://tempuri.org/IServicioEmpleosChile/DelTagOficioUsuarioResponse")]
+        System.Threading.Tasks.Task<WebAPI.ServicioEmpleosChile.ServicioEmpleosChile> DelTagOficioUsuarioAsync(string[] Parametros, string[] valores);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEmpleosChile/GetCandidatosPublicacionEmpresa", ReplyAction="http://tempuri.org/IServicioEmpleosChile/GetCandidatosPublicacionEmpresaResponse")]
         WebAPI.ServicioEmpleosChile.ServicioEmpleosChile GetCandidatosPublicacionEmpresa(string[] Parametros, string[] valores);
         
@@ -524,6 +530,36 @@ namespace WebAPI.ServicioEmpleosChile {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEmpleosChile/GetCurriculum", ReplyAction="http://tempuri.org/IServicioEmpleosChile/GetCurriculumResponse")]
         System.Threading.Tasks.Task<WebAPI.ServicioEmpleosChile.ServicioEmpleosChile> GetCurriculumAsync(string[] Parametros, string[] valores);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEmpleosChile/GetTagOficio", ReplyAction="http://tempuri.org/IServicioEmpleosChile/GetTagOficioResponse")]
+        WebAPI.ServicioEmpleosChile.ServicioEmpleosChile GetTagOficio(string[] Parametros, string[] valores);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEmpleosChile/GetTagOficio", ReplyAction="http://tempuri.org/IServicioEmpleosChile/GetTagOficioResponse")]
+        System.Threading.Tasks.Task<WebAPI.ServicioEmpleosChile.ServicioEmpleosChile> GetTagOficioAsync(string[] Parametros, string[] valores);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEmpleosChile/GetTagOficioUsuario", ReplyAction="http://tempuri.org/IServicioEmpleosChile/GetTagOficioUsuarioResponse")]
+        WebAPI.ServicioEmpleosChile.ServicioEmpleosChile GetTagOficioUsuario(string[] Parametros, string[] valores);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEmpleosChile/GetTagOficioUsuario", ReplyAction="http://tempuri.org/IServicioEmpleosChile/GetTagOficioUsuarioResponse")]
+        System.Threading.Tasks.Task<WebAPI.ServicioEmpleosChile.ServicioEmpleosChile> GetTagOficioUsuarioAsync(string[] Parametros, string[] valores);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEmpleosChile/GetDescripcionOficio", ReplyAction="http://tempuri.org/IServicioEmpleosChile/GetDescripcionOficioResponse")]
+        WebAPI.ServicioEmpleosChile.ServicioEmpleosChile GetDescripcionOficio(string[] Parametros, string[] valores);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEmpleosChile/GetDescripcionOficio", ReplyAction="http://tempuri.org/IServicioEmpleosChile/GetDescripcionOficioResponse")]
+        System.Threading.Tasks.Task<WebAPI.ServicioEmpleosChile.ServicioEmpleosChile> GetDescripcionOficioAsync(string[] Parametros, string[] valores);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEmpleosChile/GetValoracionOficio", ReplyAction="http://tempuri.org/IServicioEmpleosChile/GetValoracionOficioResponse")]
+        WebAPI.ServicioEmpleosChile.ServicioEmpleosChile GetValoracionOficio(string[] Parametros, string[] valores);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEmpleosChile/GetValoracionOficio", ReplyAction="http://tempuri.org/IServicioEmpleosChile/GetValoracionOficioResponse")]
+        System.Threading.Tasks.Task<WebAPI.ServicioEmpleosChile.ServicioEmpleosChile> GetValoracionOficioAsync(string[] Parametros, string[] valores);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEmpleosChile/GetComentarioOficio", ReplyAction="http://tempuri.org/IServicioEmpleosChile/GetComentarioOficioResponse")]
+        WebAPI.ServicioEmpleosChile.ServicioEmpleosChile GetComentarioOficio(string[] Parametros, string[] valores);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEmpleosChile/GetComentarioOficio", ReplyAction="http://tempuri.org/IServicioEmpleosChile/GetComentarioOficioResponse")]
+        System.Threading.Tasks.Task<WebAPI.ServicioEmpleosChile.ServicioEmpleosChile> GetComentarioOficioAsync(string[] Parametros, string[] valores);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEmpleosChile/SetComentarioPublicacion", ReplyAction="http://tempuri.org/IServicioEmpleosChile/SetComentarioPublicacionResponse")]
         WebAPI.ServicioEmpleosChile.ServicioEmpleosChile SetComentarioPublicacion(string[] Parametros, string[] valores);
         
@@ -674,6 +710,24 @@ namespace WebAPI.ServicioEmpleosChile {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEmpleosChile/SetCurriculum", ReplyAction="http://tempuri.org/IServicioEmpleosChile/SetCurriculumResponse")]
         System.Threading.Tasks.Task<WebAPI.ServicioEmpleosChile.ServicioEmpleosChile> SetCurriculumAsync(string[] Parametros, string[] valores);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEmpleosChile/SetTagOficio", ReplyAction="http://tempuri.org/IServicioEmpleosChile/SetTagOficioResponse")]
+        WebAPI.ServicioEmpleosChile.ServicioEmpleosChile SetTagOficio(string[] Parametros, string[] valores);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEmpleosChile/SetTagOficio", ReplyAction="http://tempuri.org/IServicioEmpleosChile/SetTagOficioResponse")]
+        System.Threading.Tasks.Task<WebAPI.ServicioEmpleosChile.ServicioEmpleosChile> SetTagOficioAsync(string[] Parametros, string[] valores);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEmpleosChile/SetTagOficioUsuario", ReplyAction="http://tempuri.org/IServicioEmpleosChile/SetTagOficioUsuarioResponse")]
+        WebAPI.ServicioEmpleosChile.ServicioEmpleosChile SetTagOficioUsuario(string[] Parametros, string[] valores);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEmpleosChile/SetTagOficioUsuario", ReplyAction="http://tempuri.org/IServicioEmpleosChile/SetTagOficioUsuarioResponse")]
+        System.Threading.Tasks.Task<WebAPI.ServicioEmpleosChile.ServicioEmpleosChile> SetTagOficioUsuarioAsync(string[] Parametros, string[] valores);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEmpleosChile/SetDescripcionOficio", ReplyAction="http://tempuri.org/IServicioEmpleosChile/SetDescripcionOficioResponse")]
+        WebAPI.ServicioEmpleosChile.ServicioEmpleosChile SetDescripcionOficio(string[] Parametros, string[] valores);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEmpleosChile/SetDescripcionOficio", ReplyAction="http://tempuri.org/IServicioEmpleosChile/SetDescripcionOficioResponse")]
+        System.Threading.Tasks.Task<WebAPI.ServicioEmpleosChile.ServicioEmpleosChile> SetDescripcionOficioAsync(string[] Parametros, string[] valores);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEmpleosChile/UpdADPreguntaEmpresa", ReplyAction="http://tempuri.org/IServicioEmpleosChile/UpdADPreguntaEmpresaResponse")]
         WebAPI.ServicioEmpleosChile.ServicioEmpleosChile UpdADPreguntaEmpresa(string[] Parametros, string[] valores);
         
@@ -808,6 +862,14 @@ namespace WebAPI.ServicioEmpleosChile {
         
         public System.Threading.Tasks.Task<WebAPI.ServicioEmpleosChile.ServicioEmpleosChile> DelCurriculumAsync(string[] Parametros, string[] valores) {
             return base.Channel.DelCurriculumAsync(Parametros, valores);
+        }
+        
+        public WebAPI.ServicioEmpleosChile.ServicioEmpleosChile DelTagOficioUsuario(string[] Parametros, string[] valores) {
+            return base.Channel.DelTagOficioUsuario(Parametros, valores);
+        }
+        
+        public System.Threading.Tasks.Task<WebAPI.ServicioEmpleosChile.ServicioEmpleosChile> DelTagOficioUsuarioAsync(string[] Parametros, string[] valores) {
+            return base.Channel.DelTagOficioUsuarioAsync(Parametros, valores);
         }
         
         public WebAPI.ServicioEmpleosChile.ServicioEmpleosChile GetCandidatosPublicacionEmpresa(string[] Parametros, string[] valores) {
@@ -1370,6 +1432,46 @@ namespace WebAPI.ServicioEmpleosChile {
             return base.Channel.GetCurriculumAsync(Parametros, valores);
         }
         
+        public WebAPI.ServicioEmpleosChile.ServicioEmpleosChile GetTagOficio(string[] Parametros, string[] valores) {
+            return base.Channel.GetTagOficio(Parametros, valores);
+        }
+        
+        public System.Threading.Tasks.Task<WebAPI.ServicioEmpleosChile.ServicioEmpleosChile> GetTagOficioAsync(string[] Parametros, string[] valores) {
+            return base.Channel.GetTagOficioAsync(Parametros, valores);
+        }
+        
+        public WebAPI.ServicioEmpleosChile.ServicioEmpleosChile GetTagOficioUsuario(string[] Parametros, string[] valores) {
+            return base.Channel.GetTagOficioUsuario(Parametros, valores);
+        }
+        
+        public System.Threading.Tasks.Task<WebAPI.ServicioEmpleosChile.ServicioEmpleosChile> GetTagOficioUsuarioAsync(string[] Parametros, string[] valores) {
+            return base.Channel.GetTagOficioUsuarioAsync(Parametros, valores);
+        }
+        
+        public WebAPI.ServicioEmpleosChile.ServicioEmpleosChile GetDescripcionOficio(string[] Parametros, string[] valores) {
+            return base.Channel.GetDescripcionOficio(Parametros, valores);
+        }
+        
+        public System.Threading.Tasks.Task<WebAPI.ServicioEmpleosChile.ServicioEmpleosChile> GetDescripcionOficioAsync(string[] Parametros, string[] valores) {
+            return base.Channel.GetDescripcionOficioAsync(Parametros, valores);
+        }
+        
+        public WebAPI.ServicioEmpleosChile.ServicioEmpleosChile GetValoracionOficio(string[] Parametros, string[] valores) {
+            return base.Channel.GetValoracionOficio(Parametros, valores);
+        }
+        
+        public System.Threading.Tasks.Task<WebAPI.ServicioEmpleosChile.ServicioEmpleosChile> GetValoracionOficioAsync(string[] Parametros, string[] valores) {
+            return base.Channel.GetValoracionOficioAsync(Parametros, valores);
+        }
+        
+        public WebAPI.ServicioEmpleosChile.ServicioEmpleosChile GetComentarioOficio(string[] Parametros, string[] valores) {
+            return base.Channel.GetComentarioOficio(Parametros, valores);
+        }
+        
+        public System.Threading.Tasks.Task<WebAPI.ServicioEmpleosChile.ServicioEmpleosChile> GetComentarioOficioAsync(string[] Parametros, string[] valores) {
+            return base.Channel.GetComentarioOficioAsync(Parametros, valores);
+        }
+        
         public WebAPI.ServicioEmpleosChile.ServicioEmpleosChile SetComentarioPublicacion(string[] Parametros, string[] valores) {
             return base.Channel.SetComentarioPublicacion(Parametros, valores);
         }
@@ -1560,6 +1662,30 @@ namespace WebAPI.ServicioEmpleosChile {
         
         public System.Threading.Tasks.Task<WebAPI.ServicioEmpleosChile.ServicioEmpleosChile> SetCurriculumAsync(string[] Parametros, string[] valores) {
             return base.Channel.SetCurriculumAsync(Parametros, valores);
+        }
+        
+        public WebAPI.ServicioEmpleosChile.ServicioEmpleosChile SetTagOficio(string[] Parametros, string[] valores) {
+            return base.Channel.SetTagOficio(Parametros, valores);
+        }
+        
+        public System.Threading.Tasks.Task<WebAPI.ServicioEmpleosChile.ServicioEmpleosChile> SetTagOficioAsync(string[] Parametros, string[] valores) {
+            return base.Channel.SetTagOficioAsync(Parametros, valores);
+        }
+        
+        public WebAPI.ServicioEmpleosChile.ServicioEmpleosChile SetTagOficioUsuario(string[] Parametros, string[] valores) {
+            return base.Channel.SetTagOficioUsuario(Parametros, valores);
+        }
+        
+        public System.Threading.Tasks.Task<WebAPI.ServicioEmpleosChile.ServicioEmpleosChile> SetTagOficioUsuarioAsync(string[] Parametros, string[] valores) {
+            return base.Channel.SetTagOficioUsuarioAsync(Parametros, valores);
+        }
+        
+        public WebAPI.ServicioEmpleosChile.ServicioEmpleosChile SetDescripcionOficio(string[] Parametros, string[] valores) {
+            return base.Channel.SetDescripcionOficio(Parametros, valores);
+        }
+        
+        public System.Threading.Tasks.Task<WebAPI.ServicioEmpleosChile.ServicioEmpleosChile> SetDescripcionOficioAsync(string[] Parametros, string[] valores) {
+            return base.Channel.SetDescripcionOficioAsync(Parametros, valores);
         }
         
         public WebAPI.ServicioEmpleosChile.ServicioEmpleosChile UpdADPreguntaEmpresa(string[] Parametros, string[] valores) {

@@ -1,6 +1,5 @@
 ﻿var seleccionado;
 $(document).ready(function () {
-
     $(document).on('keydown', ".soloLetras", function (e) {
         let tecla = (document.all) ? e.keyCode : e.which;
         if (tecla == 8) return true;
@@ -30,14 +29,14 @@ $(document).ready(function () {
     });
 
 
-    $(document).on("keyup", "#username", function (e) {
+    $(document).on('keyup', "#username", function (e) {
         var code = e.keyCode ? e.keyCode : e.which;
         if (code === 13) {
             $("#signInUser").trigger("click");
         }
     });
 
-    $(document).on("keyup", "#userPassword", function (e) {
+    $(document).on('keyup', "#userPassword", function (e) {
         var code = e.keyCode ? e.keyCode : e.which;
         if (code === 13) {
             $("#signInUser").trigger("click");
@@ -56,7 +55,7 @@ $(document).ready(function () {
         let password = $("#passWord").val();
         let passwordRepetir = $("#passWordRepetir").val();
         let fechaNacimiento = $("#fechaNacimiento").val();
-        let domain = getControllerAuth();
+        let domain = getController('/Auth/');
         let error = validateErrorIngreso(rut, nombre1, apellidoP, correo, correoRepetir, password, passwordRepetir, fechaNacimiento);
 
         if (error == "" || error == null || error == undefined) {
@@ -79,7 +78,7 @@ $(document).ready(function () {
 
     $(document).on('click', "#signInUser", function (e) {
         e.preventDefault();
-        let domain = getControllerAuth();
+        let domain = getController('/Auth/');
         let user = $("#username").val();
         let pass = $("#userPassword").val();
 
@@ -87,8 +86,7 @@ $(document).ready(function () {
         ajaxViewPartialLoadingSignIn(domain, user, pass);
     });
 
-    $(document).on('click', ".modalSignIn", function () {
-        //debugger;
+    $(document).on('click', "#SignInUser", function () {
         $("#username").val('');
         $("#signInUser").val('');
         $("#loginError").html('');
@@ -97,15 +95,49 @@ $(document).ready(function () {
     });
 
     $(document).on('click', "#signOutUser", function () {
-        let domain = getControllerAuth();
+        let domain = getController('/Auth/');
 
         ajaxSignOut(domain);
+    });
+
+    $(document).on('click', "#guardaTagOficio", function () {
+        let domain = getController('/Oficios/');
+        let oficio = $("#tagOficio").val();
+
+        if (oficio !== null && oficio !== '' && oficio !== undefined) {
+
+            ajaxSetTagOficio(domain, oficio);
+        }
+
+    });
+
+    $(document).on('click', "#setDescripcionOficio", function () {
+        let descripcion = $("#oficioDescripcion").val();
+        let domain = getController('/Oficios/');
+
+        if (descripcion != null && descripcion != "" && descripcion != undefined) {
+            ajaxSetDescripcionOficio(domain, descripcion);
+        }
+    });
+
+    $(document).on('click', "#updDescripcionOficio", function () {
+        let descripcion = $("#oficioDescripcion").val();
+        let domain = getController('/Oficios/');
+
+        if (descripcion != null && descripcion != "" && descripcion != undefined) {
+            ajaxSetDescripcionOficio(domain, descripcion);
+        }
+    });
+
+    $('#oficioDescripcion').on('input', function () {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';
     });
 
 
     $(document).on('change', "#ciudad", function () {
         let ciudad = $("#ciudad").val();
-        let domain = getControllerAuth();
+        let domain = getController('/Auth/');
 
         if (parseInt(ciudad) > 0) {
             ajaxGetComuna(domain, ciudad);
@@ -133,7 +165,7 @@ $(document).ready(function () {
 
     $(document).on('change', "#region", function () {
         let region = $("#region").val();
-        let domain = getControllerAuth();
+        let domain = getController('/Auth/');
 
         ajaxGetCiudad(domain, region);
     });
@@ -167,7 +199,7 @@ $(document).ready(function () {
 
     //se ejecuta al cerrar un modal
     $("#modalRegistroUsuario").on('hide.bs.modal', function () {
-        window.location.href = getControllerApp() + "Inicio";
+        window.location.href = getController('/App/') + "Inicio";
     });
 
     $("#modalSignIn").on('hide.bs.modal', function () {
@@ -934,17 +966,16 @@ function validateOnlyNumber(inputText) {
     return regex.test(inputText);
 }
 
+function delTagOficio(e) {
+    let domain = getController('/Oficios/');
+    let tag = e.dataset.tag;
 
-function getControllerAuth() {
-    let prefixDomain = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2];
-    let prefix = "/Auth/";
-
-    return prefixDomain + prefix;
+    ajaxDelTagOficio(domain, tag);
 }
 
-function getControllerApp() {
+
+function getController(prefix) {
     let prefixDomain = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2];
-    let prefix = "/Usuario/";
 
     return prefixDomain + prefix;
 }
@@ -958,7 +989,7 @@ function CargaCharts() {
 
 //CURRICULUM
 function uploadCV(file) {
-    let domain = getControllerApp();
+    let domain = getController('/App/');
     let filename = file.files[0].name;
     let extension = filename.slice(filename.lastIndexOf("."), filename.length);
 
@@ -974,7 +1005,7 @@ function uploadCV(file) {
 
 function deleteCV(e) {
     let user = e.dataset.user;
-    let domain = getControllerApp();
+    let domain = getController('/App/');
 
     ajaxDeleteCV(domain, user);
 }
@@ -982,5 +1013,7 @@ function deleteCV(e) {
 
 
 
-
-
+function handleRating(e) {
+    let element = e.attributes.for.value;
+    console.log($("#"+ element).val());
+}
