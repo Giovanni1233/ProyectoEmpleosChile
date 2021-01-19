@@ -19,25 +19,28 @@
                 <div class="md-form form-sm">
                     <div class="input-group form-group">
                         <input type="text" name="rut" id="rut" class="form-control soloRut" autocomplete="off" maxlength="12" style="font-family: 'Roboto', sans-serif;" />
-                        <label for="rut">Rut</label>
+                        <label for="rut">Rut *</label>
                     </div>
 
                 </div>
             </div>
             <div class="col-12 col-sm-12 col-md-12 col-lg-6" style="margin: auto;">
                 <div class="md-form form-sm">
-                    <div class="input-group form-group">
-                        <input type="text" name="rubro" id="rubro" class="form-control soloLetras" maxlength="40" autocomplete="off" style="font-family: 'Roboto', sans-serif;" />
-                        <label for="rubro">Rubro</label>
-                    </div>
-
+                    <select class="mdb-select md-form" name="rubro" id="rubro" searchable="Buscar rubro..">
+                        <option value="" disabled selected>Seleccione un rubro</option>
+                        @foreach (var rubro in ViewBag.Rubro as ICollection<Model.Models.Rubro>)
+                        {
+                            <option value="@rubro.idRubro">@rubro.NombreRubro</option>
+                        }
+                    </select>
+                    
                 </div>
             </div>
             <div class="col-12 col-sm-12 col-md-12 col-lg-6" style="margin: auto;">
                 <div class="md-form form-sm">
                     <div class="input-group form-group">
                         <input type="text" name="nombre" id="nombre" class="form-control soloLetras" maxlength="40" autocomplete="off" style="font-family: 'Roboto', sans-serif;" />
-                        <label for="nombre">Nombre</label>
+                        <label for="nombre">Nombre *</label>
                     </div>
 
                 </div>
@@ -46,7 +49,7 @@
                 <div class="md-form form-sm">
                     <div class="input-group form-group">
                         <input type="text" name="razonsocial" id="razonsocial" class="form-control soloLetras" maxlength="40" autocomplete="off" style="font-family: 'Roboto', sans-serif;" />
-                        <label for="razonsocial">Razon Social</label>
+                        <label for="razonsocial">Razon Social *</label>
                     </div>
 
                 </div>
@@ -54,9 +57,9 @@
             <div class="col-12 col-sm-12 col-md-12 col-lg-6" style="margin: auto;">
                 <div class="md-form form-sm">
                     <div class="input-group form-group">
-                        <input type="text" name="correo" id="correo" class="form-control" autocomplete="off" maxlength="60" style="font-family: 'Roboto', sans-serif;" />
+                        <input type="text" name="correo" id="correoReg" class="form-control" autocomplete="off" maxlength="60" style="font-family: 'Roboto', sans-serif;" />
                         <span id="mailError" class="error-span"></span>
-                        <label for="correo">Email</label>
+                        <label for="correo">Email *</label>
                     </div>
 
                 </div>
@@ -64,8 +67,8 @@
             <div class="col-12 col-sm-12 col-md-12 col-lg-6" style="margin: auto;">
                 <div class="md-form form-sm">
                     <div class="input-group form-group">
-                        <input type="text" name="telefono" id="telefono" class="form-control" autocomplete="off" style="font-family: 'Roboto', sans-serif;"/>
-                        <label for="telefono">Telefono</label>
+                        <input type="text" name="telefono" id="telefono" class="form-control soloNumeros" autocomplete="off" style="font-family: 'Roboto', sans-serif;" />
+                        <label for="telefono">Telefono *</label>
                     </div>
 
                 </div>
@@ -74,7 +77,7 @@
                 <div class="md-form form-sm">
                     <select class="mdb-select md-form" name="comuna" id="comuna" searchable="Buscar comuna..">
                         <option value="" disabled selected>Seleccione una comuna</option>
-                        <option value="1">Maipú</option>
+                        <option value="1">Puente Alto</option>
 
                     </select>
                 </div>
@@ -83,7 +86,7 @@
                 <div class="md-form form-sm">
                     <div class="input-group form-group">
                         <input type="text" name="direccion" id="direccion" class="form-control" autocomplete="off" style="font-family: 'Roboto', sans-serif;" />
-                        <label for="direccion">Direccion</label>
+                        <label for="direccion">Direccion *</label>
                     </div>
 
                 </div>
@@ -92,7 +95,7 @@
                 <div class="md-form form-sm">
                     <div class="input-group form-group">
                         <input type="password" name="clave" id="clave" class="form-control" autocomplete="off" style="font-family: 'Roboto', sans-serif;" />
-                        <label for="clave">Clave</label>
+                        <label for="clave">Clave *</label>
                     </div>
 
                 </div>
@@ -100,9 +103,9 @@
             <div class="col-12 col-sm-12 col-md-12 col-lg-6" style="margin: auto;">
                 <div class="md-form form-sm">
                     <div class="input-group form-group">
-                        <input type="password" name="repetirclave" id="repetirclave" class="form-control" autocomplete="off" style="font-family: 'Roboto', sans-serif;"  />
+                        <input type="password" name="repetirclave" id="repetirclave" class="form-control" autocomplete="off" style="font-family: 'Roboto', sans-serif;" />
                         <span id="repetirError" class="error-span"></span>
-                        <label for="repetirclave">Repetir Clave</label>
+                        <label for="repetirclave">Repetir Clave *</label>
                     </div>
 
                 </div>
@@ -110,9 +113,15 @@
             <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin-top:-15px; margin-bottom:15px;">
                 <span>(*) Campos obligatorios para el registro</span>
             </div>
+            <br />
+            <div class="col-md-12">
+                <div class="errorRegistroEmpresa"></div>
+            </div>
+
+            <br />
 
             <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin-bottom: 30px;">
-                <button class="btn btn-primary guardarEmpresa">
+                <button type="button" class="btn btn-primary guardarEmpresa">
                     <i class="fas fa-save" style="color: #fff;"> Registrar</i>
                 </button>
                 <input type="hidden" name="error" id="error" />

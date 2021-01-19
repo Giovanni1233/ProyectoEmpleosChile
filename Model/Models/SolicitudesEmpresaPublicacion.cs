@@ -12,5 +12,8 @@ namespace Model.Models
         public string IdSolicitante { get; set; }
         public string EstadoSolicitud { get; set; }
         public string PublicacionSolicitud { get; set; }
+        public string Documento { get; set; }
+        public string EnviaCV { get; set; }
+        public string DocNombre { get; set; }
     }
 }

@@ -37,7 +37,34 @@
                 </div>
                 <hr />
                 <div class="card mt-3">
-                    <p><h3>Ver Curriculum</h3></p>
+                    <p><h3 class="text-center">Curriculum usuario</h3></p>
+                    <div class="col-md-12">
+                        @if (ViewBag.ReferenciaUrlCV != null && ViewBag.ReferenciaUrlCV != "")
+                        {
+                            <div class="primary dspl-inline-block btn btn-block" style="margin-bottom:20px;">
+                                <i class="fas fa-file-pdf fa-2x" style="margin-right:5px; color:#fff;">&nbsp;</i>
+                                <span style="display: inline-block; margin-top: -4px;">
+                                    <i style="font-size: 14px; font-style: normal; display: block; color:#fff; margin-bottom: -8px;">
+                                        @ViewBag.ReferenciaDocumento
+                                    </i>
+                                    <span style="display: inline-block; margin-top: 10px;">
+
+                                        <a href="@ViewBag.ReferenciaUrlCV" id="downloadCV" title="Descargar" style="color:#fff;">
+                                            <i class="fas fa-file-download" style="display: inline; font-size:18px; cursor:pointer; margin: 5px;"> </i>
+                                        </a>
+
+                                    </span>
+                                </span>
+                            </div>
+                        }
+                        else
+                        {
+                            <p class="text-center"><h6 class="text-center">No se ha encontrado curriculum</h6></p>
+                        }
+
+                        <br />
+                    </div>
+
                 </div>
             </div>
             <div class="col-md-8">
@@ -237,221 +264,218 @@
                 </div>
             </div>
         </div>
+
     }
-}
-@*@if (ViewBag.ReferenciaDatosUsuario != null)
-    {
-        foreach (var item in ViewBag.ReferenciaDatosUsuario as ICollection<Model.Models.PerfilCandidatoPostulacion>)
-        {
-            <div class="emp-profile">
-                <form method="post">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="profile-img">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt="" />
-
-                            </div>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="profile-head">
-                                <h5>
-                                    Nombre: @item.NombreUsuario
-                                </h5>
-                                <p> Apellido Paterno: @item.ApellidoMUsuario - Apellido Materno: @item.ApellidoPUsuario</p>
-
-                                <h6>
-                                    @item.CorreoUsuario
-                                </h6>
-                                <p class="proile-rating">RANKINGS : <span>8/10</span></p>
-                                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" id="informacion-tab" data-toggle="tab" href="#informacion" role="tab" aria-controls="informacion" aria-selected="true">Información</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="experiencia-tab" data-toggle="tab" href="#experiencia" role="tab" aria-controls="experiencia" aria-selected="false">Experiencia</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="educacion-tab" data-toggle="tab" href="#educacion" role="tab" aria-controls="educacion" aria-selected="false">Educación</a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                        </div>
-
-                    </div>
-                    <br />
-                    <hr />
-                    <div class="col-md-3">
-
-                        <ul class="list-group">
-                            <li class="list-group-item text-muted">Postulaciones a empleos de mi empresa <i class="fa fa-home fa-1x"></i></li>
-                            <li class="list-group-item text-right"><span class="pull-left"><strong>Programador .NET</strong></span> 5</li>
-                            <li class="list-group-item text-right"><span class="pull-left"><strong>Programador PHP</strong></span> 2</li>
-                        </ul>
-                        <hr />
-                        <div class="card card-default">
-                            <div class="card-header">Redes sociales</div>
-                            <div class="card-body">
-                                <i class="fab fa-facebook-f"></i> <i class="fab fa-github"></i> <i class="fab fa-twitter"></i> <i class="fab fa-pinterest"></i> <i class="fab fa-google-plus"></i>
-                            </div>
-                        </div>
-                        <hr />
-                        <div class="card card-default">
-                            <div class="card-header">Carta de Presentación</div>
-                            <div class="card-body">
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="tab-content profile-tab" id="myTabContent">
-                            <div class="tab-pane fade show active" id="informacion" role="tabpanel" aria-labelledby="informacion-tab">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label>Rut</label>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <p>@item.RutUsuario</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label>Nombres</label>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <p>@item.NombreUsuario</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label>Apellidos</label>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <p>@item.ApellidoPUsuario @item.ApellidoMUsuario</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label>Telefono</label>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <p>@item.TelefonoUsuario</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label>Correo</label>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <p>@item.CorreoUsuario</p>
-                                    </div>
-                                </div>
-                                <h4>Habilidades</h4>
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        @if (ViewBag.ReferenciaHabilidadesUsuario.Count > 0)
-                                        {
-                                            <ul>
-                                                @foreach (var hab in ViewBag.ReferenciaHabilidadesUsuario as ICollection<Model.Models.HabilidadesUsuario>)
-                                                {
-                                                    <li>@hab.HabilidadNombre</li>
-                                                }
-                                            </ul>
-                                        }
-                                        else
-                                        {
-                                            <div class="error-template">
-                                                <div class="error-details">
-                                                    <h4>No hay descripción de habilidades.</h4>
-                                                </div>
-                                            </div>
-                                        }
-
-                                    </div>
-
-                                </div>
-
-                                <h4>Idiomas</h4>
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        @if (ViewBag.ReferenciaIdiomasUsuario.Count > 0)
-                                        {
-                                            <ul>
-                                                @foreach (var idiomas in ViewBag.ReferenciaIdiomasUsuario as ICollection<Model.Models.IdiomasUsuario>)
-                                                {
-                                                    <li>@idiomas.NombreIdioma - @idiomas.NivelIdioma</li>
-                                                }
-                                            </ul>
-                                        }
-                                        else
-                                        {
-                                            <div class="error-template">
-                                                <div class="error-details">
-                                                    <h4>No hay descripción de idiomas.</h4>
-                                                </div>
-                                            </div>
-                                        }
-                                    </div>
-
-                                </div>
-
-                            </div>
-                            <div class="tab-pane fade" id="experiencia" role="tabpanel" aria-labelledby="experiencia-tab">
-                                @if (ViewBag.ReferenciaExperienciasUsuario.Count > 0)
-                                {
-                                    foreach (var exp in ViewBag.ReferenciaExperienciasUsuario as ICollection<Model.Models.ExperienciaUsuario>)
-                                    {
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <label>@exp.Nombre - @exp.Fecha_Inicio / @exp.Fecha_Termino</label>
-                                            </div>
-                                            <div class="col-md-9">
-                                                <p>@exp.Descripcion</p>
-                                            </div>
-                                        </div>
-                                    }
-                                }
-                                else
-                                {
-                                    <div class="error-template">
-                                        <div class="error-details">
-                                            <h4>No hay experiencias de empleos anteriores.</h4>
-                                        </div>
-                                    </div>
-                                }
-                            </div>
-                            <div class="tab-pane fade" id="educacion" role="tabpanel" aria-labelledby="educacion-tab">
-                                @if (ViewBag.ReferenciaExperienciasUsuario.Count > 0)
-                                {
-                                    foreach (var edu in ViewBag.ReferenciaEducacionUsuario as ICollection<Model.Models.EducacionUsuario>)
-                                    {
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <label>@edu.TituloEducacion - @edu.FechaDesdeEducacion / @edu.FechaHastaEducacion</label>
-                                            </div>
-                                            <div class="col-md-9">
-                                                <p><h6>@edu.InstitucionEducacion</h6></p>
-                                                <p>@edu.DescripcionEducacion</p>
-                                            </div>
-                                        </div>
-                                    }
-                                }
-                                else
-                                {
-                                    <div class="error-template">
-                                        <div class="error-details">
-                                            <h4>No hay descripción de estudios.</h4>
-                                        </div>
-                                    </div>
-                                }
-                            </div>
-                        </div>
-                    </div>
-                </form>
+    <hr />
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>Resultados del test / <a href="@Url.Action("DetalleTestUsuario","Empresa", new { idUsuario = ViewBag.referenciaIdUsuario })">Ver detalle del test</a></h4>
+                </div>
+            </div>
+            <div class="col-md-12 d-inline-flex">
+                <div class="col-md-4">
+                    <canvas id="myChartResponsabilidad"></canvas>
+                </div>
+                <div class="col-md-4">
+                    <canvas id="myChartAutogestion"></canvas>
+                </div>
+                <div class="col-md-4">
+                    <canvas id="myChartLiderazgo"></canvas>
+                </div>
             </div>
 
-        }
+        </div>
+    </div>
+    <hr />
+    <div class="row">
 
-    }*@
+        <div class="col-md-12">
+            @if (ViewBag.DetallePreguntasRespuestas.Count > 0)
+            {
+                <h3>Respuestas a las postulaciones realizadas</h3>
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Publicacion</th>
+                            <th>Disponibilidad</th>
+                            <th>Sueldo Liquido</th>
+                            <th>Descripcion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var itemRespuestas in ViewBag.DetallePreguntasRespuestas as ICollection<Model.Models.DetallePreguntasRespuestas>
+                   )
+                        {
+                            <tr>
+                                <td>@itemRespuestas.nombrePublicacion</td>
+                                <td>@itemRespuestas.Disponibilidad</td>
+                                <td>@itemRespuestas.Sueldo</td>
+                                <td>@itemRespuestas.Descripcion</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="error-template">
+
+                    <div class="error-details">
+                        <h4>   No hay se encontró detalle de las preguntas</h4>
+
+                    </div>
+
+                </div>
+            }
+
+
+
+        </div>
+    </div>
+
+}
+
+<script type="text/javascript">
+                var Responsabilidad = @Html.Raw(Json.Encode(ViewBag.referenciaResponsabilidad));
+                var RestoResponsabilidad = @Html.Raw(Json.Encode(ViewBag.referenciaRestoResponsabilidad));
+                var AutoGestion = @Html.Raw(Json.Encode(ViewBag.referenciaAutoGestion));
+                var RestoAutoGestion = @Html.Raw(Json.Encode(ViewBag.referenciaRestoAutogestion));
+                var Liderazgo = @Html.Raw(Json.Encode(ViewBag.referenciaLiderazgo));
+                var RestoLiderazgo = @Html.Raw(Json.Encode(ViewBag.referenciaRestoLiderazgo));
+                var respon = Responsabilidad.replace(',', '.');
+                var restorespon = RestoResponsabilidad.replace(',', '.');
+                var autoges = AutoGestion.replace(',', '.');
+                var restoautoges = RestoAutoGestion.replace(',', '.');
+                var lideraz = Liderazgo.replace(',', '.');
+                var restolideraz = RestoLiderazgo.replace(',', '.');
+                let ctx = document.getElementById("myChartResponsabilidad").getContext('2d');
+                let ctx1 = document.getElementById("myChartAutogestion").getContext('2d');
+                let ctx2 = document.getElementById("myChartLiderazgo").getContext('2d');
+                let labelsrespo = ['Responsabilidad ' + respon + ' %', 'No Responsabilidad ' + restorespon + ' %'];
+                let colorHexrespo = ['#FF702D', '#FFD2BD'];
+
+                let labelsges = ['AutoGestion ' + autoges + ' %', 'No AutoGestion ' + restoautoges + ' %'];
+                let colorHexges = ['#FF702D', '#FFD2BD'];
+
+                let labelslider = ['Liderazgo ' + lideraz + ' %', 'No Liderazgo ' + restolideraz + ' %'];
+                let colorHexlider = ['#FF702D', '#FFD2BD'];
+
+                // Responsabilidad
+                let myChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        datasets: [{
+                            data: [respon, restorespon],
+                            backgroundColor: colorHexrespo
+                        }],
+                        labels: labelsrespo
+                    },
+                    options: {
+                        responsive: true,
+                        legend: {
+                            position: 'bottom'
+                        },
+                        plugins: {
+                            datalabels: {
+                                color: '#fff',
+                                anchor: 'end',
+                                align: 'start',
+                                offset: -10,
+                                borderWidth: 2,
+                                borderColor: '#fff',
+                                borderRadius: 25,
+                                backgroundColor: (context) => {
+                                    return context.dataset.backgroundColor;
+                                },
+                                font: {
+                                    weight: 'bold',
+                                    size: '10'
+                                },
+                                formatter: (value) => {
+                                    return value + ' %';
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // Autogestion
+                let myChart2 = new Chart(ctx1, {
+                    type: 'doughnut',
+                    data: {
+                        datasets: [{
+                            data: [autoges, restoautoges],
+                            backgroundColor: colorHexges
+                        }],
+                        labels: labelsges
+                    },
+                    options: {
+                        responsive: true,
+                        legend: {
+                            position: 'bottom'
+                        },
+                        plugins: {
+                            datalabels: {
+                                color: '#fff',
+                                anchor: 'end',
+                                align: 'start',
+                                offset: -10,
+                                borderWidth: 2,
+                                borderColor: '#fff',
+                                borderRadius: 25,
+                                backgroundColor: (context) => {
+                                    return context.dataset.backgroundColor;
+                                },
+                                font: {
+                                    weight: 'bold',
+                                    size: '10'
+                                },
+                                formatter: (value) => {
+                                    return value + ' %';
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // liderazgo
+                let myChart3 = new Chart(ctx2, {
+                    type: 'doughnut',
+                    data: {
+                        datasets: [{
+                            data: [lideraz, restolideraz],
+                            backgroundColor: colorHexlider
+                        }],
+                        labels: labelslider
+                    },
+                    options: {
+                        responsive: true,
+                        legend: {
+                            position: 'bottom'
+                        },
+                        plugins: {
+                            datalabels: {
+                                color: '#fff',
+                                anchor: 'end',
+                                align: 'start',
+                                offset: -10,
+                                borderWidth: 2,
+                                borderColor: '#fff',
+                                borderRadius: 25,
+                                backgroundColor: (context) => {
+                                    return context.dataset.backgroundColor;
+                                },
+                                font: {
+                                    weight: 'bold',
+                                    size: '10'
+                                },
+                                formatter: (value) => {
+                                    return value + ' %';
+                                }
+                            }
+                        }
+                    }
+                });
+</script>

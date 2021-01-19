@@ -1,0 +1,177 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <a href="@Url.Action("PerfilCandidato", "Empresa", new { idUsuario = ViewBag.referenciaIdUsuario })" class="btn border">Volver</a>
+    </div>
+
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-6 border-right">
+        <h4>Test de personalidad</h4>
+        <div class="chart_container">
+            <canvas id="myChartResponsabilidad"></canvas>
+            <hr />
+            <canvas id="myChartAutogestion"></canvas>
+            <hr />
+            <canvas id="myChartLiderazgo"></canvas>
+            <hr />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h4>Detalle de test</h4>
+        @foreach (var item in ViewBag.referenciaRespuestasTest as ICollection<Model.Models.DetalleRespuestasTest>)
+        {
+            <div class="card">
+                <div class="card-body">
+                    <p class="text-primary">Pregunta: <b>¿@item.DetallePregunta?</b></p>
+                    <p class="text-warning">Respuesta: <b>@item.RespuestaPregunta</b></p>
+                </div>
+            </div>
+            <hr />
+        }
+    </div>
+</div>
+
+
+<script type="text/javascript">
+                var Responsabilidad = @Html.Raw(Json.Encode(ViewBag.referenciaResponsabilidad));
+                var RestoResponsabilidad = @Html.Raw(Json.Encode(ViewBag.referenciaRestoResponsabilidad));
+                var AutoGestion = @Html.Raw(Json.Encode(ViewBag.referenciaAutoGestion));
+                var RestoAutoGestion = @Html.Raw(Json.Encode(ViewBag.referenciaRestoAutogestion));
+                var Liderazgo = @Html.Raw(Json.Encode(ViewBag.referenciaLiderazgo));
+                var RestoLiderazgo = @Html.Raw(Json.Encode(ViewBag.referenciaRestoLiderazgo));
+                var respon = Responsabilidad.replace(',', '.');
+                var restorespon = RestoResponsabilidad.replace(',', '.');
+                var autoges = AutoGestion.replace(',', '.');
+                var restoautoges = RestoAutoGestion.replace(',', '.');
+                var lideraz = Liderazgo.replace(',', '.');
+                var restolideraz = RestoLiderazgo.replace(',', '.');
+                let ctx = document.getElementById("myChartResponsabilidad").getContext('2d');
+                let ctx1 = document.getElementById("myChartAutogestion").getContext('2d');
+                let ctx2 = document.getElementById("myChartLiderazgo").getContext('2d');
+                let labelsrespo = ['Responsabilidad ' + respon + ' %', 'No Responsabilidad ' + restorespon + ' %'];
+                let colorHexrespo = ['#4285F4', '#B9D2FC'];
+
+                let labelsges = ['AutoGestion ' + autoges + ' %', 'No AutoGestion ' + restoautoges + ' %'];
+                let colorHexges = ['#4285F4', '#B9D2FC'];
+
+                let labelslider = ['Liderazgo ' + lideraz + ' %', 'No Liderazgo ' + restolideraz + ' %'];
+                let colorHexlider = ['#4285F4', '#B9D2FC'];
+
+                // Responsabilidad
+                let myChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        datasets: [{
+                            data: [respon, restorespon],
+                            backgroundColor: colorHexrespo
+                        }],
+                        labels: labelsrespo
+                    },
+                    options: {
+                        responsive: true,
+                        legend: {
+                            position: 'bottom'
+                        },
+                        plugins: {
+                            datalabels: {
+                                color: '#fff',
+                                anchor: 'end',
+                                align: 'start',
+                                offset: -10,
+                                borderWidth: 2,
+                                borderColor: '#fff',
+                                borderRadius: 25,
+                                backgroundColor: (context) => {
+                                    return context.dataset.backgroundColor;
+                                },
+                                font: {
+                                    weight: 'bold',
+                                    size: '10'
+                                },
+                                formatter: (value) => {
+                                    return value + ' %';
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // Autogestion
+                let myChart2 = new Chart(ctx1, {
+                    type: 'doughnut',
+                    data: {
+                        datasets: [{
+                            data: [autoges, restoautoges],
+                            backgroundColor: colorHexges
+                        }],
+                        labels: labelsges
+                    },
+                    options: {
+                        responsive: true,
+                        legend: {
+                            position: 'bottom'
+                        },
+                        plugins: {
+                            datalabels: {
+                                color: '#fff',
+                                anchor: 'end',
+                                align: 'start',
+                                offset: -10,
+                                borderWidth: 2,
+                                borderColor: '#fff',
+                                borderRadius: 25,
+                                backgroundColor: (context) => {
+                                    return context.dataset.backgroundColor;
+                                },
+                                font: {
+                                    weight: 'bold',
+                                    size: '10'
+                                },
+                                formatter: (value) => {
+                                    return value + ' %';
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // liderazgo
+                let myChart3 = new Chart(ctx2, {
+                    type: 'doughnut',
+                    data: {
+                        datasets: [{
+                            data: [lideraz, restolideraz],
+                            backgroundColor: colorHexlider
+                        }],
+                        labels: labelslider
+                    },
+                    options: {
+                        responsive: true,
+                        legend: {
+                            position: 'bottom'
+                        },
+                        plugins: {
+                            datalabels: {
+                                color: '#fff',
+                                anchor: 'end',
+                                align: 'start',
+                                offset: -10,
+                                borderWidth: 2,
+                                borderColor: '#fff',
+                                borderRadius: 25,
+                                backgroundColor: (context) => {
+                                    return context.dataset.backgroundColor;
+                                },
+                                font: {
+                                    weight: 'bold',
+                                    size: '10'
+                                },
+                                formatter: (value) => {
+                                    return value + ' %';
+                                }
+                            }
+                        }
+                    }
+                });
+</script>

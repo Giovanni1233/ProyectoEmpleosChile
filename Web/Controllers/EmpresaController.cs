@@ -52,6 +52,25 @@ namespace Web.Controllers
 
             return View();
         }
+        public ActionResult DetalleTestUsuario(string idUsuario)
+        {
+            // ResultadosTest
+            ViewBag.referenciaTestUsuario = GetResultadosTestUsuario(idUsuario);
+
+            foreach (var item in ViewBag.referenciaTestUsuario)
+            {
+                ViewBag.referenciaResponsabilidad = item.Responsabilidad;
+                ViewBag.referenciaRestoResponsabilidad = item.RestoResponsabilidad;
+                ViewBag.referenciaAutoGestion = item.AutoGestion;
+                ViewBag.referenciaRestoAutogestion = item.RestoAutogestion;
+                ViewBag.referenciaLiderazgo = item.Liderazgo;
+                ViewBag.referenciaRestoLiderazgo = item.RestoLiderazgo;
+            }
+            // Detalle respuestas test
+            ViewBag.referenciaRespuestasTest = GetRespuestasTestUsuario(idUsuario);
+            ViewBag.referenciaIdUsuario = idUsuario;
+            return View();
+        }
         public ActionResult Index()
         {
 
@@ -60,6 +79,10 @@ namespace Web.Controllers
             ViewBag.PublicacionesPermitidasEmpresa = GetCandiPubliTrabaPreguntPermitidas("", "1");
             ViewBag.TrabajadoresPermitidosEmpresa = GetCandiPubliTrabaPreguntPermitidas("", "2");
             // Se debe borrar pronto
+
+
+            // Imagenes a cargar
+            ViewBag.ImagenesAfuera = GetImagenesAfuera();
 
             return View();
         }
@@ -109,19 +132,71 @@ namespace Web.Controllers
             ViewBag.PublicacionesPermitidasEmpresa = GetCandiPubliTrabaPreguntPermitidas(idEmpresa, "1");
             ViewBag.TrabajadoresPermitidosEmpresa = GetCandiPubliTrabaPreguntPermitidas(idEmpresa, "2");
             ViewBag.referenciaContadorPublicaciones = GetPublicaciones(idEmpresa, "").Count();
+
+            ViewBag.DetallePreguntasRespuestas = GetRespuestasPublicacion(idUsuario);
             ViewBag.Planes = GetPlanes("");
+
+            // ResultadosTest
+            ViewBag.referenciaTestUsuario = GetResultadosTestUsuario(idUsuario);
+
+            foreach (var item in ViewBag.referenciaTestUsuario)
+            {
+                ViewBag.referenciaResponsabilidad = item.Responsabilidad;
+                ViewBag.referenciaRestoResponsabilidad = item.RestoResponsabilidad;
+                ViewBag.referenciaAutoGestion = item.AutoGestion;
+                ViewBag.referenciaRestoAutogestion = item.RestoAutogestion;
+                ViewBag.referenciaLiderazgo = item.Liderazgo;
+                ViewBag.referenciaRestoLiderazgo = item.RestoLiderazgo;
+            }
+            ViewBag.referenciaIdUsuario = idUsuario;
+
+            // Subir CV
+            var data = GetCurriculum(idUsuario);
+            if (data.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow rows in data.Tables[0].Rows)
+                {
+                    switch (rows["Code"].ToString())
+                    {
+                        case "200":
+                            ViewBag.ReferenciaIdUser = idUsuario;
+                            ViewBag.ReferenciaDocumento = rows["Documento"].ToString();
+                            ViewBag.ReferenciaUrlCV = ModuleControlRetorno() + "/Empresa/DownloadCV?url=" + rows["Url"].ToString() + "&documento=" + rows["Documento"].ToString();
+                            break;
+
+                        case "400":
+                            ViewBag.ReferenciaMsg1 = rows["Message1"].ToString();
+                            ViewBag.ReferenciaMsg2 = rows["Message2"].ToString();
+                            break;
+
+                        default:
+                            ViewBag.ReferenciaMsg1 = "Puedes adjuntar tu CV!!";
+                            ViewBag.ReferenciaMsg2 = "(.pdf)";
+                            break;
+                    }
+                }
+            }
+
             return View();
         }
         public ActionResult PerfilEmpresa(string idEmpresa = "")
         {
             var empresa = "";
-            if (idEmpresa == "")
+            if (idEmpresa == "" && Session["EmpresaID"].ToString() == "")
             {
-                empresa = Session["EmpresaID"].ToString();
+                RedirectToAction("CerrarSesion");
             }
             else
             {
-                empresa = idEmpresa;
+                if (idEmpresa == "")
+                {
+                    empresa = Session["EmpresaID"].ToString();
+                }
+                else
+                {
+                    empresa = idEmpresa;
+                }
+
             }
             ViewBag.ReferenciaDatosEmpresa = GetDatosEmpresa(empresa);
             // Se debe borrar pronto
@@ -177,19 +252,8 @@ namespace Web.Controllers
                 var empresa = Session["EmpresaID"].ToString();
                 //ViewBag.TiposPublicaciones = GetTiposPublicaciones();
                 ViewBag.referenciaCandidatosPublicacion = GetUltimosCandidatosEmpresa(empresa);
-                //if (NombrePublicacion == "")
-                //{
-                //    ViewBag.PublicacionesEmpresa = GetPublicaciones(empresa, "");
 
-                //}
-                //else
-                //{
                 ViewBag.PublicacionesEmpresa = GetPublicacionFiltros(empresa, NombrePublicacion, FechaPublicacion, Ordenamiento, "");
-                //}
-                // Se debe borrar pronto
-                Session["ContadorSolicitudes"] = GetCantidadSMN(empresa, "1");
-                Session["ContadorNotificaciones"] = GetCantidadSMN(empresa, "2");
-                Session["ContadorMensajes"] = GetCantidadSMN(empresa, "3");
 
                 // Detalle publicacion
                 ViewBag.DetallePublicacionContador = GetDetallePublicacion(IdPublicacion).Count();
@@ -207,10 +271,6 @@ namespace Web.Controllers
                 }
 
                 ViewBag.PreguntasPorPublicacionId = GetPreguntasPorPublicacionId(IdPublicacion);
-
-                //ViewBag.CountVotosTotales = GetVotosTotales(IdPublicacion);
-                //ViewBag.PromedioVotosPublicacion = GetPromedioVotosPublicacion(IdPublicacion);
-
                 // Planes
                 ViewBag.referenciaPlanEmpresa = GetPlanesContratadosEmpresa(empresa);
                 ViewBag.PublicacionesPermitidasEmpresa = GetCandiPubliTrabaPreguntPermitidas(empresa, "1");
@@ -268,9 +328,33 @@ namespace Web.Controllers
             ViewBag.DevolucionesEmpresa = GetDevolucionesEmpresa(idEmpresa);
             return View();
         }
+        public ActionResult UsuariosOficios()
+        {
+            ViewBag.referenciaUsuariosOficios = GetUsuariosConOficio();
+            return View();
+        }
         #endregion
 
         #region ObtencionDatos
+        public ActionResult DownloadCV(string url, string documento)
+        {
+            MemoryStream ms = new MemoryStream();
+            var pdfbyte = System.IO.File.ReadAllBytes(Server.MapPath(url));
+
+            ms = new MemoryStream();
+            ms.Write(pdfbyte, 0, pdfbyte.Length);
+            ms.Position = 0;
+
+            Response.ContentType = "application/pdf";
+            Response.AddHeader("content-disposition", "attachment;filename=" + documento);
+            Response.Buffer = true;
+            Response.Clear();
+            Response.OutputStream.Write(ms.GetBuffer(), 0, ms.GetBuffer().Length);
+            Response.OutputStream.Flush();
+            Response.End();
+
+            return new FileStreamResult(Response.OutputStream, "application/pdf");
+        }
         public List<CandidatoEmpleos> GetCandidatosEmpresa(string id)
         {
             string code = string.Empty;
@@ -535,6 +619,26 @@ namespace Web.Controllers
             }
             return contador;
         }
+        public DataSet GetCurriculum(string user)
+        {
+            string[] parametros = new string[1];
+            string[] valores = new string[1];
+            DataSet data = new DataSet();
+
+            try
+            {
+                parametros[0] = "@USUARIO";
+                valores[0] = user;
+
+                data = svcEmpleos.GetCurriculum(parametros, valores).Table;
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return data;
+        }
         public List<DatosEmpresa> GetDatosEmpresa(string idEmpresa)
         {
             string code = string.Empty;
@@ -618,7 +722,8 @@ namespace Web.Controllers
                                     FechaNacUsuarioE = rows["FechaNacUsuarioE"].ToString(),
                                     TelefonoUsuarioE = rows["TelefonoUsuarioE"].ToString(),
                                     PassUsuarioE = rows["PassUsuarioE"].ToString(),
-                                    CorreoUsuarioE = rows["CorreoUsuarioE"].ToString()
+                                    CorreoUsuarioE = rows["CorreoUsuarioE"].ToString(),
+                                    ImagendelUsuarioE = (byte[])rows["ImagendelUsuarioE"]
                                 });
 
                             mensaje = "";
@@ -870,6 +975,59 @@ namespace Web.Controllers
                 mensaje = errorSistema;
             }
             return clDetallePub;
+        }
+        public List<DetalleRespuestasTest> GetRespuestasTestUsuario(string idUsuario)
+        {
+            string code = string.Empty;
+            string mensaje = string.Empty;
+            string[] parametros = new string[1];
+            string[] valores = new string[1];
+            parametros[0] = "@ID_USUARIO";
+            valores[0] = idUsuario;
+            List<DetalleRespuestasTest> cldetalleTest = new List<DetalleRespuestasTest>();
+
+            DataSet data = new DataSet();
+
+            try
+            {
+                data = svcEmpleos.GetRespuestasTestUsuario(parametros, valores).Table;
+                foreach (DataRow rows in data.Tables[0].Rows)
+                {
+                    switch (rows["Code"].ToString())
+                    {
+                        case "200":
+                            cldetalleTest.Add(
+                                new DetalleRespuestasTest
+                                {
+                                    DetallePregunta =  rows["DetallePregunta"].ToString(),
+                                    RespuestaPregunta = rows["RespuestaPregunta"].ToString(),
+                                });
+                            mensaje = "";
+                            break;
+                        case "400":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        case "500":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        default:
+                            code = "600";
+                            mensaje = errorSistema;
+                            break;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                code = "600";
+                mensaje = errorSistema;
+            }
+            return cldetalleTest;
         }
         public List<DevolucionEmpresa> GetDevolucionesEmpresa(string idEmpresa)
         {
@@ -1411,6 +1569,56 @@ namespace Web.Controllers
             }
             return clImagenesBanner;
         }
+        public List<ImagenesFuera> GetImagenesAfuera()
+        {
+            string code = string.Empty;
+            string mensaje = string.Empty;
+
+            List<ImagenesFuera> clImagenesFuera = new List<ImagenesFuera>();
+
+            DataSet data = new DataSet();
+
+            try
+            {
+                data = svcEmpleos.GetImagenesAfuera().Table;
+                foreach (DataRow rows in data.Tables[0].Rows)
+                {
+                    switch (rows["Code"].ToString())
+                    {
+                        case "200":
+                            clImagenesFuera.Add(
+                                new ImagenesFuera
+                                {
+                                    Imagen = (byte[])rows["Imagen"]
+
+                                });
+                            mensaje = "";
+                            break;
+                        case "400":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        case "500":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        default:
+                            code = "600";
+                            mensaje = errorSistema;
+                            break;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                code = "600";
+                mensaje = errorSistema;
+            }
+            return clImagenesFuera;
+        }
         public List<PagosRealizadosEmpresa> GetPagosEmpresa(string parametro = "")
         {
             string code = string.Empty;
@@ -1521,6 +1729,62 @@ namespace Web.Controllers
             }
             return clPlanesEmpresa;
         }
+
+        public List<DetallePreguntasRespuestas> GetRespuestasPublicacion(string idUsuario)
+        {
+            string code = string.Empty;
+            string mensaje = string.Empty;
+            string[] parametros = new string[1];
+            string[] valores = new string[1];
+            parametros[0] = "@ID_USUARIO";
+            valores[0] = idUsuario;
+            List<DetallePreguntasRespuestas> clRespuestasUsuario = new List<DetallePreguntasRespuestas>();
+            DataSet data = new DataSet();
+            try
+            {
+                data = svcEmpleos.GetRespuestasPublicacion(parametros, valores).Table;
+                foreach (DataRow rows in data.Tables[0].Rows)
+                {
+                    switch (rows["Code"].ToString())
+                    {
+                        case "200":
+                            clRespuestasUsuario.Add(
+                                new DetallePreguntasRespuestas
+                                {
+                                    Descripcion = rows["Descripcion"].ToString(),
+                                    Disponibilidad = rows["Disponibilidad"].ToString(),
+                                    Sueldo = rows["Sueldo"].ToString(),
+                                    nombrePublicacion = rows["nombrePublicacion"].ToString()
+
+                                });
+
+
+                            mensaje = "";
+                            break;
+                        case "400":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        case "500":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        default:
+                            code = "600";
+                            mensaje = errorSistema;
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                code = "600";
+                mensaje = errorSistema;
+            }
+            return clRespuestasUsuario;
+        }
         public List<MensajesEmpresa> GetMensajes(string idEmpresa)
         {
             string code = string.Empty;
@@ -1628,6 +1892,58 @@ namespace Web.Controllers
                 mensaje = errorSistema;
             }
             return clNotificaciones;
+        }
+        public List<DetalleTagOficio> GetOficiosUsuario(string idUsuario)
+        {
+            string code = string.Empty;
+            string mensaje = string.Empty;
+            string[] parametros = new string[1];
+            string[] valores = new string[1];
+            parametros[0] = "@ID_USUARIO";
+            valores[0] = idUsuario;
+            List<DetalleTagOficio> clDetalleOficio = new List<DetalleTagOficio>();
+            DataSet data = new DataSet();
+            try
+            {
+                data = svcEmpleos.GetOficiosUsuario(parametros, valores).Table;
+                foreach (DataRow rows in data.Tables[0].Rows)
+                {
+                    switch (rows["Code"].ToString())
+                    {
+                        case "200":
+                            clDetalleOficio.Add(
+                                new DetalleTagOficio
+                                {
+                                    idTag = (int)rows["IdTag"],
+                                    nombreOficio = rows["NombreOficio"].ToString()
+                                });
+
+
+                            mensaje = "";
+                            break;
+                        case "400":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        case "500":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        default:
+                            code = "600";
+                            mensaje = errorSistema;
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                code = "600";
+                mensaje = errorSistema;
+            }
+            return clDetalleOficio;
         }
         public int GetPlanesContratadosEmpresa(string parametro = "")
         {
@@ -2164,6 +2480,112 @@ namespace Web.Controllers
             }
             return clPublicacionEmpresa;
         }
+
+        public List<ResultadosTest> GetResultadosTestUsuario(string idUsuario)
+        {
+            
+            string[] parametros = new string[1];
+            string[] valores = new string[1];
+            string code = string.Empty;
+            string mensaje = string.Empty;
+            parametros[0] = "@ID_USUARIO";
+            valores[0] = idUsuario;
+            List<ResultadosTest> resultado = new List<ResultadosTest>();
+            DataSet data = new DataSet();
+            try
+            {
+                data = svcEmpleos.GetResultadosTest(parametros, valores).Table;
+                foreach (DataRow rows in data.Tables[0].Rows)
+                {
+                    switch (rows["Code"].ToString())
+                    {
+                        case "200":
+                            resultado.Add(
+                                new ResultadosTest
+                                {
+                                    Responsabilidad = rows["Responsabilidad"].ToString(),
+                                    RestoResponsabilidad = rows["RestoResponsabilidad"].ToString(),
+                                    AutoGestion = rows["AutoGestion"].ToString(),
+                                    RestoAutogestion = rows["RestoAutogestion"].ToString(),
+                                    Liderazgo = rows["Liderazgo"].ToString(),
+                                    RestoLiderazgo = rows["RestoLiderazgo"].ToString()
+                                });
+
+
+                            break;
+                        case "400":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        case "500":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        default:
+                            code = "600";
+                            mensaje = errorSistema;
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                code = "600";
+                mensaje = errorSistema;
+            }
+            return resultado;
+        }
+        public List<Rubro> GetRubrosEmpresa()
+        {
+            DataSet data = new DataSet();
+            List<Rubro> clrubroE = new List<Rubro>();
+            string code = string.Empty;
+            string mensaje = string.Empty;
+            try
+            {
+                data = svcEmpleos.GetRubro().Table;
+                foreach (DataRow rows in data.Tables[0].Rows)
+                {
+
+                    switch (rows["Code"].ToString())
+                    {
+                        case "200":
+                            clrubroE.Add(
+                                new Rubro
+                                {
+                                    idRubro = rows["IdRubro"].ToString(),
+                                    NombreRubro = rows["NombreRubro"].ToString()
+                                });
+
+                            mensaje = "";
+                            break;
+                        case "400":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        case "500":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        default:
+                            code = "600";
+                            mensaje = errorSistema;
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorPlataforma = errorSistema;
+            }
+
+            return clrubroE;
+
+        }
         public List<SolicitudesEmpresaPublicacion> GetSolicitudesEmpresa(string parametro)
         {
             string code = string.Empty;
@@ -2190,7 +2612,10 @@ namespace Web.Controllers
                                     RutSolicitante = rows["RutSolicitante"].ToString(),
                                     EstadoSolicitud = rows["EstadoSolicitud"].ToString(),
                                     FechaSolicitud = rows["FechaSolicitud"].ToString(),
-                                    PublicacionSolicitud = rows["PublicacionSolicitud"].ToString()
+                                    PublicacionSolicitud = rows["PublicacionSolicitud"].ToString(),
+                                    DocNombre = rows["Documento"].ToString(),
+                                    Documento = ModuleControlRetorno() + "/Empresa/DownloadCV?url=" + rows["Url"].ToString() + "&documento=" + rows["Documento"].ToString()
+
                                 });
 
                             mensaje = "";
@@ -2273,6 +2698,8 @@ namespace Web.Controllers
             }
             return clTarjetaEmpresa;
         }
+
+
         public List<DetalleTrabajadores> GetTrabajadoresEmpresa(string idUsuario, string idEmpresa)
         {
             string code = string.Empty;
@@ -2299,7 +2726,8 @@ namespace Web.Controllers
                                     RutUsuarioE = rows["RutUsuarioE"].ToString(),
                                     ApellidoUsuarioE = rows["ApellidoUsuarioE"].ToString(),
                                     NombreUsuarioE = rows["NombreUsuarioE"].ToString(),
-                                    IdUsuarioE = rows["IdUsuarioE"].ToString()
+                                    ImagendelUsuarioE = (byte[])rows["ImagendelUsuarioE"],
+                                    IdUsuarioE = rows["IdUsuarioE"].ToString(),
                                 });
 
                             mensaje = "";
@@ -2352,7 +2780,10 @@ namespace Web.Controllers
                                 {
                                     NombreCandidato = rows["NombreCandidato"].ToString(),
                                     FechaSolicitud = rows["FechaCandidato"].ToString(),
-                                    CorreoCandidato = rows["CorreoCandidato"].ToString()
+                                    CorreoCandidato = rows["CorreoCandidato"].ToString(),
+                                    ApellidosCandidatos = rows["ApellidoCandidato"].ToString(),
+                                    TituloPostulacion = rows["TituloPublicacion"].ToString(),
+                                    IdCandidato = rows["IdUsuarioSol"].ToString()
                                 });
 
                             mensaje = "";
@@ -2380,6 +2811,60 @@ namespace Web.Controllers
                 mensaje = errorSistema;
             }
             return clUltimosC;
+        }
+
+        public List<CandidatoUsuarioOficios> GetUsuariosConOficio()
+        {
+            string code = string.Empty;
+            string mensaje = string.Empty;
+           
+            DataSet datas = new DataSet();
+            List<CandidatoUsuarioOficios> clUsuariosOficios = new List<CandidatoUsuarioOficios>();
+            try
+            {
+                datas = svcEmpleos.GetUsuariosConOficios().Table; // GetCandidatosEmpresa
+
+                foreach (DataRow rows in datas.Tables[0].Rows)
+                {
+                    switch (rows["Code"].ToString())
+                    {
+                        case "200":
+                            clUsuariosOficios.Add(
+                                new CandidatoUsuarioOficios
+                                {
+                                    IdUsuario = rows["IdUsuario"].ToString(),
+                                    ApellidosUsuario = rows["ApellidosUsuario"].ToString(),
+                                    NombreUsuario = rows["NombreUsuario"].ToString(),
+                                    RutUsuario = rows["RutUsuario"].ToString(),
+                                    ImagendelUsuario = (byte[])rows["ImagendelUsuario"],
+                                    TagOficios = GetOficiosUsuario(rows["IdUsuario"].ToString())
+                                });
+
+                            mensaje = "";
+                            break;
+                        case "400":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        case "500":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        default:
+                            code = "600";
+                            mensaje = errorSistema;
+                            break;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                code = "600";
+                mensaje = errorSistema;
+            }
+            return clUsuariosOficios;
         }
         public string GetVotoPorUsuario(string idUsuario, string idPublicacion)
         {
@@ -2489,12 +2974,17 @@ namespace Web.Controllers
             string mensaje = string.Empty;
             string[] parametros = new string[2];
             string[] valores = new string[2];
+            string[] parametrosUserE = new string[3];
+            string[] valoresUserE = new string[3];
+            var resultado = "";
 
             Empresa clEmpresa = new Empresa();
+            Usuario clUsuario = new Usuario();
 
             try
             {
                 DataSet data = new DataSet();
+                DataSet dataUsuario = new DataSet();
 
                 parametros[0] = "@USUARIO";
                 parametros[1] = "@PASSWORD";
@@ -2520,20 +3010,69 @@ namespace Web.Controllers
                             Session["ContadorSolicitudes"] = GetCantidadSMN(rows["IdEmpresa"].ToString(), "1");
                             Session["ContadorNotificaciones"] = GetCantidadSMN(rows["IdEmpresa"].ToString(), "2");
                             Session["ContadorMensajes"] = GetCantidadSMN(rows["IdEmpresa"].ToString(), "3");
+                            resultado = "1";
                             break;
                         case "400":
                             code = rows["Code"].ToString();
                             mensaje = rows["Message"].ToString();
+                            resultado = "0";
                             break;
 
                         case "500":
                             code = rows["Code"].ToString();
                             mensaje = rows["Message"].ToString();
+                            resultado = "0";
                             break;
                         default:
                             code = "600";
                             mensaje = errorSistema;
+                            resultado = "0";
                             break;
+                    }
+                }
+
+                // Validamos usuarioempresa
+                if (resultado == "0")
+                {
+                    parametrosUserE[0] = "@USUARIO";
+                    parametrosUserE[1] = "@PASSWORD";
+                    parametrosUserE[2] = "@TIPO";
+
+                    valoresUserE[0] = usuario;
+                    valoresUserE[1] = clave;
+                    valoresUserE[2] = "E";
+
+                    dataUsuario = svcEmpleos.ValUsuario(parametrosUserE, valoresUserE).Table;
+                    foreach (DataRow rows in dataUsuario.Tables[0].Rows)
+                    {
+                        switch (rows["Code"].ToString())
+                        {
+                            case "200":
+                                clUsuario.Rut = rows["Rut"].ToString();
+                                clUsuario.Correo = rows["Correo"].ToString();
+                                code = "800";
+                                mensaje = "";
+                                Session["Usuario"] = rows["Rut"].ToString();
+                                Session["IdUsuario"] = rows["IdUsuario"].ToString();
+                                Session["NombreUsuario"] = rows["Nombre"].ToString();
+                                Session["TipoUsuario"] = rows["TipoUsuario"].ToString();
+                                Session["IDempresa"] = rows["EmpresaID"].ToString();
+                                break;
+                            case "400":
+                                code = rows["Code"].ToString();
+                                mensaje = rows["Message"].ToString();
+                                break;
+
+                            case "500":
+                                code = rows["Code"].ToString();
+                                mensaje = rows["Message"].ToString();
+                                break;
+
+                            default:
+                                code = "600";
+                                mensaje = errorSistema;
+                                break;
+                        }
                     }
                 }
             }
@@ -2542,7 +3081,7 @@ namespace Web.Controllers
                 code = "600";
                 mensaje = errorSistema;
             }
-            return Json(new { Code = code, Message = mensaje, Empresa = clEmpresa });
+            return Json(new { Code = code, Message = mensaje, Empresa = clEmpresa, UsuarioEmpresa = clUsuario });
         }
         #endregion
 
@@ -3066,7 +3605,7 @@ namespace Web.Controllers
                 valores[0] = nombrePregunta;
                 valores[1] = Session["EmpresaID"].ToString();
                 valores[2] = "1";
-                valores[3] = tipoPregunta;
+                valores[3] = "1";
                 valores[4] = nombrecorto;
 
                 data = svcEmpleos.SetPreguntasSeleccionadasEmpresa(parametros, valores).Table;
@@ -3357,7 +3896,7 @@ namespace Web.Controllers
                 view = "Index";
             }
 
-            return PartialView(view);
+            return RedirectToAction(view);
         }
         [HttpPost]
         public JsonResult GuardarPreguntaPostulacion(string nombrePregunta, string error = "")
@@ -3753,6 +4292,11 @@ namespace Web.Controllers
                             view = "PlanesEmpresa";
                             dato = "0";
                             break;
+                        case "800":
+                            ViewBag.ReferenciaMensaje = rows["Message"].ToString();
+                            view = "PlanesEmpresa";
+                            dato = "0";
+                            break;
                         default:
                             ViewBag.ReferenciaMensaje = errorSistema;
                             view = "PlanesEmpresa";
@@ -3829,6 +4373,7 @@ namespace Web.Controllers
         }
         public ActionResult Registro()
         {
+            ViewBag.Rubro = GetRubrosEmpresa();
             return View();
         }
         public ActionResult SubirImagenes(HttpPostedFileBase file)
@@ -3889,6 +4434,32 @@ namespace Web.Controllers
 
         #region ControlRetorno
         [HttpPost]
+        public ActionResult ViewPartialFormSignIn()
+        {
+            return PartialView("Empresa/_DetalleLoginEmpresa");
+        }
+
+        [HttpPost]
+        public ActionResult ViewPartialErrorSignIn(string message)
+        {
+            ViewBag.Message = message;
+
+            return PartialView("Auth/_ErrorSignIn");
+        }
+
+        [HttpPost]
+        public ActionResult ViewPartialErrorRegistro()
+        {
+            return PartialView("Empresa/_ErrorRegistroEmpresa");
+        }
+
+        [HttpPost]
+        public ActionResult ViewPartialErrorRegistroClaves()
+        {
+            return PartialView("Empresa/_ErrorRegistroEmpresaClaves");
+        }
+
+        [HttpPost]
         public ActionResult ViewPartialLoadingSignIn()
         {
             return PartialView("_LoadingLogin");
@@ -3901,7 +4472,7 @@ namespace Web.Controllers
 
             #region "CONTROL DE RETORNO"
 
-            if (!Request.Url.AbsoluteUri.Split('/')[2].Contains("localhost:44392"))
+            if (!Request.Url.AbsoluteUri.Split('/')[2].Contains("localhost:44304"))
             {
                 if (!Request.Url.AbsoluteUri.Split('/')[2].Contains("localhost"))
                 {

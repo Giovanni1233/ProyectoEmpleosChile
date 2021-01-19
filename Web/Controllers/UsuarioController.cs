@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -20,8 +21,10 @@ namespace Web.Controllers
         AuthController auth = new AuthController();
         // GET: Usuario
         #region metodos
+        
         public ActionResult Perfil(string idMensaje = "0", string idReceptor = "0")
         {
+            AppController app = new AppController();
             EmpresaController empresa = new EmpresaController();
             if (Session["IdUser"] != null && Session["IdUser"].ToString() != "")
                 ViewBag.ReferenciaIdUser = Session["IdUser"].ToString();
@@ -40,10 +43,8 @@ namespace Web.Controllers
 
             ViewBag.PublicacionUsuario = GetPublicacionUsuario(usuario);
             ViewBag.PostulacionesUsuario = GetPostulacionesUsuario(usuario);
-            ViewBag.referenciaHistorialConversacion = GetHistorialConversacion(idMensaje, usuario);
-            ViewBag.MensajesUsuario = GetMensajesUsuario(usuario);
-            ViewBag.referenciadetalleMensaje = empresa.GetDetalleMensajeE(idMensaje);
-            ViewBag.referenciaIdMensaje = idMensaje;
+            
+            
             ViewBag.idMensaje = idMensaje;
             ViewBag.idReceptor = idReceptor;
 
@@ -64,8 +65,84 @@ namespace Web.Controllers
             ViewBag.ReferenciaEmpresasConPlan = empresa.GetEmpresasPlanesVigente();
             ViewBag.referenciaEmpleosAPerfil = GetEmpleosAdaptadosAPerfil(usuario);
 
+
+            // Subir CV
+            var data = GetCurriculum(Session["IdUser"].ToString());
+            if (data.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow rows in data.Tables[0].Rows)
+                {
+                    switch (rows["Code"].ToString())
+                    {
+                        case "200":
+                            ViewBag.ReferenciaIdUser = rows["IdUsuario"].ToString();
+                            ViewBag.ReferenciaDocumento = rows["Documento"].ToString();
+                            ViewBag.ReferenciaUrlCV = ModuleControlRetorno() + "/Usuario/DownloadCV?url=" + rows["Url"].ToString() + "&documento=" + rows["Documento"].ToString();
+                            break;
+
+                        case "400":
+                            ViewBag.ReferenciaMsg1 = rows["Message1"].ToString();
+                            ViewBag.ReferenciaMsg2 = rows["Message2"].ToString();
+                            break;
+
+                        default:
+                            ViewBag.ReferenciaMsg1 = "Puedes adjuntar tu CV!!";
+                            ViewBag.ReferenciaMsg2 = "(.pdf)";
+                            break;
+                    }
+                }
+            }
+
             return View();
         }
+
+        public ActionResult Mensajes(string idMensaje = "0", string idReceptor = "0")
+        {
+
+            EmpresaController empresa = new EmpresaController();
+            if (Session["IdUser"] != null && Session["IdUser"].ToString() != "")
+                ViewBag.ReferenciaIdUser = Session["IdUser"].ToString();
+
+            if (Session["UserName"] != null && Session["UserName"].ToString() != "")
+                ViewBag.ReferenciaUserName = Session["UserName"].ToString();
+
+            if (Session["UserType"] != null && Session["UserType"].ToString() != "")
+                ViewBag.ReferenciaUserType = Session["UserType"].ToString();
+            if (Session["IdUser"] == null)
+            {
+                auth.SignOut();
+            }
+            var usuario = Session["IdUser"].ToString();
+            ViewBag.referenciadetalleMensaje = empresa.GetDetalleMensajeE(idMensaje);
+            ViewBag.referenciaIdMensaje = idMensaje;
+            ViewBag.referenciaHistorialConversacion = GetHistorialConversacion(idMensaje, usuario);
+            ViewBag.MensajesUsuario = GetMensajesUsuario(usuario);
+
+            ViewBag.idMensaje = idMensaje;
+            ViewBag.idReceptor = idReceptor;
+            return View();
+        }
+
+        public ActionResult Test(string idUsuario)
+        {
+            if (Session["IdUser"] != null && Session["IdUser"].ToString() != "")
+                ViewBag.ReferenciaIdUser = Session["IdUser"].ToString();
+
+            if (Session["UserName"] != null && Session["UserName"].ToString() != "")
+                ViewBag.ReferenciaUserName = Session["UserName"].ToString();
+
+            if (Session["UserType"] != null && Session["UserType"].ToString() != "")
+                ViewBag.ReferenciaUserType = Session["UserType"].ToString();
+
+            if (Session["IdUser"] == null)
+            {
+                auth.SignOut();
+            }
+            ViewBag.referenciaCargarPreguntas = GetPreguntasTest();
+            return View();
+
+        }
+
         #endregion
         #region ObtencionDatos
         public List<ContadorPostulacionUsuario> GetContadorPostulaciones(string idUsuario)
@@ -436,6 +513,57 @@ namespace Web.Controllers
             }
             return clPerfilProfesional;
         }
+        public List<PreguntasTest> GetPreguntasTest()
+        {
+            string code = string.Empty;
+            string mensaje = string.Empty;
+            
+            List<PreguntasTest> clPreguntasTest = new List<PreguntasTest>();
+            DataSet data = new DataSet();
+            try
+            {
+                data = svcEmpleos.GetPreguntasTestUsuario().Table;
+                foreach (DataRow rows in data.Tables[0].Rows)
+                {
+
+                    switch (rows["Code"].ToString())
+                    {
+                        case "200":
+                            clPreguntasTest.Add(
+                                new PreguntasTest
+                                {
+                                    idPregunta = rows["idPregunta"].ToString(),
+                                    Pregunta = rows["Pregunta"].ToString(),
+                                    catePregunta = (int)rows["catePregunta"],
+
+                                });
+
+                            mensaje = "";
+                            break;
+                        case "400":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        case "500":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        default:
+                            code = "600";
+                            mensaje = errorSistema;
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                code = "600";
+                mensaje = errorSistema;
+            }
+            return clPreguntasTest;
+        }
         public List<DetallePostulacion> GetPostulacionesUsuario(string idUsuario)
         {
             string code = string.Empty;
@@ -772,9 +900,186 @@ namespace Web.Controllers
             }
             return clSolicitudes;
         }
+
+        public ActionResult DownloadCV(string url, string documento)
+        {
+            MemoryStream ms = new MemoryStream();
+            var pdfbyte = System.IO.File.ReadAllBytes(Server.MapPath(url));
+
+            ms = new MemoryStream();
+            ms.Write(pdfbyte, 0, pdfbyte.Length);
+            ms.Position = 0;
+
+            Response.ContentType = "application/pdf";
+            Response.AddHeader("content-disposition", "attachment;filename=" + documento);
+            Response.Buffer = true;
+            Response.Clear();
+            Response.OutputStream.Write(ms.GetBuffer(), 0, ms.GetBuffer().Length);
+            Response.OutputStream.Flush();
+            Response.End();
+
+            return new FileStreamResult(Response.OutputStream, "application/pdf");
+        }
+
+        public JsonResult DeleteCV(string user)
+        {
+            string[] parametros = new string[1];
+            string[] valores = new string[1];
+            DataSet data = new DataSet();
+
+            try
+            {
+                parametros[0] = "@USUARIO";
+                valores[0] = Session["IdUser"].ToString();
+
+                data = svcEmpleos.DelCurriculum(parametros, valores).Table;
+                foreach (DataRow rows in data.Tables[0].Rows)
+                {
+                    switch (rows["Code"].ToString())
+                    {
+                        case "200":
+                            if (System.IO.File.Exists(Server.MapPath(rows["Url"].ToString())))
+                            {
+                                System.IO.File.Delete(Server.MapPath(rows["Url"].ToString()));
+                            }
+                            break;
+
+                        case "400":
+
+                            break;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return Json("");
+        }
+
+        public DataSet GetCurriculum(string user)
+        {
+            string[] parametros = new string[1];
+            string[] valores = new string[1];
+            DataSet data = new DataSet();
+
+            try
+            {
+                parametros[0] = "@USUARIO";
+                valores[0] = Session["IdUser"].ToString();
+
+                data = svcEmpleos.GetCurriculum(parametros, valores).Table;
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return data;
+        }
+
+        public JsonResult GetResultadosTestUsuario()
+        {
+            if (Session["IdUser"] == null)
+            {
+                return Json(new { data = "0" }, JsonRequestBehavior.AllowGet);
+            }
+            
+            string[] parametros = new string[1];
+            string[] valores = new string[1];
+            string code = string.Empty;
+            string mensaje = string.Empty;
+            parametros[0] = "@ID_USUARIO";
+            valores[0] = Session["IdUser"].ToString();
+            List<ResultadosTest> resultado = new List<ResultadosTest>();
+            DataSet data = new DataSet();
+            try
+            {
+                data = svcEmpleos.GetResultadosTest(parametros, valores).Table;
+                foreach (DataRow rows in data.Tables[0].Rows)
+                {
+                    switch (rows["Code"].ToString())
+                    {
+                        case "200":
+                            resultado.Add(
+                                new ResultadosTest
+                                {
+                                    Responsabilidad = rows["Responsabilidad"].ToString(),
+                                    RestoResponsabilidad = rows["RestoResponsabilidad"].ToString(),
+                                    AutoGestion = rows["AutoGestion"].ToString(),
+                                    RestoAutogestion = rows["RestoAutogestion"].ToString(),
+                                    Liderazgo = rows["Liderazgo"].ToString(),
+                                    RestoLiderazgo = rows["RestoLiderazgo"].ToString()
+                                });
+
+
+                            break;
+                        case "400":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        case "500":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        default:
+                            code = "600";
+                            mensaje = errorSistema;
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                code = "600";
+                mensaje = errorSistema;
+            }
+            return Json(new { data = resultado }, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         #region Acciones
+        public ActionResult SetFileCV(HttpPostedFileBase file)
+        {
+            string[] parametros = new string[3];
+            string[] valores = new string[3];
+            Curriculum curriculum = new Curriculum();
+            try
+            {
+                DataSet data = new DataSet();
+                var fileName = Convert.ToBase64String(Encoding.UTF8.GetBytes(Session["IdUser"].ToString() + file.FileName));
+                file.SaveAs(Server.MapPath("~/FilesCV/" + fileName + ".pdf"));
+
+                if (System.IO.File.Exists(Server.MapPath("~/FilesCV/" + fileName + ".pdf")))
+                {
+                    parametros[0] = "@USUARIO";
+                    parametros[1] = "@DOCUMENTO";
+                    //parametros[2] = "@NOMBRE_DOCUMENTO";
+                    parametros[2] = "@URL";
+
+                    valores[0] = Session["IdUser"].ToString();
+                    valores[1] = file.FileName;
+                    //valores[2] = fileName;
+                    valores[2] = "~/FilesCV/" + fileName + ".pdf";
+
+                    data = svcEmpleos.SetCurriculum(parametros, valores).Table;
+
+                }
+                else
+                {
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return RedirectToAction("Perfil");
+        }
 
         [HttpPost]
         public JsonResult EliminarEducacionPerfilUsuario(string idEducacion, string error = "")
@@ -1054,7 +1359,7 @@ namespace Web.Controllers
         public JsonResult GuardarExperienciaPerfilUsuario(string empresaNombre, string recomendacion, string descripcion,  string destacoEmpresa, string mejorarEmpresa, string fechaD, string fechaH, string actualmente, string error = "")
         {
             string view = string.Empty;
-
+            string datoreturn = string.Empty;
             try
             {
                 string[] parametros = new string[9];
@@ -1065,8 +1370,7 @@ namespace Web.Controllers
                 if (string.IsNullOrEmpty(empresaNombre) || string.IsNullOrWhiteSpace(empresaNombre) ||
                     string.IsNullOrEmpty(destacoEmpresa) || string.IsNullOrWhiteSpace(destacoEmpresa) ||
                     string.IsNullOrEmpty(mejorarEmpresa) || string.IsNullOrWhiteSpace(mejorarEmpresa) ||
-                    string.IsNullOrEmpty(fechaD) || string.IsNullOrWhiteSpace(fechaD) ||
-                    string.IsNullOrEmpty(descripcion) || string.IsNullOrWhiteSpace(descripcion))
+                    string.IsNullOrEmpty(fechaD) || string.IsNullOrWhiteSpace(fechaD))
                 {
 
                     //ViewBag.ReferenciaMensaje = "Debe completar todos los campos oblicatorios(*)";
@@ -1112,20 +1416,24 @@ namespace Web.Controllers
                         case "200":
                             ViewBag.ReferenciaMensaje = rows["Message"].ToString();
                             view = "NotificacionesM";
+                            datoreturn = "1";
                             //ViewBag.ReferenciaCatalogo = ModuleRetornoCatalogo();
                             break;
 
                         case "400":
                             ViewBag.ReferenciaMensaje = rows["Message"].ToString();
                             view = "NotificacionesM";
+                            datoreturn = "2";
                             break;
                         case "500":
                             ViewBag.ReferenciaMensaje = errorSistema;
                             view = "NotificacionesM";
+                            datoreturn = "3";
                             break;
                         default:
                             ViewBag.ReferenciaMensaje = errorSistema;
                             view = "NotificacionesM";
+                            datoreturn = "3";
                             break;
                     }
                 }
@@ -1136,14 +1444,14 @@ namespace Web.Controllers
                 view = "NotificacionesM";
             }
 
-            return Json(new { data = "1" }, JsonRequestBehavior.AllowGet);
+            return Json(new { data = datoreturn }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         public JsonResult GuardarEducacionPerfilUsuario(string centroNombre, string estadoEdu, string tituloNombreEdu, string descripcion,  string fechaD, string fechaH, string error = "")
         {
             string view = string.Empty;
-
+            string datoreturn = string.Empty;
             try
             {
                 string[] parametros = new string[7];
@@ -1195,20 +1503,24 @@ namespace Web.Controllers
                         case "200":
                             ViewBag.ReferenciaMensaje = rows["Message"].ToString();
                             view = "NotificacionesM";
+                            datoreturn = "1";
                             //ViewBag.ReferenciaCatalogo = ModuleRetornoCatalogo();
                             break;
 
                         case "400":
                             ViewBag.ReferenciaMensaje = rows["Message"].ToString();
                             view = "NotificacionesM";
+                            datoreturn = "2";
                             break;
                         case "500":
                             ViewBag.ReferenciaMensaje = errorSistema;
                             view = "NotificacionesM";
+                            datoreturn = "3";
                             break;
                         default:
                             ViewBag.ReferenciaMensaje = errorSistema;
                             view = "NotificacionesM";
+                            datoreturn = "3";
                             break;
                     }
                 }
@@ -1219,14 +1531,14 @@ namespace Web.Controllers
                 view = "NotificacionesM";
             }
 
-            return Json(new { data = "1" }, JsonRequestBehavior.AllowGet);
+            return Json(new { data = datoreturn }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         public JsonResult GuardarHabilidadPerfilUsuario(string idHabilidad, string nivel, string error = "")
         {
             string view = string.Empty;
-
+            string datoreturn = string.Empty;
             try
             {
                 string[] parametros = new string[3];
@@ -1268,20 +1580,24 @@ namespace Web.Controllers
                         case "200":
                             ViewBag.ReferenciaMensaje = rows["Message"].ToString();
                             view = "NotificacionesM";
+                            datoreturn = "1";
                             //ViewBag.ReferenciaCatalogo = ModuleRetornoCatalogo();
                             break;
 
                         case "400":
                             ViewBag.ReferenciaMensaje = rows["Message"].ToString();
                             view = "NotificacionesM";
+                            datoreturn = "2";
                             break;
                         case "500":
                             ViewBag.ReferenciaMensaje = errorSistema;
                             view = "NotificacionesM";
+                            datoreturn = "3";
                             break;
                         default:
                             ViewBag.ReferenciaMensaje = errorSistema;
                             view = "NotificacionesM";
+                            datoreturn = "3";
                             break;
                     }
                 }
@@ -1292,14 +1608,14 @@ namespace Web.Controllers
                 view = "NotificacionesM";
             }
 
-            return Json(new { data = "1" }, JsonRequestBehavior.AllowGet);
+            return Json(new { data = datoreturn }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         public JsonResult GuardarIdiomaPerfilUsuario(string idIdioma, string nivel, string error = "")
         {
             string view = string.Empty;
-
+            string datoreturn = string.Empty;
             try
             {
                 string[] parametros = new string[3];
@@ -1341,20 +1657,24 @@ namespace Web.Controllers
                         case "200":
                             ViewBag.ReferenciaMensaje = rows["Message"].ToString();
                             view = "NotificacionesM";
+                            datoreturn = "1";
                             //ViewBag.ReferenciaCatalogo = ModuleRetornoCatalogo();
                             break;
 
                         case "400":
                             ViewBag.ReferenciaMensaje = rows["Message"].ToString();
                             view = "NotificacionesM";
+                            datoreturn = "2";
                             break;
                         case "500":
                             ViewBag.ReferenciaMensaje = errorSistema;
                             view = "NotificacionesM";
+                            datoreturn = "3";
                             break;
                         default:
                             ViewBag.ReferenciaMensaje = errorSistema;
                             view = "NotificacionesM";
+                            datoreturn = "3";
                             break;
                     }
                 }
@@ -1365,7 +1685,7 @@ namespace Web.Controllers
                 view = "NotificacionesM";
             }
 
-            return Json(new { data = "1" }, JsonRequestBehavior.AllowGet);
+            return Json(new { data = datoreturn }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -1604,14 +1924,14 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult GuardarPostulacionEmpleo(string idPublicacion, string error = "")
+        public JsonResult GuardarPostulacionEmpleo(string idPublicacion, string disponibilidad,  string sueldo, string descripcion, string envioCV, string error = "")
         {
             string view = string.Empty;
 
             try
             {
-                string[] parametros = new string[2];
-                string[] valores = new string[2];
+                string[] parametros = new string[6];
+                string[] valores = new string[6];
 
                 DataSet data = new DataSet();
 
@@ -1626,8 +1946,16 @@ namespace Web.Controllers
                 
                 parametros[0] = "@ID_USUARIO";
                 parametros[1] = "@ID_PUBLICACION";
+                parametros[2] = "@DISPONIBILIDAD";
+                parametros[3] = "@SUELDO";
+                parametros[4] = "@DESCRIPCION";
+                parametros[5] = "@ENVIOCV";
                 valores[0] = Session["IdUser"].ToString();
                 valores[1] = idPublicacion;
+                valores[2] = disponibilidad;
+                valores[3] = sueldo;
+                valores[4] = descripcion;
+                valores[5] = envioCV;
 
 
                 data = svcEmpleos.SetPostuloEmpleo(parametros, valores).Table;
@@ -1666,6 +1994,81 @@ namespace Web.Controllers
             return Json(new { data = "1" }, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public JsonResult GuardarRespuestasTest(string respuestas, string error = "")
+        {
+            string view = string.Empty;
+
+            try
+            {
+                string[] words = respuestas.Split(',');
+                string[] parametros = new string[3];
+                string[] valores = new string[3];
+                var i = 1;
+                DataSet data = new DataSet();
+
+                foreach (var word in words)
+                {
+                    if (error == "true")
+                    {
+                        //ViewBag.ReferenciaMensaje = "Algunos datos ingresados tienen un formato no valido.";
+                        view = "Configuracion";//"App/_ModalMensajeError";
+                        return Json(new { data = "0" }, JsonRequestBehavior.AllowGet);
+                    }
+
+
+                    parametros[0] = "@ID_USUARIO";
+                    parametros[1] = "@RESPUESTAS";
+                    parametros[2] = "@ID_RESPUESTA";
+                    valores[0] = Session["IdUser"].ToString();
+                    valores[1] = word;
+                    valores[2] = i.ToString();
+                    //valores[2] = disponibilidad;
+                    //valores[3] = sueldo;
+                    //valores[4] = descripcion;
+                    //valores[5] = envioCV;
+
+
+                    data = svcEmpleos.SetRespuestasUsuarioTest(parametros, valores).Table;
+
+                    foreach (DataRow rows in data.Tables[0].Rows)
+                    {
+                        switch (rows["Code"].ToString())
+                        {
+                            case "200":
+                                ViewBag.ReferenciaMensaje = rows["Message"].ToString();
+                                view = "NotificacionesM";
+                                //ViewBag.ReferenciaCatalogo = ModuleRetornoCatalogo();
+                                break;
+
+                            case "400":
+                                ViewBag.ReferenciaMensaje = rows["Message"].ToString();
+                                view = "NotificacionesM";
+                                break;
+                            case "500":
+                                ViewBag.ReferenciaMensaje = errorSistema;
+                                view = "NotificacionesM";
+                                break;
+                            default:
+                                ViewBag.ReferenciaMensaje = errorSistema;
+                                view = "NotificacionesM";
+                                break;
+                        }
+                    }
+                    i = i + 1;
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ReferenciaMensaje = errorSistema;
+                view = "NotificacionesM";
+            }
+
+            return Json(new { data = "1" }, JsonRequestBehavior.AllowGet);
+        }
+
+
         public ActionResult SubirImagenPerfil(HttpPostedFileBase file)
         {
             string Query = "";
@@ -1697,6 +2100,42 @@ namespace Web.Controllers
 
 
             return RedirectToAction("Perfil");
+        }
+        #endregion
+
+        #region OTHERS
+        private string ModuleControlRetorno()
+        {
+            string domainReal = string.Empty;
+            string domain = string.Empty;
+            string prefixDomain = string.Empty;
+
+            #region "CONTROL DE RETORNO"
+
+            if (!Request.Url.AbsoluteUri.Split('/')[2].Contains("localhost:44304"))
+            {
+                if (!Request.Url.AbsoluteUri.Split('/')[2].Contains("localhost"))
+                {
+                    domainReal = Request.Url.AbsoluteUri.Split('/')[2];
+                }
+                else
+                {
+                    domainReal = "localhost";
+                }
+
+                domain = "http://" + domainReal + "/";
+                prefixDomain = Request.Url.AbsoluteUri.Split('/')[3];
+            }
+            else
+            {
+                domain = "http://" + Request.Url.AbsoluteUri.Split('/')[2];
+                prefixDomain = "";
+            }
+
+            #endregion
+
+            return domain + prefixDomain;
+
         }
         #endregion
     }

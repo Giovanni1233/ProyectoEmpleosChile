@@ -33,7 +33,7 @@
                         <br />
                         <div class="row">
                             <div class="col-auto">
-                                <a href="@Url.Action("Perfil","Usuario", new { url = "#pills-mensajes-tab", idMensaje = item.idMensaje, idReceptor = item.IdReceptor })" id="verHistorialMensajes">Ver historial...</a>
+                                <a href="@Url.Action("Mensajes","Usuario", new { idMensaje = item.idMensaje, idReceptor = item.IdReceptor })" id="verHistorialMensajes">Ver historial...</a>
                             </div>
                         </div>
                     </div>

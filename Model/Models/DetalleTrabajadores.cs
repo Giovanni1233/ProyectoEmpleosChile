@@ -11,6 +11,7 @@ namespace Model.Models
         public string ApellidoUsuarioE { get; set; }
         public string RutUsuarioE { get; set; }
         public string IdUsuarioE { get; set; }
+        public byte[] ImagendelUsuarioE { get; set; }
 
 
     }

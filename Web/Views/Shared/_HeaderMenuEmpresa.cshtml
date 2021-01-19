@@ -9,6 +9,8 @@
     <!-- Optional: include a polyfill for ES6 Promises for IE11 -->
     <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+            integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
 
     @Styles.Render("~/bundles/bootstrapcss")
     @Styles.Render("~/bundles/jqueryuicss")
@@ -31,10 +33,10 @@
     <div style="width: 100%; top: 0px; z-index: 999;" class="header-background">
         <div class="row" style="width: 99%; margin: auto auto auto 5px;">
             <div class="col-6 col-sm-6 col-md-4 col-lg-2">
-                <div style="text-align: center;">
+                <div style="margin-top:10px; text-align: center;">
 
-                    <a href="#">
-                        <img src="#" class="imgLogoHome" style="height: 60px; display: block; margin: auto; cursor:pointer;" />
+                    <a href="javascript:void(0);">
+                        <h3 style="color:#fff;">Empleos Chile</h3>
                     </a>
 
                 </div>
@@ -61,14 +63,14 @@
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="@Url.Action("Trabajadores","Empresa")">Trabajadores</a>
                                     <a class="dropdown-item" href="@Url.Action("CandidatosEmpresa","Empresa")">Candidatos</a>
-                                    <a class="dropdown-item" href="@Url.Action("Solicitudes","Empresa")">Solicitudes &nbsp;&nbsp;<span class="badge badge-success">@Session["ContadorSolicitudes"]</span></a>
+                                    <a class="dropdown-item" href="@Url.Action("Solicitudes","Empresa")">Solicitudes</a>
+                                    <a class="dropdown-item" href="@Url.Action("UsuariosOficios","Empresa")">Usuarios con Oficios</a>
                                     @*<a class="dropdown-item" href="#one">Publicaciones</a>*@
                                     <a class="dropdown-item" href="@Url.Action("PerfilEmpresa","Empresa")">Perfil</a>
                                     <a class="dropdown-item" href="@Url.Action("PagosEmpresa","Empresa")">Pagos y Devoluciones</a>
-                                    <a class="dropdown-item" href="@Url.Action("Configuracion","Empresa")">Configuracion</a>
+                                    @*<a class="dropdown-item" href="@Url.Action("Configuracion","Empresa")">Configuracion</a>*@
                                     <a class="dropdown-item" href="@Url.Action("NotificacionesM","Empresa")">
-                                        Not. <span class="badge badge-danger"><span class="fa fa-bell"></span>&nbsp;@Session["ContadorNotificaciones"]</span>
-                                        / Men. <span class="badge badge-info"><span class="fa fa-envelope"></span>&nbsp;@Session["ContadorMensajes"]</span>
+                                        Mensajes
                                     </a>
                                     <div role="separator" class="dropdown-divider"></div>
                                     <a class="dropdown-item signOut" href="javascript:void(0);">Cerrar Sesión</a>
@@ -114,9 +116,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="@Url.Action("Registro","Empresa")">Registrarse</a>
                                 </li>
-                                <li class="nav-item signInUsuarioEmpresa">
+                                @*<li class="nav-item signInUsuarioEmpresa">
                                     <a class="nav-link" href="javascript:void(0);">Inicio Usuario Empresa</a>
-                                </li>
+                                </li>*@
                             }
 
                         }

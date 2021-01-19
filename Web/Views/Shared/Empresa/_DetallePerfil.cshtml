@@ -1,7 +1,7 @@
 ﻿<div class="row">
     @foreach (var item in ViewBag.ReferenciaDatosEmpresa as ICollection<Model.Models.DatosEmpresa>)
     {
-        <div class="col-md-3 border-right">
+        <div class="col-md-4 border-right">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                 <div class="col-sm-12">
                     <div class="text-center">
@@ -15,26 +15,48 @@
                                 <p>@item2.NombreImagen</p>
                             }
                         }
-                        
+
                     </div>
                     <div class="text-center">
+                        @*@using (Html.BeginForm("SubirImagenPerfil", "Empresa", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+
+                                <span class="">
+                                    <input type="file" id="input-file-now file" name="file" class="archivoImagenPerfil" onchange="validoArchivo(this)" data-height="200" data-default-file />
+                                     <input type="file" name="file" id="file" style="width: 100%;" />
+                                </span>
+                                <br />
+                                <br />
+                                <input type="button" value="Guardar Imagen" id="btnImagenPerfilEmpresa" class="submit btn btn-outline-success" style="display:block;" />
+                                <div class="d-flex align-items-center">
+                                    <strong class="text-primary" id="textoSpinnerImgPerfil" style="display: none;">Cargando...</strong>
+                                    <div class="spinner-border text-primary ml-auto" role="status" aria-hidden="true" id="spinnerImgPerfil" style="display: none;"></div>
+                                </div>
+                            }*@
                         @using (Html.BeginForm("SubirImagenPerfil", "Empresa", FormMethod.Post, new { enctype = "multipart/form-data" }))
                         {
-
-                        <span class="">
-                            <input type="file" id="input-file-now file" name="file" onchange="validoArchivo(this)" data-height="200" data-default-file />
-                            <!-- <input type="file" name="file" id="file" style="width: 100%;" /> -->
-                        </span>
-                            <br />
-                            <br />
-                            <input type="submit" value="Guardar Imagen" class="submit btn btn-outline-success" />
+                            <input type="file" id="fileImgPerfilEmpresa" name="file" style="display: none;" onchange="uploadImgPerfilEmpresa(this)" />
+                            <button id="uploadFileImgPerfilEmpresa" style="display: none;"></button>
                         }
+                        <button id="uploadfileImgPerfilEmp" class="btn btn-primary dspl-inline-block" style="text-align: left; font-size:12px;">
+                            <i class="fas fa-file fa-2x" style="margin-right:5px;"></i>
+                            <span style="display: inline-block; margin-top: -4px;">
+                                <i style="font-size: 14px; font-style: normal; display: block; margin-bottom: -5px;" class="text-center">Subir una imagen de Perfil</i>
+                            </span>
+                        </button>
+                        <div class="text-center align-items-center">
+                            <strong class="text-primary text-center" id="textoSpinnerImgPerfilEmpresa" style="display:none;">Cargando...</strong>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <div class="spinner-border text-primary" role="status" style="display:none;" id="spinnerImgPerfilEmpresa"></div>
+                        </div>
+
                     </div>
                 </div>
+                <div class="ErrorImagenPerfil"></div>
             </div>
         </div>
 
-        <div class="col-md-5 border-right">
+        <div class="col-md-4 border-right">
 
             <div class="p-3 py-5">
                 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -46,30 +68,84 @@
                     <div class="col-md-6"><label class="labels">Razon Social</label><input type="text" class="form-control" value="@item.razonEmpresa" readonly name="razon" placeholder="Razon social"></div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-md-12"><label class="labels">Telefono</label><input type="text" class="form-control" placeholder="Ingrese su telefono" id="telefono" name="telefono" value="@item.telefonoEmpresa"></div>
+                    <div class="col-md-12"><label class="labels">Telefono</label><input type="text" class="form-control soloNumeros" placeholder="Ingrese su telefono" id="telefono" name="telefono" value="@item.telefonoEmpresa"></div>
                     <div class="col-md-12"><label class="labels">Correo</label><input type="text" class="form-control" placeholder="enter address" id="correo" name="correo" value="@item.correoEmpresa"></div>
 
-                    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" id="btnGuardarPerfilEmpresa" type="button">Guardar</button></div>
+
                 </div>
+                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" id="btnGuardarPerfilEmpresa" type="button">Guardar</button></div>
+                <br />
+                <div class="errorGuardarPerfilEmpresa"></div>
             </div>
 
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-4 text-center">
             <h4>Imagenes banner @ViewBag.ReferenciaImagenesEmpresa.Count / 4</h4>
-            <div class="text-center">
-                @using (Html.BeginForm("SubirImagenes", "Empresa", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                {
+            <hr />
+            <div class="card">
+                <div class="card-body" style="box-shadow:none;">
+                    <p class="card-text">Las imágenes banner te permitirán destacar entre las demás empresas, sólo si contratas un plan.</p>
 
-                    <span>
-                        <input type="file" id="input-file-now files" name="file" onchange="validoArchivo(this)" data-height="200" data-default-file />
-                    </span>
-                    <br />
-                    <br />
-                    <input type="submit" value="Guardar" class="submit btn btn-outline-success" />
-                }
+                </div>
             </div>
+            <hr />
+            <br />
+            @if (ViewBag.ReferenciaImagenesEmpresa.Count < 4)
+            {
+                using (Html.BeginForm("SubirImagenes", "Empresa", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <input type="file" id="fileBanner" name="file" style="display: none;" onchange="uploadImgBanner(this)" />
+                    <button id="uploadFileBannerEmpresa" style="display: none;"></button>
+                }
+                <div class="text-center" id="apartadoBotonBanner" style="display:block;">
+                    <button id="uploadfileBanner" class="btn btn-block btn-primary text-center" style="font-size:12px;">
+                        <i class="fas fa-file fa-2x" style="margin-right:5px;"></i>
+                        <span style="display: inline-block; margin-top: -4px;">
+                            <i style="font-size: 14px; font-style: normal; display: block; margin-bottom: -5px;" class="text-center">Subir una imagen para banner</i>
+                        </span>
+                    </button>
+                </div>
+                <div class="col-md-12">
+                    <div class="align-items-center" style="display: inline-flex;">
+                        <strong class="text-primary" id="textoSpinnerBanner" style="display:none;">Cargando...</strong>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <div class="spinner-border text-primary" role="status" aria-hidden="true" style="display:none;" id="spinnerBanner"></div>
 
+                    </div>
+                </div>
+
+            }
+            else
+            {
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-text text-danger">Ya ha completado el máximo de imágenes permitidas.</p>
+
+                    </div>
+                </div>
+            }
+            @*<div class="text-center">
+                    @using (Html.BeginForm("SubirImagenes", "Empresa", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+
+                        <span>
+                            <input type="file" id="input-file-now files" class="archivoBannerEmpresa" name="file" onchange="validoArchivo(this)" data-height="200" data-default-file />
+                        </span>
+                        <br />
+                        <br />
+                        <div class="form-check mb-2 mr-sm-2 text-center">
+                            <input type="button" value="Guardar" id="btnImagenBannerEmpresa" class="submit btn btn-outline-success" style="display:block;" />
+                            <div class="d-flex align-items-center">
+                                <strong class="text-primary" id="textoSpinnerBanner" style="display: none;">Cargando...</strong>
+                                <div class="spinner-border text-primary ml-auto" role="status" aria-hidden="true" id="spinnerBanner" style="display: none;"></div>
+                            </div>
+                        </div>
+
+                    }
+                </div>*@
+            <br />
+            <div class="ErrorImagenBannerEmpresa"></div>
         </div>
 
     }

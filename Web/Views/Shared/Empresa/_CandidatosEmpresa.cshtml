@@ -1,12 +1,13 @@
 ﻿@if (ViewBag.ReferenciaCandidatosEmpresa != null && ViewBag.ReferenciaCandidatosEmpresa.Count > 0)
 {
+    <h3>Candidatos a las publicaciones</h3>
+    <hr />
     <div class="row">
         @foreach (var item in ViewBag.ReferenciaCandidatosEmpresa as ICollection<Model.Models.CandidatoEmpleos>)
         {
 
             <div class="col-md-3">
-                <div class="card" style="width: 18rem;">
-
+                <div class="card">
 
                     <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(item.ImagendelUsuario))" style="max-width:100%; height:250px;" />
                     <br />
@@ -20,6 +21,7 @@
             </div>
         }
     </div>
+   
 }
 else
 {

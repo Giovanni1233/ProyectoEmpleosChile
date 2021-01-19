@@ -5,12 +5,12 @@
         {
 
             <div class="col-md-3">
-                <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
+                <div class="card">
+                    <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(item.ImagendelUsuario))" style="max-width:100%; height:250px;" />
                     <div class="card-body">
                         <h5 class="card-title">@item.RutCandidato - @item.NombreCandidato - @item.ApellidosCandidatos</h5>
                         <p class="card-text">@item.TituloPostulacion - @item.FechaSolicitud</p>
-                        <a href="#" class="btn btn-primary">Ver perfil</a>
+                        <a class="btn btn-primary btn-block" href="@Url.Action("PerfilCandidato", "UsuarioEmpresa", new { idUsuario = item.IdCandidato })">Ver perfil</a>
                     </div>
                 </div>
             </div>

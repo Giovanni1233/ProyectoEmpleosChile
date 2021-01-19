@@ -47,7 +47,7 @@
                         @foreach (var item22 in ViewBag.DetallePublicacion as ICollection<Model.Models.DetallePublicacion>)
                         {
                             <input type="text" id="usuarioLogueado" value="@Session["Usuario"]" />
-                            <a href="javascript:void(0);" id="btnEnviarCV" onclick="PostularEmpleo(@Session["IdUser"], @item22.IdPublicacion);" class="btn btn-primary text-center btn-block">Enviar CV</a>
+                            <a href="javascript:void(0);" id="btnEnviarCV" onclick="PostularEmpleo(@Session["IdUser"], @item22.IdPublicacion);" class="btn btn-primary text-center btn-block">Postular</a>
                         }
                     </div>
                 }
@@ -67,7 +67,7 @@
                     @foreach (var item22 in ViewBag.DetallePublicacion as ICollection<Model.Models.DetallePublicacion>)
                     {
                         <input type="text" id="usuarioLogueado" value="@Session["Usuario"]" />
-                        <a href="javascript:void(0);" id="btnEnviarCV" onclick="return PostularEmpleo(0, @item22.IdPublicacion);" class="btn btn-primary text-center btn-block">Enviar CV</a>
+                        <a href="javascript:void(0);" id="btnEnviarCV" onclick="return PostularEmpleo(0, @item22.IdPublicacion);" class="btn btn-primary text-center btn-block">Postular</a>
                     }
                 </div>
             }

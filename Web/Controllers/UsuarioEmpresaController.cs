@@ -70,7 +70,56 @@ namespace Web.Controllers
 
         public ActionResult PerfilCandidato(string idUsuario)
         {
-            ViewBag.ReferenciaDatosUsuario = GetDatosUsuario(idUsuario);
+            UsuarioController usuarioController = new UsuarioController();
+            var idEmpresa = Session["IDempresa"].ToString();
+            ViewBag.ReferenciaDatosUsuario = empresa.GetDatosUsuario(idUsuario);
+            ViewBag.ReferenciaHabilidadesUsuario = empresa.GetHabilidadesUsuario(idUsuario);
+            ViewBag.ReferenciaExperienciasUsuario = empresa.GetExperienciasUsuario(idUsuario);
+            ViewBag.ReferenciaIdiomasUsuario = empresa.GetIdiomasUsuario(idUsuario);
+            ViewBag.ReferenciaEducacionUsuario = empresa.GetEducacionUsuario(idUsuario);
+            ViewBag.referenciaperfilUser = usuarioController.GetPerfilProfesionalUsuario(idUsuario);
+            foreach (var item in ViewBag.referenciaperfilUser)
+            {
+                ViewBag.referenciatituloperfilUsuario = item.TituloPerfil;
+                ViewBag.referenciaDetallePerfil = item.DescripcionPerfil;
+            }
+
+            ViewBag.referenciaImagenPerfil = usuarioController.GetImagenDePerfilUsuario(idUsuario);
+            // Se debe borrar pronto
+            ViewBag.referenciaPlanEmpresa = empresa.GetPlanesContratadosEmpresa(idEmpresa);
+            ViewBag.PublicacionesPermitidasEmpresa = empresa.GetCandiPubliTrabaPreguntPermitidas(idEmpresa, "1");
+            ViewBag.TrabajadoresPermitidosEmpresa = empresa.GetCandiPubliTrabaPreguntPermitidas(idEmpresa, "2");
+            ViewBag.referenciaContadorPublicaciones = GetPublicaciones(idEmpresa, "").Count();
+
+            ViewBag.DetallePreguntasRespuestas = empresa.GetRespuestasPublicacion(idUsuario);
+            ViewBag.Planes = empresa.GetPlanes("");
+
+            // Subir CV
+            var data = empresa.GetCurriculum(idUsuario);
+            if (data.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow rows in data.Tables[0].Rows)
+                {
+                    switch (rows["Code"].ToString())
+                    {
+                        case "200":
+                            ViewBag.ReferenciaIdUser = idUsuario;
+                            ViewBag.ReferenciaDocumento = rows["Documento"].ToString();
+                            ViewBag.ReferenciaUrlCV = ModuleControlRetorno() + "/Empresa/DownloadCV?url=" + rows["Url"].ToString() + "&documento=" + rows["Documento"].ToString();
+                            break;
+
+                        case "400":
+                            ViewBag.ReferenciaMsg1 = rows["Message1"].ToString();
+                            ViewBag.ReferenciaMsg2 = rows["Message2"].ToString();
+                            break;
+
+                        default:
+                            ViewBag.ReferenciaMsg1 = "Puedes adjuntar tu CV!!";
+                            ViewBag.ReferenciaMsg2 = "(.pdf)";
+                            break;
+                    }
+                }
+            }
             return View();
         }
 
@@ -443,63 +492,7 @@ namespace Web.Controllers
             return clCandidatos;
         }
 
-        public List<PerfilCandidatoPostulacion> GetDatosUsuario(string idUsuario)
-        {
-            string code = string.Empty;
-            string mensaje = string.Empty;
-            string[] parametros = new string[1];
-            string[] valores = new string[1];
-            parametros[0] = "@ID_PUBLICACION";
-            valores[0] = idUsuario;
-            List<PerfilCandidatoPostulacion> clUsuarioPostulado = new List<PerfilCandidatoPostulacion>();
-
-            DataSet data = new DataSet();
-
-            try
-            {
-                data = svcEmpleos.GetDetallePublicacion(parametros, valores).Table;
-                foreach (DataRow rows in data.Tables[0].Rows)
-                {
-                    switch (rows["Code"].ToString())
-                    {
-                        case "200":
-                            clUsuarioPostulado.Add(
-                                new PerfilCandidatoPostulacion
-                                {
-                                    IdUsuario = rows["IdUsuario"].ToString(),
-                                    NombreUsuario = rows["NombreUsuario"].ToString(),
-                                    ApellidoPUsuario = rows["ApellidoPUsuario"].ToString(),
-                                    ApellidoMUsuario = rows["ApellidoMUsuario"].ToString(),
-                                    TelefonoUsuario = rows["TelefonoUsuario"].ToString(),
-                                    CorreoUsuario = rows["CorreoUsuario"].ToString()
-                                });
-                            mensaje = "";
-                            break;
-                        case "400":
-                            code = rows["Code"].ToString();
-                            mensaje = rows["Message"].ToString();
-                            break;
-
-                        case "500":
-                            code = rows["Code"].ToString();
-                            mensaje = rows["Message"].ToString();
-                            break;
-
-                        default:
-                            code = "600";
-                            mensaje = errorSistema;
-                            break;
-                    }
-                }
-
-            }
-            catch (Exception ex)
-            {
-                code = "600";
-                mensaje = errorSistema;
-            }
-            return clUsuarioPostulado;
-        }
+        
         public List<DetalleTrabajadores> GetTrabajadoresEmpresa(string idUsuario, string idEmpresa)
         {
             string code = string.Empty;
@@ -963,7 +956,7 @@ namespace Web.Controllers
                         case "200":
                             clUsuario.Rut = rows["Rut"].ToString();
                             clUsuario.Correo = rows["Correo"].ToString();
-                            code = rows["Code"].ToString();
+                            code = "800";
                             mensaje = "";
                             Session["Usuario"] = rows["Rut"].ToString();
                             Session["IdUsuario"] = rows["IdUsuario"].ToString();
@@ -1014,5 +1007,38 @@ namespace Web.Controllers
         }
         #endregion
 
+        private string ModuleControlRetorno()
+        {
+            string domainReal = string.Empty;
+            string domain = string.Empty;
+            string prefixDomain = string.Empty;
+
+            #region "CONTROL DE RETORNO"
+
+            if (!Request.Url.AbsoluteUri.Split('/')[2].Contains("localhost:44304"))
+            {
+                if (!Request.Url.AbsoluteUri.Split('/')[2].Contains("localhost"))
+                {
+                    domainReal = Request.Url.AbsoluteUri.Split('/')[2];
+                }
+                else
+                {
+                    domainReal = "localhost";
+                }
+
+                domain = "http://" + domainReal + "/";
+                prefixDomain = Request.Url.AbsoluteUri.Split('/')[3];
+            }
+            else
+            {
+                domain = "http://" + Request.Url.AbsoluteUri.Split('/')[2];
+                prefixDomain = "";
+            }
+
+            #endregion
+
+            return domain + prefixDomain;
+
+        }
     }
 }

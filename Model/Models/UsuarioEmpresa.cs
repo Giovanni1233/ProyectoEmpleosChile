@@ -18,6 +18,7 @@ namespace Model.Models
         public string PassUsuarioE { get; set; }
 
         public string CorreoUsuarioE { get; set; }
+        public byte[] ImagendelUsuarioE { get; set; }
 
 
     }

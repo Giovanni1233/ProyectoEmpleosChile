@@ -202,7 +202,34 @@ function ajaxRegistroExperienciaPerfilUsuario(controller, empresaNombre, destaco
         async: true,
         success: function (response) {
             if (response.data == 1) {
-                window.location.reload();
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Experiencia agregada con éxito.',
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+                setInterval(function () { window.location.reload(); }, 500);
+            }
+            else if (response.data == 2) {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'info',
+                    title: 'El nombre de empresa ya se encuentra registrado.',
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+                setInterval(function () { window.location.reload(); }, 500);
+            }
+            else {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'info',
+                    title: 'Ha ocurrido un error en el sistema.',
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+                setInterval(function () { window.location.reload(); }, 500);
             }
         }
     });
@@ -210,20 +237,41 @@ function ajaxRegistroExperienciaPerfilUsuario(controller, empresaNombre, destaco
 
 
 function EliminarExperiencia(idExperiencia) {
-    var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Usuario/";
-    $.ajax({
-        type: 'POST',
-        url: controller + 'EliminarExperienciaPerfilUsuario',
-        data: '{ idExperiencia: "' + idExperiencia + '"}',
-        dataType: 'json',
-        contentType: 'application/json',
-        async: true,
-        success: function (response) {
-            if (response.data == 1) {
-                window.location.reload();
-            }
+    Swal.fire({
+        title: 'Desea eliminar el registro de experiencia profesional?',
+        text: "No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+
+            var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Usuario/";
+            $.ajax({
+                type: 'POST',
+                url: controller + 'EliminarExperienciaPerfilUsuario',
+                data: '{ idExperiencia: "' + idExperiencia + '"}',
+                dataType: 'json',
+                contentType: 'application/json',
+                async: true,
+                success: function (response) {
+                    if (response.data == 1) {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Experiencia eliminada con éxito.',
+                            showConfirmButton: false,
+                            timer: 2000
+                        })
+                        window.location.reload();
+                    }
+                }
+            });
         }
-    });
+    })
+
 }
 
 
@@ -239,27 +287,75 @@ function ajaxRegistroEducacionPerfilUsuario(controller, centroNombre, estadoEdu,
         async: true,
         success: function (response) {
             if (response.data == 1) {
-                window.location.reload();
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Educación agregada con éxito.',
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+                setInterval(function () { window.location.reload(); }, 500);
             }
+            else if (response.data == 2) {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'info',
+                    title: 'El nombre ingresado ya se encuentra registrado.',
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+                setInterval(function () { window.location.reload(); }, 500);
+            }
+            else {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'info',
+                    title: 'Ha ocurrido un error en el sistema.',
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+                setInterval(function () { window.location.reload(); }, 500);
+            }
+
         }
     });
 }
 
 function EliminarEducacion(idEducacion) {
-    var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Usuario/";
-    $.ajax({
-        type: 'POST',
-        url: controller + 'EliminarEducacionPerfilUsuario',
-        data: '{ idEducacion: "' + idEducacion + '"}',
-        dataType: 'json',
-        contentType: 'application/json',
-        async: true,
-        success: function (response) {
-            if (response.data == 1) {
-                window.location.reload();
-            }
+    Swal.fire({
+        title: 'Desea eliminar el registro de formación academica?',
+        text: "No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Usuario/";
+            $.ajax({
+                type: 'POST',
+                url: controller + 'EliminarEducacionPerfilUsuario',
+                data: '{ idEducacion: "' + idEducacion + '"}',
+                dataType: 'json',
+                contentType: 'application/json',
+                async: true,
+                success: function (response) {
+                    if (response.data == 1) {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Educación eliminada con éxito.',
+                            showConfirmButton: false,
+                            timer: 2000
+                        })
+                        window.location.reload();
+                    }
+                }
+            });
         }
-    });
+    })
+
 }
 
 // // guardar idioma usuario perfil 
@@ -274,27 +370,74 @@ function ajaxRegistroIdiomaPerfilUsuario(controller, idiomaId, nivelIdioma) {
         async: true,
         success: function (response) {
             if (response.data == 1) {
-                window.location.reload();
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Idioma agregado con éxito.',
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+                setInterval(function () { window.location.reload(); }, 500);
+            }
+            else if (response.data == 2) {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'info',
+                    title: 'El idioma seleccionado ya se encuentra registrado.',
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+                setInterval(function () { window.location.reload(); }, 500);
+            }
+            else {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'info',
+                    title: 'Ha ocurrido un error en el sistema.',
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+                setInterval(function () { window.location.reload(); }, 500);
             }
         }
     });
 }
 
 function EliminarIdioma(idIdioma) {
-    var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Usuario/";
-    $.ajax({
-        type: 'POST',
-        url: controller + 'EliminarIdiomaPerfilUsuario',
-        data: '{ idIdioma: "' + idIdioma + '"}',
-        dataType: 'json',
-        contentType: 'application/json',
-        async: true,
-        success: function (response) {
-            if (response.data == 1) {
-                window.location.reload();
-            }
+    Swal.fire({
+        title: 'Desea eliminar el registro de idioma?',
+        text: "No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Usuario/";
+            $.ajax({
+                type: 'POST',
+                url: controller + 'EliminarIdiomaPerfilUsuario',
+                data: '{ idIdioma: "' + idIdioma + '"}',
+                dataType: 'json',
+                contentType: 'application/json',
+                async: true,
+                success: function (response) {
+                    if (response.data == 1) {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Idioma eliminado con éxito.',
+                            showConfirmButton: false,
+                            timer: 2000
+                        })
+                        window.location.reload();
+                    }
+                }
+            });
         }
-    });
+    })
+
 }
 
 
@@ -310,27 +453,74 @@ function ajaxRegistroHabilidadPerfilUsuario(controller, habilidadID, nivelHabili
         async: true,
         success: function (response) {
             if (response.data == 1) {
-                window.location.reload();
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Habilidad agregada con éxito.',
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+                setInterval(function () { window.location.reload(); }, 500);
+            }
+            else if (response.data == 2) {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'info',
+                    title: 'La habildiad seleccionada ya se encuentra registrado.',
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+                setInterval(function () { window.location.reload(); }, 500);
+            }
+            else {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'info',
+                    title: 'Ha ocurrido un error en el sistema.',
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+                setInterval(function () { window.location.reload(); }, 500);
             }
         }
     });
 }
 
 function EliminarHabilidad(idHabilidad) {
-    var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Usuario/";
-    $.ajax({
-        type: 'POST',
-        url: controller + 'EliminarHabilidadPerfilUsuario',
-        data: '{ IdHabilidad: "' + idHabilidad + '"}',
-        dataType: 'json',
-        contentType: 'application/json',
-        async: true,
-        success: function (response) {
-            if (response.data == 1) {
-                window.location.reload();
-            }
+    Swal.fire({
+        title: 'Desea eliminar el registro de habilidades?',
+        text: "No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Usuario/";
+            $.ajax({
+                type: 'POST',
+                url: controller + 'EliminarHabilidadPerfilUsuario',
+                data: '{ IdHabilidad: "' + idHabilidad + '"}',
+                dataType: 'json',
+                contentType: 'application/json',
+                async: true,
+                success: function (response) {
+                    if (response.data == 1) {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Habilidad eliminada con éxito.',
+                            showConfirmButton: false,
+                            timer: 2000
+                        })
+                        window.location.reload();
+                    }
+                }
+            });
         }
-    });
+    })
+
 }
 
 // // guardar datos usuario perfil 
@@ -372,82 +562,199 @@ function ajaxRegistroPerfilProfesionalUsuario(controller, tituloperfil, descripc
 
 // postulacion a empleo
 function PostularEmpleo(dato1, idPublicacion) {
-    var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/App/";
+    if (dato1 != 0) {
+        $("#idPublicacionPreguntas").val(idPublicacion);
+        $("#modalPreguntasPublicacion").modal("show");
+    }
+    else {
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Debe estar logueado para postular',
+            showConfirmButton: false,
+            timer: 1500
+        })
+        return false;
+    }
+}
+
+// Charts Usuario test
+function ajaxCargaCharts(controller) {
     $.ajax({
         type: 'POST',
-        url: controller + 'CargarDatosPreguntas',
-        data: '{ idPublicacion: "' + idPublicacion + '" }',
+        url: controller + 'GetResultadosTestUsuario',
         dataType: 'json',
         contentType: 'application/json',
         async: true,
         success: function (response) {
-            if (response.datos != "") {
-                $("#preguntasSinDescripcion").empty();
-                for (var i = 0; i < response.datos.length; i++) {
-                        $('#preguntasSinDescripcion').append('<label>' + response.datos[i].PreguntaNombre + ': </label><input type = "text" class="form-control" name = "inputMultiples[]"  id = "' + response.datos[i].NombreCorto + '" /> ');
-                   
-                }
-                //$.each(response.datos, function (i, val) {
-                //    if (val.TipoPregunta == "1") {
+            debugger;
+            if (response.data[0] != "0") {
+                var respon = response.data[0].Responsabilidad.replace(',', '.');
+                var restorespon = response.data[0].RestoResponsabilidad.replace(',', '.');
+                var autoges = response.data[0].AutoGestion.replace(',', '.');
+                var restoautoges = response.data[0].RestoAutogestion.replace(',', '.');
+                var lideraz = response.data[0].Liderazgo.replace(',', '.');
+                var restolideraz = response.data[0].RestoLiderazgo.replace(',', '.');
+                let ctx = document.getElementById("myChartResponsabilidad").getContext('2d');
+                let ctx1 = document.getElementById("myChartAutogestion").getContext('2d');
+                let ctx2 = document.getElementById("myChartLiderazgo").getContext('2d');
+                let labelsrespo = ['Responsabilidad', 'No Responsabilidad'];
+                let colorHexrespo = ['#FF702D', '#FFD2BD'];
 
-                //        $('.preguntasSinDescripcion').append('<label>' + val.PreguntaNombre + ': </label><input type = "text" class="form-control" name = "' + val.NombreCorto + '"  id = "' + val.NombreCorto + '" /> ');
-                //    }
+                let labelsges = ['AutoGestion', 'No AutoGestion'];
+                let colorHexges = ['#FF702D', '#FFD2BD'];
 
-                //    if (val.TipoPregunta == "2") {
-                //        $('.preguntasConDescripcion').append('<label for="val.Nombre">' + val.PreguntaNombre + ': </label><textarea class= "form-control" rows = "5" style = "resize:none; width:100%; max-width:100%;" name = "' + val.NombreCorto + '" id = "' + val.NombreCorto + '" ></textarea >')
-                //    }
-                   
-                //});
-                $("#modalPreguntasPublicacion").modal("show");
+                let labelslider = ['Liderazgo', 'No Liderazgo'];
+                let colorHexlider = ['#FF702D', '#FFD2BD'];
+
+
+                // Responsabilidad
+                let myChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        datasets: [{
+                            data: [respon, restorespon],
+                            backgroundColor: colorHexrespo
+                        }],
+                        labels: labelsrespo
+                    },
+                    options: {
+                        responsive: true,
+                        legend: {
+                            position: 'bottom'
+                        },
+                        plugins: {
+                            datalabels: {
+                                color: '#fff',
+                                anchor: 'end',
+                                align: 'start',
+                                offset: -10,
+                                borderWidth: 2,
+                                borderColor: '#fff',
+                                borderRadius: 25,
+                                backgroundColor: (context) => {
+                                    return context.dataset.backgroundColor;
+                                },
+                                font: {
+                                    weight: 'bold',
+                                    size: '10'
+                                },
+                                formatter: (value) => {
+                                    return value + ' %';
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // Autogestion
+                let myChart2 = new Chart(ctx1, {
+                    type: 'doughnut',
+                    data: {
+                        datasets: [{
+                            data: [autoges, restoautoges],
+                            backgroundColor: colorHexges
+                        }],
+                        labels: labelsges
+                    },
+                    options: {
+                        responsive: true,
+                        legend: {
+                            position: 'bottom'
+                        },
+                        plugins: {
+                            datalabels: {
+                                color: '#fff',
+                                anchor: 'end',
+                                align: 'start',
+                                offset: -10,
+                                borderWidth: 2,
+                                borderColor: '#fff',
+                                borderRadius: 25,
+                                backgroundColor: (context) => {
+                                    return context.dataset.backgroundColor;
+                                },
+                                font: {
+                                    weight: 'bold',
+                                    size: '10'
+                                },
+                                formatter: (value) => {
+                                    return value + ' %';
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // liderazgo
+                let myChart3 = new Chart(ctx2, {
+                    type: 'doughnut',
+                    data: {
+                        datasets: [{
+                            data: [lideraz, restolideraz],
+                            backgroundColor: colorHexlider
+                        }],
+                        labels: labelslider
+                    },
+                    options: {
+                        responsive: true,
+                        legend: {
+                            position: 'bottom'
+                        },
+                        plugins: {
+                            datalabels: {
+                                color: '#fff',
+                                anchor: 'end',
+                                align: 'start',
+                                offset: -10,
+                                borderWidth: 2,
+                                borderColor: '#fff',
+                                borderRadius: 25,
+                                backgroundColor: (context) => {
+                                    return context.dataset.backgroundColor;
+                                },
+                                font: {
+                                    weight: 'bold',
+                                    size: '10'
+                                },
+                                formatter: (value) => {
+                                    return value + ' %';
+                                }
+                            }
+                        }
+                    }
+                });
             }
+
         }
     });
-
-
-
-    //if (idUsuario == 0) {
-    //    Swal.fire({
-    //        position: 'center',
-    //        icon: 'error',
-    //        title: 'Debe loguearse para postular',
-    //        showConfirmButton: false,
-    //        timer: 1500
-    //    })
-    //    return false;
-    //}
-    //else {
-
-    //    var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Usuario/";
-    //    $.ajax({
-    //        type: 'POST',
-    //        url: controller + 'GuardarPostulacionEmpleo',
-    //        data: '{ idPublicacion: "' + idPublicacion + '" }',
-    //        dataType: 'json',
-    //        contentType: 'application/json',
-    //        async: true,
-    //        success: function (response) {
-    //            if (response.data == 1) {
-    //                window.location.reload();
-    //            }
-    //        }
-    //    });
-    //}
-
 }
-
-
 
 //CURRICULUM
 function ajaxDeleteCV(controller, user) {
-    $.ajax({
-        type: 'POST',
-        url: controller + 'DeleteCV',
-        data: '{ user: "' + user + '"}',
-        dataType: 'json',
-        contentType: 'application/json',
-        async: true,
-        success: function (response) {
-            //
+    Swal.fire({
+        title: 'Desea eliminar el curriculum vitae?',
+        text: "No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+
+            $.ajax({
+                type: 'POST',
+                url: controller + 'DeleteCV',
+                data: '{ user: "' + user + '"}',
+                dataType: 'json',
+                contentType: 'application/json',
+                async: true,
+                success: function (response) {
+                    window.location.reload();
+                }
+            });
         }
-    });
+    })
+
 }

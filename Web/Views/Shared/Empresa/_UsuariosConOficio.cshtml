@@ -1,0 +1,56 @@
+﻿@if (ViewBag.referenciaUsuariosOficios.Count > 0 && ViewBag.referenciaUsuariosOficios != null)
+{
+    <div class="row">
+        @foreach (var item in ViewBag.referenciaUsuariosOficios as ICollection<Model.Models.CandidatoUsuarioOficios>)
+        {
+
+            <div class="col-md-6 col-lg-3 col-xl-3 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        @if (item.ImagendelUsuario != null && item.ImagendelUsuario.Count() > 0)
+                        {
+                            <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(item.ImagendelUsuario))" style="max-width:100%; height:250px;" />
+
+                        }
+                        else
+                        {
+                            <img src="http://placehold.it/200x150" style="max-width:100%; height:250px;" />
+                        }
+
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">@item.RutUsuario</h5>
+                        <p class="card-text">@item.NombreUsuario - @item.ApellidosUsuario</p>
+                        <p class="card-text">
+                            <ul>
+                                @foreach (var item2 in item.TagOficios as ICollection<Model.Models.DetalleTagOficio>)
+                                {
+                                    <li>@item2.nombreOficio</li>
+                                }
+
+                            </ul>
+                        </p>
+                        <a href="@Url.Action("PerfilUsuarioEmpresaLectura","Empresa", new { idUsuario = item.IdUsuario })" class="btn btn-outline-primary">Ver perfil</a>
+                    </div>
+                </div>
+            </div>
+            <br />
+
+
+
+        }
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-12">
+            <h2 style="color:#808080"> No existen usuarios con oficios registrados.</h2>
+
+        </div>
+    </div>
+
+}
+
+
+

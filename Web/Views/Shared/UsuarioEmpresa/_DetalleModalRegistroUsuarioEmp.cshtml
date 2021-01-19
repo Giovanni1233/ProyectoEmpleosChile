@@ -14,9 +14,9 @@
     <div class="modal-body">
 
         <div class="md-form form-sm">
-            <input type="hidden" id="id_empresa" name="id_empresa" value="@Session["IDempresa"]" />
+            <input type="hidden" id="id_empresa" name="id_empresa" value="@Session["EmpresaID"]" />
             <i class="fas fa-pencil-alt prefix" style="margin-top: 4px;"></i>
-            <input type="text" id="rut" name="rut" autocomplete="off" class="form-control">
+            <input type="text" id="rut" name="rut" autocomplete="off" class="form-control soloRut">
             <label for="rut">Rut</label>
         </div>
 
@@ -28,7 +28,7 @@
 
         <div class="md-form form-sm">
             <i class="fas fa-signature prefix" style="margin-top: 4px;"></i>
-            <input type="text" id="apellido" name="apellido" autocomplete="off" class="form-control">
+            <input type="text" id="apellido" name="apellido" autocomplete="off" class="form-control soloLetras">
             <label for="apellido">Apellido</label>
         </div>
 
@@ -45,7 +45,7 @@
 
         <div class="md-form form-sm">
             <i class="fas fa-lock prefix" style="margin-top: 4px;"></i>
-            <input type="password" id="password" name="password" autocomplete="off" class="form-control">
+            <input type="password" id="password1" name="password" autocomplete="off" class="form-control">
             <label for="password">Contraseña</label>
         </div>
 
@@ -62,10 +62,16 @@
         </div>
 
         <div class="form-check mb-2 mr-sm-2 text-center">
-            <button type="submit" class="btn btn-primary guardarUsuarioEmpresa">
+            <button type="button" class="btn btn-primary guardarUsuarioEmpresa" style="display:block;">
                 <i class="fas fa-save" style="color: #fff;"> Registrar</i>
             </button>
+            <div class="d-flex align-items-center">
+                <strong class="text-primary" id="textoSpinner" style="display: none;">Cargando...</strong>
+                <div class="spinner-border text-primary ml-auto" role="status" aria-hidden="true" id="spinner" style="display: none;"></div>
+            </div>
         </div>
+        <br />
+        <div class="errorRegistroUsuarioEmpresa"></div>
     </div>
 
 }

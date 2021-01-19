@@ -1,10 +1,15 @@
-﻿<div class="row" style="margin-bottom:15px;">
-    <div class="col-md-12 col-xl-12 col-lg-12">
-        <input type="hidden" name="UsuarioSesion" id="UsuarioSesion" value="@Session["UserName"]" />
-        <a href="javascript:void(0);" class="btn btn-success" id="btnEnviarMensaje">Enviar mensaje</a>
+﻿@if (Session["UserName"] != null)
+{
+    <div class="row" style="margin-bottom:15px;">
+        <div class="col-md-12 col-xl-12 col-lg-12">
+            <input type="hidden" name="UsuarioSesion" id="UsuarioSesion" value="@Session["UserName"]" />
+            <a href="javascript:void(0);" class="btn btn-success" id="btnEnviarMensaje">Enviar mensaje</a>
+        </div>
     </div>
-</div>
-<hr />
+    <hr />
+}
+
+
 <div class="row">
     @foreach (var item in ViewBag.ReferenciaDatosEmpresa as ICollection<Model.Models.DatosEmpresa>)
     {

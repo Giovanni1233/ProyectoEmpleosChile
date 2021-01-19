@@ -22,7 +22,8 @@ namespace Web
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrapjs").Include(
                 "~/Scripts/bootstrap.js",
-                "~/Scripts/popper.js"));
+                "~/Scripts/popper.js",
+                "~/Scripts/Chart.min.js"));
 
             bundles.Add(new StyleBundle("~/bundles/bootstrapcss").Include(
                 "~/Content/bootstrap.css"));
@@ -77,7 +78,9 @@ namespace Web
                 "~/Content/App/EstilosCarrusel.css",
                 "~/Content/App/TabsMenuPerfil.css",
                 "~/Content/App/EstilosPerfilProfesional.css",
-                "~/Content/App/EstilosInicio.css"
+                "~/Content/App/EstilosInicio.css",
+                "~/Content/App/CarruselIntermedio.css",
+                "~/Content/App/EstiloTestPersonalidad.css"
                 ));
 
             bundles.Add(new StyleBundle("~/bundles/MaterialDesign").Include(

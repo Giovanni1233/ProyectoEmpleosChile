@@ -64,14 +64,20 @@
         <div class="md-form form-sm">
 
             <i class="fas fa-dollar-sign prefix" style="margin-top: 4px;"></i>
-            <input type="text" id="monto" name="monto" autocomplete="off" class="form-control">
+            <input type="text" id="monto" name="monto" autocomplete="off" class="form-control soloNumeros">
             <label for="monto">Monto</label>
         </div>
 
         <div class="form-check mb-2 mr-sm-2 text-center">
-            <button class="btn btn-primary guardarPublicacion">
+            <button type="button" class="btn btn-primary btn-block guardarPublicacion" style="display:block;">
                 <i class="fas fa-save" style="color: #fff;"> Registrar</i>
             </button>
+            <div class="d-flex align-items-center">
+                <strong class="text-primary" id="textoSpinner" style="display: none;">Cargando...</strong>
+                <div class="spinner-border text-primary ml-auto" role="status" aria-hidden="true"  id="spinner" style="display: none;"></div>
+            </div>
         </div>
+        <br />
+        <div class="errorRegistroPublicacion"></div>
     </div>
 }

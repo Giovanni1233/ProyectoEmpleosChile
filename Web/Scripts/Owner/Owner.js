@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-   
+
     // cargamos el ordenamiento principal
     var ordenamiento = $('input[type = radio][name = radioOrdenamiento]').val();
     $("#hiddenOrdenamiento").val(ordenamiento);
@@ -11,7 +11,7 @@
     $('.mdb-select').materialSelect();
     $('.collapse').collapse()
 
-
+    
     // Validar datos
     $(document).on('change', "#rut", function () {
         var rut = $("#rut").val();
@@ -102,11 +102,13 @@
         var password = $("#password").val();
 
         if (rut == "" || rut == null || rut == undefined || password == "" || password == null || password == undefined) {
-            alert('Ingrese su rut y contraseña para iniciar sesión');
-            return;
+            $("#errorInicioSesionEmpresa").html('<div class="alert alert-danger text-center"><strong> Error!</strong> Debe ingresar las credenciales.</div>');
+            setInterval(function () { $("#errorInicioSesionEmpresa").html(''); }, 3000);
+            return false;
         }
-            ajaxViewPartialLoadingEmpresa(rut, password);
-       
+
+        ajaxViewPartialLoadingEmpresa(rut, password);
+
     });
 
     // Cerrar sesion usuario
@@ -132,8 +134,9 @@
         var password = $("#passwordUE").val();
 
         if (rut == "" || rut == null || rut == undefined || password == "" || password == null || password == undefined) {
-            alert('Ingrese su rut y contraseña para iniciar sesión');
-            return;
+            $("#errorInicioSesionEmpresa").html('<div class="alert alert-danger text-center"><strong> Error!</strong> Debe ingresar las credenciales.</div>');
+            setInterval(function () { $("#errorInicioSesionEmpresa").html(''); }, 3000);
+            return false;
         }
         ajaxViewPartialLoadingUsuarioEmpresa(rut, password);
         //controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/UsuarioEmpresa/";
@@ -204,7 +207,7 @@
         })
     });
 
-   
+
     $(document).on('keypress', ".soloNumeros", function (e) {
         tecla = (document.all) ? e.keyCode : e.which;
         if (tecla == 8) {
@@ -397,7 +400,11 @@
         var controller = '';
         var nombrePregunta = $("#nombrePregunta").val();
         var tipoPregunta = $("#tipoPregunta").val();
-
+        if (nombrePregunta.trim() == "") {
+            $(".errorPreguntaEmpresa").html('<div class="alert alert-danger text-center"><strong> Error!</strong> Debe ingresar una pregunta.</div>');
+            setInterval(function () { $(".errorPreguntaEmpresa").html(''); }, 3000);
+            return false;
+        }
         controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Empresa/";
 
         ajaxRegistroPreguntasEmpresa(controller, nombrePregunta, tipoPregunta);
@@ -425,6 +432,22 @@
     });
 
     $(document).on('click', "#FiltroGatillo", function () {
+        let timerInterval
+        Swal.fire({
+            title: 'Cargando...',
+            html: '<div class="spinner-border text-primary ml-auto" role="status" aria-hidden="true" style="width: 3rem; height: 3rem;" id="spinner"></div>',
+            timer: 2000,
+            timerProgressBar: true,
+            showConfirmButton: false,
+            willClose: () => {
+                clearInterval(timerInterval)
+            }
+        }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+                //console.log('I was closed by the timer')
+            }
+        })
         $("#buscarFiltros").trigger("click");
 
     });
@@ -439,9 +462,29 @@
 
     // Perfil de la empresa
     $(document).on('click', "#btnGuardarPerfilEmpresa", function () {
+
         var rut = $("#rut").val();
         var telefono = $("#telefono").val();
         var correo = $("#correo").val();
+        if (telefono.trim() == "" || correo.trim() == "") {
+            $(".errorGuardarPerfilEmpresa").html('<div class="alert alert-danger text-center"><strong> Error!</strong> Debe ingresar el telefono y el correo.</div>');
+            setInterval(function () { $(".errorGuardarPerfilEmpresa").html(''); }, 3000);
+            return false;
+        }
+
+        if (correo != "" && correo != null && correo != undefined) {
+            if (ValidateEmail(correo)) {
+                $(".errorGuardarPerfilEmpresa").html('');
+            }
+            else {
+                $(".errorGuardarPerfilEmpresa").html('<div class="alert alert-danger text-center"><strong> Error!</strong> Correo ingresado no es valido.</div>');
+                setInterval(function () { $(".errorGuardarPerfilEmpresa").html(''); }, 3000);
+                return false;
+            }
+        }
+        else {
+            $(".errorGuardarPerfilEmpresa").html('');
+        }
         var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Empresa/";
 
         ajaxGuardaPerfilEmpresa(controller, rut, telefono, correo);
@@ -495,7 +538,7 @@
 
     // Perfil del usuario empresa
     $(document).on('click', "#btnGuardarPerfilUsuarioEmpresa", function () {
-        
+
         var telefono = $("#telefono").val();
         var correo = $("#correo").val();
         var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/UsuarioEmpresa/";
@@ -513,6 +556,9 @@
 
         ajaxGuardaAsignacionPreguntaPublicacion(controller, publicacion, pregunta);
     });
+
+    // popover informativo planes
+    $('[data-toggle="popover"]').popover();
 
 });
 function CambioValor(valor) {
@@ -722,12 +768,44 @@ $(document).on('change', "#comuna", function () {
 });
 
 $(document).on('click', "#buscarFiltrosApp", function () {
+    let timerInterval
+    Swal.fire({
+        title: 'Cargando...',
+        html: '<div class="spinner-border text-primary ml-auto" role="status" aria-hidden="true" style="width: 3rem; height: 3rem;" id="spinner"></div>',
+        timer: 2000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+        willClose: () => {
+            clearInterval(timerInterval)
+        }
+    }).then((result) => {
+        /* Read more about handling dismissals below */
+        if (result.dismiss === Swal.DismissReason.timer) {
+            //console.log('I was closed by the timer')
+        }
+    })
     $("#buscarFiltrosApp2").trigger("click");
 
 });
 
 // filtros pagina 2
 $(document).on('click', "#buscarFiltrosAppPublicacion", function () {
+    let timerInterval
+    Swal.fire({
+        title: 'Cargando!',
+        html: '<div class="spinner-border text-primary ml-auto" role="status" aria-hidden="true" style="width: 3rem; height: 3rem;" id="spinner"></div>',
+        timer: 2000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+        willClose: () => {
+            clearInterval(timerInterval)
+        }
+    }).then((result) => {
+        /* Read more about handling dismissals below */
+        if (result.dismiss === Swal.DismissReason.timer) {
+            //console.log('I was closed by the timer')
+        }
+    })
     $("#buscarFiltrosPagEmpleos").trigger("click");
 
 });
@@ -745,4 +823,297 @@ $(document).on('change', "#sueldoBusqueda", function () {
 
     $("#hiddenSueldo").val(sueldo);
 
+});
+
+$(document).on('change', "#comuna2", function () {
+    var sueldo = $("#comuna2").val();
+
+    $("#hiddenComuna2").val(sueldo);
+
+});
+
+$(document).on('click', ".guardarEmpresa", function () {
+    controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Empresa/";
+    var rut = $("#rut").val();
+    var rubro = $("#rubro").val();
+    var nombre = $("#nombre").val();
+    var razon = $("#razonsocial").val();
+    var email = $("#correoReg").val();
+    var telefono = $("#telefono").val();
+    var comuna = $("#comuna").val();
+    var direccion = $("#direccion").val();
+    var clave = $("#clave").val();
+    var repetirclave = $("#repetirclave").val();
+
+    if (rut == "" ||
+        rubro == "" ||
+        nombre == "" ||
+        razon == "" ||
+        email == "" ||
+        telefono == "" ||
+        comuna == "" ||
+        direccion == "" ||
+        clave == "" ||
+        repetirclave == "") {
+        $.ajax({
+            type: 'POST',
+            url: controller + 'ViewPartialErrorRegistro',
+            data: '{ }',
+            dataType: 'json',
+            contentType: 'application/json',
+            async: true,
+            error: function (xhr) {
+                $(".errorRegistroEmpresa").html(xhr.responseText);
+                setInterval(function () { $(".errorRegistroEmpresa").html(''); }, 3000);
+                return false;
+            }
+        });
+    }
+    else {
+        var error = '<div class="alert alert-danger text-center"><strong> Error!</strong> Correo ingresado no es valido.</div>';
+        if (email != "" && email != null && email != undefined) {
+            if (ValidateEmail(email)) {
+                $(".errorRegistroEmpresa").html('');
+            }
+            else {
+                $(".errorRegistroEmpresa").html(error);
+                return false;
+            }
+        }
+        else {
+            $(".errorRegistroEmpresa").html('');
+        }
+
+        if (clave != repetirclave) {
+            $.ajax({
+                type: 'POST',
+                url: controller + 'ViewPartialErrorRegistroClaves',
+                data: '{ }',
+                dataType: 'json',
+                contentType: 'application/json',
+                async: true,
+                error: function (xhr) {
+                    $(".errorRegistroEmpresa").html(xhr.responseText)
+                    setInterval(function () { $(".errorRegistroEmpresa").html(''); }, 3000);
+                    return false;
+                }
+            });
+
+        }
+        else {
+            $('.guardarEmpresa').get(0).type = 'submit';
+            $(".guardarEmpresa").trigger('click');
+        }
+    }
+
+});
+
+// validacion publicacion empresa
+
+$(document).on('click', '.guardarPublicacion', function () {
+
+    var titulo = $("#titulo").val();
+    var descripcion = $("#descripcionNuevaPub").val();
+    var area = $("#area").val();
+    var subarea = $("#subarea").val();
+    var tipo = $("#tipo").val();
+    var monto = $("#monto").val();
+
+    if (titulo == "" ||
+        descripcion == "" ||
+        area == "" ||
+        subarea == "" ||
+        tipo == "" ||
+        monto == "") {
+        $(".errorRegistroPublicacion").html('<div class="alert alert-danger text-center"><strong> Error!</strong> Todos los campos son obligatorios.</div>');
+        setInterval(function () { $(".errorRegistroPublicacion").html(''); }, 3000);
+        //Swal.fire({
+        //    position: 'center',
+        //    icon: 'error',
+        //    title: 'Todos los campos son obligatorios',
+        //    showConfirmButton: false,
+        //    timer: 1500
+        //})
+        return false;
+    }
+    else {
+
+
+        $(".guardarPublicacion").css('display', 'none');
+        $("#spinner").css('display', 'block');
+        $("#textoSpinner").css('display', 'block');
+        $('.guardarPublicacion').get(0).type = 'submit';
+        setInterval(function () { $(".guardarPublicacion").trigger('click'); }, 3000);
+
+    }
+
+
+
+});
+
+// validacion registro trabajadores
+$(document).on('click', '.guardarUsuarioEmpresa', function () {
+
+    var rut = $("#rut").val();
+    var nombres = $("#nombres").val();
+    var apellido = $("#apellido").val();
+    var perfil = $("#perfil").val();
+    var password = $("#password1").val();
+    var passwordRepetir = $("#passwordRepetir").val();
+    var correo = $("#correo").val();
+
+    if (correo != "" && correo != null && correo != undefined) {
+        if (ValidateEmail(mail)) {
+            $(".errorRegistroUsuarioEmpresa").html('');
+        }
+        else {
+            $(".errorRegistroUsuarioEmpresa").html('Correo ingresado no es valido');
+        }
+    }
+    else {
+        $(".errorRegistroUsuarioEmpresa").html('');
+    }
+
+    if (rut.trim() == "" ||
+        nombres.trim() == "" ||
+        apellido.trim() == "" ||
+        perfil.trim() == "" ||
+        password.trim() == "" ||
+        passwordRepetir.trim() == "" ||
+        correo.trim() == "") {
+        $(".errorRegistroUsuarioEmpresa").html('<div class="alert alert-danger  text-center"><strong> Error!</strong> Todos los campos son obligatorios.</div>');
+        setInterval(function () { $(".errorRegistroUsuarioEmpresa").html(''); }, 3000);
+        //Swal.fire({
+        //    position: 'center',
+        //    icon: 'error',
+        //    title: 'Todos los campos son obligatorios',
+        //    showConfirmButton: false,
+        //    timer: 1500
+        //})
+        return false;
+    }
+    else {
+        if (password != passwordRepetir) {
+            $(".errorRegistroUsuarioEmpresa").html('<div class="alert alert-danger text-center"><strong> Error!</strong> Las contraseñas no coinciden.</div>');
+            setInterval(function () { $(".errorRegistroUsuarioEmpresa").html(''); }, 3000);
+            return false;
+        }
+        else {
+            $(".guardarPublicacion").css('display', 'none');
+            $("#spinner").css('display', 'block');
+            $("#textoSpinner").css('display', 'block');
+            $('.guardarUsuarioEmpresa').get(0).type = 'submit';
+            setInterval(function () { $(".guardarUsuarioEmpresa").trigger('click'); }, 3000);
+        }
+
+    }
+
+
+
+});
+
+// validacion imagen perfil empresa
+$(document).on('click', "#uploadfileImgPerfilEmp", function () {
+    $("#fileImgPerfilEmpresa").trigger("click");
+});
+function uploadImgPerfilEmpresa(file) {
+    let filename = file.files[0].name;
+    let extension = filename.slice(filename.lastIndexOf("."), filename.length);
+
+    if (extension !== ".png" && extension !== ".jpg" && extension !== ".jpeg") {
+        document.getElementById(file.id).value = "";
+    }
+    else {
+        $("#spinnerImgPerfilEmpresa").css('display', 'block');
+        $("#textoSpinnerImgPerfilEmpresa").css('display', 'block');
+        $('#uploadFileImgPerfilEmpresa').get(0).type = 'submit';
+        setInterval(function () { $("#uploadFileImgPerfilEmpresa").trigger('click'); }, 3000);
+    }
+}
+//$(document).on('click', '#btnImagenPerfilEmpresa', function () {
+//    var archivo = $(".archivoImagenPerfil").val();
+//    if (archivo == "" || archivo == null || archivo == undefined) {
+//        $(".ErrorImagenPerfil").html('<div class="alert alert-danger text-center" style="margin-top:20px;"><strong> Error!</strong> Debe seleccionar una imagen.</div>');
+//        setInterval(function () { $(".ErrorImagenPerfil").html(''); }, 3000);
+//        return false;
+//    }
+//    else {
+        
+//        $("#btnImagenPerfilEmpresa").css('display', 'none');
+//        $("#spinnerImgPerfil").css('display', 'block');
+//        $("#textoSpinnerImgPerfil").css('display', 'block');
+//        $('#btnImagenPerfilEmpresa').get(0).type = 'submit';
+//        setInterval(function () { $("#btnImagenPerfilEmpresa").trigger('click'); }, 6000);
+//    }
+//});
+
+
+// validacion imagen banner empresa
+$(document).on('click', "#uploadfileBanner", function () {
+    $("#fileBanner").trigger("click");
+});
+function uploadImgBanner(file) {
+    let filename = file.files[0].name;
+    let extension = filename.slice(filename.lastIndexOf("."), filename.length);
+
+    if (extension !== ".png" && extension !== ".jpg" && extension !== ".jpeg") {
+        document.getElementById(file.id).value = "";
+    }
+    else {
+        $("#apartadoBotonBanner").css('display', 'none');
+        $("#spinnerBanner").css('display', 'block');
+        $("#textoSpinnerBanner").css('display', 'block');
+        $('#uploadFileBannerEmpresa').get(0).type = 'submit';
+        setInterval(function () { $("#uploadFileBannerEmpresa").trigger('click'); }, 3000);
+    }
+}
+//$(document).on('click', '#btnImagenBannerEmpresa', function () {
+//    var archivo = $(".archivoBannerEmpresa").val();
+//    if (archivo == "" || archivo == null || archivo == undefined) {
+//        $(".ErrorImagenBannerEmpresa").html('<div class="alert alert-danger text-center" style="margin-top:20px;"><strong> Error!</strong> Debe seleccionar una imagen.</div>');
+//        setInterval(function () { $(".ErrorImagenBannerEmpresa").html(''); }, 3000);
+//        return false;
+//    }
+//    else {
+
+//        $("#btnImagenBannerEmpresa").css('display', 'none');
+//        $("#spinnerBanner").css('display', 'block');
+//        $("#textoSpinnerBanner").css('display', 'block');
+//        $('#btnImagenBannerEmpresa').get(0).type = 'submit';
+//        setInterval(function () { $("#btnImagenBannerEmpresa").trigger('click'); }, 6000);
+//    }
+//});
+
+// validacion configuracion tarjeta
+$(document).on('click', '.guardarTarjetas', function () {
+    var nombreT = $("#nombreT").val();
+    var numeroT = $("#numeroT").val();
+    var fechaT = $("#fechaT").val();
+    var cvvT = $("#cvvT").val();
+    var montoDisponible = $("#montoT").val();
+    if (nombreT.trim() == "" || numeroT.trim() == "" || fechaT.trim() == "" || cvvT.trim() == "" || montoDisponible.trim() == "") {
+        $(".errorConfiguracionTarjeta").html('<div class="alert alert-danger text-center" style="margin-top:20px;"><strong> Error!</strong> Todos los campos son obligatorios</div>');
+        setInterval(function () { $(".errorConfiguracionTarjeta").html(''); }, 3000);
+        return false;
+    }
+    else {
+        $('.guardarTarjetas').get(0).type = 'submit';
+        let timerInterval
+        Swal.fire({
+            title: 'Cargando...',
+            html: '<div class="spinner-border text-primary ml-auto" role="status" aria-hidden="true" style="width: 3rem; height: 3rem;" id="spinner"></div>',
+            timer: 2000,
+            timerProgressBar: true,
+            showConfirmButton: false,
+            willClose: () => {
+                clearInterval(timerInterval)
+            }
+        }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+                //console.log('I was closed by the timer')
+            }
+        })
+        $(".guardarTarjetas").trigger('click');
+    }
 });

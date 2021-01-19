@@ -46,8 +46,16 @@
 
 </div>
 <div class="row">
-    <a href="javascript:void(0);" class="btn btn-primary" id="btnAgregarEducacion"><span class="fa fa-plus-circle">&nbsp;&nbsp;</span> Agregar</a>
+    <a href="javascript:void(0);" class="btn btn-primary" style="display: block;" id="btnAgregarEducacion"><span class="fa fa-plus-circle">&nbsp;&nbsp;</span> Agregar</a>
+    <div class="align-items-center">
+        <strong class="text-primary" id="textoSpinnerEducacion" style="display:none;">Cargando...</strong>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <div class="spinner-border text-primary" role="status" aria-hidden="true" style="display:none;" id="spinnerEducacion"></div>
+
+    </div>
 </div>
+<br />
+<div class="errorEducacionPerfil"></div>
 <br />
 @if (ViewBag.referenciaEducacionUsuario.Count > 0)
 {
@@ -78,7 +86,15 @@
                             }
                         </td>
                         <td>@itemedu.InstitucionEducacion</td>
-                        <td>@itemedu.FechaDesdeEducacion / @itemedu.FechaHastaEducacion</td>
+                        @if (itemedu.FechaHastaEducacion == "01-01-1900 0:00:00")
+                        {
+                            <td>@Html.ValueFor(modelItem => itemedu.FechaDesdeEducacion, "{0:dd/MM/yyyy}") - Actual</td>
+                        }
+                        else
+                        {
+                            <td>@Html.ValueFor(modelItem => itemedu.FechaDesdeEducacion, "{0:dd/MM/yyyy}") - @Html.ValueFor(modelItem => itemedu.FechaHastaEducacion, "{0:dd/MM/yyyy}")</td>
+                        }
+
                         <td>
                             <a href="javascript:void(0);" style="font-size:16px;" class="text-danger" onclick="return EliminarEducacion(@itemedu.IdEducacion);" title="Eliminar"><span class="far fa-times-circle"></span></a>
                         </td>

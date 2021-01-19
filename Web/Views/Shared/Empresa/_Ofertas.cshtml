@@ -1,5 +1,8 @@
 ﻿@if (ViewBag.Planes != null)
 {
+    <h3>Nuestros Planes</h3>
+    <p>Elige el que más te convenga.</p>
+    <hr />
     <div class="pricing pricing--sonam">
         @foreach (var item in ViewBag.Planes as ICollection<Model.Models.PlanesEmpresa>
             )
@@ -35,14 +38,14 @@
                         {
                             if (item.NombrePlan == "NORMAL")
                             {
-                        <li class="mb-2">
-                            <i class="fa fa-check mr-1 text-success CheckLi"></i>@item2.CantidadPlan @item2.NombreDetalle
-                        </li>
+                                <li class="mb-2">
+                                    <i class="fa fa-check mr-1 text-success CheckLi"></i>&nbsp;@item2.CantidadPlan @item2.NombreDetalle
+                                </li>
                             }
                             else
                             {
                                 <li class="mb-2">
-                                    <i class="fa fa-check mr-1 text-success CheckLi"></i> + @item2.CantidadPlan @item2.NombreDetalle
+                                    <i class="fa fa-check mr-1 text-success CheckLi"></i>&nbsp;+ @item2.CantidadPlan @item2.NombreDetalle
                                 </li>
                             }
 
@@ -59,10 +62,10 @@
                     }
                     else
                     {
-                        if (item.NombrePlan != "NORMAL")
-                        {
-                            <a href="javascript:void(0);" class="btn btn-primary btn-block p-2 shadow rounded-pill" id="PlanAfuera">Seleccionar Plan</a>
-                        }
+                        @*if (item.NombrePlan != "NORMAL")
+                            {
+                                <a href="javascript:void(0);" class="btn btn-primary btn-block p-2 shadow rounded-pill" id="PlanAfuera">Seleccionar Plan</a>
+                            }*@
 
                     }
 

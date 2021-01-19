@@ -15,13 +15,13 @@
 
         <div class="md-form form-sm">
             <i class="fas fa-user prefix" style="margin-top: 4px;"></i>
-            <input type="text" id="nombreT" name="nombreT" autocomplete="off" class="form-control">
+            <input type="text" id="nombreT" name="nombreT" autocomplete="off" class="form-control soloLetras">
             <label for="nombreT">Nombre Tarjeta</label>
         </div>
 
         <div class="md-form form-sm">
             <i class="fas fa-pencil-alt prefix" style="margin-top: 4px;"></i>
-            <input type="text" id="numeroT" name="numeroT" autocomplete="off" class="form-control">
+            <input type="text" id="numeroT" name="numeroT" autocomplete="off" placeholder="ejemplo: AAAA-AAAA-AAAA-AAAA" class="form-control">
             <label for="numeroT">Número Tarjeta</label>
         </div>
 
@@ -33,20 +33,22 @@
 
         <div class="md-form form-sm">
             <i class="fas fa-question prefix" style="margin-top: 4px;"></i>
-            <input type="text" id="cvvT" name="cvvT" autocomplete="off" maxlength="3" class="form-control">
+            <input type="text" id="cvvT" name="cvvT" autocomplete="off" maxlength="3" class="form-control soloNumeros">
             <label for="cvvT">CVV</label>
         </div>
 
         <div class="md-form form-sm">
-            <i class="fas fa-question prefix" style="margin-top: 4px;"></i>
-            <input type="text" id="montoT" name="montoT" autocomplete="off" maxlength="3" class="form-control">
+            <i class="fas fa-dollar prefix" style="margin-top: 4px;"></i>
+            <input type="text" id="montoT" name="montoT" autocomplete="off" maxlength="9" class="form-control soloNumeros">
             <label for="montoT">Monto Disponible</label>
         </div>
 
         <div class="form-check mb-2 mr-sm-2 text-center">
-            <button class="btn btn-primary guardarTarjetas">
+            <button type="button" class="btn btn-primary guardarTarjetas">
                 <i class="fas fa-save" style="color: #fff;"> Registrar</i>
             </button>
         </div>
+        <br />
+        <div class="errorConfiguracionTarjeta"></div>
     </div>
 }

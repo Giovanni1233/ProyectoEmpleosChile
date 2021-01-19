@@ -12,7 +12,7 @@
                 @foreach (var item in ViewBag.ReferenciaEmpresasConPlan as ICollection<Model.Models.EmpresasPlanVigentes>)
                 {
                     <div class="col-sm-3">
-                        <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(item.ImagenEmpresa))" style="max-width:100%;" />
+                        <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(item.ImagenEmpresa))" style="max-width:100%; width:100%; max-height: 200px;" />
                         <br />
                         <p class="text-center"><b><a class="text-primary" href="@Url.Action("PerfilEmpresaLectura","App", new { idEmpresa = item.idEmpresa })">@item.NombreEmpresa</a></b></p>
                     </div>

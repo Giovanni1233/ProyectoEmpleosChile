@@ -28,6 +28,7 @@ namespace Web.Controllers
 
         public List<PlanesEmpresa> GetPlanSeleccionado(string idEmpresa = "", string idplan = "")
         {
+            EmpresaController emp = new EmpresaController();
             string code = string.Empty;
             string mensaje = string.Empty;
             string[] parametros = new string[2];
@@ -40,7 +41,7 @@ namespace Web.Controllers
             DataSet data = new DataSet();
             try
             {
-                data = svcEmpleos.GetPlanesEmpresa(parametros, valores).Table;
+                data = svcEmpleos.GetPlanSeleccionadoEmpresa(parametros, valores).Table;
                 foreach (DataRow rows in data.Tables[0].Rows)
                 {
                     switch (rows["Code"].ToString())
@@ -51,7 +52,8 @@ namespace Web.Controllers
                                 {
                                     idPlan = rows["IdPlan"].ToString(),
                                     NombrePlan = rows["NombrePlan"].ToString(),
-                                    PrecioPlan = rows["Precio"].ToString()
+                                    PrecioPlan = rows["Precio"].ToString(),
+                                    detallePlan = emp.GetDetallePlanes(rows["IdPlan"].ToString())
                                 });
 
                             mensaje = "";

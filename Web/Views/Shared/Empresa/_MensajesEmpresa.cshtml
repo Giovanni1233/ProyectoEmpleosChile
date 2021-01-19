@@ -11,6 +11,7 @@
     </div>
     <hr />
     <div class="row">
+
         @foreach (var item in ViewBag.referenciaMensajes as IEnumerable<Model.Models.MensajesEmpresa>
             )
         {
@@ -39,7 +40,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="card-footer"><a href="@Url.Action("HistorialMensajes", "Empresa", new { idMensaje = item.idMensaje })" class="btn btn-outline-primary btnResponderMensaje">Responder</a></div>
                 </div>
 
@@ -47,13 +48,7 @@
 
         }
     </div>
-    <br />
-    <div class="row">
-        <div class="col-md-9">
-            <a href="javascript:void(0);">Ver más...</a>
-        </div>
-        <div class="col-md-3"></div>
-    </div>
+
 }
 else
 {

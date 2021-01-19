@@ -1,14 +1,22 @@
 ﻿<div class="d-xl-inline-flex">
-    <div class="col-sm-4 col-md-6 col-lg-6 col-xl-6">
+    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                <h5 class="card-title">Objetivos del sistema</h5>
+                <p class="card-text">Dar a conocer no solo a empresas sino que a personas que posean conocimiento de algún oficio, ese es nuestro ideal.</p>
+                <p class="card-text"><small class="text-muted">Aquí podrás encontrar esto y mucho más...</small></p>
+            </div>
+        </div>
+        <br />
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">¿Por qué somos innovadores?</h5>
+                <p class="card-text">Por que permitimos a todo tipo de persona ya sea profesional o no a optar a un empleo, más aun sabiendo la situación actual existente.</p>
+
             </div>
         </div>
     </div>
-    <div class="col-sm-8 col-md-6 col-lg-6 col-xl-6">
+    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
         <div id="demo" class="carousel slide" data-ride="carousel">
 
             <!-- Indicators -->
@@ -19,16 +27,18 @@
             </ul>
 
             <!-- The slideshow -->
-            <div class="carousel-inner" style="height:350px; max-height:350px;">
+            <div class="carousel-inner" style="height:350px; max-height:350px; width:100%; max-width:100%;">
                 <div class="carousel-item active">
-                    <img src="~/Imagenes/slider1.jpg" alt="Los Angeles">
+                    <img src="~/Imagenes/Inicio2.jpg" style="width:100%; max-width:100%;" />
                 </div>
-                <div class="carousel-item">
-                    <img src="~/Imagenes/slider1.jpg" alt="Chicago">
-                </div>
-                <div class="carousel-item">
-                    <img src="~/Imagenes/slider1.jpg" alt="New York">
-                </div>
+
+                @foreach (var item in ViewBag.ImagenesAfuera as ICollection<Model.Models.ImagenesFuera>)
+                {
+
+                    <div class="carousel-item">
+                        <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(item.Imagen))" style="max-width:100%;" />
+                    </div>
+                }
             </div>
 
             <!-- Left and right controls -->
@@ -43,7 +53,7 @@
     </div>
 
 </div>
-</div>
+
 
 @section scripts{
     <script>

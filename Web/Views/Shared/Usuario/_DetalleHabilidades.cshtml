@@ -23,8 +23,16 @@
 
 </div>
 <div class="row">
-    <a href="javascript:void(0);" class="btn btn-primary" id="btnAgregarHabilidad"><span class="fa fa-plus-circle">&nbsp;&nbsp;</span> Agregar</a>
+    <a href="javascript:void(0);" class="btn btn-primary" style="display: block;" id="btnAgregarHabilidad"><span class="fa fa-plus-circle">&nbsp;&nbsp;</span> Agregar</a>
+    <div class="align-items-center">
+        <strong class="text-primary" id="textoSpinnerHabilidad" style="display:none;">Cargando...</strong>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <div class="spinner-border text-primary" role="status" aria-hidden="true" style="display:none;" id="spinnerHabilidad"></div>
+
+    </div>
 </div>
+<br />
+<div class="errorHabilidadesPerfil"></div>
 <br />
 @if (ViewBag.referenciaHabilidadesUsuario.Count > 0)
 {

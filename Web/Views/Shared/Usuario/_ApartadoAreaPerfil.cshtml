@@ -49,4 +49,24 @@
         </div>
     </div>
 </div>
+<hr />
+<div class="row border-right">
+    <div class="col-md-12">
+        <div class="card">
 
+            <div class="card-body">
+                <h5 class="card-title">Resumen del test</h5>
+                <div class="chart_container">
+                    <canvas id="myChartResponsabilidad"></canvas>
+                    <hr />
+                    <canvas id="myChartAutogestion"></canvas>
+                    <hr />
+                    <canvas id="myChartLiderazgo"></canvas>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-block btn-primary" href="@Url.Action("Test","Usuario", new { idUsuario = ViewBag.ReferenciaIdUser })">Realizar el test</a>
+            </div>
+        </div>
+    </div>
+</div>

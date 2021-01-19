@@ -5,36 +5,7 @@
 </div>
 <div class="modal-body">
     <div id="contentLoginE">
-        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="row">
-                <div class="col-12 col-sm-12 col-md-12 col-lg-12" id="errorSignIn"></div>
-
-                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-                    <div class="md-form form-sm">
-                        <i class="fas fa-user prefix" style="margin-top: 4px;"></i>
-                        <input type="text" id="username" autocomplete="off" class="form-control">
-                        <label for="username">Usuario (Correo o Rut)</label>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: -30px;">
-                    <div class="md-form form-sm">
-                        <i class="fas fa-key prefix" style="margin-top: 4px;"></i>
-                        <input type="password" id="password" autocomplete="off" class="form-control">
-                        <label for="password">Contraseña</label>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="text-align: center;">
-                    <button id="inicioSesionEmpresa" class="btn btn-primary btn-block">Iniciar Sesión</button>
-                </div>
-
-                <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin-top:5px;">
-                    <p class="hint-text">
-                        <a href="#">Olvide mi contraseña?</a>
-                    </p>
-                </div>
-
-            </div>
-        </div>
+        @Html.Partial("Empresa/_DetalleLoginEmpresa")
     </div>
 </div>
 <div class="modal-footer">¿No tienes una cuenta? <a href="@Url.Action("Registro","Empresa")">Registrarse</a></div>

@@ -75,15 +75,19 @@ function ajaxInicioSesionEmpresa(controller, usuario, password) {
         contentType: 'application/json',
         async: true,
         success: function (response) {
+            //debugger;
             if (response.Code == "200") {
                 $("#userEmpresaHidden").val(response.Empresa.Rut);
                 $("#loginError").html('');
 
                 location.href = "/Empresa/Principal";
             }
+            else if (response.Code == "800") // Usuario empresa
+            {
+                location.href = "/UsuarioEmpresa/Index";
+            }
             else {
-                $("#loginError").html(response.Message);
-                $(".signInLoaderContent").hide();
+                ajaxViewPartialFormSignInEmpresa(controller, response.Message);
             }
         },
         error: function (xhr) {
@@ -91,6 +95,41 @@ function ajaxInicioSesionEmpresa(controller, usuario, password) {
         }
     });
 }
+
+
+function ajaxViewPartialFormSignInEmpresa(controller, message) {
+    $.ajax({
+        type: 'POST',
+        url: controller + 'ViewPartialFormSignIn',
+        data: '{ }',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: true,
+        error: function (xhr) {
+            $("#contentLoginE").html(xhr.responseText);
+            ajaxViewPartialErrorSignInEmpresa(controller, message);
+        }
+    });
+}
+
+function ajaxViewPartialErrorSignInEmpresa(controller, message) {
+    $.ajax({
+        type: 'POST',
+        url: controller + 'ViewPartialErrorSignIn',
+        data: '{ message: "' + message + '" }',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: true,
+        error: function (xhr) {
+            $("#errorInicioSesionEmpresa").html(xhr.responseText);
+            $("#username").focus();
+            setInterval(function () { $("#errorInicioSesionEmpresa").html(''); },3000);
+
+        }
+    });
+}
+
+
 
 function ajaxCierraSesionEmpresa(controller) {
     $.ajax({
@@ -291,23 +330,6 @@ function ajaxGuardarPreguntaPostulacion(controller, valor) {
     });
 }
 
-//PartialView
-function ajaxViewPartialErrorSignIn(controller, message) {
-    $.ajax({
-        type: 'POST',
-        url: controller + 'ViewPartialErrorSignIn',
-        data: '{ message: "' + message + '" }',
-        dataType: 'json',
-        contentType: 'application/json',
-        async: true,
-        error: function (xhr) {
-            $("#errorSignIn").html(xhr.responseText);
-        }
-    });
-}
-
-
-
 // Responder mensaje a usuario
 
 function ajaxResponderMensajeAUsuario(controller, idMensaje, idAutor, mensaje) {
@@ -357,6 +379,13 @@ function ajaxActualizarTarjetaEmpresa(controller, nombre, numero, fecha, monto) 
         async: true,
         success: function (response) {
             if (response.data == 1) {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Tarjeta actualizada con éxito',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
                 window.location.reload();
             }
         }
@@ -430,20 +459,33 @@ function ActualizarEstadoSolicitud(idCandidato, estado, idPublicacion) {
 
 // Eliminar imagen
 function EliminarImagen(idImagen) {
-    var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Empresa/";
-    $.ajax({
-        type: 'POST',
-        url: controller + 'DelImagenesEmpresa',
-        data: '{ idImagen: "' + idImagen + '"}',
-        dataType: 'json',
-        contentType: 'application/json',
-        async: true,
-        success: function (response) {
-            if (response.data == 1) {
-                window.location.reload();
-            }
+    Swal.fire({
+        title: 'Desea eliminar la imagen?',
+        text: "No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Empresa/";
+            $.ajax({
+                type: 'POST',
+                url: controller + 'DelImagenesEmpresa',
+                data: '{ idImagen: "' + idImagen + '"}',
+                dataType: 'json',
+                contentType: 'application/json',
+                async: true,
+                success: function (response) {
+                    if (response.data == 1) {
+                        window.location.reload();
+                    }
+                }
+            });
         }
-    });
+    })
+    
 }
 
 
@@ -581,14 +623,11 @@ function ajaxViewPartialLoadingEmpresa(username, password) {
         async: true,
         error: function (xhr) {
             $("#contentLoginE").html(xhr.responseText);
-            var tiempo = setInterval(Tiempo(),3000);
+            ajaxInicioSesionEmpresa(controller, username, password);
             
-            if (tiempo > 0) {
-                ajaxInicioSesionEmpresa(controller, username, password);
-            }
         }
     });
-   
+
 }
 
 // Loading usuario empresa
@@ -631,7 +670,7 @@ function ajaxViewPartialLoadingUsuarioEmpresa(username, password) {
             var tiempo = setInterval(Tiempo(), 3000);
 
             if (tiempo > 0) {
-                
+
                 ajaxInicioSesionUsuarioEmpresa(controller, username, password);
             }
         }

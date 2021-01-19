@@ -1,104 +1,191 @@
 ﻿@if (ViewBag.ReferenciaDatosPerfil.Count > 0 && ViewBag.ReferenciaDatosPerfil != null)
 {
+    <a href="@Url.Action("Trabajadores", "Empresa")" class="btn border">Volver</a>
+    <hr />
     foreach (var item in ViewBag.ReferenciaDatosPerfil as ICollection<Model.Models.UsuarioEmpresa>)
     {
-        <a href="@Url.Action("Trabajadores", "Empresa")" class="btn border">Volver</a>
-        <hr />
-        <div class="emp-profile">
-            <form method="post">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="profile-img">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt="" />
+        <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            @if (item.ImagendelUsuarioE != null && item.ImagendelUsuarioE.Count() > 0)
+                            {
+                                <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(item.ImagendelUsuarioE))" style="max-width:100%; height:250px;" />
 
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="profile-head">
-                            <h5>
-                                @item.NombreUsuarioE
-                            </h5>
+                            }
+                            else
+                            {
+                                <img src="http://placehold.it/200x150" />
+                            }
 
-                            <p class="proile-rating">RANKINGS : <span>8/10</span></p>
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Información Importante</a>
-                                </li>
-                            </ul>
+                            <div class="mt-3">
+                                <h4>@item.NombreUsuarioE</h4>
+                                <p class="text-secondary mb-1">@item.CorreoUsuarioE</p>
+
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-2">
-                        <h4><b>Empleado destacado</b></h4>
                     </div>
                 </div>
+                <hr />
 
-                <div class="row">
-                    <div class="col-md-4">
+            </div>
+            <div class="col-md-8">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Rut Usuario</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                @item.RutUsuarioE
+                            </div>
+                        </div>
                         <hr />
-                        <div class="card profile-work">
-                            <div class="card-header">
-                                <p><h5>Redes Sociales</h5></p>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Nombre Completo</h6>
                             </div>
-                            <div class="card-body">
-                                <ul>
-                                    <li>Facebook</li>
-                                    <li>Twitter</li>
-                                    <li>Instagram</li>
-                                </ul>
+                            <div class="col-sm-9 text-secondary">
+                                @item.NombreUsuarioE @item.ApellidoUsuarioE
                             </div>
-
-
                         </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="tab-content profile-tab" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Rut</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>@item.RutUsuarioE</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Nombre</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>@item.NombreUsuarioE</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Email</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>@item.CorreoUsuarioE</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Telefono</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>@item.TelefonoUsuarioE</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Fecha Nacimiento</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>@item.FechaNacUsuarioE</p>
-                                    </div>
-                                </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Correo</h6>
                             </div>
-
+                            <div class="col-sm-9 text-secondary">
+                                @item.CorreoUsuarioE
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Teléfono</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                @item.TelefonoUsuarioE
+                            </div>
                         </div>
                     </div>
                 </div>
-            </form>
+                <hr />
+            </div>
         </div>
     }
 }
+@*@if (ViewBag.ReferenciaDatosPerfil.Count > 0 && ViewBag.ReferenciaDatosPerfil != null)
+    {
+        foreach (var item in ViewBag.ReferenciaDatosPerfil as ICollection<Model.Models.UsuarioEmpresa>)
+        {
+            <a href="@Url.Action("Trabajadores", "Empresa")" class="btn border">Volver</a>
+            <hr />
+            <div class="emp-profile">
+                <form method="post">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="profile-img">
+                                @if (item.ImagendelUsuarioE != null && item.ImagendelUsuarioE.Count() > 0)
+                                {
+                                    <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(item.ImagendelUsuarioE))" style="max-width:100%; height:250px;" />
+
+                                }
+                                else
+                                {
+                                    <img src="http://placehold.it/200x150" />
+                                }
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="profile-head">
+                                <h5>
+                                    @item.NombreUsuarioE
+                                </h5>
+
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Información Importante</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <hr />
+                            <div class="card profile-work">
+                                <div class="card-header">
+                                    <p><h5>Redes Sociales</h5></p>
+                                </div>
+                                <div class="card-body">
+                                    <ul>
+                                        <li>Facebook</li>
+                                        <li>Twitter</li>
+                                        <li>Instagram</li>
+                                    </ul>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="tab-content profile-tab" id="myTabContent">
+                                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Rut</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>@item.RutUsuarioE</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Nombre</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>@item.NombreUsuarioE</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Email</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>@item.CorreoUsuarioE</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Telefono</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>@item.TelefonoUsuarioE</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Fecha Nacimiento</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>@item.FechaNacUsuarioE</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        }
+    }*@

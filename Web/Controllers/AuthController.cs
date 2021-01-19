@@ -173,6 +173,7 @@ namespace Web.Controllers
                 valores[2] = "N";
 
                 data = svcEmpleos.ValUsuario(parametros, valores).Table;
+
                 foreach (DataRow rows in data.Tables[0].Rows)
                 {
                     switch (rows["Code"].ToString())

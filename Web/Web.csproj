@@ -14,7 +14,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Web</RootNamespace>
     <AssemblyName>Web</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -26,6 +26,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TypeScriptToolsVersion>3.8</TypeScriptToolsVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -55,17 +56,15 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
@@ -107,6 +106,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -143,6 +143,7 @@
     <Content Include="Content\App\EstilosCarrusel.css" />
     <Content Include="Content\App\estilosError.css" />
     <Content Include="Content\App\EstilosInicio.css" />
+    <Content Include="Content\App\EstiloTestPersonalidad.css" />
     <Content Include="Content\App\EstilosPerfilProfesional.css" />
     <Content Include="Content\App\estilosPlanes.css" />
     <Content Include="Content\App\estilosPlanes2.css" />
@@ -168,11 +169,14 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Chart.css" />
+    <Content Include="Content\Chart.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Imagenes\algoogo.png" />
     <Content Include="Imagenes\Documento.jpg" />
+    <Content Include="Imagenes\GIF.gif" />
     <Content Include="Imagenes\giova LETRA arial.png" />
     <Content Include="Imagenes\giovanni LETRA ARIAL.png" />
     <Content Include="Imagenes\ImagenImportante.png" />
@@ -184,6 +188,7 @@
     <Content Include="Imagenes\Obreros2.jpg" />
     <Content Include="Imagenes\Procesos.jpg" />
     <Content Include="Imagenes\SubeTuFoto.jpg" />
+    <Content Include="Imagenes\Test_Personalidad.png" />
     <Content Include="MaterialDesign\css\addons-pro\cards-extended.css" />
     <Content Include="MaterialDesign\css\addons-pro\cards-extended.min.css" />
     <Content Include="MaterialDesign\css\addons-pro\chat.css" />
@@ -521,6 +526,8 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Scripts\Chart.js" />
+    <Content Include="Scripts\Chart.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -677,7 +684,7 @@
     <Content Include="Plugins\dropify-master\src\sass\demo\_variables.scss" />
     <Content Include="Plugins\dropify-master\src\sass\dropify.scss" />
     <Content Include="Plugins\dropify-master\src\sass\_dropify-font.scss" />
-    <Content Include="FilesCV\MTJDViBIw6ljdG9yIFBhcmFkYS5wZGY=.pdf" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery-3.5.1.min.js" />
@@ -921,8 +928,21 @@
     <Content Include="Views\Shared\App\_VotacionPublicacionUsuarios.cshtml" />
     <Content Include="Views\Shared\App\_ModalPreguntasPublicacion.cshtml" />
     <Content Include="Views\Shared\App\_FileUpload.cshtml" />
+    <Content Include="Views\Shared\Empresa\_DetalleLoginEmpresa.cshtml" />
+    <Content Include="Views\Shared\Empresa\_ErrorRegistroEmpresa.cshtml" />
+    <Content Include="Views\Shared\Empresa\_ErrorRegistroEmpresaClaves.cshtml" />
+    <Content Include="Views\Usuario\Mensajes.cshtml" />
+    <Content Include="Views\Usuario\Test.cshtml" />
+    <Content Include="Views\Shared\Usuario\_TestPersonalidad.cshtml" />
+    <Content Include="Views\Shared\UsuarioEmpresa\_PerfilCandidatoEmpresa.cshtml" />
+    <Content Include="Views\UsuarioEmpresa\PerfilCandidato.cshtml" />
+    <Content Include="Views\Empresa\DetalleTestUsuario.cshtml" />
+    <Content Include="Views\Shared\Empresa\_DetalleTestUsuario.cshtml" />
+    <Content Include="Views\Empresa\UsuariosOficios.cshtml" />
+    <Content Include="Views\Shared\Empresa\_UsuariosConOficio.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="FilesCV\" />
     <Folder Include="Imagenes\Empresa\" />
   </ItemGroup>
   <ItemGroup>
@@ -973,12 +993,12 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

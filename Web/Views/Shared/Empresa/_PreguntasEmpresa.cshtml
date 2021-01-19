@@ -1,8 +1,7 @@
 ﻿<div class="row">
     <!-- <button type="button" class="btn btn-outline-info btnModalNuevaPregunta">Nueva Pregunta</button> -->
 </div>
-@if (ViewBag.referenciaPreguntas.Count > 0 && ViewBag.referenciaPreguntas != null)
-{
+
     <div class="row">
         <div class="col-md-3">
         </div>
@@ -14,25 +13,20 @@
                         <div class="md-form form-sm">
 
                             <i class="fas fa-question prefix" style="margin-top: 4px;"></i>
-                            <input type="text" id="nombrePregunta" name="nombrePregunta" autocomplete="off" class="form-control">
+                            <input type="text" id="nombrePregunta" name="nombrePregunta" autocomplete="off" class="form-control soloLetras">
                             <label for="nombrePregunta">Nueva Pregunta</label>
                         </div>
 
                         <input type="hidden" name="url" id="url" value="@Url.Action("ActivarDesactivarPregunta","Empresa")" />
                     </div>
-                    <div class="col-auto my-1">
-                        <select class="mdb-select md-form" name="tipoPregunta" id="tipoPregunta" searchable="Buscar tipo pregunta..">
-                            <option value="" disabled selected>Seleccione un tipo</option>
-                            <option value="1">No descripción</option>
-                            <option value="2">Descripción</option>
-
-                        </select>
-                    </div>
+                    
                     <div class="col-auto my-1">
                         <button type="button" class="btn btn-outline-success btnAgregarPregunta">Agregar</button>
 
                     </div>
                 </div>
+                <br />
+                <div class="errorPreguntaEmpresa"></div>
             </form>
         </div>
         <div class="col-md-3">
@@ -40,7 +34,7 @@
 
     </div>
     <hr />
-    if (ViewBag.PreguntasSeleccionadasEmpresa.Count > 0 && ViewBag.PreguntasSeleccionadasEmpresa != null)
+    @if (ViewBag.PreguntasSeleccionadasEmpresa.Count > 0 && ViewBag.PreguntasSeleccionadasEmpresa != null)
     {
         <h3>Preguntas seleccionadas</h3>
         <div class="row">
@@ -92,22 +86,3 @@
             </div>
         </div>
     }
-
-}
-else
-{
-    <div class="row">
-        <div class="col-md-3">
-        </div>
-        <div class="col-md-6">
-            <div class="error-template">
-                <div class="error-details">
-                    <h4>  No se encontraron preguntas para añadir a la publicación.</h4>
-                </div>
-
-            </div>
-        </div>
-        <div class="col-md-3">
-        </div>
-    </div>
-}

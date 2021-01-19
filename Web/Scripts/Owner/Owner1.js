@@ -1,6 +1,6 @@
 ﻿var seleccionado;
 $(document).ready(function () {
-    
+
     $(document).on('keydown', ".soloLetras", function (e) {
         let tecla = (document.all) ? e.keyCode : e.which;
         if (tecla == 8) return true;
@@ -67,7 +67,8 @@ $(document).ready(function () {
                 document.getElementById('errorRegistro').innerHTML = `<ul style="background-color: #FFDADA; width: 100%; padding: 15px; border-radius: 25px; list-style-type:none"><li>Ha ocurrido un error inesperado, favor intetarlo nuevamente!!</li></ul>`;
             }
             else {
-                document.getElementById('errorRegistro').innerHTML = `<ul style="background-color: #FFDADA; width: 100%; padding: 15px; border-radius: 25px; list-style-type:none">${error}</ul>`;
+                $("#errorRegistro").html('<div class="alert alert-danger  text-center"><strong> Error!</strong> Todos los campos son obligatorios.</div>');
+                setInterval(function () { $("#errorRegistro").html(''); }, 3000);
             }
         }
     });
@@ -87,6 +88,7 @@ $(document).ready(function () {
     });
 
     $(document).on('click', ".modalSignIn", function () {
+        //debugger;
         $("#username").val('');
         $("#signInUser").val('');
         $("#loginError").html('');
@@ -251,13 +253,17 @@ $(document).ready(function () {
             // Levanta modal
             $("#modalSignIn").modal("show");
         }
-       
+
     });
 
     $(document).on('click', '.btnGuardarMensaje', function () {
         var idEmpresa = $("#idEmpresa").val();
         var mensaje = $("#mensajeEmpresa").val();
-
+        if (mensaje.trim() == "") {
+            $(".divErrorMensajeEmpresa").html('<div class="alert alert-danger text-center"><strong> Error!</strong> Debe ingresar un mensaje.</div>');
+            setInterval(function () { $(".divErrorMensajeEmpresa").html(''); }, 3000);
+            return false;
+        }
         var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Usuario/";
         ajaxEnviarMensajeAEmpresa(controller, idEmpresa, mensaje);
     });
@@ -268,6 +274,11 @@ $(document).ready(function () {
         var idMensaje = $("#idMensajeUS").val();
         var idAutor = $("#idReceptorUS").val();
         var mensaje = $("#MensajeHMUS").val();
+        if (mensaje.trim() == "") {
+            $(".ErrorMensajeReceptor").html('<div class="alert alert-danger text-center"><strong> Error!</strong> Debe ingresar un comentario.</div>');
+            setInterval(function () { $(".ErrorMensajeReceptor").html(''); }, 3000);
+            return false;
+        }
         var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Usuario/";
         ajaxResponderMensajeAReceptor(controller, idMensaje, idAutor, mensaje);
     });
@@ -275,6 +286,11 @@ $(document).ready(function () {
 
     // guardar experiencias perfil usuario
     $(document).on('click', "#btnAgregarExperiencia", function () {
+
+        $("#btnAgregarExperiencia").css('display', 'none');
+        $("#spinnerExperiencia").css('display', 'block');
+        $("#textoSpinnerExperiencia").css('display', 'block');
+
         var empresaNombre = $("#empresaNombre").val();
         var destacoEmpresa = $("#destacoEmpresa").val();
         var mejorarEmpresa = $("#mejorarEmpresa").val();
@@ -283,24 +299,46 @@ $(document).ready(function () {
         var actualmente = $("#actualmente").val();
         var recomendacion = $("#recomendacion").val();
         var descripcion = $("#descripcionExperiencia").val();
-        
+        if (empresaNombre.trim() == "" || destacoEmpresa.trim() == "" || mejorarEmpresa.trim() == "" || fechaD == "" || fechaH == "" || recomendacion.trim() == "") {
+            $(".errorExperienciaPerfil").html('<div class="alert alert-danger text-center"><strong> Error!</strong> Debe ingresar todos los datos.</div>');
+            setInterval(function () { $(".errorExperienciaPerfil").html(''); }, 3000);
+            $("#btnAgregarExperiencia").css('display', 'block');
+            $("#spinnerExperiencia").css('display', 'none');
+            $("#textoSpinnerExperiencia").css('display', 'none');
+            return false;
+        }
         var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Usuario/";
+
+        setInterval(function () { ajaxRegistroExperienciaPerfilUsuario(controller, empresaNombre, destacoEmpresa, mejorarEmpresa, fechaD, fechaH, actualmente, descripcion, recomendacion); }, 3000);
         
-        ajaxRegistroExperienciaPerfilUsuario(controller, empresaNombre, destacoEmpresa, mejorarEmpresa, fechaD, fechaH, actualmente, descripcion, recomendacion);
     });
 
     // guardar educacion perfil usuario
     $(document).on('click', "#btnAgregarEducacion", function () {
+
+        $("#btnAgregarEducacion").css('display', 'none');
+        $("#spinnerEducacion").css('display', 'block');
+        $("#textoSpinnerEducacion").css('display', 'block');
+
+
         var centroNombre = $("#centroNombre").val();
         var estadoEdu = $("#estadoEdu").val();
         var tituloNombreEdu = $("#tituloNombreEdu").val();
         var fechaD = $("#fechaDesdeEdu").val();
         var fechaH = $("#fechaHastaEdu").val();
         var descripcion = $("#descripcionEducacion").val();
+        if (centroNombre == "" || centroNombre == null || estadoEdu == "" || estadoEdu == null || tituloNombreEdu.trim() == "" || fechaD == "" || fechaH == "" || descripcion.trim() == "") {
+            $(".errorEducacionPerfil").html('<div class="alert alert-danger text-center"><strong> Error!</strong> Debe ingresar todos los datos.</div>');
+            setInterval(function () { $(".errorEducacionPerfil").html(''); }, 3000);
+            $("#btnAgregarEducacion").css('display', 'block');
+            $("#spinnerEducacion").css('display', 'none');
+            $("#textoSpinnerEducacion").css('display', 'none');
 
+            return false;
+        }
         var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Usuario/";
 
-        ajaxRegistroEducacionPerfilUsuario(controller, centroNombre, estadoEdu, tituloNombreEdu, fechaD, fechaH, descripcion);
+        setInterval(function () { ajaxRegistroEducacionPerfilUsuario(controller, centroNombre, estadoEdu, tituloNombreEdu, fechaD, fechaH, descripcion); }, 3000);
     });
 
     $(document).on('change', '#estadoEdu', function () {
@@ -316,23 +354,47 @@ $(document).ready(function () {
 
     // guardar idioma perfil usuario
     $(document).on('click', "#btnAgregarIdioma", function () {
+
+        $("#btnAgregarIdioma").css('display', 'none');
+        $("#spinnerIdioma").css('display', 'block');
+        $("#textoSpinnerIdioma").css('display', 'block');
+
         var idiomaId = $("#idiomaId").val();
         var nivelIdioma = $("#nivelIdioma").val();
-
+        if (idiomaId == "" || idiomaId == null || nivelIdioma == "" || nivelIdioma == null) {
+            $(".errorIdiomaPerfil").html('<div class="alert alert-danger text-center"><strong> Error!</strong> Debe seleccionar un nivel y una habilidad.</div>');
+            setInterval(function () { $(".errorIdiomaPerfil").html(''); }, 3000);
+            $("#btnAgregarIdioma").css('display', 'block');
+            $("#spinnerIdioma").css('display', 'none');
+            $("#textoSpinnerIdioma").css('display', 'none');
+            return false;
+        }
         var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Usuario/";
 
-        ajaxRegistroIdiomaPerfilUsuario(controller, idiomaId, nivelIdioma);
+        setInterval(function () { ajaxRegistroIdiomaPerfilUsuario(controller, idiomaId, nivelIdioma); }, 3000);
     });
 
     // guardar habilidad perfil usuario
     $(document).on('click', "#btnAgregarHabilidad", function () {
+
+        $("#btnAgregarHabilidad").css('display', 'none');
+        $("#spinnerHabilidad").css('display', 'block');
+        $("#textoSpinnerHabilidad").css('display', 'block');
+
         var habilidadID = $("#habilidadID").val();
         var nivelHabilidad = $("#nivelHabilidad").val();
-
+        if (habilidadID == null || habilidadID == "" || nivelHabilidad == "" || nivelIdioma == null) {
+            $(".errorHabilidadesPerfil").html('<div class="alert alert-danger text-center"><strong> Error!</strong> Debe seleccionar un nivel y un idioma.</div>');
+            setInterval(function () { $(".errorHabilidadesPerfil").html(''); }, 3000);
+            $("#btnAgregarHabilidad").css('display', 'block');
+            $("#spinnerHabilidad").css('display', 'none');
+            $("#textoSpinnerHabilidad").css('display', 'none');
+            return false;
+        }
         var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Usuario/";
 
-        ajaxRegistroHabilidadPerfilUsuario(controller, habilidadID, nivelHabilidad);
-       
+        setInterval(function () { ajaxRegistroHabilidadPerfilUsuario(controller, habilidadID, nivelHabilidad); },3000)
+
     });
 
     // guardar perfil usuario
@@ -345,33 +407,75 @@ $(document).ready(function () {
         var correo = $("#correoPerfil").val();
         var descripcion = $("#descripcionPersonal").val();
 
+        if (nombre1.trim() == "" || nombre2.trim() == "" || apellido1.trim() == "" || apellido2.trim() == "" || telefono.trim() == "" || correo.trim() == "" || descripcion.trim() == "") {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Debe ingresar todos los campos de los datos personales',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            return false;
+        }
+
         var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Usuario/";
-        
+
         ajaxRegistroPerfilUsuario(controller, nombre1, nombre2, apellido1, apellido2, telefono, correo, descripcion);
 
     });
 
     // perfil profesional usuario
     $(document).on('click', "#btnAgregarPerfilProfesional", function () {
+
+        $("#btnAgregarPerfilProfesional").css('display', 'none');
+        $("#spinnerPerfilProfesional").css('display', 'block');
+        $("#textoSpinnerPerfilProfesional").css('display', 'block');
+
         var tituloperfil = $("#tituloPerfilProfesional").val();
         var descripcionperfil = $("#descripcionPerfilProfesional").val();
 
+        if (tituloperfil.trim() == "" || descripcionperfil.trim() == "") {
+            $(".errorPerfilProfesional").html('<div class="alert alert-danger text-center"><strong> Error!</strong> Debe ingresar todos los datos.</div>');
+            setInterval(function () { $(".errorPerfilProfesional").html(''); }, 3000);
+            $("#btnAgregarPerfilProfesional").css('display', 'block');
+            $("#spinnerPerfilProfesional").css('display', 'none');
+            $("#textoSpinnerPerfilProfesional").css('display', 'none');
+            return false;
+        }
         var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Usuario/";
 
-        ajaxRegistroPerfilProfesionalUsuario(controller, tituloperfil, descripcionperfil);
+        setInterval(function () { ajaxRegistroPerfilProfesionalUsuario(controller, tituloperfil, descripcionperfil); }, 3000);
+
 
     });
 
+    // validacion imagen usuario perfil
+    $(document).on('click', "#GuardarImagendePerfilUsuario", function () {
+        $("#filePerfilUsuarioEmpresa").trigger("click");
+    });
+
+    //$(document).on('click', '#GuardarImagendePerfilUsuario', function () {
+    //    var imagen = $(".imagenPerfilUsuarioEmpresa").val();
+    //    if (imagen == "" || imagen == null || imagen == undefined) {
+    //        $(".errorImagenPerfilUsuario").html('<div class="alert alert-danger text-center" style="margin-top:20px;"><strong> Error!</strong> Debe seleccionar una imagen.</div>');
+    //        setInterval(function () { $(".errorImagenPerfilUsuario").html(''); }, 3000);
+    //        return false;
+    //    }
+    //    else {
+    //        $('#GuardarImagendePerfilUsuario').get(0).type = 'submit';
+    //        $("#GuardarImagendePerfilUsuario").trigger('click');
+    //    }
+    //});
 
     // funcionamiento tabs
-    
+
     $(document).on('click', "#pills-area-tab", function () {
         if (window.location.pathname != window.location.href + "#pills-area-tab") {
             var url = window.location.pathname + "#pills-area-tab";
             window.location.href = url;
-           
+
         }
-        
+
     });
 
     if (window.location.hash == "#pills-area-tab") { $("#pills-area-tab").trigger('click'); }
@@ -381,10 +485,10 @@ $(document).ready(function () {
             var url = window.location.pathname + "#pills-postulaciones-tab";
             window.location.href = url;
         }
-        
+
     });
     if (window.location.hash == "#pills-postulaciones-tab") { $("#pills-postulaciones-tab").trigger('click'); }
-    
+
     $(document).on('click', "#pills-curriculum-tab", function () {
         if (window.location.pathname != window.location.href + "#pills-curriculum-tab") {
             var url = window.location.pathname + "#pills-curriculum-tab";
@@ -392,31 +496,292 @@ $(document).ready(function () {
         }
     });
     if (window.location.hash == "#pills-curriculum-tab") { $("#pills-curriculum-tab").trigger('click'); }
-    
-    //$(document).on('click', "#pills-mensajes-tab", function () {
-    //    if (window.location.pathname != window.location.href + "#pills-mensajes-tab") {
-    //        var url = window.location.pathname + "#pills-mensajes-tab";
-    //        window.location.href = url;
-    //    }
-    //});
-    //if (window.location.hash == "#pills-mensajes-tab") { $("#pills-mensajes-tab").trigger('click'); }
 
 
-    //BtnGuardarRespuestasPreguntas y enviar postulacion
-    $(document).on('click', '#btnEnviarPreguntas', function () {
-        debugger;
-        var datosDiv1 = $("#preguntasSinDescripcion").html();
-        var datosDiv2 = $("#preguntasConDescripcion").html();
-        $("#preguntasSinDescripcion :input").each(function (e) {
-            id = this.id;
-            // show id 
-            alert("#" + id);
+    $(document).on('click', '#ComentarioGu', function () {
+        var comentario = $("#ComentarioPubliC").val();
+        if (comentario.trim() == "") {
+            $(".errorRegistroComentariosEnPub").html('<div class="alert alert-danger text-center"><strong> Error!</strong> Debe ingresar un comentario.</div>');
+            setInterval(function () { $(".errorRegistroComentariosEnPub").html(''); }, 3000);
+            //Swal.fire({
+            //    position: 'center',
+            //    icon: 'error',
+            //    title: 'Debe ingresar un comentario',
+            //    showConfirmButton: false,
+            //    timer: 1500
+            //})
+            return false;
+        }
+        else {
+            $('#ComentarioGu').get(0).type = 'submit';
+            $("#ComentarioGu").trigger('click');
+        }
+    });
+
+    $(document).on('click', '.btnEnviarPreguntasDesa', function () {
+
+        var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Usuario/";
+        var disponibilidad = $("#Disponibilidad").val();
+        var sueldo = $("#Sueldo").val();
+        var descripcion = $("#descripcionEmpleo").val();
+        var envioCV = $("#cv_adjuntar").val();
+        var idPublicacion = $("#idPublicacionPreguntas").val();
+
+        if (disponibilidad.trim() == "" || disponibilidad == null || disponibilidad == undefined
+            || sueldo.trim() == "" || sueldo == null || sueldo == undefined
+            || descripcion.trim() == "" || descripcion == null || descripcion == undefined) {
+            $(".errorEnviarPreguntas").html('<div class="alert alert-danger text-center"><strong> Error!</strong> Debe rellenar todos los campos.</div>');
+            setInterval(function () { $(".errorEnviarPreguntas").html(''); }, 3000);
+            return false;
+        }
+        else {
+            $.ajax({
+                type: 'POST',
+                url: controller + 'GuardarPostulacionEmpleo',
+                data: '{ idPublicacion: "' + idPublicacion + '", disponibilidad: "' + disponibilidad + '", sueldo: "' + sueldo + '", descripcion: "' + descripcion + '", envioCV: "' + envioCV + '" }',
+                dataType: 'json',
+                contentType: 'application/json',
+                async: true,
+                success: function (response) {
+                    if (response.data == 1) {
+                        window.location.reload();
+                    }
+                }
+            });
+        }
+
+
+
+    });
+
+    // Charts
+    CargaCharts();
+
+    // Funcionamiento de test de personalidad formulario
+
+    var current_fs, next_fs, previous_fs; //fieldsets
+    var opacity;
+
+    $(".nextResponsabilidad").click(function () {
+        var resultado = validoResponsabilidad();
+        if (resultado == 1) {
+            return false;
+        }
+
+        current_fs = $(this).parent();
+        next_fs = $(this).parent().next();
+
+        //Add Class Active
+        $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+        //show the next fieldset
+        next_fs.show();
+        //hide the current fieldset with style
+        current_fs.animate({ opacity: 0 }, {
+            step: function (now) {
+                // for making fielset appear animation
+                opacity = 1 - now;
+
+                current_fs.css({
+                    'display': 'none',
+                    'position': 'relative'
+                });
+                next_fs.css({ 'opacity': opacity });
+            },
+            duration: 600
+        });
+    });
+
+    $(".nextAutogestion").click(function () {
+        var resultado = validoAutogestion();
+        if (resultado == 1) {
+            return false;
+        }
+
+        current_fs = $(this).parent();
+        next_fs = $(this).parent().next();
+
+        //Add Class Active
+        $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+        //show the next fieldset
+        next_fs.show();
+        //hide the current fieldset with style
+        current_fs.animate({ opacity: 0 }, {
+            step: function (now) {
+                // for making fielset appear animation
+                opacity = 1 - now;
+
+                current_fs.css({
+                    'display': 'none',
+                    'position': 'relative'
+                });
+                next_fs.css({ 'opacity': opacity });
+            },
+            duration: 600
+        });
+    });
+
+    $(".previous").click(function () {
+
+        current_fs = $(this).parent();
+        previous_fs = $(this).parent().prev();
+
+        //Remove class active
+        $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+        //show the previous fieldset
+        previous_fs.show();
+
+        //hide the current fieldset with style
+        current_fs.animate({ opacity: 0 }, {
+            step: function (now) {
+                // for making fielset appear animation
+                opacity = 1 - now;
+
+                current_fs.css({
+                    'display': 'none',
+                    'position': 'relative'
+                });
+                previous_fs.css({ 'opacity': opacity });
+            },
+            duration: 600
+        });
+    });
+
+    // Usuario test de personalidad
+    $(document).on('click', '#btnGuardarRespuestasTest', function () {
+        //debugger;
+        var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Usuario/";
+        var array = [];
+
+        resultado = validoLiderazgo();
+        if (resultado == 1) {
+            return false;
+        }
+
+        var responsabilidad1 = $('input:radio[name = radioresponsabilidad1]:checked').val();
+        var responsabilidad2 = $('input:radio[name = radioresponsabilidad2]:checked').val();
+        var responsabilidad3 = $('input:radio[name = radioresponsabilidad3]:checked').val();
+        var responsabilidad4 = $('input:radio[name = radioresponsabilidad4]:checked').val();
+        var responsabilidad5 = $('input:radio[name = radioresponsabilidad5]:checked').val();
+        var autogestion1 = $('input:radio[name = radiogestion1]:checked').val();
+        var autogestion2 = $('input:radio[name = radiogestion2]:checked').val();
+        var autogestion3 = $('input:radio[name = radiogestion3]:checked').val();
+        var autogestion4 = $('input:radio[name = radiogestion4]:checked').val();
+        var autogestion5 = $('input:radio[name = radiogestion5]:checked').val();
+        var liderazgo1 = $('input:radio[name = radioliderazgo1]:checked').val();
+        var liderazgo2 = $('input:radio[name = radioliderazgo2]:checked').val();
+        var liderazgo3 = $('input:radio[name = radioliderazgo3]:checked').val();
+        var liderazgo4 = $('input:radio[name = radioliderazgo4]:checked').val();
+        var liderazgo5 = $('input:radio[name = radioliderazgo5]:checked').val();
+
+        array.push(responsabilidad1);
+        array.push(responsabilidad2);
+        array.push(responsabilidad3);
+        array.push(responsabilidad4);
+        array.push(responsabilidad5);
+
+        array.push(autogestion1);
+        array.push(autogestion2);
+        array.push(autogestion3);
+        array.push(autogestion4);
+        array.push(autogestion5);
+
+        array.push(liderazgo1);
+        array.push(liderazgo2);
+        array.push(liderazgo3);
+        array.push(liderazgo4);
+        array.push(liderazgo5);
+
+        // envio a guardar los datos del test
+        $.ajax({
+            type: 'POST',
+            url: controller + 'GuardarRespuestasTest',
+            data: '{respuestas: "' + array + '"}',
+            dataType: 'json',
+            contentType: 'application/json',
+            async: true,
+            success: function (response) {
+                if (response.data == 1) {
+                    window.location.href = "Perfil";
+                }
+            }
         });
 
     });
 
-    
 });
+
+// Funcion validar radiobutton test
+function validoResponsabilidad() {
+    var responsabilidad1 = $('input:radio[name = radioresponsabilidad1]:checked').val();
+    var responsabilidad2 = $('input:radio[name = radioresponsabilidad2]:checked').val();
+    var responsabilidad3 = $('input:radio[name = radioresponsabilidad3]:checked').val();
+    var responsabilidad4 = $('input:radio[name = radioresponsabilidad4]:checked').val();
+    var responsabilidad5 = $('input:radio[name = radioresponsabilidad5]:checked').val();
+
+    // validacion responsabilidad
+    if (responsabilidad1 == "" || responsabilidad2 == "" || responsabilidad3 == "" || responsabilidad4 == "" || responsabilidad5 == "" ||
+        responsabilidad1 == undefined || responsabilidad2 == undefined || responsabilidad3 == undefined || responsabilidad4 == undefined || responsabilidad5 == undefined) {
+        $(".ErrorResponsabilidad").html('<div class="alert alert-danger text-center" style="margin-top:20px;"><strong> Error!</strong> Todos las opciones deben ser seleccionadas.</div>');
+        setInterval(function () { $(".ErrorResponsabilidad").html(''); }, 3000);
+        return 1;
+    }
+    
+    return 0;
+
+}
+
+function validoAutogestion() {
+    var autogestion1 = $('input:radio[name = radiogestion1]:checked').val();
+    var autogestion2 = $('input:radio[name = radiogestion2]:checked').val();
+    var autogestion3 = $('input:radio[name = radiogestion3]:checked').val();
+    var autogestion4 = $('input:radio[name = radiogestion4]:checked').val();
+    var autogestion5 = $('input:radio[name = radiogestion5]:checked').val();
+    // validacion autogestion
+    if (autogestion1 == "" || autogestion2 == "" || autogestion3 == "" || autogestion4 == "" || autogestion5 == "" ||
+        autogestion1 == undefined || autogestion2 == undefined || autogestion3 == undefined || autogestion4 == undefined || autogestion5 == undefined) {
+        $(".ErrorAutogestion").html('<div class="alert alert-danger text-center" style="margin-top:20px;"><strong> Error!</strong> Todos las opciones deben ser seleccionadas.</div>');
+        setInterval(function () { $(".ErrorAutogestion").html(''); }, 3000);
+        return 1;
+    }
+    return 0;
+}
+
+function validoLiderazgo() {
+
+    var liderazgo1 = $('input:radio[name = radioliderazgo1]:checked').val();
+    var liderazgo2 = $('input:radio[name = radioliderazgo2]:checked').val();
+    var liderazgo3 = $('input:radio[name = radioliderazgo3]:checked').val();
+    var liderazgo4 = $('input:radio[name = radioliderazgo4]:checked').val();
+    var liderazgo5 = $('input:radio[name = radioliderazgo5]:checked').val();
+    // validacion liderazgo
+    if (liderazgo1 == "" || liderazgo2 == "" || liderazgo3 == "" || liderazgo4 == "" || liderazgo5 == "" ||
+        liderazgo1 == undefined || liderazgo2 == undefined || liderazgo3 == undefined || liderazgo4 == undefined || liderazgo5 == undefined) {
+        $(".ErrorLiderazgo").html('<div class="alert alert-danger text-center" style="margin-top:20px;"><strong> Error!</strong> Todos las opciones deben ser seleccionadas.</div>');
+        setInterval(function () { $(".ErrorLiderazgo").html(''); }, 3000);
+        return 1;
+    }
+    return 0;
+}
+
+// Guardar imagen de perfil usuario empresa
+function uploadImgPerfilUsuarioEmpresa(file) {
+    let filename = file.files[0].name;
+    let extension = filename.slice(filename.lastIndexOf("."), filename.length);
+
+    if (extension !== ".png" && extension !== ".jpg" && extension !== ".jpeg") {
+        document.getElementById(file.id).value = "";
+    }
+    else {
+        $("#GuardarImagendePerfilUsuario").css('display', 'none');
+        $("#spinnerUsuarioEmpresa").css('display', 'block');
+        $("#textoSpinnerUsuarioEmpresa").css('display', 'block');
+        //$('#uploadFileUsuarioEmpresa').get(0).type = 'submit';
+        setInterval(function () { $("#uploadFileUsuarioEmpresa").trigger('click'); }, 3000);
+    }
+}
 
 
 //FUNCTIONS
@@ -431,7 +796,7 @@ function formatRut(rut) {
         let sinPuntos = actual.replace(/\./g, "");
         let actualLimpio = sinPuntos.replace(/-/g, "");
         let inicio = actualLimpio.substring(0, actualLimpio.length - 1);
-        
+
         let i = 0;
         let j = 1;
         for (i = inicio.length - 1; i >= 0; i--) {
@@ -579,12 +944,16 @@ function getControllerAuth() {
 
 function getControllerApp() {
     let prefixDomain = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2];
-    let prefix = "/App/";
+    let prefix = "/Usuario/";
 
     return prefixDomain + prefix;
 }
 
-
+// CHARTS USUARIO TEST
+function CargaCharts() {
+    var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Usuario/";
+    ajaxCargaCharts(controller);
+}
 
 
 //CURRICULUM
@@ -609,5 +978,9 @@ function deleteCV(e) {
 
     ajaxDeleteCV(domain, user);
 }
+
+
+
+
 
 
