@@ -1,16 +1,20 @@
 ﻿@if (ViewBag.referenciaUsuariosOficios.Count > 0 && ViewBag.referenciaUsuariosOficios != null)
 {
+    <h4>Últimos usuarios registrados</h4>
+    <hr />
     <div class="row">
         @foreach (var item in ViewBag.referenciaUsuariosOficios as ICollection<Model.Models.CandidatoUsuarioOficios>)
         {
 
             <div class="col-md-6 col-lg-3 col-xl-3 col-sm-12">
                 <div class="card">
-                    
+
                     <div class="card-body">
-                        <h5 class="card-title">@item.RutUsuario</h5>
-                        <p class="card-text">@item.NombreUsuario - @item.ApellidosUsuario</p>
+                        <h5 class="card-title">Rut: @item.RutUsuario</h5>
+                        <p class="card-text">Nombre: @item.NombreUsuario - @item.ApellidosUsuario</p>
                         <p class="card-text">
+                            Oficios:
+                            <br />
                             <ul style="list-style:none;">
                                 @foreach (var item2 in item.TagOficios as ICollection<Model.Models.DetalleTagOficio>)
                                 {
@@ -19,8 +23,11 @@
 
                             </ul>
                         </p>
-                        <a href="@Url.Action("PerfilCandidato","Empresa", new { idUsuario = item.IdUsuario })" class="btn btn-outline-primary">Ver perfil</a>
-                        
+                        @if (ViewBag.ReferenciaIdUser != item.IdUsuario)
+                        {
+                            <a href="@Url.Action("PerfilOtroUsuario","Usuario", new { idUsuario = item.IdUsuario })" class="btn btn-block btn-outline-primary">Ver perfil</a>
+                        }
+
                     </div>
                 </div>
             </div>
@@ -35,10 +42,12 @@ else
 {
     <div class="row">
         <div class="col-md-12">
-            <h2 style="color:#808080"> No existen usuarios con oficios registrados.</h2>
+            <h2 style="color:#808080"> No existen usuarios con oficios.</h2>
 
         </div>
     </div>
 
 }
+
+
 

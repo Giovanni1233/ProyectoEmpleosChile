@@ -1,0 +1,84 @@
+﻿
+@if (ViewBag.ReferenciaMensajesPorOficio != null && ViewBag.ReferenciaMensajesPorOficio.Count > 0)
+{
+
+    <div class="row">
+        @foreach (var item in ViewBag.ReferenciaMensajesPorOficio as IEnumerable<Model.Models.MensajesPorOficio>
+            )
+        {
+            <div class="col-md-4 col-xl-4 col-lg-4 col-xs-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+
+                                <div class="font-weight-bold text-uppercase mb-1">
+                                    <p>Fecha: @item.FechaMensaje</p>
+                                </div>
+
+                            </div>
+                            <div class="col-auto">
+
+                                @if (ViewBag.ReferenciaIdUser != item.idUsuarioAutor)
+                                {
+                                    <p class="font-weight-bold">
+                                        Emisor:<a href="@Url.Action("PerfilOtroUsuario","Usuario", new { idUsuario = item.idUsuarioAutor })">@item.AutorMensaje</a> / Receptor: item.ReceptorMensaje
+                                    </p>
+                                }
+                                else if (ViewBag.ReferenciaIdUser != item.idUsuarioReceptor)
+                                {
+                                    <p class="font-weight-bold">
+                                        Emisor: @item.AutorMensaje / Receptor: <a href="@Url.Action("PerfilOtroUsuario","Usuario", new { idUsuario = item.idUsuarioReceptor })">@item.ReceptorMensaje</a>
+                                    </p>
+                                }
+                                else
+                                {
+                                    <p class="font-weight-bold">
+                                        Emisor: @item.AutorMensaje / Receptor: @item.ReceptorMensaje
+                                    </p>
+                                }
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col mr-2">Mensaje: </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-auto">
+                                @item.Mensaje
+                            </div>
+                        </div>
+                        <br />
+                    </div>
+                </div>
+
+            </div>
+
+        }
+    </div>
+
+}
+else
+{
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+            <div class="error-template">
+
+                <div class="error-details">
+                    <h4>   No se encontraron mensajes.</h4>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+
+}
+
+
+

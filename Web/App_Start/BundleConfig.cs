@@ -77,7 +77,8 @@ namespace Web
                 "~/Content/App/teamwork-auth.css",
                 "~/Content/App/teamwork-files.css",
                 "~/Content/App/text-decoration.css",
-                "~/Content/App/width.css"
+                "~/Content/App/width.css",
+                "~/Content/App/EstiloTestPersonalidad.css"
                 ));
 
             bundles.Add(new StyleBundle("~/bundles/MaterialDesign").Include(

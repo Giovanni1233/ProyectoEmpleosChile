@@ -1,26 +1,35 @@
 ﻿<div class="row">
     <div class="col-md-12">
-        <h3>Encuantra el servicio que necesites</h3>
+        @if (ViewBag.referenciaFiltroSeleccionado != null)
+        {
+            <h3>Filtro seleccionado: @ViewBag.referenciaFiltroSeleccionado</h3>
+        }
+        else
+        {
+            <h3>Busca el oficio que más se adecue a tus necesidades.</h3>
+        }
+
         <table class="table">
 
             <tr>
-                <td style="vertical-align:middle;">
-                    <div class="md-form form-sm" style="margin: auto;">
-                        <input type="text" id="nombrePublicacion" name="nombrePublicacion1" class="form-control soloLetras" style="font-family: 'Roboto', sans-serif;" maxlength="100" tabindex="2" autocomplete="off" />
-                        <label for="oferta">Ingrese busqueda</label>
-                    </div>
+                @*<td style="vertical-align:middle;">
+                        <div class="md-form form-sm" style="margin: auto;">
+                            <input type="text" id="nombreOficioB1" name="nombreOficioB1" class="form-control soloLetras" style="font-family: 'Roboto', sans-serif;" maxlength="100" tabindex="2" autocomplete="off" />
+                            <label for="oferta">Ingrese busqueda</label>
+                        </div>
 
-                </td>
+                    </td>*@
+
                 <td style="vertical-align:middle;">
                     <div class="form-group">
 
-                        <select class="mdb-select md-form" name="comuna" id="comuna" searchable="Buscar Comuna..">
-                            <option disabled selected value="0">Seleccione comuna</option>
-                            @if (ViewBag.ReferenciaComuna != null)
+                        <select class="mdb-select md-form" name="oficioB1" id="oficioB1" searchable="Buscar Oficio..">
+                            <option disabled selected value="0">Seleccione oficio</option>
+                            @if (ViewBag.ReferenciaOficios != null)
                             {
-                                foreach (Model.Models.Comuna item in (List<Model.Models.Comuna>)ViewBag.ReferenciaComuna)
+                                foreach (Model.Models.Oficios item in (List<Model.Models.Oficios>)ViewBag.ReferenciaOficios)
                                 {
-                                    <option value="@item.Id">@item.Nombre</option>
+                                    <option value="@item.IdOficio">@item.NombreOficio</option>
                                 }
                             }
                         </select>
@@ -29,11 +38,11 @@
 
                 </td>
                 <td style="vertical-align:middle;">
-                    <a href="javascript:void(0);" id="buscarFiltrosApp" class="btn btn-success btn-block p-2 shadow rounded-pill"><i class="fa fa-eye"></i> BUSCAR</a>
+                    <a href="javascript:void(0);" id="buscarFiltrosOficio" class="btn btn-success btn-block p-2 shadow rounded-pill"><i class="fa fa-eye"></i> BUSCAR</a>
                 </td>
             </tr>
         </table>
-        @using (Ajax.BeginForm("Empleos", "App", new AjaxOptions()
+        @using (Ajax.BeginForm("OficiosUsuarioFiltro", "Oficios", new AjaxOptions()
         {
             HttpMethod = "POST",
             UpdateTargetId = "ViewDetalleEmpleos",
@@ -41,9 +50,9 @@
             LoadingElementId = "loader"
         }, new { @style = "display: none;" }))
         {
-            <input type="hidden" name="nombrePublicacion" id="hiddenNombreOferta" />
-            <input type="hidden" name="comuna" id="hiddenComuna" />
-            <button type="submit" style="display:none" id="buscarFiltrosApp2" class="btn btn-outline-primary form-control"><i class="fa fa-eye"></i> FILTRAR</button>
+            <input type="hidden" name="hiddenNombreOficioB1" id="hiddenNombreOficioB1" />
+            <input type="hidden" name="hiddenOficioB1" id="hiddenOficioB1" />
+            <button type="submit" style="display:none" id="buscarFiltrosOficio2" class="btn btn-outline-primary form-control"><i class="fa fa-eye"></i> FILTRAR</button>
         }
     </div>
 

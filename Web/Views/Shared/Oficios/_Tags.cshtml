@@ -1,40 +1,64 @@
-﻿
-<div class="col-3 col-sm-12 col-md-3 col-lg-4">
-    <h5 style="margin-top: 10px;">Oficios</h5>
-    <div class="form-group">
-        <div class="md-form form-sm">
-            <input type="text" id="tagOficio" class="form-control" list="tagOficios">
-            <label for="tagOficio">Buscar Oficio...</label>
-            <datalist id="tagOficios">
-                @if (ViewBag.ReferenciaOficios != null)
-                {
-                    foreach (Model.Models.TagOficio item in (List<Model.Models.TagOficio>)ViewBag.ReferenciaOficios)
+﻿<div class="row">
+    <div class="col-6 col-sm-12 col-md-6 col-lg-6">
+        <h5 style="margin-top: 10px;">Oficios</h5>
+        <div class="form-group">
+            <div class="md-form form-sm">
+                <input type="text" id="tagOficio" class="form-control" list="tagOficios">
+                <label for="tagOficio">Buscar Oficio...</label>
+                <datalist id="tagOficios">
+                    @if (ViewBag.ReferenciaOficios != null)
                     {
-                        <option data-tag="@item.IdTag">@item.Nombre</option>
+                        foreach (Model.Models.TagOficio item in (List<Model.Models.TagOficio>)ViewBag.ReferenciaOficios)
+                        {
+                            <option data-tag="@item.IdTag">@item.Nombre</option>
+                        }
                     }
-                }
-            </datalist>
+                </datalist>
 
-            <button id="guardaTagOficio" class="btn btn-primary btn-sm">
-                <i class="fas fa-plus"> Agregar</i>
-            </button>
+                <button id="guardaTagOficio" class="btn btn-primary btn-sm">
+                    <i class="fas fa-plus"> Agregar</i>
+                </button>
+            </div>
+            <div class="divErrorTagOficio"></div>
+        </div>
+    </div>
+
+    <div class="col-6 col-sm-12 col-md-6 col-lg-6">
+        <div id="ViewDetalleExperiencias" class="col-12 col-sm-12 col-md-12 col-lg-12">
+            @Html.Partial("Oficios/_DescripcionOficio")
+
+        </div>
+
+    </div>
+
+</div>
+<hr />
+<div class="row">
+    <div id="tagOficioUser" class="col-6 col-sm-6 col-md-6 col-lg-6">
+        <div style="display: inline-block;">
+            @if (ViewBag.ReferenciaOficiosUsuarios != null)
+            {
+                foreach (Model.Models.TagOficio item in (List<Model.Models.TagOficio>)ViewBag.ReferenciaOficiosUsuarios)
+                {
+                    <button class="btn btn-primary" onclick="delTagOficio(this)" data-tag="@item.IdTag" style="font-family: 'Roboto', sans-serif; font-size: 13px; border-radius: 25px; padding:10px; margin-top:5px;">
+                        <span>@item.Nombre</span>
+                        <i class="fas fa-trash"></i>
+                    </button>
+                }
+            }
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div id="ViewDetalleEducacion" class="col-12 col-sm-12 col-md-12 col-lg-12">
+            @Html.Partial("Oficios/_ValoracionOficio")
+            <hr />
+        </div>
+        <div id="ViewDetalleIdiomas" class="col-12 col-sm-12 col-md-12 col-lg-12">
+            @Html.Partial("Oficios/_Comentarios")
+            <hr />
         </div>
     </div>
 </div>
 
-<div id="tagOficioUser" class="col-3 col-sm-12 col-md-3 col-lg-8">
-    <div style="display: inline-block;">
-        @if (ViewBag.ReferenciaOficiosUsuarios != null)
-        {
-            foreach (Model.Models.TagOficio item in (List<Model.Models.TagOficio>)ViewBag.ReferenciaOficiosUsuarios)
-            {
-                <button class="btn btn-primary" onclick="delTagOficio(this)" data-tag="@item.IdTag" style="font-family: 'Roboto', sans-serif; font-size: 13px; border-radius: 25px; padding:10px; margin-top:5px;">
-                    <span>@item.Nombre</span>
-                    <i class="fas fa-trash"></i>
-                </button>
-            }
-        }
-    </div>
-</div>
 
 

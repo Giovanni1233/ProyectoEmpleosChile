@@ -24,6 +24,11 @@ namespace Web.Controllers
         
         public ActionResult Perfil(string idMensaje = "0", string idReceptor = "0")
         {
+            ViewBag.ReferenciaInicio = ModuleControlRetorno() + "App/Inicio";
+            ViewBag.ReferenciaHome = ModuleControlRetorno() + "App/Inicio";
+            ViewBag.ReferenciaRegistro = ModuleControlRetorno() + "Auth/RegistroUsuario";
+            ViewBag.ReferenciaOficio = ModuleControlRetorno() + "Oficios/Inicio";
+
             AppController app = new AppController();
             EmpresaController empresa = new EmpresaController();
             if (Session["IdUser"] != null && Session["IdUser"].ToString() != "")
@@ -98,7 +103,11 @@ namespace Web.Controllers
 
         public ActionResult Mensajes(string idMensaje = "0", string idReceptor = "0")
         {
-
+            ViewBag.ReferenciaInicio = ModuleControlRetorno() + "App/Inicio";
+            ViewBag.ReferenciaHome = ModuleControlRetorno() + "App/Inicio";
+            ViewBag.ReferenciaRegistro = ModuleControlRetorno() + "Auth/RegistroUsuario";
+            ViewBag.ReferenciaOficio = ModuleControlRetorno() + "Oficios/Inicio";
+            OficiosController ofi = new OficiosController();
             EmpresaController empresa = new EmpresaController();
             if (Session["IdUser"] != null && Session["IdUser"].ToString() != "")
                 ViewBag.ReferenciaIdUser = Session["IdUser"].ToString();
@@ -117,7 +126,7 @@ namespace Web.Controllers
             ViewBag.referenciaIdMensaje = idMensaje;
             ViewBag.referenciaHistorialConversacion = GetHistorialConversacion(idMensaje, usuario);
             ViewBag.MensajesUsuario = GetMensajesUsuario(usuario);
-
+            ViewBag.ReferenciaMensajesPorOficio = ofi.GetMensajesOficio(usuario);
             ViewBag.idMensaje = idMensaje;
             ViewBag.idReceptor = idReceptor;
             return View();
@@ -125,6 +134,11 @@ namespace Web.Controllers
 
         public ActionResult Test(string idUsuario)
         {
+            ViewBag.ReferenciaInicio = ModuleControlRetorno() + "App/Inicio";
+            ViewBag.ReferenciaHome = ModuleControlRetorno() + "App/Inicio";
+            ViewBag.ReferenciaRegistro = ModuleControlRetorno() + "Auth/RegistroUsuario";
+            ViewBag.ReferenciaOficio = ModuleControlRetorno() + "Oficios/Inicio";
+
             if (Session["IdUser"] != null && Session["IdUser"].ToString() != "")
                 ViewBag.ReferenciaIdUser = Session["IdUser"].ToString();
 
@@ -141,6 +155,70 @@ namespace Web.Controllers
             ViewBag.referenciaCargarPreguntas = GetPreguntasTest();
             return View();
 
+        }
+
+        public ActionResult PerfilOtroUsuario(string idUsuario)
+        {
+           
+            EmpresaController emp = new EmpresaController();
+            OficiosController ofi = new OficiosController();
+
+            ViewBag.ReferenciaInicio = ModuleControlRetorno() + "App/Inicio";
+            ViewBag.ReferenciaHome = ModuleControlRetorno() + "App/Inicio";
+            ViewBag.ReferenciaRegistro = ModuleControlRetorno() + "Auth/RegistroUsuario";
+            ViewBag.ReferenciaOficio = ModuleControlRetorno() + "Oficios/Inicio";
+            if (Session["IdUser"] != null && Session["IdUser"].ToString() != "")
+                ViewBag.ReferenciaIdUser = Session["IdUser"].ToString();
+
+            if (Session["UserName"] != null && Session["UserName"].ToString() != "")
+                ViewBag.ReferenciaUserName = Session["UserName"].ToString();
+
+            if (Session["UserType"] != null && Session["UserType"].ToString() != "")
+                ViewBag.ReferenciaUserType = Session["UserType"].ToString();
+
+
+            ViewBag.ReferenciaDatosUsuario = emp.GetDatosUsuario(idUsuario);
+            ViewBag.ReferenciaHabilidadesUsuario = emp.GetHabilidadesUsuario(idUsuario);
+            ViewBag.ReferenciaExperienciasUsuario = emp.GetExperienciasUsuario(idUsuario);
+            ViewBag.ReferenciaIdiomasUsuario = emp.GetIdiomasUsuario(idUsuario);
+            ViewBag.ReferenciaEducacionUsuario = emp.GetEducacionUsuario(idUsuario);
+            ViewBag.referenciaperfilUser = GetPerfilProfesionalUsuario(idUsuario);
+            foreach (var item in ViewBag.referenciaperfilUser)
+            {
+                ViewBag.referenciatituloperfilUsuario = item.TituloPerfil;
+                ViewBag.referenciaDetallePerfil = item.DescripcionPerfil;
+            }
+
+            ViewBag.referenciaImagenPerfil = GetImagenDePerfilUsuario(idUsuario);
+           
+            // ResultadosTest
+            ViewBag.referenciaTestUsuario = emp.GetResultadosTestUsuario(idUsuario);
+
+            foreach (var item in ViewBag.referenciaTestUsuario)
+            {
+                ViewBag.referenciaResponsabilidad = item.Responsabilidad;
+                ViewBag.referenciaRestoResponsabilidad = item.RestoResponsabilidad;
+                ViewBag.referenciaAutoGestion = item.AutoGestion;
+                ViewBag.referenciaRestoAutogestion = item.RestoAutogestion;
+                ViewBag.referenciaLiderazgo = item.Liderazgo;
+                ViewBag.referenciaRestoLiderazgo = item.RestoLiderazgo;
+            }
+            ViewBag.referenciaIdUsuario = idUsuario;
+            ViewBag.referenciaOficiosUsuario = emp.GetOficiosUsuario(idUsuario);
+            ViewBag.referenciaComentariosUsuario = ofi.GetComentariosOficio(idUsuario);
+            ViewBag.ReferenciaValoracionOficio = ofi.GetValoracionOficio(idUsuario);
+
+            ViewBag.referenciaValidaComentario = GetComentariosOficiosUsuario(Session["IdUser"].ToString()).Count();
+
+            // Mensaje al usuario variables
+            ViewBag.referenciaidReceptor = idUsuario;
+            foreach(var item2 in ViewBag.ReferenciaDatosUsuario)
+            {
+                ViewBag.referenciaNombreReceptor = item2.NombreUsuario;
+            }
+           
+
+            return View();
         }
 
         #endregion
@@ -1040,6 +1118,57 @@ namespace Web.Controllers
             }
             return Json(new { data = resultado }, JsonRequestBehavior.AllowGet);
         }
+
+        public List<ComentarioOficio> GetComentariosOficiosUsuario(string idUsuarioLogueado)
+        {
+            string code = string.Empty;
+            string message = string.Empty;
+            string[] parametros = new string[1];
+            string[] valores = new string[1];
+
+            DataSet data = new DataSet();
+            List<ComentarioOficio> comentario = new List<ComentarioOficio>();
+
+            try
+            {
+                parametros[0] = "@USUARIO_LOGUEADO";
+                valores[0] = idUsuarioLogueado;
+
+                data = svcEmpleos.GetComentariosOficiosUsuarioLog(parametros, valores).Table;
+
+                if (data.Tables.Count > 0)
+                {
+                    foreach (DataRow row in data.Tables[0].Rows)
+                    {
+                        switch (row["Code"].ToString())
+                        {
+                            case "200":
+                                comentario.Add(new ComentarioOficio
+                                {
+                                    Id = row["Id"].ToString(),
+                                    IdUsuario = row["IdUsuario"].ToString(),
+                                    IdUsuarioComentario = row["IdUsuarioComentario"].ToString(),
+                                    Comentario = row["Comentario"].ToString(),
+                                    NombreUsuario = row["NombreUsuario"].ToString()
+                                });
+                                break;
+                        }
+                    }
+                }
+                else
+                {
+                    code = "400";
+                    message = "Error al cargar datos";
+                }
+            }
+            catch (Exception ex)
+            {
+                code = "600";
+                message = errorSistema;
+            }
+
+            return comentario;
+        }
         #endregion
 
         #region Acciones
@@ -1354,7 +1483,137 @@ namespace Web.Controllers
 
             return Json(new { data = codigo }, JsonRequestBehavior.AllowGet);
         }
-        
+
+        [HttpPost]
+        public JsonResult GuardarEnvioMensajeAUsuario(string idUsuario, string mensaje)
+        {
+
+            string view = string.Empty;
+            var codigo = "0";
+            var usuario = Session["IdUser"].ToString();
+            try
+            {
+                string[] parametros = new string[3];
+                string[] valores = new string[3];
+
+                if (string.IsNullOrEmpty(mensaje) || string.IsNullOrWhiteSpace(mensaje)
+                   )
+                {
+                    return Json(new { data = "-1" }, JsonRequestBehavior.AllowGet);
+                }
+
+                DataSet data = new DataSet();
+
+
+                parametros[0] = "@MENSAJE";
+                parametros[1] = "@AUTOR";
+                parametros[2] = "@RECEPTOR";
+
+
+                valores[0] = mensaje;
+                valores[1] = usuario;
+                valores[2] = idUsuario; // receptor
+                
+
+
+                data = svcEmpleos.SetMensajesAOtrosUsuarios(parametros, valores).Table;
+
+                foreach (DataRow rows in data.Tables[0].Rows)
+                {
+                    switch (rows["Code"].ToString())
+                    {
+                        case "200":
+
+                            codigo = "1";
+                            break;
+
+                        case "400":
+                            codigo = "-1";
+                            break;
+                        case "500":
+                            codigo = "-1";
+                            break;
+                        default:
+                            codigo = "-1";
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ReferenciaMensaje = errorSistema;
+                codigo = "-1";
+            }
+
+
+            return Json(new { data = codigo }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult GuardarEnvioComentarioAUsuario(string idUsuario, string comentario)
+        {
+
+            string view = string.Empty;
+            var codigo = "0";
+            var usuario = Session["IdUser"].ToString();
+            try
+            {
+                string[] parametros = new string[3];
+                string[] valores = new string[3];
+
+                if (string.IsNullOrEmpty(comentario) || string.IsNullOrWhiteSpace(comentario)
+                   )
+                {
+                    return Json(new { data = "-1" }, JsonRequestBehavior.AllowGet);
+                }
+
+                DataSet data = new DataSet();
+
+
+                parametros[0] = "@ID_AUTOR";
+                parametros[1] = "@ID_USUARIO_A_COMENTAR";
+                parametros[2] = "@COMENTARIO";
+
+
+                valores[0] = usuario;
+                valores[1] = idUsuario;
+                valores[2] = comentario;
+
+
+
+                data = svcEmpleos.SetComentarioUsuarioOficios(parametros, valores).Table;
+
+                foreach (DataRow rows in data.Tables[0].Rows)
+                {
+                    switch (rows["Code"].ToString())
+                    {
+                        case "200":
+
+                            codigo = "1";
+                            break;
+
+                        case "400":
+                            codigo = "-1";
+                            break;
+                        case "500":
+                            codigo = "-1";
+                            break;
+                        default:
+                            codigo = "-1";
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ReferenciaMensaje = errorSistema;
+                codigo = "-1";
+            }
+
+
+            return Json(new { data = codigo }, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public JsonResult GuardarExperienciaPerfilUsuario(string empresaNombre, string recomendacion, string descripcion,  string destacoEmpresa, string mejorarEmpresa, string fechaD, string fechaH, string actualmente, string error = "")
         {
@@ -2100,6 +2359,63 @@ namespace Web.Controllers
 
 
             return RedirectToAction("Perfil");
+        }
+
+        [HttpPost]
+        public JsonResult GuardarVotacionUsuario(string votacion, string idUsuario, string error = "")
+        {
+            string view = string.Empty;
+
+            try
+            {
+                string[] parametros = new string[3];
+                string[] valores = new string[3];
+
+                DataSet data = new DataSet();
+
+                parametros[0] = "@VOTACION";
+                parametros[1] = "@ID_USUARIO_RECIBE_VOTACION";
+                parametros[2] = "@ID_USUARIO_VOTA";
+
+
+                valores[0] = votacion;
+                valores[1] = idUsuario;
+                valores[2] = Session["IdUser"].ToString();
+
+
+                data = svcEmpleos.SetValoracionOficio(parametros, valores).Table;
+
+                foreach (DataRow rows in data.Tables[0].Rows)
+                {
+                    switch (rows["Code"].ToString())
+                    {
+                        case "200":
+                            ViewBag.ReferenciaMensaje = rows["Message"].ToString();
+                            view = "Inicio";
+                            //ViewBag.ReferenciaCatalogo = ModuleRetornoCatalogo();
+                            break;
+
+                        case "400":
+                            ViewBag.ReferenciaMensaje = rows["Message"].ToString();
+                            view = "Inicio";
+                            break;
+                        case "500":
+                            ViewBag.ReferenciaMensaje = errorSistema;
+                            view = "Inicio";
+                            break;
+                        default:
+                            ViewBag.ReferenciaMensaje = errorSistema;
+                            view = "Inicio";
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ReferenciaMensaje = errorSistema;
+                view = "Inicio";
+            }
+            return Json(new { data = "1" }, JsonRequestBehavior.AllowGet);
         }
         #endregion
 

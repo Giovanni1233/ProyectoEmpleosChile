@@ -110,6 +110,7 @@ namespace Web.Controllers
         public ActionResult PerfilCandidato(string idUsuario)
         {
             UsuarioController usuarioController = new UsuarioController();
+            OficiosController ofi = new OficiosController();
             var idEmpresa = Session["EmpresaID"].ToString();
             ViewBag.ReferenciaDatosUsuario = GetDatosUsuario(idUsuario);
             ViewBag.ReferenciaHabilidadesUsuario = GetHabilidadesUsuario(idUsuario);
@@ -149,6 +150,10 @@ namespace Web.Controllers
                 ViewBag.referenciaRestoLiderazgo = item.RestoLiderazgo;
             }
             ViewBag.referenciaIdUsuario = idUsuario;
+
+            // oficios
+            ViewBag.referenciaOficiosUsuario = GetOficiosUsuario(idUsuario);
+            ViewBag.referenciaComentariosUsuario = ofi.GetComentariosOficio(idUsuario);
 
             // Subir CV
             var data = GetCurriculum(idUsuario);
@@ -1914,7 +1919,7 @@ namespace Web.Controllers
                             clDetalleOficio.Add(
                                 new DetalleTagOficio
                                 {
-                                    idTag = (int)rows["IdTag"],
+                                    idTag = rows["IdTag"].ToString(),
                                     nombreOficio = rows["NombreOficio"].ToString()
                                 });
 
@@ -2813,16 +2818,19 @@ namespace Web.Controllers
             return clUltimosC;
         }
 
-        public List<CandidatoUsuarioOficios> GetUsuariosConOficio()
+        public List<CandidatoUsuarioOficios> GetUsuariosConOficio(string parametro = "")
         {
             string code = string.Empty;
             string mensaje = string.Empty;
-           
+            string[] parametros = new string[1];
+            string[] valores = new string[1];
+            parametros[0] = "@PARAMETRO";
+            valores[0] = parametro;
             DataSet datas = new DataSet();
             List<CandidatoUsuarioOficios> clUsuariosOficios = new List<CandidatoUsuarioOficios>();
             try
             {
-                datas = svcEmpleos.GetUsuariosConOficios().Table; // GetCandidatosEmpresa
+                datas = svcEmpleos.GetUsuariosConOficios(parametros, valores).Table; // GetCandidatosEmpresa
 
                 foreach (DataRow rows in datas.Tables[0].Rows)
                 {
@@ -2836,7 +2844,6 @@ namespace Web.Controllers
                                     ApellidosUsuario = rows["ApellidosUsuario"].ToString(),
                                     NombreUsuario = rows["NombreUsuario"].ToString(),
                                     RutUsuario = rows["RutUsuario"].ToString(),
-                                    ImagendelUsuario = (byte[])rows["ImagendelUsuario"],
                                     TagOficios = GetOficiosUsuario(rows["IdUsuario"].ToString())
                                 });
 
@@ -2859,7 +2866,7 @@ namespace Web.Controllers
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 code = "600";
                 mensaje = errorSistema;
@@ -4430,6 +4437,8 @@ namespace Web.Controllers
 
             return RedirectToAction("PerfilEmpresa");
         }
+
+       
         #endregion
 
         #region ControlRetorno

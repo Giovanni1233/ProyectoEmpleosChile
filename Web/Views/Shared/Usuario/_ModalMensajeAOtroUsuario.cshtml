@@ -1,0 +1,24 @@
+﻿<div class="modal-header">
+    <div class="d-block"><h3>Nuevo mensaje</h3></div>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+</div>
+<div class="modal-body">
+
+    <div class="form-group">
+        <input type="hidden" id="idUsuarioReceptor" name="idUsuarioReceptor" value="@ViewBag.referenciaidReceptor" />
+        <input type="text" class="form-control" id="nombreUsuarioReceptor" name="nombreUsuarioReceptor" value="@ViewBag.referenciaNombreReceptor" readonly />
+    </div>
+
+    <br />
+    <div class="form-group">
+        <textarea class="form-control" name="mensajeAOtroUsuario" placeholder="Ingrese un mensaje" maxlength="2000" id="mensajeAOtroUsuario" style="min-height:250px; max-height:250px;"></textarea>
+    </div>
+    <br />
+    <div class="form-group">
+        <button type="button" class="btn btn-success btnGuardarMensajeAOtroUsuario">Enviar</button>
+    </div>
+    <br />
+    <div class="divErrorMensajeAOtroUsuario"></div>
+
+</div>

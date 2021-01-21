@@ -17,6 +17,7 @@ namespace Web.Controllers
 
         public ActionResult Inicio()
         {
+            EmpresaController emp = new EmpresaController();
             ViewBag.ApplicationActive = true;
             ViewBag.ReferenciaInicio = ModuleControlRetorno() + "/Oficio/Inicio";
             ViewBag.ReferenciaHome = ModuleControlRetorno() + "/App/Inicio";
@@ -33,8 +34,8 @@ namespace Web.Controllers
                 ViewBag.ReferenciaUserType = Session["UserType"].ToString();
 
             ViewBag.ReferenciaComuna = GetComuna("");
-
-
+            ViewBag.ReferenciaOficios = GetOficios();
+            ViewBag.referenciaUsuariosOficios = emp.GetUsuariosConOficio("1");
             return View();
         }
 
@@ -57,12 +58,13 @@ namespace Web.Controllers
                 if (Session["UserType"] != null && Session["UserType"].ToString() != "")
                     ViewBag.ReferenciaUserType = Session["UserType"].ToString();
 
-
-                ViewBag.ReferenciaOficios = GetTagOficios(Session["IdUser"].ToString());
-                ViewBag.ReferenciaOficiosUsuarios = GetTagOficiosUsuario(Session["IdUser"].ToString());
-                ViewBag.ReferenciaDescripcionOficio = GetDescripcionOficio(Session["IdUser"].ToString());
-                ViewBag.ReferenciaValoracionOficio = GetValoracionOficio(Session["IdUser"].ToString());
-                ViewBag.ReferenciaComentarioOficio = GetComentariosOficio(Session["IdUser"].ToString());
+                var idUser = Session["IdUser"].ToString();
+                ViewBag.ReferenciaOficios = GetTagOficios(idUser);
+                ViewBag.ReferenciaOficiosUsuarios = GetTagOficiosUsuario(idUser);
+                ViewBag.ReferenciaDescripcionOficio = GetDescripcionOficio(idUser);
+                ViewBag.ReferenciaValoracionOficio = GetValoracionOficio(idUser);
+                ViewBag.ReferenciaComentarioOficio = GetComentariosOficio(idUser);
+                
             }
             catch (Exception ex)
             {
@@ -72,6 +74,106 @@ namespace Web.Controllers
             return View();
         }
 
+        public ActionResult OficiosUsuario()
+        {
+            try
+            {
+                string idusuario = "";
+
+                ViewBag.ApplicationActive = true;
+                ViewBag.ReferenciaInicio = ModuleControlRetorno() + "App/Inicio";
+                ViewBag.ReferenciaHome = ModuleControlRetorno() + "App/Inicio";
+                ViewBag.ReferenciaRegistro = ModuleControlRetorno() + "Auth/RegistroUsuario";
+                ViewBag.ReferenciaOficio = ModuleControlRetorno() + "Oficios/Inicio";
+
+                if (Session["IdUser"] != null && Session["IdUser"].ToString() != "")
+                    ViewBag.ReferenciaIdUser = Session["IdUser"].ToString();
+
+                if (Session["UserName"] != null && Session["UserName"].ToString() != "")
+                    ViewBag.ReferenciaUserName = Session["UserName"].ToString();
+
+                if (Session["UserType"] != null && Session["UserType"].ToString() != "")
+                    ViewBag.ReferenciaUserType = Session["UserType"].ToString();
+
+
+                if (Session["IdUser"] == null)
+                {
+                    idusuario = "";
+                }
+                else
+                {
+                    idusuario = Session["IdUser"].ToString();
+                }
+                ViewBag.ApplicationActive = ModuleApplicationActive();
+                ViewBag.ReferenciaInicio = ModuleControlRetorno() + "App/Inicio";
+
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ApplicationActive = ModuleApplicationActive();
+                ViewBag.ReferenciaInicio = ModuleControlRetorno() + "App/Inicio";
+            }
+
+
+            return View();
+        }
+
+        public ActionResult OficiosUsuarioFiltro(string hiddenNombreOficioB1 = "", string hiddenOficioB1 = "")
+        {
+            try
+            {
+                string idusuario = "";
+
+                ViewBag.ApplicationActive = true;
+                ViewBag.ReferenciaInicio = ModuleControlRetorno() + "App/Inicio";
+                ViewBag.ReferenciaHome = ModuleControlRetorno() + "App/Inicio";
+                ViewBag.ReferenciaRegistro = ModuleControlRetorno() + "Auth/RegistroUsuario";
+                ViewBag.ReferenciaOficio = ModuleControlRetorno() + "Oficios/Inicio";
+
+                if (Session["IdUser"] != null && Session["IdUser"].ToString() != "")
+                    ViewBag.ReferenciaIdUser = Session["IdUser"].ToString();
+
+                if (Session["UserName"] != null && Session["UserName"].ToString() != "")
+                    ViewBag.ReferenciaUserName = Session["UserName"].ToString();
+
+                if (Session["UserType"] != null && Session["UserType"].ToString() != "")
+                    ViewBag.ReferenciaUserType = Session["UserType"].ToString();
+
+                ViewBag.ReferenciaOficios = GetOficios();
+                ViewBag.ReferenciaBusquedaEmpleos = GetOficiosUsuarioFiltro(hiddenNombreOficioB1, hiddenOficioB1);
+                ViewBag.detalleOficios = GetOficios(hiddenOficioB1);
+
+                if (hiddenOficioB1 != "")
+                {
+                    foreach (var item in ViewBag.detalleOficios)
+                    {
+                        ViewBag.referenciaFiltroSeleccionado = item.NombreOficio;
+                    }
+
+                }
+
+
+                if (Session["IdUser"] == null)
+                {
+                    idusuario = "";
+                }
+                else
+                {
+                    idusuario = Session["IdUser"].ToString();
+                }
+                ViewBag.ApplicationActive = ModuleApplicationActive();
+                ViewBag.ReferenciaInicio = ModuleControlRetorno() + "App/Inicio";
+
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ApplicationActive = ModuleApplicationActive();
+                ViewBag.ReferenciaInicio = ModuleControlRetorno() + "App/Inicio";
+            }
+
+
+            return View();
+        }
 
         #region JSON
         public JsonResult SetTagOficio(string oficio)
@@ -289,6 +391,43 @@ namespace Web.Controllers
             }
 
             return lstComuna;
+        }
+        private List<Oficios> GetOficios(string parametro = "")
+        {
+            string code = string.Empty;
+            string message = string.Empty;
+
+            string[] parametros = new string[1];
+            string[] valores = new string[1];
+
+            parametros[0] = "@ID_OFICIO";
+            valores[0] = parametro;
+            List<Oficios> lstOficios = new List<Oficios>();
+
+            try
+            {
+
+                DataSet data = svcEmpleosChile.GetOficios(parametros, valores).Table;
+
+                if (data.Tables.Count > 0)
+                {
+                    foreach (DataRow row in data.Tables[0].Rows)
+                    {
+                        code = row["Code"].ToString();
+                        lstOficios.Add(new Oficios
+                        {
+                            IdOficio = row["Id"].ToString(),
+                            NombreOficio = row["Nombre"].ToString()
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return lstOficios;
         }
 
         private List<ImagenUsuarioPerfil> GetImagenDePerfilUsuario(string idUsuario)
@@ -513,7 +652,7 @@ namespace Web.Controllers
             return descripcion;
         }
 
-        private List<ValoracionOficio> GetValoracionOficio(string usuario)
+        public List<ValoracionOficio> GetValoracionOficio(string usuario)
         {
             string code = string.Empty;
             string message = string.Empty;
@@ -526,7 +665,7 @@ namespace Web.Controllers
             try
             {
                 parametros[0] = "@USUARIO";
-                valores[0] = Session["IdUser"].ToString();
+                valores[0] = usuario;
 
                 data = svcEmpleosChile.GetValoracionOficio(parametros, valores).Table;
 
@@ -566,7 +705,7 @@ namespace Web.Controllers
             return valoracion;
         }
 
-        private List<ComentarioOficio> GetComentariosOficio(string usuario)
+        public List<ComentarioOficio> GetComentariosOficio(string usuario)
         {
             string code = string.Empty;
             string message = string.Empty;
@@ -579,7 +718,7 @@ namespace Web.Controllers
             try
             {
                 parametros[0] = "@USUARIO";
-                valores[0] = Session["IdUser"].ToString();
+                valores[0] = usuario;
 
                 data = svcEmpleosChile.GetComentarioOficio(parametros, valores).Table;
 
@@ -609,7 +748,8 @@ namespace Web.Controllers
                                     IdUsuario = row["IdUsuario"].ToString(),
                                     IdUsuarioComentario = row["IdUsuarioComentario"].ToString(),
                                     Comentario = row["Comentario"].ToString(),
-                                    Valoracion = valoracion
+                                    Valoracion = valoracion,
+                                    NombreUsuario = row["NombreUsuario"].ToString()
                                 });
                                 break;
                         }
@@ -630,6 +770,123 @@ namespace Web.Controllers
             return comentario;
         }
 
+        public List<MensajesPorOficio> GetMensajesOficio(string idUsuario)
+        {
+            string code = string.Empty;
+            string mensaje = string.Empty;
+            string[] parametros = new string[1];
+            string[] valores = new string[1];
+            parametros[0] = "@ID_USUARIO";
+            valores[0] = idUsuario;
+            List<MensajesPorOficio> clMensajesOficio = new List<MensajesPorOficio>();
+            DataSet data = new DataSet();
+            try
+            {
+                data = svcEmpleosChile.GetMensajesOficios(parametros, valores).Table;
+                foreach (DataRow rows in data.Tables[0].Rows)
+                {
+                    switch (rows["Code"].ToString())
+                    {
+                        case "200":
+                            clMensajesOficio.Add(
+                                new MensajesPorOficio
+                                {
+                                    Mensaje = rows["Mensaje"].ToString(),
+                                    AutorMensaje = rows["AutorMensaje"].ToString(),
+                                    FechaMensaje = rows["FechaMensaje"].ToString(),
+                                    idMensaje = rows["IdMensaje"].ToString(),
+                                    ReceptorMensaje = rows["ReceptorMensaje"].ToString(),
+                                    idUsuarioAutor = rows["IdAutorMensaje"].ToString(),
+                                    idUsuarioReceptor = rows["IdReceptorMensaje"].ToString(),
+                                });
+
+
+                            mensaje = "";
+                            break;
+                        case "400":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        case "500":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        default:
+                            code = "600";
+                            mensaje = errorSistema;
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                code = "600";
+                mensaje = errorSistema;
+            }
+            return clMensajesOficio;
+        }
+
+        public List<CandidatoUsuarioOficios> GetOficiosUsuarioFiltro(string hiddenNombreOficioB1, string hiddenOficioB1)
+        {
+            string code = string.Empty;
+            string mensaje = string.Empty;
+            string[] parametros = new string[2];
+            string[] valores = new string[2];
+            DataSet datas = new DataSet();
+            List<CandidatoUsuarioOficios> clUsuariosOficios = new List<CandidatoUsuarioOficios>();
+            EmpresaController emp = new EmpresaController();
+            try
+            {
+                parametros[0] = "@NOMBRE_OFICIO";
+                parametros[1] = "@OFICIO";
+                valores[0] = hiddenNombreOficioB1;
+                valores[1] = hiddenOficioB1;
+
+                datas = svcEmpleosChile.GetOficiosUsuarioFiltro(parametros, valores).Table; // GetCandidatosEmpresa
+
+                foreach (DataRow rows in datas.Tables[0].Rows)
+                {
+                    switch (rows["Code"].ToString())
+                    {
+                        case "200":
+                            clUsuariosOficios.Add(
+                                new CandidatoUsuarioOficios
+                                {
+                                    IdUsuario = rows["IdUsuario"].ToString(),
+                                    ApellidosUsuario = rows["ApellidosUsuario"].ToString(),
+                                    NombreUsuario = rows["NombreUsuario"].ToString(),
+                                    RutUsuario = rows["RutUsuario"].ToString(),
+                                    TagOficios = emp.GetOficiosUsuario(rows["IdUsuario"].ToString())
+                                });
+
+                            mensaje = "";
+                            break;
+                        case "400":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        case "500":
+                            code = rows["Code"].ToString();
+                            mensaje = rows["Message"].ToString();
+                            break;
+
+                        default:
+                            code = "600";
+                            mensaje = errorSistema;
+                            break;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                code = "600";
+                mensaje = errorSistema;
+            }
+            return clUsuariosOficios;
+        }
         #endregion
 
 

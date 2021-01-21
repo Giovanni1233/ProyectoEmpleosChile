@@ -5,9 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@ViewBag.Title</title>
-    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
 
 
     @Styles.Render("~/bundles/jqueryuicss")
@@ -16,6 +17,13 @@
     @Styles.Render("~/bundles/MaterialDesign")
     @Styles.Render("https://use.fontawesome.com/releases/v5.8.2/css/all.css")
 
+
+    <!-- Aqui van los scripts, siempre primero debe ir el jquery solito, y luego todo lo demas, ya que jqueryui es depedencia de jquery, y el bootstrap igual -->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/bootstrapjs")
+    @Scripts.Render("~/bundles/libraryjs")
+
 </head>
 
 <body>
@@ -23,9 +31,10 @@
         <div class="row" style="width: 99%; margin: auto auto auto 5px;">
             <div class="col-6 col-sm-6 col-md-4 col-lg-2" style="margin-top: 10px;">
                 <div style="text-align: center;">
-                    <a href="@ViewBag.ReferenciaHome">
-                        <img src="~/Resources/LogoWeb.jpg" class="imgLogoHome" style="height: 50px; display: block; margin: auto; cursor:pointer;" />
+                    <a href="javascript:void(0);">
+                        <h3 style="color:#fff;">Empleos Chile</h3>
                     </a>
+
                 </div>
             </div>
 
@@ -40,12 +49,12 @@
                         {
                             if (ViewBag.ReferenciaUserType == "N")
                             {
-                                <li class="nav-item">
+                                @*<li class="nav-item">
                                     <a class="nav-link NewPublicacion" href="javascript:void(0);">Publica tu oferta</a>
-                                </li>
+                                </li>*@
 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="@ViewBag.ReferenciaOficio">Informal (Oficios)</a>
+                                    <a class="nav-link" href="@Url.Action("Inicio","Oficios")">Informal (Oficios)</a>
                                 </li>
                             }
                         }
@@ -56,7 +65,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="@ViewBag.ReferenciaOficio">Informal (Oficios)</a>
+                                <a class="nav-link" href="@Url.Action("Inicio","Oficios")">Informal (Oficios)</a>
                             </li>
 
                         }
@@ -78,7 +87,7 @@
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="@Url.Action("Perfil","Usuario")">Perfil</a>
                                     <a class="dropdown-item" href="@Url.Action("Perfil","Oficios")">Perfil Informal (Oficios)</a>
-                                    <a class="dropdown-item" href="@Url.Action("Curriculum","Usuario")">Mi Curriculum</a>
+                                    <a class="dropdown-item" href="@Url.Action("Mensajes","Usuario", new { idMensaje = "", idReceptor = "" })">Mensajes</a>
                                     <div role="separator" class="dropdown-divider"></div>
                                     <a class="dropdown-item" id="signOutUser" href="#">Cerrar Sesión</a>
                                 </div>
@@ -119,15 +128,10 @@
 
     <div class="row" style=" width: 100%;">
         @RenderBody()
+        @Scripts.Render("~/bundles/appjs")
 
     </div>
 
-    <!-- Aqui van los scripts, siempre primero debe ir el jquery solito, y luego todo lo demas, ya que jqueryui es depedencia de jquery, y el bootstrap igual -->
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryui")
-    @Scripts.Render("~/bundles/bootstrapjs")
-    @Scripts.Render("~/bundles/libraryjs")
-    @Scripts.Render("~/bundles/appjs")
 
 </body>
 </html>

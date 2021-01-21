@@ -50,8 +50,9 @@ namespace Web.Controllers
                     if (Session["UserType"] != null && Session["UserType"].ToString() != "")
                         ViewBag.ReferenciaUserType = Session["UserType"].ToString();
 
-                    ViewBag.ReferenciaEmpresasConPlan = empresa.GetEmpresasPlanesVigente();
+                   
                 }
+                ViewBag.ReferenciaEmpresasConPlan = empresa.GetEmpresasPlanesVigente();
             }
             catch (Exception ex)
             {

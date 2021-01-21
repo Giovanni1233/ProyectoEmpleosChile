@@ -1,16 +1,18 @@
-﻿@if (ViewBag.referenciaUsuariosOficios.Count > 0 && ViewBag.referenciaUsuariosOficios != null)
+﻿@if (ViewBag.ReferenciaBusquedaEmpleos.Count > 0 && ViewBag.ReferenciaBusquedaEmpleos != null)
 {
+    <h3>Usuarios con oficios registrados</h3>
     <div class="row">
-        @foreach (var item in ViewBag.referenciaUsuariosOficios as ICollection<Model.Models.CandidatoUsuarioOficios>)
+        @foreach (var item in ViewBag.ReferenciaBusquedaEmpleos as ICollection<Model.Models.CandidatoUsuarioOficios>)
         {
 
-            <div class="col-md-6 col-lg-3 col-xl-3 col-sm-12">
+            <div class="col-md-4 col-lg-4 col-xl-4 col-sm-12">
                 <div class="card">
-                    
                     <div class="card-body">
-                        <h5 class="card-title">@item.RutUsuario</h5>
-                        <p class="card-text">@item.NombreUsuario - @item.ApellidosUsuario</p>
+                        <h5 class="card-title">Rut: @item.RutUsuario</h5>
+                        <p class="card-text">Nombre: @item.NombreUsuario - @item.ApellidosUsuario</p>
                         <p class="card-text">
+                            Oficios:
+                            <br />
                             <ul style="list-style:none;">
                                 @foreach (var item2 in item.TagOficios as ICollection<Model.Models.DetalleTagOficio>)
                                 {
@@ -19,8 +21,7 @@
 
                             </ul>
                         </p>
-                        <a href="@Url.Action("PerfilCandidato","Empresa", new { idUsuario = item.IdUsuario })" class="btn btn-outline-primary">Ver perfil</a>
-                        
+                        <a href="@Url.Action("PerfilOtroUsuario","Usuario", new { idUsuario = item.IdUsuario })" class="btn btn-block btn-outline-primary">Ver perfil</a>
                     </div>
                 </div>
             </div>
@@ -41,4 +42,7 @@ else
     </div>
 
 }
+
+
+
 

@@ -19,6 +19,13 @@
     @Styles.Render("~/bundles/MaterialDesign")
     @Styles.Render("https://use.fontawesome.com/releases/v5.8.2/css/all.css")
 
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/bootstrapjs")
+    @Scripts.Render("~/bundles/libraryjs")
+
+
     <style>
         .btn-link, ul > li > a {
             color: #fff;
@@ -169,12 +176,8 @@
 
     <div class="row" style=" width: 100%;">
         @RenderBody()
+        @Scripts.Render("~/bundles/appjs")
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryui")
-    @Scripts.Render("~/bundles/bootstrapjs")
-    @Scripts.Render("~/bundles/libraryjs")
-    @Scripts.Render("~/bundles/appjs")
 </body>
 </html>

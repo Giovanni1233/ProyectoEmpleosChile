@@ -703,3 +703,38 @@ function validoArchivo(archivo) {
         return;
     }
 }
+
+// envio de mensajes a otro usuario
+function ajaxEnviarMensajeAUsuario(controller, usuario, mensaje) {
+    $.ajax({
+        type: 'POST',
+        url: controller + 'GuardarEnvioMensajeAUsuario',
+        data: '{ idUsuario: "' + usuario + '", mensaje: "' + mensaje + '"}',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: true,
+        success: function (response) {
+            if (response.data == 1) {
+                window.location.reload();
+            }
+        }
+    });
+}
+
+// envio de comentario a otro usuario
+function ajaxEnviarComentarioAUsuario(controller, usuario, comentario) {
+    $.ajax({
+        type: 'POST',
+        url: controller + 'GuardarEnvioComentarioAUsuario',
+        data: '{ idUsuario: "' + usuario + '", comentario: "' + comentario + '"}',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: true,
+        success: function (response) {
+            if (response.data == 1) {
+                window.location.reload();
+            }
+        }
+    });
+}
+

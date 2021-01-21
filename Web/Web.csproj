@@ -963,6 +963,16 @@
     <Content Include="Views\Shared\Empresa\_DetalleTestUsuario.cshtml" />
     <Content Include="Views\Empresa\UsuariosOficios.cshtml" />
     <Content Include="Views\Shared\Empresa\_UsuariosConOficio.cshtml" />
+    <Content Include="Views\Shared\Oficios\_UsuariosOficios.cshtml" />
+    <Content Include="Views\Shared\Oficios\_MensajesPorOficio.cshtml" />
+    <Content Include="Views\Oficios\OficiosUsuario.cshtml" />
+    <Content Include="Views\Shared\Oficios\_UsuariosOficiosFiltros.cshtml" />
+    <Content Include="Views\Shared\Usuario\_PerfilOtroUsuarioLectura.cshtml" />
+    <Content Include="Views\Usuario\PerfilOtroUsuario.cshtml" />
+    <Content Include="Views\Oficios\OficiosUsuarioFiltro.cshtml" />
+    <Content Include="Views\Shared\Usuario\_ModalMensajeAOtroUsuario.cshtml" />
+    <Content Include="Views\Shared\Usuario\_ModalComentarioAOtroUsuario.cshtml" />
+    <Content Include="Views\Shared\Empresa\_ModalMensajeAUsuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="FilesCV\" />

@@ -185,7 +185,7 @@ namespace Web.Controllers
                             usuario.Correo = rows["Correo"].ToString();
                             code = rows["Code"].ToString();
                             mensaje = "";
-                            pathRedirect = ModuleControlRetorno() + controller + "/Inicio";
+                            pathRedirect = ModuleControlRetorno() + "App/Inicio";
                             var useer = rows["TipoUsuario"].ToString();
                             Session["IdUser"] = rows["IdUsuario"].ToString();
                             Session["UserName"] = rows["Nombre"].ToString();

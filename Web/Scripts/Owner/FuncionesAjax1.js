@@ -853,3 +853,21 @@ function ajaxDeleteCV(controller, user) {
     })
 
 }
+
+// valoracion usuario
+function ajaxGuardarValoracionUsuario(controller, valorvotacion, idUsuario) {
+   
+    $.ajax({
+        type: 'POST',
+        url: controller + 'GuardarVotacionUsuario',
+        data: '{ votacion: "' + valorvotacion + '", idUsuario: "' + idUsuario + '"}',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: true,
+        success: function (response) {
+            if (response.data == 1) {
+                window.location.reload();
+            }
+        }
+    });
+}

@@ -19,6 +19,23 @@
                 <div class="text-center">
                     @using (Html.BeginForm("SubirImagenes", "UsuarioEmpresa", FormMethod.Post, new { enctype = "multipart/form-data" }))
                     {
+                        <input type="file" id="filePerfilUsuarioDeEmpresa" name="file" style="display: none;" onchange="uploadImgPerfilUsuarioDeEmpresa(this)" />
+                        <button id="uploadFileUsuarioDeEmpresa" style="display: none;"></button>
+                    }
+                    <button id="GuardarImagendePerfilUsuarioDeEmpresa" class="btn btn-primary btn-block" style="text-align: center; font-size:12px;">
+                        <i class="fas fa-file fa-2x" style="margin-right:5px;"></i>
+                        <span style="display: inline-block; margin-top: -4px;">
+                            <i style="font-size: 14px; font-style: normal; display: block; margin-bottom: -5px;" class="text-center">Subir una imagen de perfil</i>
+                        </span>
+                    </button>
+                    <div class="align-items-center" style="display:inline-flex;">
+                        <strong class="text-primary text-center" style="display:none;" id="textoSpinnerUsuarioDeEmpresa">Cargando...</strong>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <div class="spinner-border text-primary" role="status" style="display:none;" aria-hidden="true" id="spinnerUsuarioDeEmpresa"></div>
+
+                    </div>
+                    @*@using (Html.BeginForm("SubirImagenes", "UsuarioEmpresa", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
 
                         <span class="">
                             <input type="file" name="file" id="file" style="width: 100%;" />
@@ -26,7 +43,7 @@
                         <br />
                         <br />
                         <input type="submit" value="Guardar Imagen" class="submit btn btn-outline-success" />
-                    }
+                    }*@
                 </div>
             </div>
             <div class="col-sm-9">

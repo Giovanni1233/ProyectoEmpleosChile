@@ -1,64 +1,27 @@
 ﻿@{
-    if (ViewBag.ApplicationActive != null)
-    {
-        if (ViewBag.ApplicationActive)
-        {
-            Layout = "~/Views/Shared/_HeaderMenu.cshtml";
-            ViewBag.Title = "Empleos Chile | Inicio";
+    //if (ViewBag.ApplicationActive != null)
+    //{
+    //    if (ViewBag.ApplicationActive)
+    //    {
+    Layout = "~/Views/Shared/_HeaderMenu.cshtml";
+    ViewBag.Title = "Empleos Chile | Inicio";
+    @*}
+            else
+            {
+                Response.Redirect(ViewBag.ReferenciaInicio);
+            }
         }
         else
         {
             Response.Redirect(ViewBag.ReferenciaInicio);
-        }
-    }
-    else
-    {
-        Response.Redirect(ViewBag.ReferenciaInicio);
-    }
+        }*@
 }
 
 <div id="ViewDetallePublicacion" class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin: 20px 0px 0px 20px;">
     <h2>Perfil de @Session["UserName"]</h2>
-    <hr />
-
-    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-        <li class="nav-item border-right border-top border-left border-bottom" style="width:25%;">
-            <a class="nav-link text-center text-center" id="pills-area-tab" data-target="#pills-area" data-toggle="tab" href="#pills-area" role="tab" aria-controls="pills-area" aria-selected="true">
-                <span class="fas fa-user">&nbsp;Perfil</span>
-            </a>
-        </li>
-        <li class="nav-item" style="width:25%;">
-            <a class="nav-link text-center border-right border-top border-bottom" id="pills-mensajes-tab" data-target="#pills-area" data-toggle="tab" href="#pills-mensajes" role="tab" aria-controls="pills-mensajes" aria-selected="false">
-                <span class="fas fa-envelope">&nbsp;Mensajes</span>
-            </a>
-        </li>
-
-    </ul>
-    <hr />
-
-    <div class="" id="pills-tabContent">
-        <div class="tab-pane fade show active" id="pills-area" role="tabpanel" aria-labelledby="pills-perfil-tab">
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 border" style="margin: 20px 0px 0px 0px;">
-                <div class="row">
-                    @Html.Partial("Oficios/_Tags")
-                </div>
-            </div>
-
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 border" style="margin: 20px 0px 0px 0px;">
-                <div class="row">
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-7">
-                        @Html.Partial("Oficios/_DescripcionOficio")
-                    </div>
-
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-5 ">
-                        @Html.Partial("Oficios/_ValoracionOficio")
-
-                        @Html.Partial("Oficios/_Comentarios")
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
+            @Html.Partial("Oficios/_Tags")
+        
 </div>
 
 

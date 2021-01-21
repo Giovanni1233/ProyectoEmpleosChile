@@ -104,6 +104,12 @@ $(document).ready(function () {
         let domain = getController('/Oficios/');
         let oficio = $("#tagOficio").val();
 
+        if (oficio.trim() == "") {
+            $(".divErrorTagOficio").html('<div class="alert alert-danger text-center"><strong> Error!</strong> Debe ingresar un oficio.</div>');
+            setInterval(function () { $(".divErrorTagOficio").html(''); }, 3000);
+            return false;
+        }
+
         if (oficio !== null && oficio !== '' && oficio !== undefined) {
 
             ajaxSetTagOficio(domain, oficio);
@@ -245,30 +251,17 @@ $(document).ready(function () {
         $("#pills-mensajes-tab").css("color", "#007bff");
         $(this).css("color", "#ffffff");
     });
-    $(document).on('click', "#pills-publicaciones-tab", function () {
-        $("#pills-postulaciones-tab").css("color", "#007bff");
-        $("#pills-curriculum-tab").css("color", "#007bff");
-        $("#pills-area-tab").css("color", "#007bff");
-        $("#pills-oficios-tab").css("color", "#007bff");
-        $("#pills-mensajes-tab").css("color", "#007bff");
+    $(document).on('click', "#pills-miarea-tab", function () {
+        $("#pills-mensajesO-tab").css("color", "#007bff");
+        
         $(this).css("color", "#ffffff");
     });
-    $(document).on('click', "#pills-oficios-tab", function () {
-        $("#pills-postulaciones-tab").css("color", "#007bff");
-        $("#pills-curriculum-tab").css("color", "#007bff");
-        $("#pills-publicaciones-tab").css("color", "#007bff");
-        $("#pills-area-tab").css("color", "#007bff");
-        $("#pills-mensajes-tab").css("color", "#007bff");
+    $(document).on('click', "#pills-mensajesO-tab", function () {
+        $("#pills-miarea-tab").css("color", "#007bff");
+       
         $(this).css("color", "#ffffff");
     });
-    $(document).on('click', "#pills-mensajes-tab", function () {
-        $("#pills-postulaciones-tab").css("color", "#007bff");
-        $("#pills-curriculum-tab").css("color", "#007bff");
-        $("#pills-publicaciones-tab").css("color", "#007bff");
-        $("#pills-oficios-tab").css("color", "#007bff");
-        $("#pills-area-tab").css("color", "#007bff");
-        $(this).css("color", "#ffffff");
-    });
+    
 
     $(document).on('click', "#uploadfile", function () {
         $("#fileCV").trigger("click");
@@ -486,6 +479,11 @@ $(document).ready(function () {
         $("#filePerfilUsuarioEmpresa").trigger("click");
     });
 
+    // validacion usuario de empresa perfil
+    $(document).on('click', "#GuardarImagendePerfilUsuarioDeEmpresa", function () {
+        $("#filePerfilUsuarioDeEmpresa").trigger("click");
+    });
+
     //$(document).on('click', '#GuardarImagendePerfilUsuario', function () {
     //    var imagen = $(".imagenPerfilUsuarioEmpresa").val();
     //    if (imagen == "" || imagen == null || imagen == undefined) {
@@ -529,6 +527,27 @@ $(document).ready(function () {
     });
     if (window.location.hash == "#pills-curriculum-tab") { $("#pills-curriculum-tab").trigger('click'); }
 
+    $(document).on('click', "#pills-miarea-tab", function () {
+        if (window.location.pathname != window.location.href + "#pills-miarea-tab") {
+            var url = window.location.pathname + "#pills-miarea-tab";
+            window.location.href = url;
+
+        }
+
+    });
+
+    if (window.location.hash == "#pills-miarea-tab") { $("#pills-miarea-tab").trigger('click'); }
+
+    $(document).on('click', "#pills-mensajesO-tab", function () {
+        if (window.location.pathname != window.location.href + "#pills-mensajesO-tab") {
+            var url = window.location.pathname + "#pills-mensajesO-tab";
+            window.location.href = url;
+
+        }
+
+    });
+
+    if (window.location.hash == "#pills-mensajesO-tab") { $("#pills-mensajesO-tab").trigger('click'); }
 
     $(document).on('click', '#ComentarioGu', function () {
         var comentario = $("#ComentarioPubliC").val();
@@ -743,6 +762,20 @@ $(document).ready(function () {
 
     });
 
+    // Usuario Voto a Otro Usuario
+    // Valoracion publicacion
+    $('input[type=radio][name=radioVotacionOfi]').change(function () {
+        $("#hiddenvotoIndicadoOfi").val(this.value);
+    });
+    $(document).on('click', "#valorarUsuarioOficio", function () {
+
+        var valorvotacion = $('#hiddenvotoIndicadoOfi').val();
+        var idUsuarioAVotar = $("#idUsuarioAVotar").val();
+        var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Usuario/";
+
+        ajaxGuardarValoracionUsuario(controller, valorvotacion, idUsuarioAVotar);
+    });
+
 });
 
 // Funcion validar radiobutton test
@@ -812,6 +845,24 @@ function uploadImgPerfilUsuarioEmpresa(file) {
         $("#textoSpinnerUsuarioEmpresa").css('display', 'block');
         //$('#uploadFileUsuarioEmpresa').get(0).type = 'submit';
         setInterval(function () { $("#uploadFileUsuarioEmpresa").trigger('click'); }, 3000);
+    }
+}
+
+
+// Guardar imagen de perfil usuario empresa
+function uploadImgPerfilUsuarioDeEmpresa(file) {
+    let filename = file.files[0].name;
+    let extension = filename.slice(filename.lastIndexOf("."), filename.length);
+
+    if (extension !== ".png" && extension !== ".jpg" && extension !== ".jpeg") {
+        document.getElementById(file.id).value = "";
+    }
+    else {
+        $("#GuardarImagendePerfilUsuarioDeEmpresa").css('display', 'none');
+        $("#spinnerUsuarioDeEmpresa").css('display', 'block');
+        $("#textoSpinnerUsuarioDeEmpresa").css('display', 'block');
+        //$('#uploadFileUsuarioEmpresa').get(0).type = 'submit';
+        setInterval(function () { $("#uploadFileUsuarioDeEmpresa").trigger('click'); }, 3000);
     }
 }
 

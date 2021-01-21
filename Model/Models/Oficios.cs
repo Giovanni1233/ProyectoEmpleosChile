@@ -5,9 +5,9 @@ using System.Web;
 
 namespace Model.Models
 {
-    public class DetalleTagOficio
+    public class Oficios
     {
-        public string idTag { get; set; }
-        public string nombreOficio { get; set; }
+        public string IdOficio { get; set; }
+        public string NombreOficio { get; set; }
     }
 }

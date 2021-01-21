@@ -1,20 +1,20 @@
 ﻿@{
-    if (ViewBag.ApplicationActive != null)
-    {
-        if (ViewBag.ApplicationActive)
-        {
-            Layout = "~/Views/Shared/_HeaderMenu.cshtml";
-            ViewBag.Title = "Empleos Chile | Empleos";
+    //if (ViewBag.ApplicationActive != null)
+    //{
+    //    if (ViewBag.ApplicationActive)
+    //    {
+    Layout = "~/Views/Shared/_HeaderMenu.cshtml";
+    ViewBag.Title = "Empleos Chile | Empleos";
+    @*}
+            else
+            {
+                Response.Redirect(ViewBag.ReferenciaInicio);
+            }
         }
         else
         {
             Response.Redirect(ViewBag.ReferenciaInicio);
-        }
-    }
-    else
-    {
-        Response.Redirect(ViewBag.ReferenciaInicio);
-    }
+        }*@
 }
 
 <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin: 20px 0px 0px 20px;">
@@ -39,5 +39,5 @@
 </div>
 
 @*<div id="ViewUltimosCandidatos" class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin: 20px 0px 0px 20px;">
-    @Html.Partial("App/_BusquedasRelacionadas")
-</div>*@
+        @Html.Partial("App/_BusquedasRelacionadas")
+    </div>*@

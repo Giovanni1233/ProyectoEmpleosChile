@@ -275,6 +275,7 @@
     //    ajaxGetPublicacionFiltros(controller, nombre, fecha);
     //});
 
+
     // Modal Pregunta Postulacion
     $(document).on('click', ".btnModalNuevaPregunta", function () {
         $("#nombrePregunta").val('');
@@ -511,6 +512,8 @@
     });
 
 
+
+
     // Modal Pregunta Postulacion
     $(document).on('click', "#BtnNuevaT", function () {
         $("#modalConfiguracionTarjeta").modal("show");
@@ -559,6 +562,44 @@
 
     // popover informativo planes
     $('[data-toggle="popover"]').popover();
+
+
+    // Modal Mensajes Entre Usuarios
+    $(document).on('click', "#btnEnviarMensajeAOtroUsuario", function () {
+        $("#modalMensajeaOtroUsuario").modal("show");
+    });
+
+    // guardar mensaje enviado a usuario
+    $(document).on('click', '.btnGuardarMensajeAOtroUsuario', function () {
+        var idUsuario = $("#idUsuarioReceptor").val();
+        var mensaje = $("#mensajeAOtroUsuario").val();
+        if (mensaje.trim() == "") {
+            $(".divErrorMensajeAOtroUsuario").html('<div class="alert alert-danger text-center"><strong> Error!</strong> Debe ingresar un mensaje.</div>');
+            setInterval(function () { $(".divErrorMensajeAOtroUsuario").html(''); }, 3000);
+            return false;
+        }
+        var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Usuario/";
+        ajaxEnviarMensajeAUsuario(controller, idUsuario, mensaje);
+    });
+
+    // Modal Comentario a Otro Usuarios
+    $(document).on('click', "#btnComentarioAOtroUsuario", function () {
+        $("#modalComentarioAOtroUsuario").modal("show");
+    });
+
+    // guardar mensaje enviado a usuario
+    $(document).on('click', '.btnGuardarComentarioAOtroUsuario', function () {
+        var idUsuario = $("#idUsuarioReceptor").val();
+        var comentario = $("#ComentarioAOtroUsuario").val();
+        if (comentario.trim() == "") {
+            $(".divErrorMensajeAOtroUsuario").html('<div class="alert alert-danger text-center"><strong> Error!</strong> Debe ingresar un mensaje.</div>');
+            setInterval(function () { $(".divErrorMensajeAOtroUsuario").html(''); }, 3000);
+            return false;
+        }
+        var controller = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2] + "/Usuario/";
+        ajaxEnviarComentarioAUsuario(controller, idUsuario, comentario);
+
+    });
 
 });
 function CambioValor(valor) {
@@ -785,6 +826,44 @@ $(document).on('click', "#buscarFiltrosApp", function () {
         }
     })
     $("#buscarFiltrosApp2").trigger("click");
+
+});
+
+// filtros Oficios
+$(document).on('click', "#buscarFiltrosOficio", function () {
+    debugger;
+    let timerInterval
+    Swal.fire({
+        title: 'Cargando...',
+        html: '<div class="spinner-border text-primary ml-auto" role="status" aria-hidden="true" style="width: 3rem; height: 3rem;" id="spinner"></div>',
+        timer: 2000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+        willClose: () => {
+            clearInterval(timerInterval)
+        }
+    }).then((result) => {
+        /* Read more about handling dismissals below */
+        if (result.dismiss === Swal.DismissReason.timer) {
+            //console.log('I was closed by the timer')
+        }
+    })
+    $("#buscarFiltrosOficio2").trigger("click");
+
+});
+
+// escritura filtros oficios
+$(document).on('keyup', "#nombreOficioB1", function () {
+    var nombre = $("#nombreOficioB1").val();
+
+    $("#hiddenNombreOficioB1").val(nombre);
+
+});
+
+$(document).on('change', "#oficioB1", function () {
+    var fecha = $("#oficioB1").val();
+
+    $("#hiddenOficioB1").val(fecha);
 
 });
 

@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "OficiosUsuario";
+    Layout = "~/Views/Shared/_HeaderMenu.cshtml";
+}
+
+<div class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin: 20px 0px 0px 20px;">
+    <div class="row">
+
+        <div class="col-md-12 col-xl-12 col-sm-12 col-lg-12" id="ViewFiltros">
+            @Html.Partial("Oficios/_Filtros")
+        </div>
+    </div>
+</div>
+<hr />
+
+<div class="col-md-12 col-xl-12 col-sm-12 col-lg-6 border-right" id="ViewPublicacionesP">
+    <h3>Usuarios con oficios registrados</h3>
+    @Html.Partial("Oficios/_UsuariosOficiosFiltros")
+</div>
+
+
+
